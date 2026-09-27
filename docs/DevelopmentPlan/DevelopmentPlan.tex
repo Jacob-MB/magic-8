@@ -97,24 +97,80 @@ Here are the following unassigned roles, based off of our approved project descr
 
 
 \section{Workflow Plan}
-Check!
-\begin{itemize}
-	\item How will you be using git, including branches, pull request, etc.?
-	\item How will you be managing issues, including template issues, issue
-	classification, etc.?
-  \item Use of CI/CD
-\end{itemize}
+Git will be used to keep track of progress, new features that have been brainstormed, and as a stable workflow where we can always point to what everyone is working on and our latest stable project.
+
+After being assigned a task/issue from the Github Projects Kanban Board, the member will create their own branch from a corresponding primary branch (not main). 
+The main branch will always be stable, and almost have same status as a new release (it shouldn't be merged into without being peer reviewed and without the express approval of every member).
+
+When the team starts coding and building documentation after being assigned a role, they will start by creating a primary branch named after their role. For example, the Systems Analyst would call their primary branch, systems-analyst.
+Whenever there are tasks that requires multiple team members, they create a temporary primary branch named after the members using the branch. The goal of the users on this branch is to merge this branch into main as soon as possible as the mental calculation is that any feature requiring multiple members is worthy of being a release. 
+
+The team member will be allowed to experiment on their primary branch, as they can essentially create sub branches via "git branch role/experiment-description role" (ex. git branch systemanalyst/experiment-adding\_new\_rules systemananalyst).
+The member's primary branch should also be stable and when they get assigned an issue, they will move the issue from the "To Do" column to the "In Progress" column. After this has occurred, the person will work on a subbranch they made on their primary branch. For example, the Back End Developer would use the following command: "git branch backenddeveloper/feature-adding\_magic\_squares backenddeveloper".
+This will create a copy of the latest commits on backenddeveloper into the subbranch. 
+
+When they are finished working, they will have to git checkout into the primary branch and then create a merge request between the two branches (ex. going to backenddeveloper and making a merge request between backenddeveloper backenddeveloper/feature-adding\_magic\_squares).
+They will then move the issue to the "Done (before Review)" column and add the merge request into the task on the Github Projects Kanban Board. They will also remove the previous tag (ex. remove "feature" or "refactor"), add "review", and assign another team member to the issue. These requects will only require a single peer review before being moved to "Done (after Review)" and being accepted.
+
+There can also be a primary branch for documentation, however these aren't as strict as actual code requests and the only requirement to merge into main is that the primary branch (ex. devplan for this document) is stable. 
+
+
+In terms of issues outside of the coding, they will also be used to track meetings with the group, professors (during lectures) and our supervisor. There will be a title and a checklist for atendance. Outside of this, it will be a place for people to store their questions that can be updated, so everyone is aware of the questions that will be asked and to prevent forgetfullness.
+
+This is more important for documentation as Github Issues is an easy way to assign parts of the written work to team members. There will be a main issue named the deliverable (ex, Development Plan) with a hard deadline. There will then be titled subissues with a soft deadline and an assigned member (ex. Workflow Plan), and they will include a self-contained checklist with short descriptions (ex. How will you be managing issues, including template issues, issue
+classification, etc.?). 
+
+The CI pipeline would consist of the following linter. This was chosen because ... There will also be static tests that were created by the Systems Analyst consistently running on the code when it has been commited alongside domain-specific tests written by the specific "branch manager".
+Based on what the team member is writing, there might be specific configurations that the member might use (such as the Front End Developer requiring a plugin to display their model). This means that the JSON/YAML file will also have to build before it can it can be merged. There is also a code review in order to ensure that small problems don't become big problems when it comes time to merge from the primary branches into main.
+
+There is also a CD component if we end up publishing the website earlier to get user data, which will require an appropiate rollback strategy. This will ensure that data leaks (such as user data) are mitigated as soon as possible.
 
 \section{Project Decomposition and Scheduling}
 
-\begin{itemize}
-  \item How will you be using GitHub projects?
-  \item Include a link to your GitHub project
-\end{itemize}
+The Github project is located at: 
+The Kanban board has the following columns: Lectures/General Ideas, Meetings, To Do, In Progress, Done (before Review), Done (after Review).
 
-\wss{How will the project be scheduled?  This is the big picture schedule, not
-details. You will need to reproduce information that is in the course outline
-for deadlines.}
+The Lecture column will contain labels that describe it as either "Attendance" (to ensure that everyone is able to get the required knowledge to complete milestones and its corresponding documents) and/or "Questions" (if we have questions in the descriptions that we want to ask the professor after class). 
+There is also space to create issues that are just spitballed ideas.
+
+Meetings will be labeled to show who it is with, and will be populated with pre-meeting questions. During the meeting, meeting minutes will be added to the desciption, alongside roles/tasks assigned. After the meeting is concluded, it will be labelled as "Not Assigned", until the task discussed in meetings are turned into issues (in "To Do") that are labeled to members.
+The rest of the board will follow the guidelines set in Workflow Plan, alongside belonging to the appropiate milestone listed below:
+
+
+\begin{center}
+\begin{tabular}{||c c||} 
+ \hline
+ Milestones & Week \\ [0.5ex] 
+ \hline\hline
+ Team Formed, Project Selected & Week 03 \\ 
+ \hline
+ Problem Statement, POC Plan, Development Plan & Week 04 \\
+ \hline
+ Req.\ Doc.\ and Hazard Analysis Revision 0 & Week 06 \\
+ \hline
+ V\&V Plan Revision 0 & Week 08 \\
+  \hline
+ Design Document Rev -1 and CD-Fall Rev 0 & Week 10 \\
+  \hline
+ Proof of Concept Demo + Interviews & Week 11+12 \\
+  \hline
+ Design Document Revision 0 & Week 16 \\
+  \hline
+ Revision 0 Demo + Interviews & Week 18+19 \\
+  \hline
+ V\&V Report Rev 0 and CD-Winter Rev 0 & Week 22 \\
+  \hline
+ Final Demonstration (Revision 1) & Week 24 \\
+  \hline
+ EXPO Demonstration & Week 26 \\
+ \hline
+ Final Documentation (Revision 1) & Week 26 \\ [1ex] 
+ \hline
+\end{tabular}
+\end{center}
+
+The Final Documentation will contain the Problem Statement, Development Plan, Proof of Concept (POC) Plan, Requirements Document, Hazard Analysis, Design Document, V\&V Plan, V\&V Report, CD-Fall, CD-Winter and the Source Code.
+
 
 \section{Proof of Concept Demonstration Plan}
 
