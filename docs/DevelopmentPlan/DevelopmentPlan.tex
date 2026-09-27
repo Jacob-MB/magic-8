@@ -44,7 +44,7 @@ There is no IP to protect, and the team has agreed to let Dr. Paul Rapoport post
 
 \section{Copyright License}
 
-Circle Back to This
+This project is licensed under the MIT License. The full license can be found at \href{https://github.com/Jacob-MB/magic-8/blob/main/LICENSE}{magic-8/LICENSE}.
 
 \section{Team Meeting Plan}
 
@@ -222,10 +222,13 @@ Topics to discuss include the following:
 
 \section{Use of AI and LLMs}
 
-\wss{This section is a continuation of the previous section.  The role of LLMs
-in your project as important enough to warrant their own section.  
-How will your team be using LLMs for code and documentation development?  
-What tools will you be using?  How will you verify the output of your LLMs?}
+The team expects to use AI tools, such as GitHub Copilot and Claude, at various stages of the project during both development and documentation. Most uses will fall under brainstorming, creating boilerplate code, and assisting with debugging.
+
+Since the game's core logic is based on a fixed, formula-driven set of rules, any AI-generated implementation of these rules will not be merged until it has been checked against the correct magic sum (2052 decimal / 4004 octal) using the static test suite described in the Workflow Plan. AI-generated 3D visualization code will similarly be manually tested, since correctness in this area cannot be verified by unit tests alone.
+
+For documentation, AI tools may be used to help draft, restructure, or brainstorm sections of project documents. Any AI-assisted content will be reviewed by the team for accuracy before inclusion, particularly where it touches the mathematical rules of the game or project requirements.
+
+Regardless of the source, all code passes through the same merge request and peer review process described in the Workflow Plan. AI-generated contributions are held to the same standard as human-written ones and do not skip any step of the process.
 
 \section{Coding Standard}
 
