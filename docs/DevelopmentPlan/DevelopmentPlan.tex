@@ -69,12 +69,12 @@ Meeting notes will then be shared to the team to ensure anything that happened i
 
 \section{Team Communication Plan}
 
-We will be using the following communication tools and methods to ensure that this is a successful project.
+The team will be using the following communication tools and methods to ensure that this is a successful project.
 
 \begin {itemize}
 \item \textbf{Github}: There is a Github repository that will contain the code and documentation for this project. There will be two releases: one that will allow you to run the project as an application, and another which will be used for Dr. Rapoport's prescribed website. In lieu of assigning tasks in passing and promptly forgetting, there will be a Github Projects board that will follow the Kanban method taught in 3RA3, with tasks assigned simultaneously during meetings. Meeting minutes will also be uploaded to the repository.
 \item \textbf{MS Teams}: There is a Teams chat with all 5 group members. This will be the standard place for communication outside of in-person meetings and can be used as either a place for virtual meetings or as an asynchronous chat. Ideation outside of meetings will occur on an appropiate shared Words document, which will be committed onto Github when appropiate. There is also a seperate shared group chat with Dr. Rapoport, which will be used to schedule meetings and ask quick questions. This can also be used as a place to meet virtually with him, but in-person meetings are preferred. 
-\item \textbf{Emails/Google Meet}: When corresponding with outside channels, such as other professors and/or stakeholders, emails and Google Meet are the preferred methods. When emailing, the message should be approved in the Teams chat before being sent, and it should be carbon-copied to all other members and Dr. Rapoport. Google Meet was chosen as stakeholders are lekely tech illiterate and Meet is an accessible browser-based meeting platform. 
+\item \textbf{Emails/Google Meet}: When corresponding with outside channels, such as other professors and/or stakeholders, emails and Google Meet are the preferred methods. When emailing, the message should be approved in the Teams chat before being sent, and it should be carbon-copied (CC) to all other members and Dr. Rapoport. Google Meet was chosen as stakeholders are lekely tech illiterate and Meet is an accessible browser-based meeting platform. 
 \end{itemize}
 
 \section{Team Member Roles}
@@ -85,11 +85,11 @@ Jacob Broderson will serve as the \textbf{Team Liason}, as he has already kept u
 
 Here are the following unassigned roles, based off of our approved project description:
 \begin {itemize}
-\item \textbf{Systems Analyst}: As this project deals with a stringent set of rules that makes the Magic Cube work in octal, this person will be responsible for first compiling and creating all of the rules in our chosen programming language. He is reponsible for ensuring that none of the other members' work break these rules, using test cases and static/dynamic analysis tools. As the design space for octal magic cubes is unfinished and there are only 384 confirmed cubes, it is possible for this member to not only discover new ones, but also make/edit the base rules used to make cubes.
-\item \textbf{Game/Creative Director}: Basing their work on the rules set by the Systems Analyst and the model/UI produced by the Front End Developer, the Game/Creative Director will focus on rules for the levels of the game, making sure that they are engaging while still educational. Dr. Rapoport already has an idea for the game in mind, and the Game/Creative Director will work in lockstep with him to find a middleground that is perfect with the stakeholders. This director will work in implementing and testing stakeholder feedback, and will also be responsible for thinking up and integrating new game modes.
-\item \textbf{Front End Developer (and 3D Artist)}: They will be responsible for creating the user interface based on what the Game/Creative Director requires. They will also learn about 3D modelling/visualization on the side and create the needed visualization that can be efficiently displayed on a website.
-\item \textbf{Back End Developer}: This role requires the group member to store the required data (such as the 384 possible cube formations) in an accessible database, and create the pipeline and interfaces that makes it easier for the other developers to access the information. They can also be responsible for account management (especially important for keeping track of user scores and if we implement an online mode) and other managerial interfaces that simplify the jobs for other developers. If we end up choosing to do a family of games, they will need to come up with a creative way to support multiple databases of different sizes.
-\item \textbf{Webmaster}: Based on what Dr. Rapoport wants to do display the information (either as an executable linked on a website, or as a website itself), the Webmaster is responsible for writing and deploying the code that displays the work of the Front and Backend Developer. They will have to ensure that the website is accessible to stakeholders in high school, which means using a public domain instead of using localhost or a private server. 
+\item \textbf{Systems Analyst - Nehan}: As this project deals with a stringent set of rules that makes the Magic Cube work in octal, this person will be responsible for first compiling and creating all of the rules in our chosen programming language. He is reponsible for ensuring that none of the other members' work break these rules, using test cases and static/dynamic analysis tools. As the design space for octal magic cubes is unfinished and there are only 384 confirmed cubes, it is possible for this member to not only discover new ones, but also make/edit the base rules used to make cubes.
+\item \textbf{Game/Creative Director - Jacob}: Basing their work on the rules set by the Systems Analyst and the model/UI produced by the Front End Developer, the Game/Creative Director will focus on rules for the levels of the game, making sure that they are engaging while still educational. Dr. Rapoport already has an idea for the game in mind, and the Game/Creative Director will work in lockstep with him to find a middleground that is perfect with the stakeholders. This director will work in implementing and testing stakeholder feedback, and will also be responsible for thinking up and integrating new game modes.
+\item \textbf{Front End Developer (and 3D Artist) - Joshua}: They will be responsible for creating the user interface based on what the Game/Creative Director requires. They will also learn about 3D modelling/visualization on the side and create the needed visualization that can be efficiently displayed on a website.
+\item \textbf{Back End Developer - Amos}: This role requires the group member to store the required data (such as the 384 possible cube formations) in an accessible database, and create the pipeline and interfaces that makes it easier for the other developers to access the information. They can also be responsible for account management (especially important for keeping track of user scores and if the team implement an online mode) and other managerial interfaces that simplify the jobs for other developers. If the team end up choosing to do a family of games, they will need to come up with a creative way to support multiple databases of different sizes.
+\item \textbf{Webmaster - Allen}: Based on what Dr. Rapoport wants to do display the information (either as an executable linked on a website, or as a website itself), the Webmaster is responsible for writing and deploying the code that displays the work of the Front and Backend Developer. They will have to ensure that the website is accessible to stakeholders in high school, which means using a public domain instead of using localhost or a private server. 
 \end {itemize}
 
 
@@ -108,27 +108,28 @@ The member's primary branch should also be stable and when they get assigned an 
 This will create a copy of the latest commits on backenddeveloper into the subbranch. 
 
 When they are finished working, they will have to git checkout into the primary branch and then create a merge request between the two branches (ex. going to backenddeveloper and making a merge request between backenddeveloper backenddeveloper/feature-adding\_magic\_squares).
-They will then move the issue to the "Done (before Review)" column and add the merge request into the task on the Github Projects Kanban Board. They will also remove the previous tag (ex. remove "feature" or "refactor"), add "review", and assign another team member to the issue. These requects will only require a single peer review before being moved to "Done (after Review)" and being accepted.
+They will then move the issue to the "In review" column and add the merge request into the task on the Github Projects Kanban Board. They will also remove the previous tag (ex. remove "feature" or "refactor"), add "review", and assign another team member to the issue. These requects will only require a single peer review before being moved to "Done" and being accepted.
 
 There can also be a primary branch for documentation, however these aren't as strict as actual code requests and the only requirement to merge into main is that the primary branch (ex. devplan for this document) is stable. 
 
 
 In terms of issues outside of the coding, they will also be used to track meetings with the group, professors (during lectures) and our supervisor. There will be a title and a checklist for atendance. Outside of this, it will be a place for people to store their questions that can be updated, so everyone is aware of the questions that will be asked and to prevent forgetfullness.
 
-This is more important for documentation as Github Issues is an easy way to assign parts of the written work to team members. There will be a main issue named the deliverable (ex, Development Plan) with a hard deadline. There will then be titled subissues with a soft deadline and an assigned member (ex. Workflow Plan), and they will include a self-contained checklist with short descriptions (ex. How will you be managing issues, including template issues, issue
-classification, etc.?). 
+This is more important for documentation as Github Issues is an easy way to assign parts of the written work to team members. There will be a main issue named the deliverable (ex, Development Plan) with a hard deadline. There will then be titled subissues with a soft deadline and an assigned member (ex. Workflow Plan), and they will include a self-contained checklist with short descriptions (ex. "How will you be managing issues, including template issues, issue
+classification, etc.?"). 
 
 The CI pipeline would consist of the following linter. This was chosen because ... There will also be static tests that were created by the Systems Analyst consistently running on the code when it has been commited alongside domain-specific tests written by the specific "branch manager".
 Based on what the team member is writing, there might be specific configurations that the member might use (such as the Front End Developer requiring a plugin to display their model). This means that the JSON/YAML file will also have to build before it can it can be merged. There is also a code review in order to ensure that small problems don't become big problems when it comes time to merge from the primary branches into main.
 
-There is also a CD component if we end up publishing the website earlier to get user data, which will require an appropiate rollback strategy. This will ensure that data leaks (such as user data) are mitigated as soon as possible.
+There is also a CD component if the team ends up publishing the website earlier to get user data, which will require an appropiate rollback strategy. This will ensure that data leaks (such as user data) are mitigated as soon as possible.
 
 \section{Project Decomposition and Scheduling}
 
-The Github project is located at: 
-The Kanban board has the following columns: Lectures/General Ideas, Meetings, To Do, In Progress, Done (before Review), Done (after Review).
+The Github project is located at: \href{https://github.com/users/Jacob-MB/projects/3}{Magic 8 Kanban}
 
-The Lecture column will contain labels that describe it as either "Attendance" (to ensure that everyone is able to get the required knowledge to complete milestones and its corresponding documents) and/or "Questions" (if we have questions in the descriptions that we want to ask the professor after class). 
+The Kanban board has the following columns: Lectures/General Ideas, Meetings, To Do, In Progress, In Review, Done.
+
+The Lecture column will contain labels that describe it as either "Attendance" (to ensure that everyone is able to get the required knowledge to complete milestones and its corresponding documents) and/or "Questions" (if the team has questions in the descriptions that they want to ask the professor after class). 
 There is also space to create issues that are just spitballed ideas.
 
 Meetings will be labeled to show who it is with, and will be populated with pre-meeting questions. During the meeting, meeting minutes will be added to the desciption, alongside roles/tasks assigned. After the meeting is concluded, it will be labelled as "Not Assigned", until the task discussed in meetings are turned into issues (in "To Do") that are labeled to members.
@@ -140,29 +141,29 @@ The rest of the board will follow the guidelines set in Workflow Plan, alongside
  \hline
  Milestones & Week \\ [0.5ex] 
  \hline\hline
- Team Formed, Project Selected & Week 03 \\ 
+ Team Formed, Project Selected & Friday, September 18 \\ 
  \hline
- Problem Statement, POC Plan, Development Plan & Week 04 \\
+ Problem Statement, POC Plan, Development Plan & Monday, September 28 \\
  \hline
- Req.\ Doc.\ and Hazard Analysis Revision 0 & Week 06 \\
+ Req.\ Doc.\ and Hazard Analysis Revision 0 & Monday, October 19 \\
  \hline
- V\&V Plan Revision 0 & Week 08 \\
+ V\&V Plan Revision 0 & Monday, November 2 \\
   \hline
- Design Document Rev -1 and CD-Fall Rev 0 & Week 10 \\
+ Design Document Rev -1 and User-Stakeholder/ Client-Interview Report Rev 0 & Monday, November 16 \\
   \hline
- Proof of Concept Demo + Interviews & Week 11+12 \\
+ Proof of Concept Demo + Interviews & Monday, November 23 + 30 \\
   \hline
- Design Document Revision 0 & Week 16 \\
+ Design Document Revision 0 & Monday, January 18 \\
   \hline
- Revision 0 Demo + Interviews & Week 18+19 \\
+ Revision 0 Demo + Interviews & Monday, February 1 + 8 \\
   \hline
- V\&V Report Rev 0 and CD-Winter Rev 0 & Week 22 \\
+ V\&V Report Rev 0 and Usability Report Rev 0 & Monday, March 8 \\
   \hline
- Final Demonstration (Revision 1) & Week 24 \\
+ Final Demonstration (Revision 1) & Wednesday, March 31 \\
   \hline
- EXPO Demonstration & Week 26 \\
+ EXPO Demonstration & Tuesday, April 6 \\
  \hline
- Final Documentation (Revision 1) & Week 26 \\ [1ex] 
+ Final Documentation (Revision 1) & Tuesday, April 6 \\ [1ex] 
  \hline
 \end{tabular}
 \end{center}
