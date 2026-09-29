@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage{natbib}
 \usepackage{tabularx}
 \usepackage{booktabs}
 
@@ -40,7 +41,7 @@ information.}
 
 \subsection{Problem}
 
-Until post-secondary education, mathematics is almost exclusively taught using the decimal number base. Even in post-secondary, alternative number bases are scarce. This leaves a gap in foundational learning for other number bases such as octal. The octal number base is not only important for direct application in software/programming (e.g., Unix file permissions, ASCII [REF]), but it can also act as a stepping stone to introduce the concept of alternative number bases while still being relatable to decimal. At the same time, there is a significant appetite for recreational mathematics games utilizing numbers-based problem solving and puzzles (e.g., Sudoku, 2048, etc.) [REF].
+Until post-secondary education, mathematics is almost exclusively taught using the decimal number base. Even in post-secondary, alternative number bases are scarce. This leaves a gap in foundational learning for other number bases such as octal. The octal number base is not only important for direct application in software/programming (e.g., Unix file permissions, ASCII \cite{LenovoOctal}), but it can also act as a stepping stone to introduce the concept of alternative number bases while still being relatable to decimal. At the same time, there is a significant appetite for recreational mathematics games utilizing numbers-based problem solving and puzzles (e.g., University of Calgary Recreational Mathematics \cite{UoCRecMath}).
 
 A most perfect magic cube is a cube where each voxel's value is a distinct number from 1 to n^3 and all rows, columns, pillars, 2-dimentional diagonals, 3-dimensional diagonals (triagonals), and broken space diagonals in the cube sum to the same number, also called the magic constant. The order-eight cube is the smallest order most perfect magic cube. Using octal within this order-8 magic cube showcases the magic properties of the cube with the above prescribed lines summing to 4004, half lines summing to 2002, and the complementary numbers (+4 4 4 for the x y z coordinates from a given voxel) summing to 1001 (all in octal). These properties make the 8 x 8 x 8 magic cube in octal a perfect candidate/tool/strategy for learning/practicing addition and subtraction in octal. However, despite the clear benefits, there is a lack of resources that utilize this concept.
 
@@ -164,5 +165,8 @@ For the winter term, the \textbf{Usability Report} was chosen. As mentioned for 
     \item We did struggle with figuring out who the problem statement was for. Since we were making a game, we didn't know if the problem statement should be written fo the stakeholders (which are likely to be highschoolers) or for what we want to accomplish during the capstone (which will be more about the innovations that this project will be incorporating). Luckily, a discussion with the TA cleared up our misunderstanding.
     \item As described and written by Dr. Rapoport, the levels that he wanted to make can clearly be done in a less than a month. While we did discuss adding a family of games, another way to expand the scope is to add 3D visualization. Looking at how Dr. Rapoport and other examples found online, they were always using a 2D model, which isn't the best representation of the 8x8x8 cube, especially if we want to the user to be able to see triagonals. 
 \end{enumerate}  
+
+\bibliographystyle {plainnat}
+\bibliography{../../refs/References}
 
 \end{document}
