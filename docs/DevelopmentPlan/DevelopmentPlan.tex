@@ -23,8 +23,15 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
+September 27,2026 & Nehan Munir & Added Confidential Information and IP to protect\\
+September 27,2026 & Josh Engel & Added Proof of concept\\
+September 27 ,2026 & Nehan Munir & Added Team communication plan and Team member roles\\
+September 27 ,2026 & Nehan Munir & Added Work Flow Plan and Project Decomposition\\
+September 28 ,2026 & Josh Engel & Added Team charter\\
+September 28 ,2026 & Amos Edeaghe & Added Expected Technology and Coding Standard\\
+September 28 ,2026 & Allen Tong & Added Copyright License and Use of AI\
+September 28 ,2026 & All members & Added individual reflections and chose roles\\
+
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
@@ -73,7 +80,7 @@ Meeting notes will then be shared to the team to ensure anything that happened i
 The team will be using the following communication tools and methods to ensure that this is a successful project.
 
 \begin {itemize}
-\item \textbf{Github}: There is a Github repository that will contain the code and documentation for this project. There will be two releases: one that will allow you to run the project as an application, and another which will be used for Dr. Rapoport's prescribed website. In lieu of assigning tasks in passing and promptly forgetting, there will be a Github Projects board that will follow the Kanban method taught in 3RA3, with tasks assigned simultaneously during meetings. Meeting minutes will also be uploaded to the repository.
+\item \textbf{Github}: There is a \href{https://github.com/Jacob-MB/magic-8}{GitHub repository} that will contain the code and documentation for this project. There will be two releases: one that will allow you to run the project as an application, and another which will be used for Dr. Rapoport's prescribed website. In lieu of assigning tasks in passing and promptly forgetting, there will be a Github Projects board that will follow the Kanban method taught in 3RA3, with tasks assigned simultaneously during meetings. Meeting minutes will also be uploaded to the repository.
 \item \textbf{MS Teams}: There is a Teams chat with all 5 group members. This will be the standard place for communication outside of in-person meetings and can be used as either a place for virtual meetings or as an asynchronous chat. Ideation outside of meetings will occur on an appropiate shared Words document, which will be committed onto Github when appropiate. There is also a seperate shared group chat with Dr. Rapoport, which will be used to schedule meetings and ask quick questions. This can also be used as a place to meet virtually with him, but in-person meetings are preferred. 
 \item \textbf{Emails/Google Meet}: When corresponding with outside channels, such as other professors and/or stakeholders, emails and Google Meet are the preferred methods. When emailing, the message should be approved in the Teams chat before being sent, and it should be carbon-copied (CC) to all other members and Dr. Rapoport. Google Meet was chosen as stakeholders are lekely tech illiterate and Meet is an accessible browser-based meeting platform. 
 \end{itemize}
@@ -196,7 +203,7 @@ for asset handling and 3D rendering, pygbag to convert the application into WebA
 asyncio for asynchronous event handling to run logic on the browser between game frames with further libraires to be discussed as the project develops such as the possible use of NumPy or researching Javascript libraries. The team also plans to make use of readily available assets for the game with agent design for the cube visuals
 or generating new cubes in different bases when pursuing our stretch goals that would make use of AI agents such as Claude.
 
-For tools team members will use their preferred IDE with the most commonly used being Visual Studio Code, Github, Github projects and Git will be used for version control as laid out in the \ref{Workflow Plan}. As continuous integration is planned we will make use GitHub Actions to run our testing, build and linting tools for each push,
+For tools team members will use their preferred IDE with the most commonly used being Visual Studio Code, Github, Github projects and Git will be used for version control as laid out in the Workflow Plan. As continuous integration is planned we will make use GitHub Actions to run our testing, build and linting tools for each push,
 pylint will be used as our linter to match our chosen coding standard, pytest and pytest-cov will be used for running unit tests and checking code coverage, mypy is being considered for static type checking. 
 
 For performance measurement the team is considering the use of cProfile to find points for optimization by measuring the execution time for the different functions such as rendering or task updates, timeit would be used in conjunction to compare the speeds of different implementations, and
