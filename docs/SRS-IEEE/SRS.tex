@@ -263,15 +263,15 @@ constraints.
 
 %\plt{Current situation, problem, impact, desired improvement.  You will likely borrow some text from your problem description document.}
 
-Magic cubes provide an opportunity to explore numerical patterns and methematical 
+Magic cubes provide an opportunity to explore numerical patterns and mathematical 
 relationships in 3-dimensions. However, understanding these structures can become
-challenging due to limited sources as well as having to use static 2d images to inderstand
-a 3d pattern.
+challenging due to limited sources as well as having to use static 2D images to understand
+a 3D pattern.
 
 The goal of this project is to create a recreational mathematics game that allows those interested
 in these magic cubes as well as non standard number bases such as base 8 to further their understanding.
-This is planned to be a web based game in which users will be able to complete certain challenges on a 3d
-representation of a 8x8 magic cube using base 8 mathematics to find patterns associated with a magic cube.
+This is planned to be a web-based game in which users will be able to complete certain challenges on a 3d
+representation of an 8x8 magic cube using base 8 mathematics to find patterns associated with a magic cube.
 This will include adding values to certain sections of the cube to complete patterns of magic cubes moving through
 8 stages of difficulty while continuing to learn about these mathematical structures.
 
@@ -295,8 +295,8 @@ patterns found in objects such as magic cubes. The system will allow for simple 
 to allow users to see its many different views as well as help educate them in the patterns they will be using
 throughout the challenges.
 
-This will be able to operate on supported desktop and laptop web browsers and will provide some account based storage to
-track the users performance and rank them on a leaderbord. The system is planned to focus on maintainable and modular system
+This will be able to operate on supported desktop and laptop web browsers and will provide some account-based storage to
+track the users performance and rank them on a leaderboard. The system is planned to focus on maintainable and modular system
 design to potentially allow for different number bases in the future as well as ease of use for the users of the application.
   
 \subsection{System Context}
@@ -378,7 +378,7 @@ design to potentially allow for different number bases in the future as well as 
 %McSCert uses in their automotive hazard analyses.}
 
 Magic-8 is intended for recreational and educational exploration. This means it will
-not be operation in a highly safety or mission-critical enviornment. The application
+not be operating in a highly safety or mission-critical enviornment. The application
 provides a simple way to interact with slighlty more obscure mathematical ideas rather
 than any critical operations.
 
@@ -400,7 +400,7 @@ or vice versa, to experienced mathematical enthusiasts interested in trying a ne
 
 Users are expected to have basic computer skills, including the ability to navigate a web browser,
 use pointer-based controls, and enter numerical values. No programming knowledge is required for use.
-Only basic mathematic undertanding of addition and subtraction is expected as the application can help 
+Only basic mathematic understanding of addition and subtraction is expected as the application can help 
 to teach the subjects it covers.
 
 \subsection{System Constraints}
@@ -418,7 +418,7 @@ to teach the subjects it covers.
 Magic-8 shall be designed to run within desktop and laptop web browsers without requiring an installation.
 The functionality will initially be developed in python as well as supported python libraries such as pygame.
 It will then be translated into webassembly code for execution in browser. This means that all python code must be
-translatable with the chosen tool into webassembly inlcuding anything used for the user interface of the application.
+translatable with the chosen tool into webassembly including anything used for the user interface of the application.
 
 The system shall also support online account functionality, requiring network communication with the selected 
 service for remote data operations. The specific service, supported web browsers, and rendering technologies 
@@ -606,7 +606,7 @@ TODO
 \label{NFR_Performance}:]
 \textbf{Performance}
 
-Under the defined reference test environment, the system shall
+Under the defined reference test enviornment, the system shall
 update the visible cube orientation within 100 milliseconds of
 a supported rotation input. The system shall also reflect an
 accepted cell-value edit in the relevant two-dimensional and
@@ -618,8 +618,8 @@ three-dimensional views within 100 milliseconds.
 
 The majority of participants (most likely at least 80\%) in a usability evaluation shall
 complete each of the following tasks without external assistance:
-opening a puzzle, orienting the cube, selecting a cell, and editing
-a cell value.
+opening a puzzle, manipulating the 3D visual cube, selecting a cell, 
+and editing a cell value.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_Maintainability}:]
@@ -628,18 +628,18 @@ a cell value.
 The mathematical logic, user-interface logic, three-dimensional
 visualization logic, and online storage interactions shall be
 organized into identifiable components with documented
-responsibilities. Automated tests for the core mathematical
-operations shall be executable independently of the user interface.
+responsibilities. This will be measured with the fit criterion:
+Automated tests for the core mathematical operations shall 
+be executable independently of the user interface.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_Portability}:]
 \textbf{Portability}
 
 The system shall execute in each desktop and laptop web browser
-listed in the project's supported-environment specification
-without requiring users to install Python or a standalone desktop
-application. The core  test suite shall pass on each 
-supported browser and operating system combination.
+that it is stated to support without requiring users to install Python 
+or a standalone desktop application. The core test suite shall pass on each 
+supported browser.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_Reliability}:]
@@ -648,8 +648,8 @@ supported browser and operating system combination.
 The system shall maintain a valid in-memory puzzle state following
 supported cube modifications, cell selections, and valid cell-value
 edits. Invalid user inputs shall be handled without terminating
-the application or leaving the puzzle state invalid. If an online
-save or load operation fails, the system shall inform the user
+the application or leaving the puzzle state invalid. If an online 
+operation fails, the system shall inform the user
 and shall not indicate that the operation succeeded.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
@@ -659,11 +659,10 @@ and shall not indicate that the operation succeeded.
 All network communication involving account credentials or
 user data shall use HTTPS with valid TLS. The system shall prevent
 authenticated users from accessing other users' private stored
-data through its supported interfaces and storage operations.
+data through its supported interfaces and operations.
 Application-controlled persistent storage shall not store
 authentication secrets in plaintext. The application shall collect
-only the personal information necessary for its implemented
-account and storage functionality.
+only the personal information necessary for its implemented functionality.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_Accessibility}:]
