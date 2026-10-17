@@ -251,17 +251,17 @@ problem, the vision, and the interfaces between the system and its environment.
 This section also describes user characteristics and lists the system
 constraints.
 
-\plt{The purpose of this section is to provide general information about the
-  system so that the specific requirements in the later sections will be easier to
-  understand. The general system description section is designed to be
-  changeable independent of changes to the functional requirements documented in
-  the specific system description. The general system description provides a
-  context for a family of related models.  The general description can stay the
-  same, while specific details are changed between family members.}
+%\plt{The purpose of this section is to provide general information about the
+  %system so that the specific requirements in the later sections will be easier to
+  %understand. The general system description section is designed to be
+  %changeable independent of changes to the functional requirements documented in
+  %the specific system description. The general system description provides a
+  %context for a family of related models.  The general description can stay the
+  %same, while specific details are changed between family members.}
 
 \subsection{Problem Statement}
 
-\plt{Current situation, problem, impact, desired improvement.  You will likely borrow some text from your problem description document.}
+%\plt{Current situation, problem, impact, desired improvement.  You will likely borrow some text from your problem description document.}
 
 Magic cubes provide an opportunity to explore numerical patterns and methematical 
 relationships in 3-dimensions. However, understanding these structures can become
@@ -277,17 +277,17 @@ This will include adding values to certain sections of the cube to complete patt
 
 \subsection{Product Vision}
 
-\plt{A clear and concise statement of the product's purpose and goals.}
+%\plt{A clear and concise statement of the product's purpose and goals.}
 
-\plt{The goal statements are functional and nonfunctional objectives that system
-  under consideration should achieve. Goals provide criteria for sufficient
-  completeness of a requirements specification and for requirements pertinence.
-  Goals will be refined by requirements.  The goals are written abstractly, with
-  a minimal amount of technical language.  They should be understandable by
-  non-domain experts.}
+%\plt{The goal statements are functional and nonfunctional objectives that system
+  %under consideration should achieve. Goals provide criteria for sufficient
+  %completeness of a requirements specification and for requirements pertinence.
+  %Goals will be refined by requirements.  The goals are written abstractly, with
+  %a minimal amount of technical language.  They should be understandable by
+  %non-domain experts.}
 
-\plt{You will likely borrow from your goal statements in your problem
-description document.}
+%\plt{You will likely borrow from your goal statements in your problem
+%description document.}
 
 The vision for Magic-8 is to provide an accessible and engaging recreational mathematics application
 to allow interested users to further their understanding of non base 10 number systems as well as mathematical
@@ -301,16 +301,16 @@ design to potentially allow for different number bases in the future as well as 
   
 \subsection{System Context}
 
-\plt{Include users, external systems, APIs, databases, and third-party services.}
+%\plt{Include users, external systems, APIs, databases, and third-party services.}
 
-\plt{Your system context will include a figure that shows the abstract view of
-  the software.  In some cases the diagram will show other external
-  entities, besides the user.  For instance, when the software product is a
-  library, the user will be another software program, not an actual end user.
-  If there are system constraints that the software must work with external
-  libraries, these libraries can also be shown on the System Context diagram.
-  They should only be named with a specific library name if this is required by
-  the system constraint.}
+%\plt{Your system context will include a figure that shows the abstract view of
+  %the software.  In some cases the diagram will show other external
+  %entities, besides the user.  For instance, when the software product is a
+  %library, the user will be another software program, not an actual end user.
+  %If there are system constraints that the software must work with external
+  %libraries, these libraries can also be shown on the System Context diagram.
+  %They should only be named with a specific library name if this is required by
+  %the system constraint.}
 
 \begin{figure}[h!]
 \begin{center}
@@ -320,15 +320,15 @@ design to potentially allow for different number bases in the future as well as 
 \end{center}
 \end{figure}
 
-\plt{For each of the entities in the system context diagram its responsibilities
-  should be listed.  Whenever possible the system should check for data quality,
-  but for some cases the user will need to assume that responsibility.  The list
-  of responsibilities should be about the inputs and outputs only, and they
-  should be abstract.  Details should not be presented here.  However, the
-  information should not be so abstract as to just say ``inputs'' and
-  ``outputs''.  A summarizing phrase can be used to characterize the inputs.
-  For instance, saying ``material properties'' provides some information, but it
-  stays away from the detail of listing every required properties.}
+%\plt{For each of the entities in the system context diagram its responsibilities
+  %should be listed.  Whenever possible the system should check for data quality,
+  %but for some cases the user will need to assume that responsibility.  The list
+  %of responsibilities should be about the inputs and outputs only, and they
+  %should be abstract.  Details should not be presented here.  However, the
+  %information should not be so abstract as to just say ``inputs'' and
+  %``outputs''.  A summarizing phrase can be used to characterize the inputs.
+  %For instance, saying ``material properties'' provides some information, but it
+  %stays away from the detail of listing every required properties.}
 
 \begin{itemize}
 \item User Responsibilities:
@@ -367,15 +367,15 @@ design to potentially allow for different number bases in the future as well as 
 \end{itemize}
 \end{itemize}
 
-\plt{Identify in what context the software will typically be used.  Is it for
-exploration? education? engineering work? scientific work?. Identify whether it
-will be used for mission-critical or safety-critical applications.} 
+%\plt{Identify in what context the software will typically be used.  Is it for
+%exploration? education? engineering work? scientific work?. Identify whether it
+%will be used for mission-critical or safety-critical applications.} 
 
-\plt{This additional context information is needed to determine how much effort
-should be devoted to the rationale section.  If the application is
-safety-critical, the bar is higher.  This is currently less structured, but
-analogous to, the idea to the Automotive Safety Integrity Levels (ASILs) that
-McSCert uses in their automotive hazard analyses.}
+%\plt{This additional context information is needed to determine how much effort
+%should be devoted to the rationale section.  If the application is
+%safety-critical, the bar is higher.  This is currently less structured, but
+%analogous to, the idea to the Automotive Safety Integrity Levels (ASILs) that
+%McSCert uses in their automotive hazard analyses.}
 
 Magic-8 is intended for recreational and educational exploration. This means it will
 not be operation in a highly safety or mission-critical enviornment. The application
@@ -384,14 +384,14 @@ than any critical operations.
 
 \subsection{User Characteristics} \label{SecUserCharacteristics}
 
-\plt{This section summarizes the knowledge/skills expected of the user.
-  Measuring usability, which is often a required non-function requirement,
-  requires knowledge of a typical user.  As mentioned above, the user is a
-  different role from the ``intended reader,'' as given in
-  Section~\ref{sec_IntendedReader}.  As in Section~\ref{sec_IntendedReader}, the
-  user characteristics should be specific an unambiguous.  For instance, ``The
-  end user of \progname{} should have an understanding of undergraduate Level 1
-  Calculus and Physics.''}
+%\plt{This section summarizes the knowledge/skills expected of the user.
+  %Measuring usability, which is often a required non-function requirement,
+  %requires knowledge of a typical user.  As mentioned above, the user is a
+  %different role from the ``intended reader,'' as given in
+  %Section~\ref{sec_IntendedReader}.  As in Section~\ref{sec_IntendedReader}, the
+  %user characteristics should be specific an unambiguous.  For instance, ``The
+  %end user of \progname{} should have an understanding of undergraduate Level 1
+  %Calculus and Physics.''}
 
 The intended users are individuals who are interested in recreational mathematics,
 numerical puzzles and structures, and non standard number bases. Users may range from
@@ -405,15 +405,15 @@ to teach the subjects it covers.
 
 \subsection{System Constraints}
 
-\plt{System constraints differ from other type of requirements because they
-  limit the developers' options in the system design and they identify how the
-  eventual system must fit into the world. This is the only place in the SRS
-  where design decisions can be specified.  That is, the quality requirement for
-  abstraction is relaxed here.  However, system constraints should only be
-  included if they are truly required.}
+%\plt{System constraints differ from other type of requirements because they
+  %limit the developers' options in the system design and they identify how the
+  %eventual system must fit into the world. This is the only place in the SRS
+  %where design decisions can be specified.  That is, the quality requirement for
+  %abstraction is relaxed here.  However, system constraints should only be
+  %included if they are truly required.}
 
-\plt{This is where you would mention platform constrains, and licensing
-restrictions.}
+%\plt{This is where you would mention platform constrains, and licensing
+%restrictions.}
 
 Magic-8 shall be designed to run within desktop and laptop web browsers without requiring an installation.
 The functionality will initially be developed in python as well as supported python libraries such as pygame.
@@ -577,27 +577,27 @@ TODO
 % ============================================================== 
 \section{Non-Functional Requirements}
 
-\plt{You may have to add other NFRs.}
+%\plt{You may have to add other NFRs.}
 
-\plt{List your nonfunctional requirements.  You may consider using a fit
-  criterion to make them verifiable.}
+%\plt{List your nonfunctional requirements.  You may consider using a fit
+  %criterion to make them verifiable.}
 
-\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
-  and verifiable.  This isn't easy to show succinctly, so a good strategy may be
-to give a ``high level'' view of the requirement, but allow for the details to
-be covered in the Verification and Validation document.}
+%\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
+  %and verifiable.  This isn't easy to show succinctly, so a good strategy may be
+%to give a ``high level'' view of the requirement, but allow for the details to
+%be covered in the Verification and Validation document.}
 
-\plt{An absolute requirement on a quality of the system is rarely needed.  For
-  instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
-  for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
-  describing now well the quality is achieved, through experimentation, and
-  possibly theory, rather than meeting some bar that was defined a priori.}
+%\plt{An absolute requirement on a quality of the system is rarely needed.  For
+  %instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
+  %for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
+  %describing now well the quality is achieved, through experimentation, and
+  %possibly theory, rather than meeting some bar that was defined a priori.}
 
-\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
-  SRS is to record the requirements that need to be satisfied for correctness.
-  Any statement of correctness would just be redundant. Rather than discuss
-  correctness, you can characterize how far away from the correct (true)
-  solution you are allowed to be.  This is discussed under accuracy.}
+%\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
+  %SRS is to record the requirements that need to be satisfied for correctness.
+  %Any statement of correctness would just be redundant. Rather than discuss
+  %correctness, you can characterize how far away from the correct (true)
+  %solution you are allowed to be.  This is discussed under accuracy.}
 
 \noindent
 \begin{itemize}
