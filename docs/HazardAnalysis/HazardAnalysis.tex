@@ -127,19 +127,242 @@ this potential failure mode.}
 
 \section{Failure Mode and Effect Analysis}
 
-\wss{Include your FMEA table here. This is the most important part of this document.}
-\wss{The safety requirements in the table do not have to have the prefix SR.
-The most important thing is to show traceability to your SRS. You might trace to
-requirements you have already written, or you might need to add new
-requirements.}
-\wss{If no safety requirement can be devised, other mitigation strategies can be
-entered in the table, including strategies involving providing additional
-documentation, and/or test cases.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{2.3cm}|Y|Y|Y|Y|P{1.7cm}|P{0.8cm}|}
+
+    % Header
+    \caption{Failure Mode and Effect Analysis (FMEA)} \label{TblFMEA} \\
+    \hline
+    \textbf{Component} &
+    \textbf{Failure Modes} &
+    \textbf{Cause(s) of Failure} &
+    \textbf{Effect(s) of Failure} &
+    \textbf{Recommended Action(s)} &
+    \textbf{SR} &
+    \textbf{Ref.} \\
+    \hline
+    \endfirsthead
+
+    % Subsequent pages header
+    \hline
+    \textbf{Component} &
+    \textbf{Failure Modes} &
+    \textbf{Cause(s) of Failure} &
+    \textbf{Effect(s) of Failure} &
+    \textbf{Recommended Action(s)} &
+    \textbf{SR} &
+    \textbf{Ref.} \\
+    \hline
+    \endhead
+
+    % Prompt that the table continues
+    \hline
+    \multicolumn{7}{r}{\textit{Continued on next page}} \\
+    \endfoot
+
+    % No footer on last page
+    \hline
+    \endlastfoot
+
+    % Table Rows...
+    User Database &
+    User data exposed to unauthorized individuals &
+    - Weak password storage\newline- SQL injection &
+    - User privacy breach\newline- Loss of trust &
+    - Encrypt sensitive data\newline- Hash based passwords\newline- Conduct security audits &
+    - \hyperref[req:SR1]{SR1}\newline- \hyperref[req:SR2]{SR2} &
+    H1-a \\
+
+    \hline
+
+    User Database &
+    User data lost or corrupted &
+    - Error in saving\newline- Database crash &
+    - Loss of user account information &
+    - Automated backups\newline- Transaction logging\newline- Recovery procedures &
+    - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11} &
+    H1-b \\
+
+    \hline
+
+    User Database &
+    Inappropriate and/or harmful usernames &
+    - Inadequate review or control of public usernames &
+    - Decrease in user well-being &
+    - Restrictions on username content &
+    - \hyperref[req:SR13]{SR13} &
+    H1-c \\
+
+    \hline
+
+    Competitive / Leaderboard Database &
+    Incorrect leaderboard rankings &
+    - Database corruption or loss of data &
+    - User frustration\newline- Loss of user engagement &
+    - Automated backups\newline- Transaction logging\newline- Recovery procedures\newline- Ranking validation &
+    - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11} &
+    H2-a \\
+
+    \hline
+
+    Competitive / Leaderboard Database &
+    Unauthorized modification of leaderboard and competitive data &
+    - Insufficient access controls &
+    - User frustration leading to loss of user engagement &
+    - Role-based access control &
+    - \hyperref[req:SR10]{SR10} &
+    H2-b \\
+
+    \hline
+
+    Game State Manager &
+    Progress not saved &
+    - Game crash\newline- Failed save &
+    - Loss of user progress leading to frustration and disengagement &
+    - Autosave functionality\newline- Save retries &
+    - \hyperref[req:SR5]{SR5}\newline- \hyperref[req:SR6]{SR6} &
+    H3-a \\
+
+    \hline
+
+    Game State Manager &
+    Incorrect game state loaded &
+    - Corrupted save data\newline- Incorrect state flow &
+    - Correct answer marked incorrect or vice versa\newline- User confusion leading to decreased educational value and disengagement &
+    - Save integrity checks\newline- Validate state flow &
+    - \hyperref[req:SR7]{SR7} &
+    H3-b \\
+
+    \hline
+
+    Visualization / Rendering Manager &
+    Cube or highlighting incorrectly displayed &
+    - Projection error &
+    - User confusion leading to reduced educational value\newline- Lead user to incorrect decisions &
+    - Thorough unit testing of component\newline- Gameplay testing &
+    X &
+    H4-a \\
+
+    \hline
+
+    Visualization / Rendering Manager &
+    Unstable refresh rate or screen tearing &
+    - Software bug\newline- Incorrect application of animation &
+    - User disorientation leading to disengagement &
+    - Through unit testing of component &
+    X &
+    H4-b \\
+
+    \hline
+
+    Visualization / Rendering Manager &
+    Excessive and unintended flashing or animation &
+    - Graphics bug\newline- Excessive use of animation &
+    - Photosensitive seizure risk\newline- Eye strain &
+    - Thorough unit testing of component\newline- User testing of animations &
+    X &
+    H4-c \\
+
+    \hline
+
+    Hint / Tutorial Manager &
+    Incorrect hint provided &
+    - Hints are not properly encoded\newline- Tutorial/hint state flow is incorrect &
+    - User confusion and frustration\newline- User disengagement\newline- Loss of educational value &
+    - Unit testing of component\newline- Validation of hint/tutorial state flow &
+    X &
+    H5-a \\
+
+    \hline
+
+    Hint / Tutorial Manager &
+    Incorrect octal arithmetic provided &
+    - Octal arithmetic is not properly encoded &
+    - Loss of educational value &
+    - Unit testing of component's octal arithmetic &
+    X &
+    H5-b \\
+
+    \hline
+
+    User Interface &
+    User input interpreted incorrectly &
+    - Input parsing error\newline- User action(s) mapped incorrectly to game command(s) &
+    - Incorrect action taken leading to incorrect game state\newline- User frustration / disengagement\newline- Loss of educational value &
+    - Unit testing of parsing logic and encoded actions &
+    X &
+    H6-a \\
+
+    \hline
+
+    User Interface &
+    User input not registered &
+    - Event handling bug &
+    - Inability to progress\newline- User frustration / disengagement &
+    - Input event validation &
+    X &
+    H6-b \\
+
+    \hline
+
+    Task Generator &
+    Duplicate task generated &
+    - Insufficient shuffling of tasks &
+    - Loss of user engagement\newline- Ineffective education &
+    - Check tasks for uniqueness in a given round\newline- Validate randomness of task generation &
+    - \hyperref[req:SR8]{SR8} &
+    H7-a \\
+
+    \hline
+
+    Task Generator &
+    Invalid task generated &
+    - Logic error\newline- Error in task generation algorithm &
+    - Unsolvable puzzle leading to disengagement\newline- User confusion / loss in educational value &
+    - Validate solvability of task before giving it to the user &
+    - \hyperref[req:SR9]{SR9} &
+    H7-b \\
+
+    \hline
+
+    Task Generator &
+    Generated task has incorrect expected answer &
+    - Logic error &
+    - Correct answer is marked incorrect and an incorrect answer could be marked correct\newline- Loss of educational value\newline- User frustration and disengagement &
+    - Validate the generated solution before giving the task to the user &
+    - \hyperref[req:SR12]{SR12} &
+    H7-c \\
+
+\end{tabularx}
+\end{landscape}
 
 \section{Safety and Security Requirements}
 
-\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-rationale design process how and why to fake it.)}
+\noindent\textbf{SR1\label{req:SR1}:} The system shall encrypt sensitive user data.
+
+\noindent\textbf{SR2\label{req:SR2}:} The system shall store user account passwords as cryptographic hashes.
+
+\noindent\textbf{SR3\label{req:SR3}:} The system shall automatically generate a backup for each database.
+
+\noindent\textbf{SR4\label{req:SR4}:} The system shall log all transactions for each database.
+
+\noindent\textbf{SR5\label{req:SR5}:} The system shall automatically save game progress every time there is a change in game state.
+
+\noindent\textbf{SR6\label{req:SR6}:} The system shall attempt to save the game state three times before failing.
+
+\noindent\textbf{SR7\label{req:SR7}:} The system shall ensure that a save state is valid before loading it as the current game state.
+
+\noindent\textbf{SR8\label{req:SR8}:} The system shall ensure that each generated task has not already been generated in the current round.
+
+\noindent\textbf{SR9\label{req:SR9}:} The system shall ensure that each generated task is solvable.
+
+\noindent\textbf{SR10\label{req:SR10}:} The system shall only allow authorized users to modify competitive statistics and leaderboard records.
+
+\noindent\textbf{SR11\label{req:SR11}:} The system shall restore database data from the most recent, valid backup in the event of database corruption or data loss.
+
+\noindent\textbf{SR12\label{req:SR12}:} The system shall ensure that a generated solution correctly solves its related generated task.
+
+\noindent\textbf{SR13\label{req:SR13}:} The system shall ensure that public usernames meet guidelines for user conduct.
 
 \section{Roadmap}
 
