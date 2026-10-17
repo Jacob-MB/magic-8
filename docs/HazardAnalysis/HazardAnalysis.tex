@@ -88,11 +88,35 @@ This category is described as the loss of user engagement, satisfaction, or trus
 
 \section{System Boundaries and Components}
 
-\wss{Dividing the system into components will help you brainstorm the hazards.
-You shouldn't do a full design of the components, just get a feel for the major
-ones.  For projects that involve hardware, the components will typically include
-each individual piece of hardware.  If your software will have a database, or an
-important library, these are also potential components.}
+The following subsections describe the main components of the system.
+
+\subsection{User Database}
+
+This component stores user account specific data including usernames, emails, passwords, and individual high scores.
+
+\subsection{Competitive/Leaderboard Database}
+
+This component stores data related to online, competitive statistics such as global high scores, fastest solve times, and rankings.
+
+\subsection{Game State Manager}
+
+This component handles the gameplay for the application. This involves taking in user actions and evaluating them against the current task, progressing through tasks in a round, etc.
+
+\subsection{Visualization/Rendering Manager}
+
+This component handles the rendering and projection calculations associated with the 3D visualization. This includes both the magic cube itself and highlighting related to the current task.
+
+\subsection{Hint/Tutorial Manager}
+
+This component handles the hints, feedback, and tutorial steps related to the game as well as educational help for octal arithmetic.
+
+\subsection{User Interface}
+
+This component handles user input and output for the labels, buttons, and text fields of the application. Essentially, this component handles all user input and output that is not related to rendering the 3D space.
+
+\subsection{Task Generator}
+
+This component handles the task generation process for a given round including generating both the problem and solution for a generated task and ramping up difficulty as a round progresses.
 
 \section{Critical Assumptions}
 
