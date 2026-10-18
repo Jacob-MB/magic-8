@@ -214,7 +214,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Weak password storage\newline- SQL injection &
     - User privacy breach\newline- Loss of trust &
     - Encrypt sensitive data\newline- Hash based passwords\newline- Conduct security audits &
-    - \hyperref[req:SR1]{SR1}\newline- \hyperref[req:SR2]{SR2} &
+    - \hyperref[req:SR1]{SR1}\newline- \hyperref[req:SR2]{SR2}\newline- PR3\newline- PR4 &
     H1-a \\
 
     \hline
@@ -224,7 +224,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Error in saving\newline- Database crash &
     - Loss of user account information &
     - Automated backups\newline- Transaction logging\newline- Recovery procedures &
-    - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11} &
+    - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11}\newline- PR6\newline- PR7\newline- PR8 &
     H1-b \\
 
     \hline
@@ -234,7 +234,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Inadequate review or control of public usernames &
     - Decrease in user well-being &
     - Restrictions on username content &
-    - \hyperref[req:SR13]{SR13} &
+    - \hyperref[req:SR13]{SR13}\newline- FR44 &
     H1-c \\
 
     \hline
@@ -244,7 +244,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Database corruption or loss of data &
     - User frustration\newline- Loss of user engagement &
     - Automated backups\newline- Transaction logging\newline- Recovery procedures\newline- Ranking validation &
-    - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11} &
+    - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11}\newline- PR6\newline- PR7\newline- PR8 &
     H2-a \\
 
     \hline
@@ -254,7 +254,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Insufficient access controls &
     - User frustration leading to loss of user engagement &
     - Role-based access control &
-    - \hyperref[req:SR10]{SR10} &
+    - \hyperref[req:SR10]{SR10}\newline- FR50 &
     H2-b \\
 
     \hline
@@ -264,7 +264,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Game crash\newline- Failed save &
     - Loss of user progress leading to frustration and disengagement &
     - Autosave functionality\newline- Save retries &
-    - \hyperref[req:SR5]{SR5}\newline- \hyperref[req:SR6]{SR6} &
+    - \hyperref[req:SR5]{SR5}\newline- \hyperref[req:SR6]{SR6}\newline- FR30 &
     H3-a \\
 
     \hline
@@ -274,7 +274,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Corrupted save data\newline- Incorrect state flow &
     - Correct answer marked incorrect or vice versa\newline- User confusion leading to decreased educational value and disengagement &
     - Save integrity checks\newline- Validate state flow &
-    - \hyperref[req:SR7]{SR7} &
+    - \hyperref[req:SR7]{SR7}\newline- FR31 &
     H3-b \\
 
     \hline
@@ -354,7 +354,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Insufficient shuffling of tasks &
     - Loss of user engagement\newline- Ineffective education &
     - Check tasks for uniqueness in a given round\newline- Validate randomness of task generation &
-    - \hyperref[req:SR8]{SR8} &
+    - \hyperref[req:SR8]{SR8}\newline- FR6 &
     H7-a \\
 
     \hline
@@ -364,7 +364,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Logic error\newline- Error in task generation algorithm &
     - Unsolvable puzzle leading to disengagement\newline- User confusion / loss in educational value &
     - Validate solvability of task before giving it to the user &
-    - \hyperref[req:SR9]{SR9} &
+    - \hyperref[req:SR9]{SR9}\newline- FR25 &
     H7-b \\
 
     \hline
@@ -374,7 +374,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Logic error &
     - Correct answer is marked incorrect and an incorrect answer could be marked correct\newline- Loss of educational value\newline- User frustration and disengagement &
     - Validate the generated solution before giving the task to the user &
-    - \hyperref[req:SR12]{SR12} &
+    - \hyperref[req:SR12]{SR12}\newline- FR25 &
     H7-c \\
 
 \end{tabularx}
@@ -392,7 +392,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
 
 \noindent\textbf{SR5\label{req:SR5}:} The system shall automatically save game progress every time there is a change in game state.
 
-\noindent\textbf{SR6\label{req:SR6}:} The system shall attempt to save the game state three times before failing.
+\noindent\textbf{SR6\label{req:SR6}:} The system shall attempt to save the game state three times before failing and notifying the user.
 
 \noindent\textbf{SR7\label{req:SR7}:} The system shall ensure that a save state is valid before loading it as the current game state.
 
