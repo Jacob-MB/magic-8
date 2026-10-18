@@ -242,8 +242,8 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     Cube or highlighting incorrectly displayed &
     - Projection error &
     - User confusion leading to reduced educational value\newline- Lead user to incorrect decisions &
-    - Thorough unit testing of component\newline- Gameplay testing &
-    X &
+    - Formal verification of projection algorithm\newline- Gameplay testing to ensure correct highlighting is displayed &
+    - \hyperref[req:SR15]{SR15} &
     H4-a \\
 
     \hline
@@ -252,8 +252,8 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     Unstable refresh rate or screen tearing &
     - Software bug\newline- Incorrect application of animation &
     - User disorientation leading to disengagement &
-    - Through unit testing of component &
-    X &
+    - Unit testing of component\newline- Ensure user has minimum hardware specification to sustain refresh rate &
+    - \hyperref[req:SR14]{SR14} &
     H4-b \\
 
     \hline
@@ -262,7 +262,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     Excessive and unintended flashing or animation &
     - Graphics bug\newline- Excessive use of animation &
     - Photosensitive seizure risk\newline- Eye strain &
-    - Thorough unit testing of component\newline- User testing of animations &
+    - Unit testing of component to reduce chance of unintended flashes/animations\newline- User testing of animations to ensure the animations are not excessive &
     X &
     H4-c \\
 
@@ -272,7 +272,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     Incorrect hint provided &
     - Hints are not properly encoded\newline- Tutorial/hint state flow is incorrect &
     - User confusion and frustration\newline- User disengagement\newline- Loss of educational value &
-    - Unit testing of component\newline- Validation of hint/tutorial state flow &
+    - Unit testing of component to ensure correct hint is provided\newline- Validation of hint/tutorial state flow &
     X &
     H5-a \\
 
@@ -282,7 +282,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     Incorrect octal arithmetic provided &
     - Octal arithmetic is not properly encoded &
     - Loss of educational value &
-    - Unit testing of component's octal arithmetic &
+    - Unit testing of component's octal arithmetic\newline- Formal verification of octal arithmetic calculations &
     X &
     H5-b \\
 
@@ -292,8 +292,8 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     User input interpreted incorrectly &
     - Input parsing error\newline- User action(s) mapped incorrectly to game command(s) &
     - Incorrect action taken leading to incorrect game state\newline- User frustration / disengagement\newline- Loss of educational value &
-    - Unit testing of parsing logic and encoded actions &
-    X &
+    - Unit testing of encoded actions\newline- Allow users to confirm parsed data (e.g., confirm user account data before submitting) &
+    - \hyperref[req:SR16]{SR16} &
     H6-a \\
 
     \hline
@@ -303,7 +303,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Event handling bug &
     - Inability to progress\newline- User frustration / disengagement &
     - Input event validation &
-    X &
+    - \hyperref[req:SR17]{SR17} &
     H6-b \\
 
     \hline
@@ -366,6 +366,14 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
 \noindent\textbf{SR12\label{req:SR12}:} The system shall ensure that a generated solution correctly solves its related generated task.
 
 \noindent\textbf{SR13\label{req:SR13}:} The system shall ensure that public usernames meet guidelines for user conduct.
+
+\noindent\textbf{SR14\label{req:SR14}:} The system shall warn the user if their hardware specification does not meet minimum requirements to run the application.
+
+\noindent\textbf{SR15\label{req:SR15}:} The system shall ensure that the current highlighting is consistent with the game state.
+
+\noindent\textbf{SR16\label{req:SR16}:} The system shall allow users to confirm parsed data before submitting.
+
+\noindent\textbf{SR17\label{req:SR17}:} The system shall inform the user if an input event is not recognized.
 
 \section{Roadmap}
 
