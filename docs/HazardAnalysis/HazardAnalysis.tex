@@ -427,25 +427,25 @@ This section outlines which safety and security requirements will be implemented
 \begin{itemize}
     \item \hyperref[req:SR1]{SR1}: It is important that our user data is secure as we are planning to release the game on the internet within the capstone timeline.
     \item \hyperref[req:SR2]{SR2}: Similar to SR1, it is important that the user accounts are secure as we are planning to release the game on the internet within the capstone timeline.
-    \item \hyperref[req:SR5]{SR5}: An important game mechanic is saving to ensure that the application is usable and conveinient for users.
-    \item \hyperref[req:SR6]{SR6}: Similar to \hyperref[req:SR5]{SR5}, saving is an important mechanic and ensures that the application is usable.
-    \item \hyperref[req:SR7]{SR7}: Ensuring that a save state is valid before loading is crucial as it could crash the game if the save is corrupted.
+    \item \hyperref[req:SR5]{SR5}: An important game mechanic is saving the game state to ensure that the application is convenient for users.
+    \item \hyperref[req:SR6]{SR6}: Similar to \hyperref[req:SR5]{SR5}, saving the game state is an important mechanic and ensures that the application allows users to exit and resume play.
+    \item \hyperref[req:SR7]{SR7}: Ensuring that a save state is valid before loading is crucial to ensure that the game does not crash the game if the save is corrupted.
     \item \hyperref[req:SR8]{SR8}: An important goal in our game is user engagement. If a generated task is duplicated, user satisfaction could be significantly decreased.
-    \item \hyperref[req:SR9]{SR9}: If a task is not solvable, user frustration and confusion will increase drastically.
-    \item \hyperref[req:SR12]{SR12}: If a solution does not correctly solve the current task, user frustration and confusion will increase drastically.
+    \item \hyperref[req:SR9]{SR9}: If a task is not solvable, user frustration and confusion will increase. This increases the chance that users will abandon the game.
+    \item \hyperref[req:SR12]{SR12}: If a solution does not correctly solve the current task, user frustration and confusion will increase. This increases the chance that users will abandon the game.
     \item \hyperref[req:SR13]{SR13}: Because we are planning to release the game on the internet within the capstone timeline, it is important that we protect our users from harmful language.
     \item \hyperref[req:SR14]{SR14}: Notifying the user if their hardware specifications do not meet minimum requirements is important because it gives the user an actionable fix if they are experiencing performance issues with the game.
     \item \hyperref[req:SR15]{SR15}: Incorrect highlighting can increase user frustration and confusion, leading to decreased user engagement, satisfaction, and education.
-    \item \hyperref[req:SR16]{SR16}: By allowing users to confirm parsed data before submitting, the chance of mistakes decreases, improving user satisfaction.
-    \item \hyperref[req:SR17]{SR17}: By informing users when input events are not recognized, it gives users a more complete idea of what is going wrong. This will reduce user confusion.
+    \item \hyperref[req:SR16]{SR16}: By allowing users to confirm parsed data before submitting, the chance of the user submitting parsed information that they did not intend decreases. In turn, this improves user satisfaction.
+    \item \hyperref[req:SR17]{SR17}: By informing users when input events are not recognized, users can better understand what is going wrong. This will reduce user confusion.
 \end{itemize}
 
 \subsection{Deferred Safety and Security Requirements}
 
 \begin{itemize}
-    \item \hyperref[req:SR3]{SR3}: Although creating a backup is important, due to the recreational nature of the application, it is not a big detriment if data is lost or corrupted.
-    \item \hyperref[req:SR4]{SR4}: Similar to SR3, because the data stored is not entirely important (other than it being secure), our main priority is not preventing data loss or corruption.
-    \item \hyperref[req:SR10]{SR10}: Although general rules regarding how the leaderboards are modified will be set up during the capstone timeline, it is not crucial to stop malicious users from modifying competitive statistics / leaderboard results.
+    \item \hyperref[req:SR3]{SR3}: Although creating a backup is important, due to the recreational nature of the application, it is not a significant detriment if data is lost or corrupted.
+    \item \hyperref[req:SR4]{SR4}: Similar to SR3, because the data stored is not entirely important (other than it being secure), it is not our main priority to prevent data loss or corruption.
+    \item \hyperref[req:SR10]{SR10}: Although general rules regarding how the leaderboards are modified will be set up during the capstone timeline, it is not immediately critical to stop malicious users from modifying competitive statistics / leaderboard results.
     \item \hyperref[req:SR11]{SR11}: This requirement is not possible without \hyperref[req:SR3]{SR3}, which itself is deferred. The reasoning for this requirement being deferred follows the same reasoning as \hyperref[req:SR3]{SR3}.
 \end{itemize}
 
