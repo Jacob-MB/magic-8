@@ -130,13 +130,23 @@ The following table describes the main components of the system.
 
     \hline
 
+    User Manager &
+    Handles all aspects of user accounts including account creation, account management, and account deletion. \\
+
+    \hline
+
     Competitive / Leaderboard Database &
     Stores data related to online, competitive statistics such as global high scores, fastest solve times, and rankings. \\
 
     \hline
 
+    Competitive / Leaderboard Manager &
+    Handles display and management of competitive statistics and leaderboards. \\
+
+    \hline
+
     Game State Manager &
-    Handles the gameplay for the application. This involves taking in user actions and evaluating them against the current task, progressing through tasks in a round, etc. \\
+    Handles the gameplay for the application. This involves taking in user actions and evaluating them against the current task, progressing through tasks in a round, saving progress of a current game, etc. \\
 
     \hline
 
@@ -211,7 +221,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     % Table Rows...
     User Database &
     User data exposed to unauthorized individuals &
-    - Weak password storage\newline- SQL injection &
+    - Weak password storage &
     - User privacy breach\newline- Loss of trust &
     - Encrypt sensitive data\newline- Hash based passwords\newline- Conduct security audits &
     - \hyperref[req:SR1]{SR1}\newline- \hyperref[req:SR2]{SR2}\newline- PR3\newline- PR4 &
@@ -229,13 +239,13 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
 
     \hline
 
-    User Database &
+    User Manager &
     Inappropriate and/or harmful usernames &
     - Inadequate review or control of public usernames &
     - Decrease in user well-being &
     - Restrictions on username content &
     - \hyperref[req:SR13]{SR13}\newline- FR44 &
-    H1-c \\
+    H2-a \\
 
     \hline
 
@@ -245,7 +255,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - User frustration\newline- Loss of user engagement &
     - Automated backups\newline- Transaction logging\newline- Recovery procedures\newline- Ranking validation &
     - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11}\newline- PR6\newline- PR7\newline- PR8 &
-    H2-a \\
+    H3-a \\
 
     \hline
 
@@ -255,7 +265,17 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - User frustration leading to loss of user engagement &
     - Role-based access control &
     - \hyperref[req:SR10]{SR10}\newline- FR50 &
-    H2-b \\
+    H3-b \\
+
+    \hline
+
+    Competitive / Leaderboard Manager &
+    Incorrect competitive statistics or leaderboard displayed &
+    - Unsynchronized connection to Competitive / Leaderboard Database\newline- Software bug &
+    - Users feel unaccomplished and disatisfied that their achievements are not recognized\newline- Loss of user engagement &
+    - Ensure that Competitive / Leaderboard Manager is up to date with Competitive / Leaderboard Database\newline- Formally verify component software correctly displays the competitive/leaderboard data &
+    - \hyperref[req:SR18]{SR18} &
+    H4-a \\
 
     \hline
 
@@ -265,7 +285,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Loss of user progress leading to frustration and disengagement &
     - Autosave functionality\newline- Save retries &
     - \hyperref[req:SR5]{SR5}\newline- \hyperref[req:SR6]{SR6}\newline- FR30 &
-    H3-a \\
+    H5-a \\
 
     \hline
 
@@ -275,7 +295,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Correct answer marked incorrect or vice versa\newline- User confusion leading to decreased educational value and disengagement &
     - Save integrity checks\newline- Validate state flow &
     - \hyperref[req:SR7]{SR7}\newline- FR31 &
-    H3-b \\
+    H5-b \\
 
     \hline
 
@@ -285,7 +305,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - User confusion leading to reduced educational value\newline- Lead user to incorrect decisions &
     - Formal verification of projection algorithm\newline- Gameplay testing to ensure correct highlighting is displayed &
     - \hyperref[req:SR15]{SR15} &
-    H4-a \\
+    H6-a \\
 
     \hline
 
@@ -295,7 +315,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - User disorientation leading to disengagement &
     - Unit testing of component\newline- Ensure user has minimum hardware specification to sustain refresh rate &
     - \hyperref[req:SR14]{SR14} &
-    H4-b \\
+    H6-b \\
 
     \hline
 
@@ -303,29 +323,29 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     Excessive and unintended flashing or animation &
     - Graphics bug\newline- Excessive use of animation &
     - Photosensitive seizure risk\newline- Eye strain &
-    - Unit testing of component to reduce chance of unintended flashes/animations\newline- User testing of animations to ensure the animations are not excessive &
-    X &
-    H4-c \\
+    - Unit testing of component to reduce chance of unintended flashes/animations\newline- User testing of animations to ensure the animations are not excessive\newline- Allow user to disable animations that can pose a risk of photosensitive seizures &
+    - \hyperref[req:SR19]{SR19} &
+    H6-c \\
 
     \hline
 
     Hint / Tutorial Manager &
     Incorrect hint provided &
-    - Hints are not properly encoded\newline- Tutorial/hint state flow is incorrect &
+    - Hints are not properly encoded\newline- Tutorial/hint state flow is incorrect\newline- Hint / Tutorial Manager is not synchronized with game state &
     - User confusion and frustration\newline- User disengagement\newline- Loss of educational value &
-    - Unit testing of component to ensure correct hint is provided\newline- Validation of hint/tutorial state flow &
-    X &
-    H5-a \\
+    - Unit testing of component to ensure correct hint is provided\newline- Validation of hint/tutorial state flow\newline- Ensure that the hint / tutorial manager is synchronized with the current game state &
+    - \hyperref[req:SR20]{SR20} &
+    H7-a \\
 
     \hline
 
     Hint / Tutorial Manager &
-    Incorrect octal arithmetic provided &
-    - Octal arithmetic is not properly encoded &
+    Incorrect octal arithmetic provided in a hint &
+    - Octal arithmetic is not properly encoded when generating hints &
     - Loss of educational value &
     - Unit testing of component's octal arithmetic\newline- Formal verification of octal arithmetic calculations &
-    X &
-    H5-b \\
+    N/A &
+    H7-b \\
 
     \hline
 
@@ -335,7 +355,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Incorrect action taken leading to incorrect game state\newline- User frustration / disengagement\newline- Loss of educational value &
     - Unit testing of encoded actions\newline- Allow users to confirm parsed data (e.g., confirm user account data before submitting) &
     - \hyperref[req:SR16]{SR16} &
-    H6-a \\
+    H8-a \\
 
     \hline
 
@@ -343,9 +363,9 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     User input not registered &
     - Event handling bug &
     - Inability to progress\newline- User frustration / disengagement &
-    - Input event validation &
+    - Formally validate that all user input leads to an event\newline- Inform user of errors in handling an input event &
     - \hyperref[req:SR17]{SR17} &
-    H6-b \\
+    H8-b \\
 
     \hline
 
@@ -355,7 +375,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Loss of user engagement\newline- Ineffective education &
     - Check tasks for uniqueness in a given round\newline- Validate randomness of task generation &
     - \hyperref[req:SR8]{SR8}\newline- FR6 &
-    H7-a \\
+    H9-a \\
 
     \hline
 
@@ -365,7 +385,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Unsolvable puzzle leading to disengagement\newline- User confusion / loss in educational value &
     - Validate solvability of task before giving it to the user &
     - \hyperref[req:SR9]{SR9}\newline- FR25 &
-    H7-b \\
+    H9-b \\
 
     \hline
 
@@ -375,7 +395,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     - Correct answer is marked incorrect and an incorrect answer could be marked correct\newline- Loss of educational value\newline- User frustration and disengagement &
     - Validate the generated solution before giving the task to the user &
     - \hyperref[req:SR12]{SR12}\newline- FR25 &
-    H7-c \\
+    H9-c \\
 
 \end{tabularx}
 \end{landscape}
@@ -418,6 +438,12 @@ This section outlines the Safety and Security Requirements that were developed f
 
 \noindent\textbf{SR17\label{req:SR17}:} The system shall inform the user if an input event is not recognized.
 
+\noindent\textbf{SR18\label{req:SR18}:} The system shall ensure that the displayed competitive/leaderboard is up to date (synchronized with the Competitive / Leaderboard Database).
+
+\noindent\textbf{SR19\label{req:SR19}:} The system shall allow users to disable animations that may induce photosensitive seizures.
+
+\noindent\textbf{SR20\label{req:SR20}:} The system shall ensure that the Tutorial / Hint Manager is synchronized with the current game state.
+
 \section{Roadmap}
 
 This section outlines which safety and security requirements will be implemented as part of the capstone timeline, and which safety and security requirements will be deferred. The requirements implemented as part of the capstone timeline are considered high priority requirements.
@@ -426,7 +452,7 @@ This section outlines which safety and security requirements will be implemented
 
 \begin{itemize}
     \item \hyperref[req:SR1]{SR1}: It is important that our user data is secure as we are planning to release the game on the internet within the capstone timeline.
-    \item \hyperref[req:SR2]{SR2}: Similar to SR1, it is important that the user accounts are secure as we are planning to release the game on the internet within the capstone timeline.
+    \item \hyperref[req:SR2]{SR2}: Similar to \hyperref[req:SR1]{SR1}, it is important that the user accounts are secure as we are planning to release the game on the internet within the capstone timeline.
     \item \hyperref[req:SR5]{SR5}: An important game mechanic is saving the game state to ensure that the application is convenient for users.
     \item \hyperref[req:SR6]{SR6}: Similar to \hyperref[req:SR5]{SR5}, saving the game state is an important mechanic and ensures that the application allows users to exit and resume play.
     \item \hyperref[req:SR7]{SR7}: Ensuring that a save state is valid before loading is crucial to ensure that the game does not crash the game if the save is corrupted.
@@ -455,7 +481,7 @@ This section outlines which safety and security requirements will be implemented
 
 \subsection{AI Tools Used}
 
-Microsoft Copilot version 155.0.4283.45 was used in support of researching and reviewing this document.
+Microsoft Copilot version 155.0 was used in support of researching and reviewing this document.
 
 \subsection{How and Where Used}
 
