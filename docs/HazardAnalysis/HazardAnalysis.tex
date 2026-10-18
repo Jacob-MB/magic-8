@@ -88,35 +88,70 @@ This category is described as the loss of user engagement, satisfaction, or trus
 
 \section{System Boundaries and Components}
 
-The following subsections describe the main components of the system.
+The following table describes the main components of the system.
 
-\subsection{User Database}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|Y|Y|}
 
-This component stores user account specific data including usernames, emails, passwords, and individual high scores.
+    % Header
+    \caption{System Components} \\
+    \hline
+    \textbf{Component} &
+    \textbf{Description} \\
+    \hline
+    \endfirsthead
 
-\subsection{Competitive/Leaderboard Database}
+    % Subsequent pages header
+    \hline
+    \textbf{Component} &
+    \textbf{Description} \\
+    \hline
+    \endhead
 
-This component stores data related to online, competitive statistics such as global high scores, fastest solve times, and rankings.
+    % Prompt that the table continues
+    \hline
+    \multicolumn{2}{r}{\textit{Continued on next page}} \\
+    \endfoot
 
-\subsection{Game State Manager}
+    % No footer on last page
+    \hline
+    \endlastfoot
 
-This component handles the gameplay for the application. This involves taking in user actions and evaluating them against the current task, progressing through tasks in a round, etc.
+    % Table Rows...
+    User Database &
+    This component stores user account specific data including usernames, emails, passwords, and individual high scores. \\
 
-\subsection{Visualization/Rendering Manager}
+    \hline
 
-This component handles the rendering and projection calculations associated with the 3D visualization. This includes both the magic cube itself and highlighting related to the current task.
+    Competitive / Leaderboard Database &
+    This component stores data related to online, competitive statistics such as global high scores, fastest solve times, and rankings. \\
 
-\subsection{Hint/Tutorial Manager}
+    \hline
 
-This component handles the hints, feedback, and tutorial steps related to the game as well as educational help for octal arithmetic.
+    Game State Manager &
+    This component handles the gameplay for the application. This involves taking in user actions and evaluating them against the current task, progressing through tasks in a round, etc. \\
 
-\subsection{User Interface}
+    \hline
 
-This component handles user input and output for the labels, buttons, and text fields of the application. Essentially, this component handles all user input and output that is not related to rendering the 3D space.
+    Visualization/Rendering Manager &
+    This component handles the rendering and projection calculations associated with the 3D visualization. This includes both the magic cube itself and highlighting related to the current task. \\
 
-\subsection{Task Generator}
+    \hline
 
-This component handles the task generation process for a given round including generating both the problem and solution for a generated task and ramping up difficulty as a round progresses.
+    Hint/Tutorial Manager &
+    This component handles the hints, feedback, and tutorial steps related to the game as well as educational help for octal arithmetic. \\
+
+    \hline
+
+    User Interface &
+    This component handles user input and output for the labels, buttons, and text fields of the application. Essentially, this component handles all user input and output that is not related to rendering the 3D space. \\
+
+    \hline
+
+    Task Generator &
+    This component handles the task generation process for a given round including generating both the problem and solution for a generated task and ramping up difficulty as a round progresses. \\
+
+\end{tabularx}
 
 \section{Critical Assumptions}
 
