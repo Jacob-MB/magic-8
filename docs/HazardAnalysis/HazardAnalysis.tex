@@ -3,6 +3,15 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{ltablex}
+\usepackage{pdflscape}
+
+\keepXColumns
+
+% Defines new column types that use ragged right so the table doesn't look awful
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -36,7 +45,7 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
+October 17, 2026 & Jacob Brodersen & Added Initial Draft of the Hazard Analysis\\
 Date2 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
@@ -50,8 +59,6 @@ Date2 & Name(s) & Description of changes\\
 ~\newpage
 
 \pagenumbering{arabic}
-
-\wss{You are free to modify this template.}
 
 \section{Introduction}
 
