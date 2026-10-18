@@ -299,11 +299,21 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
 
     \hline
 
+    Game State Manager &
+    User becomes addicted to the gameplay &
+    - Insufficient reminders of gameplay time &
+    - Addictive or excessive use of the application &
+    - Remind user when they have been playing for an extended period of time &
+    - \hyperref[req:SR21]{SR21} &
+    H5-c \\
+
+    \hline
+
     Visualization / Rendering Manager &
     Cube or highlighting incorrectly displayed &
-    - Projection error &
+    - Projection error\newline- Visualization / Rendering Manager is relying on an outdated or incorrect game state &
     - User confusion leading to reduced educational value\newline- Lead user to incorrect decisions &
-    - Formal verification of projection algorithm\newline- Gameplay testing to ensure correct highlighting is displayed &
+    - Formal verification of projection algorithm\newline- Gameplay testing to ensure correct cube and highlighting is displayed\newline- Ensure that the Visualization / Rendering Manager is using the current game state &
     - \hyperref[req:SR15]{SR15} &
     H6-a \\
 
@@ -312,7 +322,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
     Visualization / Rendering Manager &
     Unstable refresh rate or screen tearing &
     - Software bug\newline- Incorrect application of animation &
-    - User disorientation leading to disengagement &
+    - User disorientation leading to disengagement\newline- Risk of photosensitive seizure &
     - Unit testing of component\newline- Ensure user has minimum hardware specification to sustain refresh rate &
     - \hyperref[req:SR14]{SR14} &
     H6-b \\
@@ -351,7 +361,7 @@ Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents 
 
     User Interface &
     User input interpreted incorrectly &
-    - Input parsing error\newline- User action(s) mapped incorrectly to game command(s) &
+    - Input parsing error (e.g., text fields such as username and email)\newline- User action(s) mapped incorrectly to game command(s) &
     - Incorrect action taken leading to incorrect game state\newline- User frustration / disengagement\newline- Loss of educational value &
     - Unit testing of encoded actions\newline- Allow users to confirm parsed data (e.g., confirm user account data before submitting) &
     - \hyperref[req:SR16]{SR16} &
@@ -432,7 +442,7 @@ This section outlines the Safety and Security Requirements that were developed f
 
 \noindent\textbf{SR14\label{req:SR14}:} The system shall warn the user if their hardware specification does not meet minimum requirements to run the application.
 
-\noindent\textbf{SR15\label{req:SR15}:} The system shall ensure that the current highlighting is consistent with the game state.
+\noindent\textbf{SR15\label{req:SR15}:} The system shall ensure that the rendered cube and highlighting is consistent with the current game state.
 
 \noindent\textbf{SR16\label{req:SR16}:} The system shall allow users to confirm parsed data before submitting.
 
@@ -443,6 +453,8 @@ This section outlines the Safety and Security Requirements that were developed f
 \noindent\textbf{SR19\label{req:SR19}:} The system shall allow users to disable animations that may induce photosensitive seizures.
 
 \noindent\textbf{SR20\label{req:SR20}:} The system shall ensure that the Tutorial / Hint Manager is synchronized with the current game state.
+
+\noindent\textbf{SR21\label{req:SR21}:} The system shall remind the user how long they have been playing every hour.
 
 \section{Roadmap}
 
