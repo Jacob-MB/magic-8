@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{ltablex}
 \usepackage{pdflscape}
+\usepackage{natbib}
 
 \keepXColumns
 
@@ -46,8 +47,8 @@
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
 October 17, 2026 & Jacob Brodersen & Added Initial Draft of the Hazard Analysis\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+October 18, 2026 & Jacob Brodersen & Revised Initial Draft of the Hazard Analysis\\
+October 19, 2026 & Jacob Brodersen & Finalized Hazard Analysis\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -72,14 +73,13 @@ Our project, Magic 8, is a web-based application that serves as a recreational m
 
 A hazard is defined as a system state that if combined with a specific environmental condition, can cause harm/damage. Hazards can result from software defects or incorrectly defined system behavior. These hazards can be categorized as health, data, education, and usability hazards.
 
+\section{Scope and Purpose of Hazard Analysis}\label{sec:ScopeandPurpose}
 
-\section{Scope and Purpose of Hazard Analysis}
-
-The purpose of this Hazard Analysis is to identify hazards related to the Magic 8 application and subsequently perform a Failure Mode and Effect Analysis (FMEA) to mitigate the found hazards. Below is the description of the losses that could be incurred because of the hazards.
+The purpose of this Hazard Analysis is to identify hazards related to the Magic 8 application and subsequently perform a Failure Mode and Effect Analysis (FMEA) to mitigate the found hazards. Below is the description of the losses that could be incurred because of the hazards. Out of scope features include accessibility concerns, advanced cybersecurity (beyond simply encrypting data and securing passwords), and optimizing or extending the software for outdated or insufficient user hardware or software. Although these considerations will be important for future updates (past the capstone timeline), they do not fit within the scope of a first official version of the application.
 
 \subsection{Health}
 
-This category is described as the loss of health due to use of the system. This includes both physical health (e.g., photosensitive seizure) as well as mental health (e.g., bullying through the application).
+This category is described as the loss of health due to use of the system. This includes both physical health (e.g., photosensitive seizure, see \cite{PhotoSeizure}) as well as mental health (e.g., bullying through the application and addiction).
 
 \subsection{Data}
 
@@ -95,7 +95,7 @@ This category is described as the loss of user engagement, satisfaction, or trus
 
 \section{System Boundaries and Components}
 
-The following table describes the main components of the system.
+The following table describes the main components within the system boundary. Out of scope considerations are described in the \hyperref[sec:ScopeandPurpose]{Scope and Purpose of Hazard Analysis} section.
 
 \renewcommand{\arraystretch}{1.3}
 \begin{tabularx}{\linewidth}{|Y|Y|}
@@ -169,6 +169,8 @@ The following table describes the main components of the system.
     Handles the task generation process for a given round including generating both the problem and solution for a generated task and ramping up difficulty as a round progresses. \\
 
 \end{tabularx}
+
+Outside of the system boundary are the users themselves and their associated hardware (computer) and web browser. In terms of external interaction, all of the input and output associated with the system goes through the User Interface component with the exception of the 3D visualization output, which is handled by the Visualization/Rendering Manager.
 
 \section{Critical Assumptions}
 
@@ -476,6 +478,9 @@ This section outlines which safety and security requirements will be implemented
     \item \hyperref[req:SR15]{SR15}: Incorrect highlighting can increase user frustration and confusion, leading to decreased user engagement, satisfaction, and education.
     \item \hyperref[req:SR16]{SR16}: By allowing users to confirm parsed data before submitting, the chance of the user submitting parsed information that they did not intend decreases. In turn, this improves user satisfaction.
     \item \hyperref[req:SR17]{SR17}: By informing users when input events are not recognized, users can better understand what is going wrong. This will reduce user confusion.
+    \item \hyperref[req:SR18]{SR18}: One of the main features for the capstone timeline is competitive statistics and leaderboards. Therefore, it is imperitive that these statistics/leaderboards are accurately displayed.
+    \item \hyperref[req:SR19]{SR19}: Because the application will be released to the public within the capstone timeline, it is imperative that this version of the application takes into account the risk of photosensitive seizures.
+    \item \hyperref[req:SR20]{SR20}: Effective education of octal arithmetic is an important goal of the application. To achieve this goal in the capstone timeline, the Tutorial / Hint Manager must show up to date hints / tutorial steps based on the game's state.
 \end{itemize}
 
 \subsection{Deferred Safety and Security Requirements}
@@ -485,6 +490,7 @@ This section outlines which safety and security requirements will be implemented
     \item \hyperref[req:SR4]{SR4}: Similar to SR3, because the data stored is not entirely important (other than it being secure), it is not our main priority to prevent data loss or corruption.
     \item \hyperref[req:SR10]{SR10}: Although general rules regarding how the leaderboards are modified will be set up during the capstone timeline, it is not immediately critical to stop malicious users from modifying competitive statistics / leaderboard results.
     \item \hyperref[req:SR11]{SR11}: This requirement is not possible without \hyperref[req:SR3]{SR3}, which itself is deferred. The reasoning for this requirement being deferred follows the same reasoning as \hyperref[req:SR3]{SR3}.
+    \item \hyperref[req:SR21]{SR21}: Although addiction can be a concern, it cannot be prioritized over more prevelent risks such as photosensitive seizures. Additionally, addiction-prevention features like this already exist externally (e.g., screen time controls), so there are other methods in place to control usage if necessary while this requirement is deferred.
 \end{itemize}
 
 \newpage{}
@@ -547,5 +553,8 @@ The suggestions provided by Microsoft Copilot were not implemented directly. Ins
 
     Finally, separate from physical harm is harm to mental well-being. For example, one of the hazards we identified was bullying or hateful comments through the use of usernames. This is important because as creators, we are responsible for helping safeguard our users from not only physical harm, but mental harm as well.
 \end{enumerate}
+
+\bibliographystyle {plainnat}
+\bibliography{../../refs/References}
 
 \end{document}
