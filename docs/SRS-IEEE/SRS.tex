@@ -532,7 +532,13 @@ Let the set of tasks in a game round be
 \]
 
 Each task \(T_i\) has an associated target condition and a basic
-score value. Let \(B_i\) be the basic score awarded for correctly
+score value. 
+Let:
+
+\[
+    B_i = B(T_i), \qquad B_i \in \mathbb{N}_0.
+\]
+Where \(B_i\) is the basic score awarded for correctly
 completing task \(T_i\). The target conditions are defined by the
 game configuration and are evaluated against the current puzzle
 state.
@@ -551,8 +557,23 @@ These values are interpreted as octal numbers. For example,
     4004_8 = 2052_{10}.
 \]
 
-The task configuration determines which target condition applies
-to each task and which cells or lines are involved in its evaluation.
+These values are used by the application to define their target conditions. For instance,
+\[
+    \theta_i(C) =
+    \begin{cases}
+        1, & \text{if } L_i(C) = s_i,\\
+        0, & \text{otherwise}.
+    \end{cases}
+\]
+where \(L_i(C)\) is the sum of relevant cells, and 
+\[
+    \theta_i(C) = 
+    \begin{cases}
+        1, & \text{if condition met}\\
+        0, & \text{otherwise}.
+    \end{cases}
+\] 
+is the target condition.
 
 \subsubsection{Round State}
 
@@ -562,12 +583,60 @@ A game round is represented by the state
 \]
 where:
 \begin{itemize}
-    \item \(C\) is the current puzzle configuration, including the
-    values assigned to its cells;
-    \item \(i\) is the index of the current task;
-    \item \(A\) is the set of task attempts recorded during the round;
-    \item \(P\) is the score accumulated during the round.
+    \item \textbf{Puzzle Configuration (\(C\)):}
+    The current state of the magic cube, represented by a
+    three-dimensional array of cell values:
+    \[
+        C \in V^{n \times n \times n},
+    \]
+    where \(n\) is the dimension of the cube and \(V\) is the
+    set of permitted cell values, including any designated
+    empty value used for unfilled cells. Each element
+    \(C_{x,y,z}\) represents the value of the cell at position
+    \((x,y,z)\), for \(1 \leq x,y,z \leq n\).
+
+    \item \textbf{Current Task Index (\(i\)):}
+    The index identifying the task currently being attempted:
+    \[
+        i \in \{1,2,\ldots,8\}.
+    \]
+    The value of \(i\) determines which task's completion
+    conditions are evaluated against the current configuration
+    \(C\).
+
+    \item \textbf{Attempt Set (\(A\)):}
+    The set of task attempts recorded during the round:
+    \[
+        A \subseteq
+        \{(j,C_j,t_j,q_j) \mid
+        j \in \{1,\ldots,8\}\},
+    \]
+    where \(j\) identifies the task, \(C_j\) is the cube
+    configuration submitted for evaluation, \(t_j\) is the
+    elapsed time associated with the attempt, and
+    \(q_j \in \{0,1\}\) indicates whether the attempt was
+    unsuccessful (\(0\)) or successful (\(1\)).
+    Each recorded attempt therefore contains sufficient
+    information to identify the task, the evaluated
+    configuration, its elapsed time, and its result.
+
+    \item \textbf{Accumulated Score (\(P\)):}
+    The total score awarded to the player during the round:
+    \[
+        P \in \mathbb{N}_0,
+        \qquad
+        P = \sum_{j=1}^{8} W_j,
+    \]
+    where \(W_j\) is the score awarded for task \(T_j\), and
+    \(\mathbb{N}_0\) denotes the non-negative integers.
+    A task contributes to \(P\) only when it has been completed
+    successfully and its score has not already been awarded.
 \end{itemize}
+
+The round state must remain consistent after every accepted
+state transition. In particular, the accumulated score \(P\)
+must agree with the recorded task rewards, and unsuccessful
+attempts must not increase the score.
 
 The current task index satisfies
 \[
@@ -609,6 +678,7 @@ The task completion indicator is defined as
         0, & \text{otherwise}.
     \end{cases}
 \]
+This acts as a persistent tracker of completion even after the next task begins changing \(E_i(C)\).
 
 For a round containing eight tasks, the number of completed tasks is
 \[
