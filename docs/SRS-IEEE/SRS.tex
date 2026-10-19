@@ -609,8 +609,7 @@ TODO
 Under the defined reference test enviornment, the system shall
 update the visible cube orientation within 100 milliseconds of
 a supported rotation input. The system shall also reflect an
-accepted cell-value edit in the relevant two-dimensional and
-three-dimensional views within 100 milliseconds.
+accepted cell-value edit within 100 milliseconds.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_Usability}:]
@@ -756,6 +755,49 @@ requirements, data requirements, and AI requirements.  You don't need a
 rationale for everything, ust the major decisions that are not obvious.  You
 should have traceability to the entities in the document that you are
 referencing.}
+
+\subsection{Nonfunctional Requirements}
+
+\begin{itemize}
+
+\item \textbf{Performance (NFR\ref{NFR_Performance}):}
+Cube rotation and cell-value editing are frequent user actions, so noticeable delays could disrupt the user's 
+experience manipulating the puzzle and understanding its current state. Applying this 100ms test to two of the most
+common interactions insures these frusturating delays wont cause a negative effect on user experience..
+
+\item \textbf{Usability (NFR\ref{NFR_Usability}):}
+The usability requirement focuses on the primary tasks that users must perform to interact with the puzzle successfully.
+Requiring at least 80\% of evaluation participants to complete these tasks without external assistance provides a 
+measurable baseline for whether the interface is understandable to its intended users or not. 
+These tasks were selected because they represent the essential interaction workflow.
+
+\item \textbf{Maintainability (NFR\ref{NFR_Maintainability}):}
+Separating mathematical operations, user-interface behaviour, three-dimensional visualization, and online storage 
+into identifiable components reduces coupling between unrelated responsibilities. This decision allows changes to 
+the visualization or storage mechanisms to be made without unnecessarily modifying the mathematical logic. 
+
+\item \textbf{Portability (NFR\ref{NFR_Portability}):}
+The system is intended to be accessed through desktop and laptop web browsers rather than a platform-specific desktop 
+application. Avoiding a requirement to install Python or other standalone software reduces setup effort and makes 
+the game more accessible to users across supported environments.
+
+\item \textbf{Reliability (NFR\ref{NFR_Reliability}):}
+Maintaining a valid puzzle state after supported operations is essential because subsequent calculations, visual updates, 
+and user interactions depend on the correct state. Also handling invalid input without terminating helps preserve the user's 
+progress and supports predictable behaviour.
+
+\item \textbf{Security and Privacy (NFR\ref{NFR_Security}):}
+The security requirements address the risks associated with accounts and online storage of user data. HTTPS with valid 
+TLS protects credentials and data while they are transmitted, while restrictions on access to private stored data help 
+prevent unauthorized access between accounts. While preventing plaintext storage of authentication secrets and limiting 
+personal information collection reduces unnecessary risk of exposure of user data.
+
+\item \textbf{Accessibility (NFR\ref{NFR_Accessibility}):}
+Keyboard-operable controls and high-contrast interface elements help users interact with the system without relying 
+exclusively on pointer devices or visual distinctions that may be difficult to perceive. As well as providing a two-dimensional 
+method in case a user find navigating the 3D element to be difficult or bothersome.
+
+\end{itemize}
 
 \section{Likely Changes}    
 
