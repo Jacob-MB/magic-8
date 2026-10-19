@@ -480,32 +480,434 @@ numbers.}
 \plt{Typically 8-15 substantial use cases.}
 
 \refstepcounter{ucnum} \label{UC_Label1}
-\subsection{\ucref{UC_Label1}: Example Use Case}
+\subsection{\ucref{UC_Label1}: Round Setup}
 
 \textbf{Primary Actor}
 
-TODO
+User
 
 \textbf{Preconditions}
 \begin{itemize}
-\item TODO
+\item Browser game is deployed on an accessible website
+\item Game has access to database containing cube configurations
+\item No rounds is currently in progress
 \end{itemize}
 
 \textbf{Main Success Scenario}
 \begin{enumerate}
-\item TODO
-\item TODO
-\item TODO
+\item User presses START
+\item System wipes screen clean and pings cube database wih appropiate query
+\item Cube database sends the values of the cells alongside with a cube number (as an identifier)
+\item System creates the 3D visualization and discretely populates visualization cells with its correct, hidden values
+\item System prompts user to choose the scoring system (decimal or octal)
+\item User clicks on the scoring system they want and its confirmation
+\item System selects the appropiate scoring system
+\item System randomly populates a single visualization cell with its correct octal and has a final popup describing the next level
 \end{enumerate}
 
 \textbf{Alternative Flows}
 \begin{itemize}
-\item TODO
+\item If Cube database doesn't ping back, the System will already have one default cube formation stored locally in its code, so that cube formation will be used instead. 
+The System will continuing pinging the database every 30 seconds to see if the database is active and notifiy its developers the first time it doesn't get an answer.
+\item If the 3D visualization fails, either fall back to a simpler visualization method or show an error.
+\item If the scoring system fails, continue with the steps after displaying a message about how scores isn't going to be tracked for this round.
 \end{itemize}
 
 \textbf{Postconditions}
 \begin{itemize}
-\item TODO
+\item All errors and log-type messages will appear as notifications starting from the bottom on a corner.
+\item There is a black 3D visualization of a cube in the centre.
+\item There is a notification showing '512 of 512 cells loaded' and there is a single octal number on the cube.
+\item On one of the upper corners, there is a scoring component consisting of an unstarted timer and a score integer.
+\end{itemize}
+
+\refstepcounter{ucnum} \label{UC_Label2}
+\subsection{\ucref{UC_Label2}: Tasks and Answer Checking}
+
+\textbf{Primary Actor}
+
+User
+
+\textbf{Preconditions}
+\begin{itemize}
+\item The system should be set up according to the postconditions of \ucref{UC_Label1}
+\end{itemize}
+
+\textbf{Main Success Scenario}
+\begin{enumerate}
+\item User chooses to begin the levels by clicking START.
+\item System displays a textbox asking the user to select the complement of the single populated cell
+\item User moves the 3D visualization using the chosen movement method in order to locate the complement
+\item User clicks on the cell representing the complement, thereby selecting it
+\item System flashes white and displays the properties of the intial populated cell and a textbox for the answer
+\item User enters in the complement's value in the Addition/Subtraction Box
+\item System alerts the scoring syetem by sending a query with the level of the task that was just finished
+\item System shows the user a level overview with a difficulty slider
+\item User chooses difficulty
+\item System populates the cells according to the difficulty selected and displas a START button
+\item User clicks START and selects the cells that corresponds to the half-orthogonal for the starting cell
+\item User clicks the DONE button
+\item System displays the Addition/Subtraction Box for selected cells
+\item User enters in the octal values and clcks DONE
+\item System queries the scoring system with information of the level just completed
+\item Previous steps repeat for the remaining steps: orthogonal, diagonal on continuous plane, diagonal not on continuous plane, another diagonal not on continuous plane, triagonal, split triagonal 
+\item System asks scoring sytem for final score
+\item Scoring sstem calculates final score
+\item System ends after displaying a final score and buttons to navigate to other sections
+\end{enumerate}
+
+\textbf{Alternative Flows}
+\begin{itemize}
+\item User is able to pull up level overview when they are in the level by selecting an arrow poking out of the side if they are stuck
+\item If the User clicks DONE after selecting the wrong cells, the game will flash red and deselect the selected squares, and siplays a message saying they selected the wrongs squares
+\item When the user inputs the wrong answer in the Addition/Subtracton box, the box will flash red and clear the incorrect answer, letting them try again. The System will also notify the scoring system that an incorrect answer has been given. 
+\item If the 3D visualization is stalling (e. due to the user running out of memory), the System shows a toggle to switch to the 2D view of the cube
+\item If the user is signed in, the are able to save the score if they want to
+\end{itemize}
+
+\textbf{Postconditions}
+\begin{itemize}
+\item System should display the final score front and centre
+\item There should be an option to either create a new account (while being able to save the current score), sign in, or view account information 
+\item There are options displayed to either start a new run, go to the tutorial, or enter other modes
+\end{itemize}
+
+
+\refstepcounter{ucnum} \label{UC_Label3}
+\subsection{\ucref{UC_Label3}: Scoring and controls}
+
+\textbf{Primary Actor}
+
+System
+
+\textbf{Preconditions}
+\begin{itemize}
+\item The system is currently active and in a viable state of execution
+\item The scoring system is an instance which is volatile and doesn't keep track of information
+\item The scoring system is well integrated with near-instantaneous signals from the system
+\item The scoring system is able to use other APIs to ensure that its time signals is correct
+\end{itemize}
+
+\textbf{Main Success Scenario}
+\begin{enumerate}
+\item System queries the scoring system with level number
+\item Scoring system initializes a stopwatch, error counter and correct scoring function
+\item System pings the scoring system, telling them that the level has started
+\item Scoring system starts the timer and listens for signals indicating errors or completion 
+\item System pings for an error
+\item Scoring system increments error counter
+\item System pings for the completion of the level
+\item Scoring system runs appropiate scoring function with time and error counter as inputs
+\item Scoring system returns the score and its instance terminates
+\end{enumerate}
+
+\textbf{Alternative Flows}
+\begin{itemize}
+\item If the user selected a different scoring base or level, the system (not scoring system) will add the corresponding values for each addition:
+\begin{center}
+\begin{tabular}{||c c c||} 
+ \hline
+ Level & Decimal & Octal \\ [0.5ex] 
+ \hline\hline
+ 1 & 10 & 14 \\ 
+ \hline
+ 2 & 20 & 30 \\
+ \hline
+ 3 and 4 & 30 & 44 \\
+ \hline
+ 5 and 6 & 40 & 60 \\
+ \hline
+ 7 and 8 & 60 & 110 \\ [1ex] 
+ \hline
+\end{tabular}
+\end{center}
+\item If the user is able to enter in additional numbers, they are rewarded 10 points for desimal and 14 points for octal.
+\item If the user clicks STOP/EXIT, the scoring system instance is terminated without any return
+\item If the user clicks PAUSE, the stopwatch in the scoring system will pause and keep track of the time paused (so it doesn't mess up when checked with eternal APIs), but the scoring system instance will continue running
+\end{itemize}
+
+\textbf{Postconditions}
+\begin{itemize}
+\item The score given can be verified as base score * (1350/seconds) + score for correct cells/octals for an individual level
+\item The system's internal final score is incrememented between levels
+\item At the end, the system shall show the internal final score (verified as last internal score + level 8 score)
+\end{itemize}
+
+\refstepcounter{ucnum} \label{UC_Label4}
+\subsection{\ucref{UC_Label4}: Saving and Recovery}
+
+\textbf{Primary Actor}
+
+User
+
+\textbf{Preconditions}
+\begin{itemize}
+\item System should be in a valid state of execution
+\item User database should be active (in the sense that it exists and connectable) and triggerable
+\item The connection between the database and system should be closed.
+\end{itemize}
+
+\textbf{Main Success Scenario}
+\begin{enumerate}
+\item User selects cells and pressed DONE
+\item System saves which cells were selected
+\item System verifies that the correct cells were selected
+\item System saves that the correct cells were selected
+\item System calculated how much points the user gets for the selection 
+\item System saves the number of points
+\item System displays the Addition/Subtraction box based on saved game state
+\item User completes level
+\item System caculates and saves final score
+\item User chooses to save the score
+\item System pings user database with user information
+\item User database pings back (saying that it is active)
+\item System shares final score with user database
+\item User database saves score
+\item System closes the connection with the user database
+\item User clicks to return to main menu 
+\item System refreshes its information via user database
+\item System displays the main menu with user information (including latest/highest final score) 
+\end{enumerate}
+
+\textbf{Alternative Flows}
+\begin{itemize}
+\item If a save fails (either internal or with a database), the system will retry 3 times. If the system still fails to save, it will notify the user and warn that any further progress might not be saved. The user is free to keep playing and the system will retry saving either every 30 seconds or when the user reaches the net save point (whichever comes first).
+\item If the program crashes, after exhausting all possible recovery options, the system will save the last recoverable state in the browser cache. It will then recommend the user refresh or close the browser page. The next time the user opens the page, it will ask the user if it wants to load the previous progress or start anew.
+\end{itemize}
+
+\textbf{Postconditions}
+\begin{itemize}
+\item The connection between the user database and system should be closed
+\item The schema and integrity of the user database should be equivalent to its precondition 
+\item The system shouldn't have any saved data about internal levels (such as level scores and cell selection) after finishing all the levels
+\item The browser cache would optimall always be empty unless there has been a crash and the user hasn't returned to the game
+\end{itemize}
+
+
+\refstepcounter{ucnum} \label{UC_Label5}
+\subsection{\ucref{UC_Label5}: 3D Visualization}
+
+\textbf{Primary Actor}
+
+System
+
+\textbf{Preconditions}
+\begin{itemize}
+\item System is in a valid state of execution
+\item 3D visualization is a plugin (removing it just causes the system to use another visualization) 
+\item 3D visualization doesn't have any data inputted into it (it starts anew everytime a cube is selected)
+\end{itemize}
+
+\textbf{Main Success Scenario}
+\begin{enumerate}
+\item System gets the cube values and number from the cube database
+\item 3D visualization starts to initialize in the middle of the screen
+\item System chooses a starting position
+\item 3D visualization filled with the correct octal number at that position
+\item System repositions the cube to the centre of the screen
+\item 3D visualization centers the model at the filled cell
+\item User moves mouse across a face of the cube
+\item 3D visualization rotates accordingly across its face due to mouse
+\item User types in a coordinate in a navigator bar
+\item System repositions the cube to the centre of the screen
+\item 3D visualization centers the model at that coordinate
+\item User presses down on the "s" or "down" key on the keyboard
+\item 3D visualization rotates down accordingly across its face due to keyboard
+\item User drags mouse on an area off the cube
+\item System repositions towards the mouse (so that the cube is off centre)
+\item User scrolls down on the mousewheel
+\item 3D visualization moves along the z-axis, so that the second and next layers of the cube is exposed
+\item User selects a cell
+\item System saves which cell has been selected and checks its correctness
+\item System tells the 3D visualization which cell has been selected and what colour it should be
+\item 3D visualization keeps the cell and previous cell as a bright white light source
+\item User enters in number in Addition/Subtraction box
+\item System checks correctness of the octals inputted
+\item System tells the 3D visualization what to project onto the cell's surface 
+\item 3D visualization shows the correct octals the user inputted
+\item System calculates level score
+\item 3D visualization keeps filled cells
+\end{enumerate}
+
+\textbf{Alternative Flows}
+\begin{itemize}
+\item If the user types in a coordinate that would belong on another layer, the system will reposition the cube to the centre of the screen and the 3D visualization centres on the selected xy coordinates. It will then move through each layer until it arrives at the correct z value.
+\item If the user is selecting the wrong cell (ex. as part of a triagonal), the system will inform the 3D visualization that the cell chosen is wrong. The 3D visualization will make the cell chosen red.
+\item If the user is on a non-face and tries to rotate the cube, the user will be able to see the missing layers either behind or on the R/LHS of the camera, but they will be transparent so the person is aware of where they are located in the cube.
+\item If the system is calculating final scores, the 3D visualization isn't needed, so that instance of the 3D visualization plugin is terminated.
+\end{itemize}
+
+\textbf{Postconditions}
+\begin{itemize}
+\item The 3D plugin shouldn't have any data associated with it (such as information about which cells are filled)
+\end{itemize}
+
+\refstepcounter{ucnum} \label{UC_Label6}
+\subsection{\ucref{UC_Label6}: Guided Learning and Tutorial}
+
+\textbf{Primary Actor}
+
+User
+
+\textbf{Preconditions}
+\begin{itemize}
+\item The system is in a valid state of execution
+\item The system is not in the process of conducting a level/game
+\end{itemize}
+
+\textbf{Main Success Scenario}
+\begin{enumerate}
+\item User selects the tutorial option from the menu
+\item System clears screen and projects empty cube
+\item System chooses a cube and projects all cells
+\item User clicks button to learn about octal
+\item System displays popup with an octal explanation, solved examples and calculator
+\item User clicks "Test" button
+\item System generates random questions and textboxes for solutions
+\item User enters solutions
+\item System verifies answers and closes popup
+\item User clicks button to learn about magic squares
+\item System removes navigation controls and centres on a face (thereby a magic cube)
+\item System popups explanation about magic square
+\item User clicks "Test" button
+\item System shows a stored magic square
+\item User enters solutions
+\item System verifies and shows a harder magic square
+\item User exits back to main menu 
+\item User starts first game
+\item System sets up game
+\item User clicks "Hint" button
+\item System popups coordinate hint about where the next cell is located
+\item User clicks "Hint" button
+\item System traces path to the correct square with explanations
+\item User selects correct cells
+\item System displays the Additon/Subtraction Box
+\item User clicks "Hint" button
+\item System displays the octal steps to arrive at the correct answer
+\end{enumerate}
+
+\textbf{Alternative Flows}
+\begin{itemize}
+\item If the user asks for more magic square examples, the system displays a link to an educational website.
+\item If the user taps the stopwatch, the system will display a message allowing the use to disable the scoring system. If the user wants to, it will result in no scores being recorded.
+\item If the user runs out the level timer (22.5 minutes), the system will display a messgae saying that the score wouldn't be counted. The system will not record the score and allow unlimited mistakes and hints.
+\end{itemize}
+
+\textbf{Postconditions}
+\begin{itemize}
+\item The system is in a valid state of execution
+\end{itemize}
+
+
+
+
+\refstepcounter{ucnum} \label{UC_Label7}
+\subsection{\ucref{UC_Label7}: Create Account}
+
+\textbf{Primary Actor}
+
+User
+
+\textbf{Preconditions}
+\begin{itemize}
+\item The system is in a valid state of execution
+\item The system is not in the process of conducting a level (can sign in between levels)
+\item User database should be active (in the sense that it exists and connectable) and triggerable
+\item The connection between the database and system should be closed.
+\end{itemize}
+
+\textbf{Main Success Scenario}
+\begin{enumerate}
+\item User clicks button to sign in
+\item System saves current game state in browser cache and displays information to sign in
+\item User selects "Create Account"
+\item System displays a page with a username textbox and username guide
+\item User types in appropiate username
+\item System verifies username follows username requirements and pings user database
+\item User database verifies username doesn't exist
+\item Systems displays a page with a password textbox and password guide
+\item System verifies password follows password requirements and creates a new user profile and inserts it into the user database
+\item System asks user to log in
+\item User logs in
+\item User database confirms user
+\item System recreates game state via browser cache and deletes cache
+\item User completes game
+\item System saves final score, time needed and date by appending it in user database
+\item User database saves and closes connection
+\item User goes to main menu
+\item System opens connection to user database and displays information
+\item User closes browser tab
+\item System closes connection to user database
+\end{enumerate}
+
+\textbf{Alternative Flows}
+\begin{itemize}
+\item If the user writes a username or password that doesn't follow the requirements, the system will display an error message alongside an option to type in another name.
+\item If a user database ping or save fails, the system will retry 3 times. If the system still fails to get a response to the ping, it will notify the user and say that they failed in making an account. It will also warn that any further progress might not be saved. When the user finishes the final level, the system will retry pinging the user database and if it responds, the system will display a message saying that the user creation page is working again.
+\end{itemize}
+
+\textbf{Postconditions}
+\begin{itemize}
+\item The connection between the user database and system should be closed
+\item The schema and integrity of the user database should be equivalent to its precondition 
+\end{itemize}
+
+
+\refstepcounter{ucnum} \label{UC_Label8}
+\subsection{\ucref{UC_Label8}: Daily Challenge}
+
+\textbf{Primary Actor}
+
+User
+
+\textbf{Preconditions}
+\begin{itemize}
+\item The system is in a valid state of execution
+\item The system is not in the process of conducting a level/game
+\item User and Daily Challenge database (DC) should be active (in the sense that it exists and connectable) and triggerable
+\item The connection between the databases and system should be closed.
+\end{itemize}
+
+\textbf{Main Success Scenario}
+\begin{enumerate}
+\item User clicks button to begin Daily Challenge
+\item System asks if the user wants to log in
+\item User logs in
+\item System pings DC
+\item DC replies with Daily Challenge  plane colour, orientation, and starter
+\item System saves Daily Challenge game state in browser
+\item System asks if the user is ready to play
+\item User starts challenge
+\item System uses cube and starter given instead of pinging cube database and random starter
+\item User finishes game
+\item System pings user database and DC
+\item System saves final score, time needed and date by appending it in DC column in user database
+\item System creates a copyable graphic that can be displayed by the user
+\item User database saves and closes connection
+\item DC sends leaderboard scores to System
+\item System checks if the user score belongs on leaderboard
+\item System saves final score and time needed at appropiate rank by inserting it into DC's daily leaderboard column
+\item System closes connection to DC
+\item User goes to main menu
+\item System opens connection to user database and displays information
+\item User goes to Daily Challenge leaderboard
+\item System pings DC for leaderboard data
+\item System displays leaderboard with copy button
+\item User clicks out
+\item System closes DC's connection
+\item User closes browser tab
+\item System closes connection to user database
+\end{enumerate}
+
+\textbf{Alternative Flows}
+\begin{itemize}
+\item If a DC ping or save fails, the system will retry 3 times. If the system still fails to get a response to the ping, it will notify the user and say that their Daily Challenge attempt will not be counted. Since the user already saw the puzzle, they will not be able to redo the Daily Challenge until it refreshes.
+\end{itemize}
+
+\textbf{Postconditions}
+\begin{itemize}
+\item The connection between the databases and system should be closed
+\item The schema and integrity of the bases should be equivalent to its precondition 
 \end{itemize}
 
 % ============================================================== 
