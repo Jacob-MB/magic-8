@@ -1,0 +1,885 @@
+% This template was partially made with assistance from Microsoft Co-pilot
+
+% ------------------------------------------------------------------
+% CAPSTONE SOFTWARE REQUIREMENTS SPECIFICATION (SRS)
+
+% 
+% This template is inspired by IEEE 29148 but simplified for use in 
+% a senior software engineering capstone project. 
+% 
+% The goal is not to maximize document length. 
+% The goal is to produce a clear, testable, and traceable set of 
+% requirements that can guide design, implementation, and testing. 
+% 
+% Recommended workflow: 
+% Stakeholder Requirements 
+% -> 
+% Use Cases 
+% -> 
+% Functional Requirements 
+% -> 
+% Acceptance Tests (will be in your VnV plan)
+% -> 
+% Traceability Matrix (will excluded traceability for tests, that will be in the VnV plan)
+% 
+% Students should update this document throughout the project. 
+% ------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{xfrac}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+
+\usepackage[round]{natbib}
+
+%\usepackage{refcheck}
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+      colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\input{../Comments.text}
+\input{../Common.text}
+
+% Used so that cross-references have a meaningful prefix
+
+\newcounter{srnum} %Stakeholder Requirement (SR) Number
+\newcommand{\srthesrnum}{SR\thesrnum}
+\newcommand{\srref}[1]{SR\ref{#1}}
+
+\newcounter{ucnum} %Use Case (UC) Number
+\newcommand{\uctheucnum}{UC\theucnum}
+\newcommand{\ucref}[1]{UC\ref{#1}}
+
+\newcounter{reqnum} %Functional Requirement (FR) Number
+\newcommand{\rthereqnum}{FR\thereqnum}
+\newcommand{\rref}[1]{FR\ref{#1}}
+
+\newcounter{nfrnum} %Non-Functional Requirement (NFR) Number
+\newcommand{\rthenfrnum}{NFR\thenfrnum}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
+
+\newcounter{lcnum} %Likely Change (LC) Number
+\newcommand{\lthelcnum}{LC\thelcnum}
+\newcommand{\lcref}[1]{LC\ref{#1}}
+
+\usepackage{fullpage}
+
+\begin{document}
+
+\title{Software Requirements Specification for \progname: subtitle describing software} 
+\author{\authname}
+\date{\today}
+	
+\maketitle
+
+~\newpage
+
+\pagenumbering{roman}
+
+\tableofcontents
+
+~\newpage
+
+\section*{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+Date 1 & 1.0 & Notes\\
+Date 2 & 1.1 & Notes\\
+\bottomrule
+\end{tabularx}
+
+~\\
+\plt{All capstone SRS documents should have a reflection appendix.}
+
+\newpage
+
+\pagenumbering{arabic}
+
+\plt{This SRS template is based on the IEEE template, with input from co-pilot
+  and S. Smith. It will get you started.  You should not modify the section
+  headings, without first discussing the change with the course instructor.
+  Modification means you are not following the template, which loses some of the
+  advantage of a template, especially standardization.}
+
+\plt{Feel free to change the appearance of the report by modifying the LaTeX
+  commands.}
+
+\plt{This template document assumes that a single program is being documented.
+  If you are documenting a family of models, you should start with a commonality
+  analysis.}
+
+\plt{The SRS is not generally written, or read, sequentially.  The SRS is a
+  reference document.  It is generally read in an ad hoc order, as the need
+  arises.}
+
+\plt{Guiding principles for the SRS document:
+\begin{itemize}
+\item Do not repeat the same information at the same abstraction level.  If
+  information is repeated, the repetition should be at a different abstraction
+  level.
+\end{itemize}
+}
+
+\plt{The template description comments should be disabled before submitting this
+  document for grading.}
+
+\plt{You can borrow any wording from the text given in the template.  It is part
+  of the template, and not considered an instance of academic integrity.  Of
+  course, you need to cite the source of the template.}
+
+\plt{When the documentation is done, it should be possible to trace back to the
+  source of every piece of information.  Some information will come from
+  external sources, like terminology.}
+
+\plt{An SRS document should have the following qualities: unambiguous,
+  consistent, complete, validatable, abstract and traceable.}
+
+\plt{The overall goal of the SRS is that someone can learn,
+  understand and verify the captured domain knowledge.  They should not have to
+  trust the authors of the SRS on any statements.  They should be able to
+  independently verify/derive every statement made.}
+
+% ============================================================== 
+\section{Introduction} 
+% ==============================================================
+
+\plt{Explain what system is being specified. State purpose, users, and project goals.}
+
+\plt{Introduce the name of your software as \progname{}.  Using \progname{} as
+a command lets you change the name if necessary and have the change propagate to
+all documents.}
+
+\plt{Include a reference to the template this work is based on.  \citet{ISOIECIEEE29148_2018}
+justifies the SRS structure and \citet{ISOIECIEEE15288_2023} provides the
+broader life-cycle context that underlines modern requirements engineering
+practice.}
+
+\subsection{Purpose}
+
+\plt{State the purpose of the system.}
+
+\plt{The purpose should be in the context of the project itself, not in the
+  context of this course. Although the ``purpose'' of the document is to get a
+  grade, you should not mention this.  Instead, ``fake it'' as if this is a real
+  project.}
+
+\progname{} is intended to solve ... \plt{What problem does your program solve?
+The description here should be in the problem space, not the solution space.}
+
+\subsection{Scope}
+\plt{Briefly describe:
+\begin{itemize}
+  \item Problem being solved
+  \item Intended users
+  \item Major functionality
+  \item Expected benefits
+  \item Clarifying the scope often means saying what the software doesn't do
+\end{itemize}
+}
+
+\plt{The scope section is relevant for understanding the boundaries of the system. It is also relevant for later determining typical values of inputs. The scope should make it clear what inputs are reasonable to expect. This is a distinction between scope and context (context is a later section).  Scope affects the inputs while context affects how the software will be used.}
+
+TODO
+
+\subsection{Stakeholders}
+\begin{itemize}
+\item Customer
+\item End Users
+\item Project Sponsor
+\item Development Team
+\item Administrators
+\end{itemize}
+
+\subsection{Definitions and Acronyms}
+
+\plt{This section provides the meaning of the different words and phrases used
+  in the domain of the problem.}
+
+\begin{longtable}{p{0.25\textwidth} p{0.65\textwidth}}
+\toprule
+Term & Definition\\
+\midrule
+TODO & TODO\\
+\bottomrule
+\caption{Definitions and Acronyms} \label{tab:DefinitionsAndAcronyms}
+\end{longtable}
+
+\subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
+
+\plt{This section summarizes the skills and knowledge of the readers of the
+  SRS.  It does NOT have the same purpose as the ``User Characteristics''
+  section (Section~\ref{SecUserCharacteristics}).  The intended readers are the
+  people that will read, review and maintain the SRS.  They are the people that
+  will conceivably design the software that is intended to meet the
+  requirements.  The user, on the other hand, is the person that uses the
+  software that is built.  They may never read this SRS document.  Of course,
+  the same person could be a ``user'' and an ``intended reader.''}
+
+\plt{The intended reader characteristics should be written as unambiguously and
+  as specifically as possible.  Rather than say, the user should have an
+  understanding of physics, say what kind of physics and at what level.  For
+  instance, is high school physics adequate, or should the reader have had a
+  graduate course on advanced quantum mechanics?}
+
+% ============================================================== 
+\section{System Overview}
+
+This section provides general information about the system.  It identifies the
+problem, the vision, and the interfaces between the system and its environment.
+This section also describes user characteristics and lists the system
+constraints.
+
+\plt{The purpose of this section is to provide general information about the
+  system so that the specific requirements in the later sections will be easier to
+  understand. The general system description section is designed to be
+  changeable independent of changes to the functional requirements documented in
+  the specific system description. The general system description provides a
+  context for a family of related models.  The general description can stay the
+  same, while specific details are changed between family members.}
+
+\subsection{Problem Statement}
+
+\plt{Current situation, problem, impact, desired improvement.  You will likely borrow some text from your problem description document.}
+
+TODO
+
+\subsection{Product Vision}
+
+\plt{A clear and concise statement of the product's purpose and goals.}
+
+\plt{The goal statements are functional and nonfunctional objectives that system
+  under consideration should achieve. Goals provide criteria for sufficient
+  completeness of a requirements specification and for requirements pertinence.
+  Goals will be refined by requirements.  The goals are written abstractly, with
+  a minimal amount of technical language.  They should be understandable by
+  non-domain experts.}
+
+\plt{You will likely borrow from your goal statements in your problem
+description document.}
+
+TODO
+  
+\subsection{System Context}
+
+\plt{Include users, external systems, APIs, databases, and third-party services.}
+
+\plt{Your system context will include a figure that shows the abstract view of
+  the software.  In some cases the diagram will show other external
+  entities, besides the user.  For instance, when the software product is a
+  library, the user will be another software program, not an actual end user.
+  If there are system constraints that the software must work with external
+  libraries, these libraries can also be shown on the System Context diagram.
+  They should only be named with a specific library name if this is required by
+  the system constraint.}
+
+\begin{figure}[h!]
+\begin{center}
+ \includegraphics[width=0.6\textwidth]{SystemContextFigure}
+\caption{System Context}
+\label{Fig_SystemContext} 
+\end{center}
+\end{figure}
+
+\plt{For each of the entities in the system context diagram its responsibilities
+  should be listed.  Whenever possible the system should check for data quality,
+  but for some cases the user will need to assume that responsibility.  The list
+  of responsibilities should be about the inputs and outputs only, and they
+  should be abstract.  Details should not be presented here.  However, the
+  information should not be so abstract as to just say ``inputs'' and
+  ``outputs''.  A summarizing phrase can be used to characterize the inputs.
+  For instance, saying ``material properties'' provides some information, but it
+  stays away from the detail of listing every required properties.}
+
+\begin{itemize}
+\item User Responsibilities:
+\begin{itemize}
+\item 
+\end{itemize}
+\item \progname{} Responsibilities:
+\begin{itemize}
+\item Detect data type mismatch, such as a string of characters instead of a
+  floating point number
+\item 
+\end{itemize}
+\end{itemize}
+
+\plt{Identify in what context the software will typically be used.  Is it for
+exploration? education? engineering work? scientific work?. Identify whether it
+will be used for mission-critical or safety-critical applications.} 
+
+\plt{This additional context information is needed to determine how much effort
+should be devoted to the rationale section.  If the application is
+safety-critical, the bar is higher.  This is currently less structured, but
+analogous to, the idea to the Automotive Safety Integrity Levels (ASILs) that
+McSCert uses in their automotive hazard analyses.}
+
+\subsection{User Characteristics} \label{SecUserCharacteristics}
+
+\plt{This section summarizes the knowledge/skills expected of the user.
+  Measuring usability, which is often a required non-function requirement,
+  requires knowledge of a typical user.  As mentioned above, the user is a
+  different role from the ``intended reader,'' as given in
+  Section~\ref{sec_IntendedReader}.  As in Section~\ref{sec_IntendedReader}, the
+  user characteristics should be specific an unambiguous.  For instance, ``The
+  end user of \progname{} should have an understanding of undergraduate Level 1
+  Calculus and Physics.''}
+
+\subsection{System Constraints}
+
+\plt{System constraints differ from other type of requirements because they
+  limit the developers' options in the system design and they identify how the
+  eventual system must fit into the world. This is the only place in the SRS
+  where design decisions can be specified.  That is, the quality requirement for
+  abstraction is relaxed here.  However, system constraints should only be
+  included if they are truly required.}
+
+\plt{This is where you would mention platform constrains, and licensing
+restrictions.}
+
+% ============================================================== 
+\section{Stakeholder Requirements}
+
+\plt{Technology-independent requirements.  These come from statements made by
+the stakeholders.  You will find these through interviews and surveys.  They are
+often expressed in natural language.  They are not necessarily testable, but
+they should be verifiable.}
+
+\plt{The stakeholder requirements are numbered so that you can have traceability to other parts of your document.}
+
+\noindent \begin{itemize}
+
+\item[SR\refstepcounter{srnum}\thesrnum \label{SR_Label1}] TODO
+
+\item[SR\refstepcounter{srnum}\thesrnum \label{SR_Label2}] TODO
+
+\item[SR\refstepcounter{srnum}\thesrnum \label{SR_Label3}] TODO
+
+\end{itemize}
+
+\plt{You should give your SRs meaningful labels, so that you can refer to them
+in other parts of the SRS.  The label names should be meaningful mnemonics, not
+numbers.}
+
+% ============================================================== 
+\section{User Personas}
+\plt{Create 2-5 realistic personas.
+  Personas are fictional characters that represent the different user types that
+  might use your software.  They are used to help understand the users'
+  needs, experiences, behaviors and goals.  They are not real people, but they
+  should be based on real data collected from user research.}
+
+\subsection{Persona 1}
+\begin{itemize}
+\item Name:
+\item Description:
+\item Goals:
+\item Frustrations:
+\item Technical Ability:
+\end{itemize}
+
+\subsection{Persona 2}
+\begin{itemize}
+\item Name:
+\item Description:
+\item Goals:
+\item Frustrations:
+\item Technical Ability:
+\end{itemize}
+
+% ============================================================== 
+\section{Use Cases}
+\plt{Use cases are a way to describe the interactions between users and the system.
+  They are typically written in natural language and describe the steps that a
+  user takes to achieve a specific goal.  Use cases can be used to identify
+  functional requirements and to create test cases.}  
+\plt{Typically 8-15 substantial use cases.}
+
+\refstepcounter{ucnum} \label{UC_Label1}
+\subsection{\ucref{UC_Label1}: Example Use Case}
+
+\textbf{Primary Actor}
+
+TODO
+
+\textbf{Preconditions}
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+\textbf{Main Success Scenario}
+\begin{enumerate}
+\item TODO
+\item TODO
+\item TODO
+\end{enumerate}
+
+\textbf{Alternative Flows}
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+\textbf{Postconditions}
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+% ============================================================== 
+\section{Functional Requirements}
+
+\noindent \textbf{Round setup}
+\begin{itemize}
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_StartRound}:] When the user presses START and no round is in progress, the system shall begin a round and display the 512 cells with their numbers hidden, arranged as slices of the round's plane colour.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SelectPlane}:] The system shall randomly select each round's plane colour from yellow (x and y axes continuous), green (x and z axes continuous), or blue (y and z axes continuous). \newline \textit{Rationale:} The two continuous axes form the ``continuous plane'' that the task definitions refer to.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SelectOrientation}:] The system shall randomly select one of the 384 cube orientations for each round.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ChooseBase}:] The system shall require the user to choose decimal or octal as the scoring base before the starter appears.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ShowStarter}:] When the user presses START after choosing the scoring base, the system shall display a randomly chosen starter number in its cell with a white background and start a timer that shows the elapsed seconds.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_NoRepeatStarter}:] The system shall not reuse a starter number for a player until 192 rounds have been played, after which it shall clear that player's list of used starters. \newline \textit{Rationale:} Keeps rounds different from each other.
+
+\end{itemize}
+
+\noindent \textbf{Tasks and answer checking}
+\begin{itemize}
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_TaskOrder}:] The system shall present the eight tasks in order, starting the next task when the user presses START after completing the previous one.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_CellFeedback}:] When the user selects a cell while a task awaits cell selections, the system shall turn the cell white if it belongs to the task's target line and red if it does not, with no limit on incorrect selections. The system shall ignore a cell that is already white and any selection made while no selection is expected.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task1}:] In task 1, the system shall accept as correct the cell whose x, y, and z coordinates each differ from the starter's by 4 (modulo 8). \newline \textit{Rationale:} This is the starter's complement. The two numbers sum to 1001 (octal).
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task2}:] In task 2, the system shall accept as correct the 3 cells that complete a half-orthogonal containing the starter, lying on either axis of the continuous plane and reaching an outer edge.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task3}:] In task 3, the system shall accept as correct the 7 cells that complete an orthogonal containing the starter on the axis not in the continuous plane.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task4}:] In task 4, the system shall accept as correct the 7 cells that complete a diagonal containing the starter and lying on both axes of the continuous plane, whether continuous or split. \newline \textit{Rationale:} A split line needs a row, column, or pillar moved to the opposite side of the cube to appear straight.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task5}:] In task 5, the system shall accept as correct the 7 cells that complete a diagonal containing the starter that uses one axis of the continuous plane and the axis not in the plane, whether continuous or split.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task6}:] In task 6, the system shall accept as correct the 7 cells that complete a diagonal containing the starter that uses the other axis of the continuous plane (not the one used in task 5) and the axis not in the plane, whether continuous or split.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task7}:] In task 7, the system shall accept as correct the 7 cells that complete a triagonal containing the starter, whether continuous or split.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task8}:] In task 8, the system shall accept as correct the 7 cells that complete a split triagonal containing the starter that differs from the triagonal used in task 7.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ChooseExtra}:] Before tasks 2 to 8 begin, the system shall require the user to choose how many additional numbers to add (1 to 2 for task 2, 1 to 5 for tasks 3 to 8).
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_AdditionColumn}:] When all cells of the target line are found in tasks 2 to 8, the system shall display the starter and the chosen number of additional numbers from the line in a column for the user to add.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_AdditionCheck}:] When the user presses DONE with an answer in the Addition Box, the system shall, if the sum is incorrect, clear the answer, turn the box red, and let the user try again, and, if correct, show the additional numbers in their cells in white.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SubtractionPrompt}:] After the target line is found (task 1) or the addition is correct (tasks 2 to 8), the system shall ask the user to subtract from a constant: 1001 minus the starter for task 1, 2002 minus the sum for task 2, and 4004 minus the sum for tasks 3 to 8 (all octal). \newline \textit{Rationale:} A correct subtraction shows the user found the right line, not just a lucky guess.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SubtractionCheck}:] When the user presses DONE with an answer in the Subtraction Box, the system shall, if the answer is incorrect, clear it, turn the box red, and let the user try again, and, if correct, reset the box to white, show the remaining numbers of the line in their white cells (for task 1, show the answer in the complementary cell), and stop the timer.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_InputValidation}:] If the user presses DONE with an empty answer box, or enters anything other than the octal digits 0 to 7, the system shall show a message asking for a valid answer and shall not count it as an incorrect answer.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_NextTask}:] When a new task begins, the system shall return the previous task's white cells (other than the starter) to their original colour, clear the previous question and answers, and resume the timer from its previous value.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_EndRound}:] After the subtraction in task 8 is answered correctly, the system shall end the round, display the final score, and allow a new round to begin.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_VerifyTask}:] Before presenting each task, the system shall check that the numbers on its target line add up to the correct sum (4004 octal, or 2002 for task 2 and 1001 for task 1) and that the expected answers follow from them, and shall generate a new setup and log the failure if a check fails. \newline \textit{Rationale:} A wrong expected answer would mark correct answers wrong and teach incorrect arithmetic (Hazard Analysis SR9, SR12).
+
+\end{itemize}
+
+\noindent \textbf{Scoring and controls}
+\begin{itemize}
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_BasicPoints}:] When a task's subtraction is answered correctly, the system shall award the line points for the chosen scoring base, and shall award points for each additional number when the addition is correct, as follows (decimal / octal): task 1, 10 / 14; task 2, 20 / 30; tasks 3 and 4, 30 / 44; tasks 5 and 6, 40 / 60; tasks 7 and 8, 60 / 110; each additional number in tasks 2 to 8, 10 / 14. \newline \textit{Rationale:} Octal points are 20\% above decimal points after conversion, as in the rules.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_TimedScore}:] The system shall compute each task's timed score as the task's basic score $\times$ 1350 / $t$, where $t$ is the seconds spent on that task, rounded to the nearest whole number. \newline \textit{Rationale:} The rules give the constant as $2.63671875 \times 512$, which equals 1350. Faster completion scores more. Per-task time and the rounding are our assumptions.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Totals}:] After each task, the system shall display the user's updated total score, and after task 8 the final score, which is the sum of the eight timed scores.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_StopGame}:] When the user presses STOP GAME during a round, the system shall end the round, erase all progress in it, record no score, and return to its ready state.
+
+\end{itemize}
+
+\noindent \textbf{Saving and recovery}
+\begin{itemize}
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Autosave}:] The system shall automatically save the in-progress round each time its state changes, retrying up to 3 times if a save fails and telling the user if all attempts fail. \newline \textit{Rationale:} Prevents lost progress after a crash (Hazard Analysis SR5, SR6).
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Resume}:] When the user returns after the page was closed, reloaded, or crashed during a round, the system shall check that the saved round is valid and offer to resume it with the timer at its saved value, discarding it and telling the user if it is invalid.
+
+\end{itemize}
+
+\noindent \textbf{3D visualization}
+\begin{itemize}
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_3DView}:] The system shall provide a 3D view of all 512 cells as an alternative to the slice display, and shall let the user switch between views at any time without changing the round's state or pausing the timer. Cell selection in the 3D view shall behave as in \rref{FR_CellFeedback}. \newline \textit{Rationale:} Triagonals are hard to see in 2D slices. The slice display also serves as the 2D alternative that NFR Accessibility requires.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_3DNavigate}:] In the 3D view, the system shall let the user rotate and zoom the cube using either the pointer or the keyboard.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_3DLayers}:] In the 3D view, the system shall let the user choose any single layer along any axis and show it with the other layers faded or hidden, step to the adjacent layer, and restore all layers.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_3DHighlight}:] The system shall highlight the chosen layer and the cells the user has selected, using visibly different highlights.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_CellStates}:] The system shall display the starter, correct cells, incorrect cells, and unselected cells with four appearances that are distinguishable in both views without relying on colour alone. \newline \textit{Rationale:} Users with colour-vision differences can't rely on red and white alone.
+
+\end{itemize}
+
+\noindent \textbf{Guided learning and tutorial}
+\begin{itemize}
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Tutorial}:] The system shall provide an interactive tutorial that walks the user through a fixed sample round, requiring them to practice each of the eight task types, and shall let the user skip, exit, or replay it at any time. Tutorial results shall not be recorded in statistics or leaderboards.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ExplainCell}:] After an incorrect cell selection, the system shall display a message naming the type of line being sought and the rule it follows, without revealing the correct cell.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ExplainArithmetic}:] When the user requests it after an incorrect addition or subtraction answer, the system shall show the worked octal calculation for that question.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Hint}:] When the user requests a hint, the system shall display the coordinate step the current line follows (for example, ``each coordinate differs by 4'') without identifying a cell, and shall record the request. \newline \textit{Rationale:} Whether hints should change the score is still undecided.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SolutionPath}:] When the user requests it, the system shall show the path to the correct solution by highlighting the cells of the line one after another in the order it is traced, and shall record the request.
+
+\end{itemize}
+
+\noindent \textbf{Accounts, statistics, and competitive play}
+\begin{itemize}
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_GuestPlay}:] The system shall let a user play without an account, and shall not send any data about a guest's play online.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_CreateAccount}:] The system shall let a user create an account with a unique username, a unique email address in a valid format, and a password of at least 8 characters, and shall reject anything else with a message giving the reason.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_UsernameRules}:] The system shall reject any username shorter than 3 or longer than 20 characters, or that contains a term on a prohibited-terms list. \newline \textit{Rationale:} Usernames appear on public leaderboards, so inappropriate names could harm other users (Hazard Analysis SR13, hazard H1-c).
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Login}:] The system shall let a user log in and log out, and shall reject invalid credentials with a message that does not say whether the username or the password was wrong. \newline \textit{Rationale:} Avoids revealing which usernames exist.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_PasswordReset}:] The system shall let a user who has forgotten their password request a reset link sent to their registered email address, without revealing whether the address is registered. \newline \textit{Rationale:} The Hazard Analysis lists email as stored user data, and account recovery is its purpose.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_RecordRound}:] When a logged-in user completes a round, the system shall record the final score, scoring base, total time, and date.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Statistics}:] The system shall let a logged-in user view their number of completed rounds, highest score, average score, and fastest round time, for each scoring base.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Leaderboards}:] The system shall display, for each scoring base, leaderboards of the 10 highest final scores and the 10 fastest round times, showing username and score or time only. \newline \textit{Rationale:} Separate boards by scoring base because octal scoring gives 20\% more points.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_LeaderboardIntegrity}:] The system shall create or change leaderboard and statistics records only from rounds it has completed, and shall reject any other request to do so, except for deletion under \rref{FR_DeleteAccount}. \newline \textit{Rationale:} Prevents tampering with rankings (Hazard Analysis SR10).
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_DailyChallenge}:] The system shall offer one daily challenge each day, with the same plane colour, orientation, and starter for every user, and a leaderboard of that day's results.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ShareResults}:] After completing a daily challenge, the system shall let the user copy a summary of the date, final score, and total time that contains no cell number or answer. \newline \textit{Rationale:} Lets users compare results without spoiling the challenge for others.
+
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_DeleteAccount}:] The system shall let a logged-in user delete their account, which removes their username, email, credentials, scores, statistics, and leaderboard entries.
+
+\end{itemize}
+
+% ============================================================== 
+\section{Data Requirements}
+
+\subsection{Major Data Entities}
+
+\begin{itemize}
+\item User: a registered player.
+\item Cube Array: the fixed arrangement of the numbers 1 to 512 in the cube.
+\item Orientation: one of the 384 arrangements of the cube.
+\item Daily Challenge: the shared setup for one day's challenge.
+\item Round: one play-through of eight tasks, by a User or a guest.
+\item Task Attempt: the user's work on one task within a round.
+\item Saved Round: a saved copy of an in-progress round, used to resume it.
+\item Score Record: the result of a completed round.
+\item Used Starter List: the starters already shown to a player since the list was last cleared.
+\item Transaction Log: a record of the changes made to each database.
+\end{itemize}
+
+\subsection{Data Dictionary}
+
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.36\textwidth} >{\raggedright\arraybackslash}p{0.17\textwidth} >{\raggedright\arraybackslash}p{0.37\textwidth}}
+\toprule
+Attribute & Type & Description\\
+\midrule
+\endfirsthead
+\toprule
+Attribute & Type & Description\\
+\midrule
+\endhead
+User.username & Text & 3 to 20 characters, unique, shown publicly\\
+User.email & Text & Valid email format, unique, never shown publicly\\
+User.password\_hash & Text & Cryptographic hash of the password; the password itself is never stored\\
+User.created\_at & Timestamp & When the account was created\\
+CubeArray.array\_id & Integer & Identifies the array in use\\
+CubeArray.cell\_values & List of 512 Integers & Number in each cell, indexed by (x, y, z); each of 1 to 512 appears once\\
+Orientation.orientation\_id & Integer & 0 to 383\\
+DailyChallenge.date & Date & The day the challenge applies to\\
+DailyChallenge.plane\_colour & Enumeration & yellow, green, or blue\\
+DailyChallenge.orientation\_id & Integer & Orientation used\\
+DailyChallenge.starter\_value & Integer & 1 to 512\\
+Round.plane\_colour & Enumeration & yellow, green, or blue\\
+Round.orientation\_id & Integer & Orientation used\\
+Round.scoring\_base & Enumeration & decimal or octal\\
+Round.starter\_value & Integer & 1 to 512\\
+Round.starter\_coordinates & 3 Integers & Each 0 to 7\\
+Round.daily\_date & Date & Set only if the round is a daily challenge\\
+Round.status & Enumeration & in progress, completed, or stopped\\
+Attempt.task\_number & Integer & 1 to 8\\
+Attempt.extra\_count & Integer & Additional numbers chosen: 1 to 2 for task 2, 1 to 5 for tasks 3 to 8\\
+Attempt.selected\_cells & List of coordinate triples & Cells the user selected, in order\\
+Attempt.incorrect\_count & Integer & Incorrect cell selections\\
+Attempt.hint\_requests & Integer & Hints requested (\rref{FR_Hint})\\
+Attempt.solution\_requests & Integer & Solution-path requests (\rref{FR_SolutionPath})\\
+Attempt.elapsed\_seconds & Real & Time spent on the task\\
+Attempt.basic\_score & Integer & Points before the time formula\\
+Attempt.timed\_score & Integer & Points after the time formula\\
+SavedRound.saved\_at & Timestamp & When the round was last saved\\
+SavedRound.state & Round state & Everything needed to resume the round, including elapsed time\\
+SavedRound.integrity\_value & Checksum & Used to check the saved round is valid (\rref{FR_Resume})\\
+Score.final\_score & Integer & Sum of the eight timed scores\\
+Score.scoring\_base & Enumeration & decimal or octal\\
+Score.total\_seconds & Real & Total time for the round\\
+Score.achieved\_at & Timestamp & When the round was completed\\
+UsedStarter.starter\_value & Integer & A starter already shown to the player\\
+Log.timestamp & Timestamp & When the change was made\\
+Log.operation & Enumeration & create, update, or delete\\
+Log.record & Reference & The record that was changed\\
+\bottomrule
+\caption{Data Dictionary} \label{tab:DataDictionary}
+\end{longtable}
+}
+
+\subsection{Privacy and Data Retention}
+
+\noindent \textbf{PR1:} The system shall store only the data in the data dictionary, and shall not collect real names or birthdates. \newline \textit{Rationale:} Intended users include high-school students, so collecting less personal data means less harm from a leak.
+
+\vspace{0.5em}
+\noindent \textbf{PR2:} The system shall use a user's email address only for account recovery (\rref{FR_PasswordReset}), and shall not display it or share it with any third party.
+
+\vspace{0.5em}
+\noindent \textbf{PR3:} The system shall store passwords only as cryptographic hashes. \newline \textit{Rationale:} Hazard Analysis SR2. A leak must not expose passwords that users may reuse elsewhere.
+
+\vspace{0.5em}
+\noindent \textbf{PR4:} The system shall encrypt email addresses and other sensitive user data in storage. \newline \textit{Rationale:} Hazard Analysis SR1.
+
+\vspace{0.5em}
+\noindent \textbf{PR5:} The system shall check that the stored cube array contains each of the numbers 1 to 512 exactly once, and shall not start a round if it does not. \newline \textit{Rationale:} A corrupted array would produce wrong expected answers (\rref{FR_VerifyTask}).
+
+\vspace{0.5em}
+\noindent \textbf{PR6:} The system shall automatically back up each database every 24 hours and keep the 7 most recent backups. \newline \textit{Rationale:} Hazard Analysis SR3. The interval and count are proposed values.
+
+\vspace{0.5em}
+\noindent \textbf{PR7:} The system shall log every change to each database with the time, operation, and record changed. \newline \textit{Rationale:} Hazard Analysis SR4.
+
+\vspace{0.5em}
+\noindent \textbf{PR8:} If a database is corrupted or data is lost, the system shall restore it from the most recent backup that passes an integrity check. \newline \textit{Rationale:} Hazard Analysis SR11.
+
+\vspace{0.5em}
+\noindent \textbf{PR9:} The system shall keep a user's scores and statistics until the account is deleted (\rref{FR_DeleteAccount}), and shall then remove the user's data from live databases immediately and from backups when those backups expire.
+
+\vspace{0.5em}
+\noindent \textbf{PR10:} The system shall not keep any online data from guest play (\rref{FR_GuestPlay}), and shall delete a locally saved round when the round is completed or stopped (\rref{FR_StopGame}).
+
+% ============================================================== 
+\section{Non-Functional Requirements}
+
+\plt{You may have to add other NFRs.}
+
+\plt{List your nonfunctional requirements.  You may consider using a fit
+  criterion to make them verifiable.}
+
+\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
+  and verifiable.  This isn't easy to show succinctly, so a good strategy may be
+to give a ``high level'' view of the requirement, but allow for the details to
+be covered in the Verification and Validation document.}
+
+\plt{An absolute requirement on a quality of the system is rarely needed.  For
+  instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
+  for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
+  describing now well the quality is achieved, through experimentation, and
+  possibly theory, rather than meeting some bar that was defined a priori.}
+
+\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
+  SRS is to record the requirements that need to be satisfied for correctness.
+  Any statement of correctness would just be redundant. Rather than discuss
+  correctness, you can characterize how far away from the correct (true)
+  solution you are allowed to be.  This is discussed under accuracy.}
+
+\noindent \begin{itemize}
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
+  \textbf{Accuracy} \plt{Characterize the accuracy by giving the context/use for
+    the software.  Maybe something like, ``The accuracy of the computed
+    solutions should meet the level needed for $<$engineering or scientific
+    application$>$.  The level of accuracy achieved by \progname{} shall be
+    described following the procedure given in Section~X of the Verification and
+    Validation Plan.''  If you do this provide a link to the VnV plan.}
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability}
+  \plt{Characterize the usability by giving the context/use for the software.
+    You should likely reference the user characteristics section.  The level of
+    usability achieved by the software shall be described following the
+    procedure given in Section~X of the Verification and Validation Plan.  Include a link to the VnV plan.}
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
+  \textbf{Maintainability} \plt{The effort required to make any of the likely
+    changes listed for \progname{} should be less than FRACTION of the original
+    development time.  FRACTION is then a symbolic constant that can be defined
+    at the end of the report.}
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
+  \textbf{Portability} \plt{This NFR is easier to write than the others.  The
+    systems that \progname{} should run on should be listed here.  When possible
+    the specific versions of the potential operating environments should be
+    given.  To make the NFR verifiable a statement could be made that the tests
+    from a given section of the VnV plan can be successfully run on all of the
+    possible operating environments.}
+
+\item Other NFRs that might be discussed include verifiability,
+  understandability, reusability, performance, reliability and availability, security, and accessibility.  You may have to add other NFRs.
+
+\end{itemize}
+
+% ============================================================== 
+\section{AI and Machine Learning Requirements}
+
+The project does not include any AI or machine learning components, so this section does not apply.
+
+% ============================================================== 
+\section{Requirements Traceability Matrices}
+
+\plt{The Requirements Traceability Matrix (RTM) is a table that shows the
+relationship between different types of requirements. It is used to ensure that
+all requirements are traceable and that no requirements are missed. The typical
+flow is: Stakeholder Need -> Use Case -> Requirement}
+
+\plt{There is also a traceability matrix between functional and nonfunctional
+  requirements. The purpose of some FRs is to satisfy NFRs.  Therefore, it is
+  important to show the relationship between the two.}
+
+\plt{Further traceability to test cases and modules will be given in other
+documents.}
+
+\begin{longtable}{p{0.15\textwidth} p{0.15\textwidth} p{0.20\textwidth} p{0.20\textwidth}}
+
+\toprule
+Stakeholder Req & Use Case & Functional Req \\
+\midrule
+\srref{SR_Label1} & \ucref{UC_Label1} & \rref{FR_Label1} \\
+\bottomrule
+
+\caption{Traceability Between Stakeholder Requirements, Use Cases, and
+Functional Requirements} \label{tab:SR2UC2FRtm}
+\end{longtable}
+
+\begin{longtable}{p{0.20\textwidth} p{0.20\textwidth}}
+
+\toprule
+Functional Req & Nonfunctional Req \\
+\midrule
+\rref{FR_Label1} & \nfrref{NFR_Accuracy} \\
+\bottomrule
+\caption{Traceability Between Functional and Nonfunctional Requirements}
+\label{tab:FR2Rtm}
+
+\end{longtable}
+
+% ============================================================== 
+
+\section{Rationale}
+
+\plt{Provide a rationale for the decisions made in the documentation.  Rationale
+should be provided for scope decisions, functional requirements, nonfunctioanl
+requirements, data requirements, and AI requirements.  You don't need a
+rationale for everything, ust the major decisions that are not obvious.  You
+should have traceability to the entities in the document that you are
+referencing.}
+
+\section{Likely Changes}    
+
+\noindent \begin{itemize}
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
+    the likely changes, with traceability to the entity that is likely to change.}
+
+\end{itemize}
+
+\section{Unlikely Changes}    
+
+\noindent \begin{itemize}
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
+    the unlikely changes.  The design can assume that the changes listed will
+    not occur.}
+
+\end{itemize}
+
+\newpage{}
+
+\section{Appendices}
+
+\subsection{Appendix A: Additional Materials}
+
+TODO
+
+\subsection{Appendix B: Development Plan}
+
+\plt{This section is optional.  It is used to explain the plan for developing
+  the software.  In particular, this section gives a list of the order in which
+  the requirements will be implemented.  In the context of a course  this is
+  where you can indicate which requirements will be implemented as part of the
+  course, and which will be ``faked'' as future work.  This section can be
+  organized as a prioritized list of requirements, or it could show the
+  requirements that will be implemented for ``phase 1'', ``phase 2'', etc.}
+
+\subsection{Appendix C: Values of Auxiliary Constants}
+
+\plt{Show the values of the symbolic parameters introduced in the report.}
+
+\plt{The definition of the requirements will likely call for SYMBOLIC\_CONSTANTS.
+Their values are defined in this section for easy maintenance.}
+
+\plt{The value of FRACTION, for the Maintainability NFR would be given here.}
+
+TODO
+
+\subsection{Appendix D: Generative AI Disclosure}
+
+\plt{Provide full transparency on how generative AI was used in the creation of
+  this document.  This includes any text, figures, or tables that were generated
+  by AI.  If any skills were created for AI agents to review the documentation,
+  those should be disclosed here.}
+
+\subsection{Appendix E: Reflection}
+
+\plt{This isn't part of the SRS, but it is part of the course.}
+
+The information in this section will be used to evaluate the team members on the
+graduate attribute of Lifelong Learning.  
+
+\input{../Reflection.text}
+
+\input{../SRS_Reflection.text}
+
+\newpage
+
+\bibliographystyle {plainnat}
+\bibliography {../../refs/References}
+
+\newpage
+
+
+\end{document}
