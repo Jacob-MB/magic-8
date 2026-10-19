@@ -900,13 +900,114 @@ TODO
 
 \subsection{Appendix B: Development Plan}
 
-\plt{This section is optional.  It is used to explain the plan for developing
-  the software.  In particular, this section gives a list of the order in which
-  the requirements will be implemented.  In the context of a course  this is
-  where you can indicate which requirements will be implemented as part of the
-  course, and which will be ``faked'' as future work.  This section can be
-  organized as a prioritized list of requirements, or it could show the
-  requirements that will be implemented for ``phase 1'', ``phase 2'', etc.}
+This section describes the phased implementation for the functional requirements listed in the document; it is
+organized around hedging the major risks of 3D visualization and the base game's core gameplay sequence.
+
+\subsubsection{Phase 1: Proof of concept}
+
+ Phase 1 is the POC, a hardcoded, minimal version of the game aimed at validating the two main risks. 
+ The requirements involved in this part are: 
+  \begin{itemize}
+  \item Round setup: FR1, FR2, FR3, FR4, FR5 
+  \item cell interaction: FR7, FR8, FR9, FR10, FR11, FR12, FR13, FR14, FR15, FR16, FR17, F18
+  \item 3D Visualization: FR32, FR33, FR34, FR35. FR36 is excluded as it is an extension of FR36 aimed at improving accessibility.
+  \item Task implementation: FR19, FR20, FR21, FR22; these are all checks that should be available even in a hardcoded version of tasks.
+  \end{itemize}
+
+  \textbf{Success criteria:} The cube fully renders and can be navigated according to the 3D visualization requirements; the user must be able to complete
+  all 8 tasks without logic issues. If the 3D visualization fails, a transition to a different implementation method or 2D must be evaluated.
+
+\subsubsection{Phase 2: Core game loop implementation}
+
+This phase is aimed around randomization of the round setup and completing the scoring and task evaluation system.
+The requirements involved in this part are: 
+\begin{itemize}
+\item Round setup: FR1, FR2, FR3, FR4, FR5 must still hold and FR6 is added to ensure randomization constantly changes the starting voxel.
+\item Task Execution: FR19, FR20, FR21, FR22 must all still hold and FR23 and FR24 will be used to verify the task works with a randomized starting voxel.
+\item Integrity check: FR25 to verify expected answers and verify the validity of task lines.
+\item Scoring: FR26, FR27, FR28 which will revolve around verifying the points scoring, time-based scoring, and score display.
+\item Stop and reset: FR29 to ensure the game loop can be stopped.
+\end{itemize}
+ 
+\textbf{Success criteria:} A full round of 8 randomized tasks must be playable from start to finish.
+The system must correctly accept valid answers and update the user's score while rejecting invalid or incorrect ones. The
+integrity checks must pass on every generated task, scores must be computed and displayed on every round, and the STOP GAME button must end the round and erase that round's progress.
+
+\subsubsection{Phase 3: Improved 3D visualization and Navigation}
+
+This phase is aimed at upgrading the 3D visualization implemented in the game, improving usability and accessibility.
+The requirements involved in this part are: 
+\begin{itemize}
+\item View Switching: FR23
+\item Navigation: FR33
+\item Layer control: FR34
+\item Highlighting: FR35
+\item Accessibility: FR36
+\end{itemize}
+
+\textbf{Success criteria:} Users must be able to switch between slice and 3D views at any time without progressing the round state or pausing the timer; rotation and zoom must work with
+both pointer and keyboard input. Any layer along the axis must be selectable, interactable, and restorable, with chosen layers being highlighted.
+The four defined appearances must be distinguishable via means other than just color, and at least 80\% of users in the usability test must be able to perform rotation and layer selection without assistance.
+
+\subsubsection{Phase 4: Learning phase}
+
+This phase focuses on adding the educational aspect and guided learning through the tutorial and explanation features.
+The requirements involved in this part are: 
+\begin{itemize}
+\item Interactive tutorial: FR37
+\item Mistake explanation: FR38
+\item Worked calculations: FR39
+\item Hints: FR40 and FR41
+\end{itemize}
+
+\textbf{Success criteria:} A first-time user must be able to complete the interactive tutorial on their own and practice all eight tasks. The skip, exit, and replay features must be functioning.
+The hint system should display a message naming the task/line type and its rules without revealing the correct cell, and the worked calculations should be available on request after answering incorrectly.
+
+\subsubsection{Phase 5: Online feature phase}
+
+The goal of this phase is to implement all the features with the creation of user account creation/deletion, leaderboards, round records, and daily challenges.
+The requirements involved in this part are: 
+\begin{itemize}
+\item Guest Play: FR42.
+\item Account Management: FR43, FR44, FR45, FR46.
+\item Statistics: FR47, FR48.
+\item Leaderboards: FR49, FR50.
+\item Daily challenge: FR51, FR52.
+\item Account deletion: FR53.
+\end{itemize}
+
+\textbf{Success criteria:} Users must be able to play without an account with none of their data being stored. Account creation must enforce unique usernames and emails that meet the prohibited term rules,
+a password that meets the safety definition; invalid inputs must be rejected with a reason, with the reset feature working without revealing which credential was wrong.
+Completed rounds must record the user's final score, scoring base, total time, and date; statistics must be displayed and leaderboards must show at least the top 10 scores and times with the username.
+Leaderboards and statistic records must be created only from complete rounds and reject any other requests; the daily challenge must present the same challenge to every user with an accompanying summary.
+Account deletion must remove all user data, verified by post-deletion queries.
+ 
+\subsubsection{Phase 6: Recovery phase}
+
+This phase is focused on increasing the system's resilience and interruption handling capability.
+The requirements involved in this part are: 
+\begin{itemize}
+\item Auto-save: FR30
+\item Round restoration: FR31
+\end{itemize}
+
+\textbf{Success criteria:} Any round in progress must be saved automatically on each state change, with the system trying at least 3 times upon save failure and notifying the user if all attempts fail.
+After a page closes, reloads, or crashes, the system must check the saved round's validity and offer the user the option of resuming the timer at its saved value while discarding improper saves and informing the user.
+Automated tests should simulate the state save failures and invalid saved states to confirm retry behavior, user notification, and safe discard.
+
+This phase is deferrable if timeline limitations apply as the game is fully playable without it.
+
+\subsubsection{Phase 7: Stretch goal implementations}
+
+After the completion of the initial system, the team will be free to explore out-of-scope stretch goals such as the following:
+\begin{itemize}
+\item Creation of cubes in other number bases.
+\item Alternative rulesets and objectives such as partial square completion rounds.
+\item Automatic generation of new magic cube formations.
+\item Player puzzle generation.
+\item Offline play. 
+\end{itemize}
+
 
 \subsection{Appendix C: Values of Auxiliary Constants}
 
