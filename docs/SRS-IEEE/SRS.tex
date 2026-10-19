@@ -1355,8 +1355,8 @@ referencing.}
 \begin{itemize}
 
 \item \textbf{Performance
-(NFR\ref{NFR_RotationPerformance},
-NFR\ref{NFR_CellEditPerformance}):}
+(NFR\ref{NFR_1},
+NFR\ref{NFR_2}):}
 
 Cube manipulation and cell-value editing are two of the most frequent
 interactions in the magic cube game. These operations need to provide
@@ -1364,10 +1364,10 @@ prompt feedback so that users can understand the effects of their
 actions without unnecessary delays.
 
 \item \textbf{Usability
-(NFR\ref{NFR_OpenPuzzleUsability},
-NFR\ref{NFR_CubeManipulationUsability},
-NFR\ref{NFR_CellSelectionUsability},
-NFR\ref{NFR_CellEditingUsability}):}
+(NFR\ref{NFR_3},
+NFR\ref{NFR_4},
+NFR\ref{NFR_5},
+NFR\ref{NFR_6}):}
 
 The usability requirements focus on the primary tasks that users
 must perform to interact with the puzzle successfully. These tasks 
@@ -1378,8 +1378,8 @@ measurable baseline for whether the interface is
 understandable to its intended users or not.
 
 \item \textbf{Maintainability
-(NFR\ref{NFR_ComponentSeparation},
-NFR\ref{NFR_IndependentTesting}):}
+(NFR\ref{NFR_7},
+NFR\ref{NFR_8}):}
 
 Separating mathematical operations, user-interface behaviour,
 3D visualization, and online storage into identifiable
@@ -1388,8 +1388,8 @@ This decision allows individual components to be modified with less
 risk of affecting other parts of the system.
 
 \item \textbf{Portability
-(NFR\ref{NFR_BrowserCompatibility},
-NFR\ref{NFR_WebDeployment}):}
+(NFR\ref{NFR_9},
+NFR\ref{NFR_10}):}
 
 The system is intended to be accessed through desktop and laptop
 web browsers rather than a platform-specific desktop application.
@@ -1398,9 +1398,9 @@ allows users to access the game through supported environments
 without installing Python or additional standalone software.
 
 \item \textbf{Reliability
-(NFR\ref{NFR_ValidPuzzleState},
-NFR\ref{NFR_InvalidInputHandling},
-NFR\ref{NFR_OnlineFailureHandling}):}
+(NFR\ref{NFR_11},
+NFR\ref{NFR_12},
+NFR\ref{NFR_13}):}
 
 The correctness of the puzzle state is essential because subsequent
 calculations, visual updates, and user interactions depend on it.
@@ -1410,10 +1410,10 @@ the system can respond predictably to both expected operations
 and error conditions.
 
 \item \textbf{Security and Privacy
-(NFR\ref{NFR_TransportSecurity},
-NFR\ref{NFR_DataIsolation},
-NFR\ref{NFR_CredentialStorage},
-NFR\ref{NFR_DataMinimization}):}
+(NFR\ref{NFR_14},
+NFR\ref{NFR_15},
+NFR\ref{NFR_16},
+NFR\ref{NFR_17}):}
 
 Because the system may support user accounts and online storage,
 appropriate measures are needed to protect user information.
@@ -1422,8 +1422,8 @@ while access restrictions prevent users from accessing other
 accounts' private data.
 
 \item \textbf{Accessibility
-(NFR\ref{NFR_KeyboardAccessibility},
-NFR\ref{NFR_VisualContrast}):}
+(NFR\ref{NFR_18},
+NFR\ref{NFR_19}):}
 
 The system should provide alternative ways for users to interact
 with and understand the puzzle. Keyboard-operable controls support
