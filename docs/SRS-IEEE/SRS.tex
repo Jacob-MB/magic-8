@@ -165,83 +165,197 @@ Date 2 & 1.1 & Notes\\
 \section{Introduction} 
 % ==============================================================
 
-\plt{Explain what system is being specified. State purpose, users, and project goals.}
-
-\plt{Introduce the name of your software as \progname{}.  Using \progname{} as
-a command lets you change the name if necessary and have the change propagate to
-all documents.}
 
 \plt{Include a reference to the template this work is based on.  \citet{ISOIECIEEE29148_2018}
 justifies the SRS structure and \citet{ISOIECIEEE15288_2023} provides the
 broader life-cycle context that underlines modern requirements engineering
 practice.}
 
+This document specifies \progname{Magic-8}, a free-to-play, web-based 3D puzzle game built around an 8×8×8 magic cube. 
+It states the purpose, users, and project goals: to provide an engaging, navigable magic cube experience in which players complete tasks to practice addition and subtraction in base 8, supported by an introductory tutorial, guided hints, online competitive features, and task-based problem solving. 
+
+The work is based on the provided IEEE SRS template provided in the course {cite} with reference to the ISO/IEC/IEEE 29148:2018 template \citet{ISOIECIEEE29148_2018}, which justifies the SRS structure, 
+and ISO/IEC/IEEE 15288:2023, which provides the broader life-cycle context underlying modern requirements engineering practice. Additional sections were added in the form of regulations and guiing protocols, and reasonable inputs & outputs to increase the team's refinement of the project scope and definition.
+
 \subsection{Purpose}
 
-\plt{State the purpose of the system.}
+The project is intended to create a game involving an 8x8x8 magic cube that can be navigated by players through task completion to practice addition and subtraction in base 8.
+The intent is to solve the lack of engaging resources available for learning and practicing mathematics in non-decimal number bases as alternative bases. Such as base 8, are rarely taught before post-secondary education.
 
-\plt{The purpose should be in the context of the project itself, not in the
-  context of this course. Although the ``purpose'' of the document is to get a
-  grade, you should not mention this.  Instead, ``fake it'' as if this is a real
-  project.}
-
-\progname{} is intended to solve ... \plt{What problem does your program solve?
-The description here should be in the problem space, not the solution space.}
+The following sections will outline the scope, functional requirements and the non-functional requirements that the team will adhere to produce a game that is both educative and fun.
 
 \subsection{Scope}
-\plt{Briefly describe:
+
+\textbf{In-Scope and functionality}
+
+The project known as \progname will be a free-to-play web game where users will be presented with a 3D visualization of an 8$\times$8$\times$8 magic cube separated into slices.
+Users receive a tutorial on addition and subtraction in base eight, a starting cell, and at least 8 tasks that, by solving the problems within, will navigate them through the cube as they move through its layers.
+Users will gain points for correctly solving the problems in a task; these points will be tied to a user's personal account.
+
+\textbf{Intended users}
+
+Magic-8 primarily appeals to recreational math enjoyers who would enjoy a challenge while practicing a different base, and high school students and their teachers who gain a way to engagingly experience an unfamiliar base.
+The goal is to create a system that can not only be used as a fun way to improve one's skill in addition and subtraction in bases but would also act as a ready-made introductory classroom tool for engaging students,
+an experience that is helpful for aspiring STEM students due to how important base 8 and working with new number bases is in systems such as Unix, the C programming language, etc., with Magic-8 serving as an early introduction. As such,
+the improved interest in numeracy stemming from a broader appreciation for alternative number bases benefits all those who would appreciate the greater interest, such as
+post-secondary STEM professors, educational technology platforms, and society as a whole.
+
+\textbf{Out of Scope}
+
+The tool is aimed at being fun and educational; it is not intended to replace a curriculum or full octal tutorial; it is strictly web-based with no plans for mobile or offline development.
+It supports octal only (no other bases, no 2D squares, no 4D tesseracts, no alternative rulesets, no automatic cube generation, no player puzzle generation, no decimal mode, although these may be considered as stretch goals after project completion).
+Cubes of order other than 8 and 16 are excluded because they do not satisfy all 13 lines.
+
+\textbf{Explicit assumptions}
+
+The project assumes the following as true for the success of the project:
 \begin{itemize}
-  \item Problem being solved
-  \item Intended users
-  \item Major functionality
-  \item Expected benefits
-  \item Clarifying the scope often means saying what the software doesn't do
+\item A valid order 8 magic cube is available.
+\item New valid cubes can be created be it algorithmically or through rotation of initial cube.
+\item A user will not be able to memorize the positions of the 512 cells that make up the cube to bypass task interaction.
+\item Users have browser capable devices and internet access.
+\item Users posses basic numeracy.
+\item The chosen implementation software's open source licenses are compatible with the distribution method.
+\item Tasks are all solveable and their problems can be accurately conveyed to intended users.
+\item Users are willing to engage with an octal system.
 \end{itemize}
-}
-
-\plt{The scope section is relevant for understanding the boundaries of the system. It is also relevant for later determining typical values of inputs. The scope should make it clear what inputs are reasonable to expect. This is a distinction between scope and context (context is a later section).  Scope affects the inputs while context affects how the software will be used.}
-
-TODO
 
 \subsection{Stakeholders}
+A stakeholder for the project is defined as any independent party with an interest in the sucess of the game or is affected by it. The team will categorize 
+stakeholders following the SRS IEEE template however due to our team acting as the development team the development team category will not apply.
+
 \begin{itemize}
-\item Customer
-\item End Users
-\item Project Sponsor
-\item Development Team
-\item Administrators
+\item \textbf{Customer:}
+      The game is free to play; however, technological educational websites who may choose to host the website to increase their catalog. The aim is also for high school teachers to adopt the game as a way of maintaining students' attention
+      in fun and educational activities that are still classroom appropriate.
+\item \textbf{End Users:} 
+      The end users include the recreational math enthusiasts who play the game for intellectual stimulation and the novelty of magic cube mathematics; they may already be familiar with octal, but their main goal is entertainment over education. 
+      Another primary end user are the high school students who play the game to practice basic octal in a way that they find engaging.
+\item \textbf{Project Sponsor:}
+      The capstone supervisor endorses and provides the context and the initial goals which the project team should meet; their involvement means the project needs to meet its stated goals within the capstone timeline
+      and demonstrate its recreational value as can be seen from their history in proposing recreational math games. The supervisor also provides institutional insight that guides how the project is specified and implemented, with suggestions
+      on the ways cubes can be generated, presented to the user, and how difficulty and tasks should be addressed.
+\item \textbf{Administrators:}
+      The administrators for this project would be in charge of managing the online components of Magic-8 such as the user account and login information and are concerned with ensuring the privacy and integrity of the user data.
+      In a similar vein, the regulatory and ethics bodies that set rules for data minimization and privacy protection policies are concerned with the game meeting all their related policies.
+\item \textbf{Society:}
+      Society in this context refers to the general public; one of the game's goals is to educate and breed interest in society for mathematics. This is intended to increase the numeracy of the general public and increase interest in programs such as mathematics and engineering.
+      As it is intended to reach the general public, there is also interest from the families of users in the game being free, safe, private, and inclusive to those from any background and conscious of the health issues that might be faced by the users,
+      requiring careful thought into how the visuals, inputs, and outputs are handled to make them non-safety critical or triggering in any way. The product will likely be used by more vulnerable members of society such as teenagers, and thus care must be given to ensuring their 
+      information and safety are not compromised from their gaming experience.
 \end{itemize}
+
+
+\subsection{Regulations and guiding protocols}
+The project must satisfy all the foloowing rules and regulations: 
+
+\begin{longtable}{p{0.25\textwidth} p{0.65\textwidth}}
+\toprule
+Standard / Protocol & Description\\
+\midrule
+\endfirsthead
+\toprule
+Standard / Protocol & Description\\
+\midrule
+\endhead
+\endlastfoot
+ISO/IEC/IEEE 29148:2018 & International standard defining the structure and content of requirements specifications, used to justify the organization of this SRS. \\
+ISO/IEC/IEEE 15288:2023 & International standard describing software and systems life-cycle processes, providing the broader engineering context for requirements practice. \\
+WCAG 2.1 Level AA & Web Content Accessibility Guidelines defining accessibility requirements for web content; the game targets Level AA for keyboard navigation, contrast, and text resizing. \\
+W3C WebAssembly & World Wide Web Consortium standard for portable binary code executed in browsers; the game is packaged via pygbag to run as a WebAssembly module. \\
+W3C HTML5 & World Wide Web Consortium standard for web page structure and browser interaction; the game interface must conform to it. \\
+GDPR & General Data Protection Regulation governing the processing and protection of personal data for users in the European Union. \\
+PIPEDA & Personal Information Protection and Electronic Documents Act governing personal data handling for users in Canada. \\
+COPPA & Children's Online Privacy Protection Act governing data collection from users under 13; applies if the game is made available to children below that age. \\
+FERPA & Family Educational Rights and Privacy Act governing student education records; applies if the game is integrated into formal classroom settings. \\
+Open-source licenses & Licensing terms of libraries such as pygame-ce, pygbag, pylint, pytest, and mypy; the game must comply with all dependency licenses. \\
+\bottomrule
+\caption{Regulations and Guiding Protocols} \label{tab:RegulationsAndProtocols}
+\end{longtable}
+
+\subsection{Reasonable Inputs and Outputs}
+
+The following outlines some of the projects expected user inputs:
+
+\begin{longtable}{p{0.25\textwidth} p{0.65\textwidth}}
+\toprule
+Input & Description\\
+\midrule
+\endfirsthead
+\toprule
+Input & Description\\
+\midrule
+\endhead
+\endlastfoot
+3D navigation commands & Rotation, zoom, and movement through cube layers via keyboard or mouse. \\
+Voxel selection & Selecting a specific voxel number within the cube. \\
+Answer submission & Submitting a selected voxel or value as the answer to the current task. \\
+Tutorial interactions & Advancing through, replaying, or skipping the tutorial. \\
+Account credentials & Username and password for account creation and login. \\
+Round start & Player begins a new round, triggering task generation. \\
+Database state & Stored accounts and statistics, retrieved from local or online databases. \\
+Authentication responses & Responses from third-party identity providers, if integrated. \\
+Asset and configuration files & Game assets, cube visuals, and configuration data loaded at startup. \\
+\bottomrule
+\caption{Project Inputs} \label{tab:ProjectInputs}
+\end{longtable}
+
+The following outlines some of the projects expected user inputs:
+
+\begin{longtable}{p{0.25\textwidth} p{0.65\textwidth}}
+\toprule
+Output & Description\\
+\midrule
+\endfirsthead
+\toprule
+Output & Description\\
+\midrule
+\endhead
+\endlastfoot
+3D cube rendering & Visual display of the 8$\times$8$\times$8 magic cube with visible and hidden voxels. \\
+Slice and voxel highlighting & Visual differentiation of slices, selected voxels, and active lines. \\
+Task progress display & Current task, progress within the round, and remaining tasks. \\
+Correct/incorrect indication & Clear feedback on whether an answer was correct or incorrect. \\
+Error explanations & Explanation of mistakes users make while playing. \\
+Score and statistics display & Points earned, times, accuracy, and other gameplay statistics. \\
+Tutorial content & Interactive instructional content for learning to play and for octal basics. \\
+Account confirmations & Confirmation of account creation and login. \\
+Local database updates & Stored accounts, statistics, and settings persisted on the user's device. \\
+Online database updates & Synchronized accounts and game statistics on the server. \\
+\bottomrule
+\caption{Project Outputs} \label{tab:ProjectOutputs}
+\end{longtable}
 
 \subsection{Definitions and Acronyms}
 
-\plt{This section provides the meaning of the different words and phrases used
-  in the domain of the problem.}
+This section provides the meaning of the different words and phrases used
+in the domain of the problem.
 
 \begin{longtable}{p{0.25\textwidth} p{0.65\textwidth}}
 \toprule
 Term & Definition\\
 \midrule
-TODO & TODO\\
+Base 8 & A number system using the digits 0 to 7 where the value for each digit in decimal can be found by multiplying by 8 to the power of n where n represents the number of positions from the right. \\
+Octal & Another name for base 8. \\
+Magic square & A square array of positive integers where the sum of each individual row, column, or main diagonal is the same.\\
+Magic cube & The 3-dimensional equivalent of a magic square where the sums of each row, column, pillar, main diagonal, or triagonal is the same. \\
+Magic constant & The fixed sum obtained when doing sums in any row, column, or main diagonal in a magic square. \\
+Most perfect magic cube & A magic cube where all rows, columns, pillars, diagonals, triagonals, and broken space diagonals add up to the magic constant. \\
+Triagonal & A line or set of cells connecting two opposite vertices through the interior of a cube and hence moves across all three axes. \\
+Broken space diagonal & A diagonal that wraps around the cube's boundaries.\\
+Voxel & A single 3D cell within the magic cube. \\
+Slice & A 2D display providing all the voxels within a certain cross section of the magic cube.\\
+Round & A single playthrough of the game consisting of 8 sequential tasks. \\
+Starter & The initial randomly chosen visible voxel that acts as a starting point for the player to start solving tasks.\\
 \bottomrule
 \caption{Definitions and Acronyms} \label{tab:DefinitionsAndAcronyms}
 \end{longtable}
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
-\plt{This section summarizes the skills and knowledge of the readers of the
-  SRS.  It does NOT have the same purpose as the ``User Characteristics''
-  section (Section~\ref{SecUserCharacteristics}).  The intended readers are the
-  people that will read, review and maintain the SRS.  They are the people that
-  will conceivably design the software that is intended to meet the
-  requirements.  The user, on the other hand, is the person that uses the
-  software that is built.  They may never read this SRS document.  Of course,
-  the same person could be a ``user'' and an ``intended reader.''}
-
-\plt{The intended reader characteristics should be written as unambiguously and
-  as specifically as possible.  Rather than say, the user should have an
-  understanding of physics, say what kind of physics and at what level.  For
-  instance, is high school physics adequate, or should the reader have had a
-  graduate course on advanced quantum mechanics?}
+The intended readers of this document are expected to be able to read, review, maintain, or implement the SRS. 
+As such, they are expected to have knowledge equivalent to the final year of a software engineering student or a student of an equivalent degree.
+This includes an intermediate level of experience with a programming language such as Python, a beginner level understanding of 3D graphics, game development, WebAssembly, and CI/CD.
 
 % ============================================================== 
 \section{System Overview}
@@ -271,7 +385,7 @@ a 3D pattern.
 The goal of this project is to create a recreational mathematics game that allows those interested
 in these magic cubes as well as non standard number bases such as base 8 to further their understanding.
 This is planned to be a web-based game in which users will be able to complete certain challenges on a 3d
-representation of an 8x8 magic cube using base 8 mathematics to find patterns associated with a magic cube.
+representation of an 8x8x8 magic cube using base 8 mathematics to find patterns associated with a magic cube.
 This will include adding values to certain sections of the cube to complete patterns of magic cubes moving through
 8 stages of difficulty while continuing to learn about these mathematical structures.
 
