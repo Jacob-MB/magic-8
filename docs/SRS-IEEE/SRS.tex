@@ -513,6 +513,182 @@ TODO
 
 % ============================================================== 
 \section{Functional Requirements}
+
+\subsection{Formal Model}
+\label{sec:formal-model}
+
+This formal model describes the configuration of a game round, the
+evaluation of tasks, and the calculation of the users score. It
+defines the conditions under which a task is considered complete and
+the properties that the scoring system must maintain. The model
+supports the functional requirements concerning task execution,
+answer evaluation, and score calculation (FR7--FR50).
+
+\subsubsection{Game Configuration}
+
+Let the set of tasks in a game round be
+\[
+    \mathcal{T} = \{T_1,T_2,\ldots,T_8\}.
+\]
+
+Each task \(T_i\) has an associated target condition and a basic
+score value. Let \(B_i\) be the basic score awarded for correctly
+completing task \(T_i\). The target conditions are defined by the
+game configuration and are evaluated against the current puzzle
+state.
+
+The octal target values used by the game include
+\[
+    S_1 = 1001_8,\qquad
+    S_2 = 2002_8,\qquad
+    S_3 = 4004_8.
+\]
+
+These values are interpreted as octal numbers. For example,
+\[
+    1001_8 = 513_{10},\qquad
+    2002_8 = 1026_{10},\qquad
+    4004_8 = 2052_{10}.
+\]
+
+The task configuration determines which target condition applies
+to each task and which cells or lines are involved in its evaluation.
+
+\subsubsection{Round State}
+
+A game round is represented by the state
+\[
+    R = (C, i, A, P),
+\]
+where:
+\begin{itemize}
+    \item \(C\) is the current puzzle configuration, including the
+    values assigned to its cells;
+    \item \(i\) is the index of the current task;
+    \item \(A\) is the set of task attempts recorded during the round;
+    \item \(P\) is the score accumulated during the round.
+\end{itemize}
+
+The current task index satisfies
+\[
+    1 \leq i \leq 8.
+\]
+
+For each task \(T_i\), let \(E_i(C)\) be the evaluation function
+that returns true when the puzzle configuration \(C\) satisfies
+the task's required conditions and false otherwise:
+\[
+    E_i(C) =
+    \begin{cases}
+        1, & \text{if task } T_i \text{ is satisfied},\\
+        0, & \text{otherwise}.
+    \end{cases}
+\]
+
+An attempt is considered successful only when the corresponding
+evaluation function returns \(1\). Changes to the puzzle state
+must be evaluated against the requirements of the current task.
+
+\subsubsection{Task Evaluation}
+
+Let \(a_i\) represent an attempt to complete task \(T_i\). The
+result of evaluating the attempt is
+\[
+    \operatorname{Result}(a_i) = E_i(C).
+\]
+
+A successful attempt satisfies the task's target condition.
+An unsuccessful attempt does not satisfy that condition and must
+not be treated as a completed task.
+
+The task completion indicator is defined as
+\[
+    Q_i =
+    \begin{cases}
+        1, & \text{if task } T_i \text{ has been completed correctly},\\
+        0, & \text{otherwise}.
+    \end{cases}
+\]
+
+For a round containing eight tasks, the number of completed tasks is
+\[
+    N_{\mathrm{completed}}
+    = \sum_{i=1}^{8} Q_i.
+\]
+
+Consequently,
+\[
+    0 \leq N_{\mathrm{completed}} \leq 8.
+\]
+
+A task can contribute to the completed-task count only after its
+correct completion has been established by the evaluation function.
+
+\subsubsection{Timed Scoring}
+
+Let \(B_i\) be the basic score for task \(T_i\), and let \(t_i\)
+be the elapsed time, in seconds, associated with its successful
+completion. For \(t_i > 0\), the timed score is calculated as
+\[
+    \operatorname{TimedScore}_i
+    =
+    \operatorname{round}
+    \left(
+        \frac{B_i \cdot 1350}{t_i}
+    \right).
+\]
+
+Here, \(\operatorname{round}\) denotes rounding to the nearest
+integer. The scoring rule rewards correct completion while taking
+the time required to complete the task into account.
+
+The score awarded for task \(T_i\) is defined as
+\[
+    W_i =
+    \begin{cases}
+        \operatorname{TimedScore}_i,
+        & \text{if } Q_i = 1 \text{ and the score has not been awarded},\\
+        0, & \text{otherwise}.
+    \end{cases}
+\]
+
+The total score for a round is therefore
+\[
+    P = \sum_{i=1}^{8} W_i.
+\]
+
+This definition ensures that the total score is the sum of the
+individual task scores and that an unsuccessful attempt does not
+contribute points. A completed task must not be awarded points
+more than once within the same round.
+
+\subsubsection{Formal Properties}
+
+The following properties describe expected behaviour of the task
+evaluation and scoring system.
+
+\paragraph{Theorem 1: Correctness of Task Completion.}
+
+For any task \(T_i\), the task is considered successfully completed
+only if its evaluation function returns true:
+\[
+    Q_i = 1 \implies E_i(C) = 1.
+\]
+
+\textit{Justification.}
+By definition, task completion depends on satisfying the task's
+required conditions. An attempt that fails evaluation cannot be
+recorded as a successful completion.
+
+\paragraph{Theorem 2: No Score for an Unsuccessful Attempt.}
+
+For any task \(T_i\),
+\[
+    Q_i = 0 \implies W_i = 0.
+\]
+
+\subsection{Requirements}
+
 \plt{Functional requirements describe what the system should do.  They are typically
 expressed as a set of conditions or capabilities that the system must have.  These
 requirements are usually derived from the stakeholder requirements and use cases.}
@@ -602,78 +778,424 @@ TODO
 \noindent
 \begin{itemize}
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum
-\label{NFR_Performance}:]
-\textbf{Performance}
-
-Under the defined reference test enviornment, the system shall
-update the visible cube orientation within 100 milliseconds of
-a supported rotation input. The system shall also reflect an
-accepted cell-value edit within 100 milliseconds.
+% --------------------------------------------------
+% Performance Requirements
+% --------------------------------------------------
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
-\label{NFR_Usability}:]
-\textbf{Usability}
+\label{NFR_1}:]
+\textbf{Cube Manipulation Performance}
 
-The majority of participants (most likely at least 80\%) in a usability evaluation shall
-complete each of the following tasks without external assistance:
-opening a puzzle, manipulating the 3D visual cube, selecting a cell, 
-and editing a cell value.
+The system shall update the visible cube orientation within
+100 milliseconds of receiving a supported manipulation input.
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum
-\label{NFR_Maintainability}:]
-\textbf{Maintainability}
+\textit{Rationale:} Delayed manipulation feedback can make the
+three-dimensional cube feel unresponsive and make it difficult
+for users to understand the relationship between their input
+and the resulting orientation.
 
-The mathematical logic, user-interface logic, three-dimensional
-visualization logic, and online storage interactions shall be
-organized into identifiable components with documented
-responsibilities. This will be measured with the fit criterion:
-Automated tests for the core mathematical operations shall 
-be executable independently of the user interface.
+\textit{Fit Criterion:} Under the defined reference test
+environment, the visible cube orientation updates within
+100 milliseconds for at least 95\% of measured supported
+rotation inputs.
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum
-\label{NFR_Portability}:]
-\textbf{Portability}
+\textit{Traces:} FR??.
 
-The system shall execute in each desktop and laptop web browser
-that it is stated to support without requiring users to install Python 
-or a standalone desktop application. The core test suite shall pass on each 
-supported browser.
+\textit{Stakeholder Requirements:} STR??.
+
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
-\label{NFR_Reliability}:]
-\textbf{Reliability}
+\label{NFR_2}:]
+\textbf{Cell-Value Editing Performance}
 
-The system shall maintain a valid in-memory puzzle state following
-supported cube modifications, cell selections, and valid cell-value
-edits. Invalid user inputs shall be handled without terminating
-the application or leaving the puzzle state invalid. If an online 
-operation fails, the system shall inform the user
-and shall not indicate that the operation succeeded.
+The system shall visibly reflect an accepted cell-value edit
+within 100 milliseconds of the user submitting the edit.
+
+\textit{Rationale:} Prompt feedback helps users understand
+whether their changes have been accepted and reduces
+uncertainty when solving a puzzle.
+
+\textit{Fit Criterion:} Under the defined reference test
+environment, at least 95\% of accepted cell-value edits are
+visibly reflected within 100 milliseconds.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+% --------------------------------------------------
+% Usability Requirements
+% --------------------------------------------------
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
-\label{NFR_Security}:]
-\textbf{Security and Privacy}
+\label{NFR_3}:]
+\textbf{Puzzle Opening Usability}
 
-All network communication involving account credentials or
-user data shall use HTTPS with valid TLS. The system shall prevent
-authenticated users from accessing other users' private stored
-data through its supported interfaces and operations.
+A first-time user shall be able to open a puzzle without
+external assistance or prior training.
+
+\textit{Rationale:} Users should be able to begin solving
+a puzzle without needing to consult instructions or receive
+help from another person.
+
+\textit{Fit Criterion:} At least 80\% of participants in a
+usability evaluation shall successfully open a puzzle without
+external assistance or prior training.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_4}:]
+\textbf{Cube Manipulation Usability}
+
+A first-time user shall be able to manipulate the three-dimensional
+cube using the supported rotation controls without external
+assistance.
+
+\textit{Rationale:} The cube is the primary visual representation
+of the puzzle. Users need to understand how to change its
+orientation to inspect and interact with its cells.
+
+\textit{Fit Criterion:} At least 80\% of participants in a
+usability evaluation shall successfully perform each defined
+cube-rotation task without external assistance.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_5}:]
+\textbf{Cell Selection Usability}
+
+A first-time user shall be able to select an individual
+puzzle cell using the supported selection controls without
+external assistance.
+
+\textit{Rationale:} Users must be able to identify the cell
+they intend to inspect or edit. Unclear selection behaviour
+may cause unintended changes to the puzzle.
+
+\textit{Fit Criterion:} At least 80\% of participants in a
+usability evaluation shall correctly select the requested
+cell in each defined cell-selection task without external
+assistance.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_6}:]
+\textbf{Cell-Value Editing Usability}
+
+A first-time user shall be able to enter and submit a valid
+value for a selected puzzle cell without external assistance.
+
+\textit{Rationale:} Editing cell values is a core interaction
+in solving the puzzle. The editing process should be
+understandable without requiring users to learn a complex
+sequence of actions.
+
+\textit{Fit Criterion:} At least 80\% of participants in a
+usability evaluation shall successfully enter and submit
+a valid value for a selected cell without external assistance.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+% --------------------------------------------------
+% Maintainability Requirements
+% --------------------------------------------------
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_7}:]
+\textbf{Separation of System Components}
+
+The system shall organize mathematical logic, user-interface
+logic, three-dimensional visualization logic, and online
+storage interactions into identifiable components with
+documented responsibilities.
+
+\textit{Rationale:} Separating these responsibilities reduces
+the risk that changes to one part of the system will
+unintentionally affect unrelated functionality.
+
+\textit{Fit Criterion:} A code inspection shall identify
+separate components responsible for each of the four specified
+areas, with documented responsibilities for each component.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_8}:]
+\textbf{Independent Testing of Mathematical Logic}
+
+The system shall allow its core mathematical operations to
+be tested independently of the user interface and three-dimensional
+visualization.
+
+\textit{Rationale:} Independent testing makes it easier to
+identify mathematical errors without requiring the complete
+application to be executed for every test.
+
+\textit{Fit Criterion:} The automated test suite for core
+mathematical operations shall execute without launching the
+user interface or rendering the three-dimensional cube.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+% --------------------------------------------------
+% Portability Requirements
+% --------------------------------------------------
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_9}:]
+\textbf{Browser Compatibility}
+
+The system shall operate in every desktop and laptop web
+browser included in its defined support list.
+
+\textit{Rationale:} Users should be able to access the game
+through supported browsers without requiring a specific
+browser outside the stated compatibility requirements.
+
+\textit{Fit Criterion:} The defined core functional test suite
+shall pass on every browser and browser version included in
+the system's documented support list.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_10}:]
+\textbf{Browser-Based Deployment}
+
+The system shall allow users to access and operate the game
+through a supported web browser without requiring installation
+of Python or a standalone desktop application.
+
+\textit{Rationale:} Browser-based access reduces setup effort
+and allows users to run the game on supported desktop and
+laptop devices without installing a separate application.
+
+\textit{Fit Criterion:} On a clean reference device, a tester
+shall be able to launch and use the game through a supported
+browser without installing Python or a standalone desktop
+application.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+% --------------------------------------------------
+% Reliability Requirements
+% --------------------------------------------------
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_11}:]
+\textbf{Puzzle-State Integrity}
+
+The system shall maintain a valid in-memory puzzle state
+following supported cube manipulations, cell selections, and
+accepted cell-value edits.
+
+\textit{Rationale:} The puzzle state must remain consistent
+throughout interaction so that users do not encounter
+unintended changes or false puzzle representations.
+
+\textit{Fit Criterion:} Automated tests shall verify that
+the puzzle state satisfies the defined state-validity rules
+after every state update in the test suite.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_12}:]
+\textbf{Invalid Input Handling}
+
+The system shall reject invalid cell-value inputs without
+terminating the application or leaving the puzzle state invalid.
+
+\textit{Rationale:} Users may enter unsupported values or
+make mistakes while editing cells. Invalid inputs should
+not corrupt the puzzle or interrupt continued use of the game.
+
+\textit{Fit Criterion:} Automated tests shall submit every
+defined category of invalid cell-value input and verify that
+the input is rejected, the puzzle state remains valid, and
+the application continues operating.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_13}:]
+\textbf{Online Operation Failure Handling}
+
+When an online storage operation fails, the system shall
+inform the user that the operation was unsuccessful.
+
+\textit{Rationale:} Users need accurate feedback about
+whether their data has been stored or retrieved successfully.
+Misleading feedback may cause users to believe that their
+progress or puzzle data has been saved when it has not.
+
+\textit{Fit Criterion:} Tests that simulate each defined
+online storage failure shall verify that the system displays
+an appropriate failure indication.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+% --------------------------------------------------
+% Security and Privacy Requirements
+% --------------------------------------------------
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_14}:]
+\textbf{Network Communication Security}
+
+All network communication involving account credentials
+or user data shall use HTTPS with valid TLS.
+
+\textit{Rationale:} Encrypting network communication helps
+protect credentials and user data against interception or
+unauthorized modification during transmission.
+
+\textit{Fit Criterion:} Network inspection shall confirm that
+all requests involving account credentials or user data use
+HTTPS with valid TLS, and that the system does not transmit
+such information through unencrypted HTTP requests.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_15}:]
+\textbf{User Data Isolation}
+
+The system shall prevent an authenticated user from accessing
+another user's private stored data through its supported
+interfaces and operations.
+
+\textit{Rationale:} Puzzle data, saved progress, and other
+private information associated with an account should remain
+accessible only to authorized users.
+
+\textit{Fit Criterion:} Authorization tests shall verify that
+an authenticated test account cannot retrieve, modify, or
+delete private data belonging to another test account through
+any supported operation.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_16}:]
+\textbf{Authentication Secret Protection}
+
 Application-controlled persistent storage shall not store
-authentication secrets in plaintext. The application shall collect
-only the personal information necessary for its implemented functionality.
+authentication secrets in plaintext.
+
+\textit{Rationale:} Storing authentication secrets in plaintext
+may expose user accounts if stored data is accessed without
+authorization.
+
+\textit{Fit Criterion:} Inspection of application-controlled
+persistent storage shall find no authentication secrets
+stored in plaintext.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
-\label{NFR_Accessibility}:]
-\textbf{Accessibility}
+\label{NFR_17}:]
+\textbf{Personal Data Minimization}
 
-All essential puzzle controls shall be operable using a keyboard
-without requiring pointer interaction. Essential interface text
-and controls shall be clearly visible with high contrast (3:1). 
-The system shall provide a two-dimensional method of viewing
-and editing cell values so that essential puzzle
-operations do not depend exclusively on manipulating the
-three-dimensional visualization.
+The system shall collect and retain only the personal
+information necessary to provide its implemented functionality.
+
+\textit{Rationale:} Limiting the collection and retention of
+personal information reduces privacy risks and the amount
+of data that must be protected.
+
+\textit{Fit Criterion:} A review of the system's data fields,
+collection operations, and persistent storage shall confirm
+that every collected or retained personal information field
+has a documented functional purpose.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+% --------------------------------------------------
+% Accessibility Requirements
+% --------------------------------------------------
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_18}:]
+\textbf{Keyboard Accessibility}
+
+All essential puzzle controls shall be operable using a
+keyboard without requiring pointer interaction.
+
+\textit{Rationale:} Keyboard operation supports users who
+cannot use a mouse or other pointer-based input device and
+provides an alternative way to interact with essential
+puzzle functionality.
+
+\textit{Fit Criterion:} A keyboard-only test shall verify
+that users can access and operate every essential puzzle
+control, including puzzle navigation, cell selection, and
+cell-value editing, without pointer interaction.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
+
+
+\item[NFR\refstepcounter{nfrnum}\thenfrnum
+\label{NFR_19}:]
+\textbf{Visual Contrast}
+
+Essential interface text and controls shall meet a minimum
+contrast ratio of 3:1 against their adjacent background.
+
+\textit{Rationale:} Adequate contrast helps users distinguish
+interface elements and read essential information.
+
+\textit{Fit Criterion:} An automated or manual contrast
+assessment shall confirm that every essential interface
+text element and control meets the specified minimum
+contrast ratio of 3:1 against its adjacent background.
+
+\textit{Traces:} FR??.
+
+\textit{Stakeholder Requirements:} STR??.
 
 \end{itemize}
 
@@ -758,44 +1280,85 @@ referencing.}
 
 \subsection{Nonfunctional Requirements}
 
+\subsection{Nonfunctional Requirements}
+
 \begin{itemize}
 
-\item \textbf{Performance (NFR\ref{NFR_Performance}):}
-Cube rotation and cell-value editing are frequent user actions, so noticeable delays could disrupt the user's 
-experience manipulating the puzzle and understanding its current state. Applying this 100ms test to two of the most
-common interactions insures these frusturating delays wont cause a negative effect on user experience..
+\item \textbf{Performance
+(NFR\ref{NFR_RotationPerformance},
+NFR\ref{NFR_CellEditPerformance}):}
 
-\item \textbf{Usability (NFR\ref{NFR_Usability}):}
-The usability requirement focuses on the primary tasks that users must perform to interact with the puzzle successfully.
-Requiring at least 80\% of evaluation participants to complete these tasks without external assistance provides a 
-measurable baseline for whether the interface is understandable to its intended users or not. 
-These tasks were selected because they represent the essential interaction workflow.
+Cube manipulation and cell-value editing are two of the most frequent
+interactions in the magic cube game. These operations need to provide
+prompt feedback so that users can understand the effects of their
+actions without unnecessary delays.
 
-\item \textbf{Maintainability (NFR\ref{NFR_Maintainability}):}
-Separating mathematical operations, user-interface behaviour, three-dimensional visualization, and online storage 
-into identifiable components reduces coupling between unrelated responsibilities. This decision allows changes to 
-the visualization or storage mechanisms to be made without unnecessarily modifying the mathematical logic. 
+\item \textbf{Usability
+(NFR\ref{NFR_OpenPuzzleUsability},
+NFR\ref{NFR_CubeManipulationUsability},
+NFR\ref{NFR_CellSelectionUsability},
+NFR\ref{NFR_CellEditingUsability}):}
 
-\item \textbf{Portability (NFR\ref{NFR_Portability}):}
-The system is intended to be accessed through desktop and laptop web browsers rather than a platform-specific desktop 
-application. Avoiding a requirement to install Python or other standalone software reduces setup effort and makes 
-the game more accessible to users across supported environments.
+The usability requirements focus on the primary tasks that users
+must perform to interact with the puzzle successfully. These tasks 
+represent the essential interaction workflow.
+Requiring at least 80\% of usability evaluation participants to
+complete these tasks without external assistance provides a
+measurable baseline for whether the interface is
+understandable to its intended users or not.
 
-\item \textbf{Reliability (NFR\ref{NFR_Reliability}):}
-Maintaining a valid puzzle state after supported operations is essential because subsequent calculations, visual updates, 
-and user interactions depend on the correct state. Also handling invalid input without terminating helps preserve the user's 
-progress and supports predictable behaviour.
+\item \textbf{Maintainability
+(NFR\ref{NFR_ComponentSeparation},
+NFR\ref{NFR_IndependentTesting}):}
 
-\item \textbf{Security and Privacy (NFR\ref{NFR_Security}):}
-The security requirements address the risks associated with accounts and online storage of user data. HTTPS with valid 
-TLS protects credentials and data while they are transmitted, while restrictions on access to private stored data help 
-prevent unauthorized access between accounts. While preventing plaintext storage of authentication secrets and limiting 
-personal information collection reduces unnecessary risk of exposure of user data.
+Separating mathematical operations, user-interface behaviour,
+3D visualization, and online storage into identifiable
+components reduces coupling between unrelated responsibilities.
+This decision allows individual components to be modified with less
+risk of affecting other parts of the system.
 
-\item \textbf{Accessibility (NFR\ref{NFR_Accessibility}):}
-Keyboard-operable controls and high-contrast interface elements help users interact with the system without relying 
-exclusively on pointer devices or visual distinctions that may be difficult to perceive. As well as providing a two-dimensional 
-method in case a user find navigating the 3D element to be difficult or bothersome.
+\item \textbf{Portability
+(NFR\ref{NFR_BrowserCompatibility},
+NFR\ref{NFR_WebDeployment}):}
+
+The system is intended to be accessed through desktop and laptop
+web browsers rather than a platform-specific desktop application.
+Browser-based deployment reduces installation requirements and
+allows users to access the game through supported environments
+without installing Python or additional standalone software.
+
+\item \textbf{Reliability
+(NFR\ref{NFR_ValidPuzzleState},
+NFR\ref{NFR_InvalidInputHandling},
+NFR\ref{NFR_OnlineFailureHandling}):}
+
+The correctness of the puzzle state is essential because subsequent
+calculations, visual updates, and user interactions depend on it.
+Separately defining requirements for valid state maintenance,
+invalid input handling, and online failure handling ensures that
+the system can respond predictably to both expected operations
+and error conditions.
+
+\item \textbf{Security and Privacy
+(NFR\ref{NFR_TransportSecurity},
+NFR\ref{NFR_DataIsolation},
+NFR\ref{NFR_CredentialStorage},
+NFR\ref{NFR_DataMinimization}):}
+
+Because the system may support user accounts and online storage,
+appropriate measures are needed to protect user information.
+Encrypted network communication protects data during transmission,
+while access restrictions prevent users from accessing other
+accounts' private data.
+
+\item \textbf{Accessibility
+(NFR\ref{NFR_KeyboardAccessibility},
+NFR\ref{NFR_VisualContrast}):}
+
+The system should provide alternative ways for users to interact
+with and understand the puzzle. Keyboard-operable controls support
+users who cannot rely on pointer-based interaction, while sufficient
+visual contrast helps make interface elements distinguishable.
 
 \end{itemize}
 
@@ -853,6 +1416,8 @@ TODO
   this document.  This includes any text, figures, or tables that were generated
   by AI.  If any skills were created for AI agents to review the documentation,
   those should be disclosed here.}
+
+For sections 2, 8, and 6.1 there was AI used for text generation using a particular format from unformatted text due to my unfamiliarity with LaTeX.
 
 \subsection{Appendix E: Reflection}
 
