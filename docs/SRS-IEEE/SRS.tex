@@ -113,66 +113,14 @@ October 19, 2026 & Nehan Munir & Added SRs, Personas, UCs and (U)LCs\\
 \bottomrule
 \end{tabularx}
 
-~\\
-\plt{All capstone SRS documents should have a reflection appendix.}
-
 \newpage
 
 \pagenumbering{arabic}
-
-\plt{This SRS template is based on the IEEE template, with input from co-pilot
-  and S. Smith. It will get you started.  You should not modify the section
-  headings, without first discussing the change with the course instructor.
-  Modification means you are not following the template, which loses some of the
-  advantage of a template, especially standardization.}
-
-\plt{Feel free to change the appearance of the report by modifying the LaTeX
-  commands.}
-
-\plt{This template document assumes that a single program is being documented.
-  If you are documenting a family of models, you should start with a commonality
-  analysis.}
-
-\plt{The SRS is not generally written, or read, sequentially.  The SRS is a
-  reference document.  It is generally read in an ad hoc order, as the need
-  arises.}
-
-\plt{Guiding principles for the SRS document:
-\begin{itemize}
-\item Do not repeat the same information at the same abstraction level.  If
-  information is repeated, the repetition should be at a different abstraction
-  level.
-\end{itemize}
-}
-
-\plt{The template description comments should be disabled before submitting this
-  document for grading.}
-
-\plt{You can borrow any wording from the text given in the template.  It is part
-  of the template, and not considered an instance of academic integrity.  Of
-  course, you need to cite the source of the template.}
-
-\plt{When the documentation is done, it should be possible to trace back to the
-  source of every piece of information.  Some information will come from
-  external sources, like terminology.}
-
-\plt{An SRS document should have the following qualities: unambiguous,
-  consistent, complete, validatable, abstract and traceable.}
-
-\plt{The overall goal of the SRS is that someone can learn,
-  understand and verify the captured domain knowledge.  They should not have to
-  trust the authors of the SRS on any statements.  They should be able to
-  independently verify/derive every statement made.}
 
 % ============================================================== 
 \section{Introduction} 
 % ==============================================================
 
-
-\plt{Include a reference to the template this work is based on. \citet{ISOIECIEEE29148_2018}
-justifies the SRS structure and \citet{ISOIECIEEE15288_2023} provides the
-broader life-cycle context that underlines modern requirements engineering
-practice.}
 This document specifies Magic-8, a free-to-play, web-based 3D puzzle game built around an 8×8×8 magic cube.
 It states the purpose, users, and project goals: to provide an engaging, navigable magic cube experience in which players complete tasks to practice addition and subtraction in base 8, supported by an introductory tutorial, guided hints, online competitive features, and task-based problem solving. 
 
@@ -1969,18 +1917,6 @@ The project does not include any AI or machine learning components, so this sect
 % ============================================================== 
 \section{Requirements Traceability Matrices}
 
-\plt{The Requirements Traceability Matrix (RTM) is a table that shows the
-relationship between different types of requirements. It is used to ensure that
-all requirements are traceable and that no requirements are missed. The typical
-flow is: Stakeholder Need -> Use Case -> Requirement}
-
-\plt{There is also a traceability matrix between functional and nonfunctional
-  requirements. The purpose of some FRs is to satisfy NFRs.  Therefore, it is
-  important to show the relationship between the two.}
-
-\plt{Further traceability to test cases and modules will be given in other
-documents.}
-
 \begin{longtable}{p{0.15\textwidth} p{0.15\textwidth} p{0.20\textwidth} p{0.20\textwidth}}
 
 \toprule
@@ -2065,13 +2001,6 @@ FR53 & \nfrref{NFR_15}, \nfrref{NFR_17} \\
 % ============================================================== 
 
 \section{Rationale}
-
-\plt{Provide a rationale for the decisions made in the documentation.  Rationale
-should be provided for scope decisions, functional requirements, nonfunctioanl
-requirements, data requirements, and AI requirements.  You don't need a
-rationale for everything, ust the major decisions that are not obvious.  You
-should have traceability to the entities in the document that you are
-referencing.}
 
 \subsection{Scope}
 
@@ -2239,10 +2168,6 @@ it can be a vastly different implementation on release.
 \section{Unlikely Changes}    
 
 \noindent \begin{itemize}
-
-\item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] \plt{Give
-    the unlikely changes.  The design can assume that the changes listed will
-    not occur.}
 \item[(NFR\ref{NFR_18})]: Will not likely be lessening our goal to allow those without the ability to use a mouse to be able to interact with the program.
 \item[(NFR\ref{NFR_9}, NFR\ref{NFR_10})]: The web based approach was one of the first comments made by Dr. Rapoport and so unless there is no other option we would like to continue with this method.
 \item[ULC\refstepcounter{ulcnum}\theulcnum\label{ULC_meaningfulLabel}:] Section\ref{subsec:scope}'s scope is unlikely to change to support mobile app releases as the current medium was agreed upon to be sufficient by both the team and the sponsor.
@@ -2384,12 +2309,7 @@ TODO
 
 \subsection{Appendix D: Generative AI Disclosure}
 
-\plt{Provide full transparency on how generative AI was used in the creation of
-  this document.  This includes any text, figures, or tables that were generated
-  by AI.  If any skills were created for AI agents to review the documentation,
-  those should be disclosed here.}
-
-  A model used was DeepSeek-V4.1-Flash
+A model used was DeepSeek-V4.1-Flash
   
 Generative AI was used to brainstorm a list of functional requirements and data requirements for our project (Sections 6 and 7). The rules and player instruction documents provided by Dr. Rapoport were used as context for the AI model to ensure the list of requirements was comprehensive and accurate to the game rules. Generative AI was also used to update the requirements to reflect feedback from Dr. Rapoport. In addition, it was used to draft the rationale for the functional requirements and data requirements in section 11. The AI model that was used was Claude Sonnet 5.5, with Medium effort. All AI-assisted content related to requirements and rationale was checked against Dr. Rapoport's documents and our Hazard Analysis before being included.
 For sections 2, 8, and 6.1 there was AI used for text generation using a particular format from unformatted text due to my unfamiliarity with LaTeX.
@@ -2397,8 +2317,6 @@ For section 1 AI was used to suggest user inputs and outputs an provide insight 
 for Section 10 AI was used to create the table structures.
 
 \subsection{Appendix E: Reflection}
-
-\plt{This isn't part of the SRS, but it is part of the course.}
 
 The information in this section will be used to evaluate the team members on the
 graduate attribute of Lifelong Learning.
