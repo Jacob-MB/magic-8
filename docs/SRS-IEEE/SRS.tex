@@ -970,7 +970,7 @@ evaluation of tasks, and the calculation of the users score. It
 defines the conditions under which a task is considered complete and
 the properties that the scoring system must maintain. The model
 supports the functional requirements concerning task execution,
-answer evaluation, and score calculation (FR7--FR50).
+answer evaluation, and score calculation (\rref{FR_StartRound}--\rref{FR_Totals}).
 
 \subsubsection{Game Configuration}
 
@@ -1206,67 +1206,260 @@ For any task \(T_i\),
 \]
 
 \subsection{Requirements}
-
-\plt{Functional requirements describe what the system should do.  They are typically
-expressed as a set of conditions or capabilities that the system must have.  These
-requirements are usually derived from the stakeholder requirements and use cases.}
-
-\plt{Use SHALL statements. Requirements must be atomic, testable, and traceable.}
-
-\noindent \begin{itemize}
-
-\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Label1}:] The system shall ...
-
-\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Label2}:] The system shall ...
-
-\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Label3}:] The system shall ...
+ 
+\noindent \textbf{Round setup}
+\begin{itemize}
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_StartRound}:] When the user presses START and no round is in progress, the system shall begin a round and display the 512 cells with their numbers hidden, arranged as slices of the round's plane colour.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SelectPlane}:] The system shall randomly select each round's plane colour from yellow (x and y axes continuous), green (x and z axes continuous), or blue (y and z axes continuous). \newline \textit{Rationale:} The two continuous axes form the ``continuous plane'' that the task definitions refer to.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SelectOrientation}:] The system shall randomly select one of the 384 cube orientations for each round.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ChooseBase}:] The system shall require the user to choose decimal or octal as the scoring base before the starter appears.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ShowStarter}:] When the user presses START after choosing the scoring base, the system shall display a randomly chosen starter number in its cell with a white background and start a timer that shows the elapsed seconds.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_NoRepeatStarter}:] The system shall not reuse a starter number for a player until 192 rounds have been played, after which it shall clear that player's list of used starters. \newline \textit{Rationale:} Keeps rounds different from each other.
+ 
+\end{itemize}
+ 
+\noindent \textbf{Tasks and answer checking}
+\begin{itemize}
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_TaskOrder}:] The system shall present the eight tasks in order, starting the next task when the user presses START after completing the previous one, and shall not use the same target cells for two tasks in a round.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_CellFeedback}:] When the user selects a cell while a task awaits cell selections, the system shall turn the cell white if it is one of the task's target cells and red if it is not, with no limit on incorrect selections. The system shall ignore a cell that is already white and any selection made while no selection is expected.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task1}:] In task 1, the system shall accept as correct the cell whose x, y, and z coordinates each differ from the starter's by 4 (modulo 8). \newline \textit{Rationale:} This is the starter's complement. The two numbers sum to 1001 (octal).
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task2}:] In task 2, the system shall accept as correct the 3 cells that complete a half-orthogonal containing the starter, lying on either axis of the continuous plane and reaching an outer edge.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task3}:] In task 3, the system shall accept as correct the 7 cells that complete an orthogonal containing the starter on the axis not in the continuous plane.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task4}:] In task 4, the system shall accept as correct the 7 cells that complete a diagonal containing the starter and lying on both axes of the continuous plane, whether continuous or split. \newline \textit{Rationale:} A split line needs a row, column, or pillar moved to the opposite side of the cube to appear straight.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task5}:] In task 5, the system shall accept as correct the 7 cells that complete a diagonal containing the starter that uses one axis of the continuous plane and the axis not in the plane, whether continuous or split.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task6}:] In task 6, the system shall accept as correct the 7 cells that complete a diagonal containing the starter that uses the other axis of the continuous plane (not the one used in task 5) and the axis not in the plane, whether continuous or split.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task7}:] In task 7, the system shall accept as correct the 7 cells that complete a triagonal containing the starter, whether continuous or split.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Task8}:] In task 8, the system shall accept as correct the 7 cells that complete a split triagonal containing the starter that differs from the triagonal used in task 7.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ChooseExtra}:] Before tasks 2 to 8 begin, the system shall require the user to choose how many additional numbers to add (1 to 2 for task 2, 1 to 5 for tasks 3 to 8).
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_AdditionColumn}:] When all cells of the target line are found in tasks 2 to 8, the system shall display the starter and the chosen number of additional numbers from the line in a column for the user to add.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_AdditionCheck}:] When the user presses DONE with an answer in the Addition Box, the system shall, if the sum is incorrect, clear the answer, turn the box red, and let the user try again, and, if correct, show the additional numbers in their cells in white.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SubtractionPrompt}:] After the target cell is found (task 1) or the addition is correct (tasks 2 to 8), the system shall ask the user to subtract from a constant: 1001 minus the starter for task 1, 2002 minus the sum for task 2, and 4004 minus the sum for tasks 3 to 8 (all octal). \newline \textit{Rationale:} A correct subtraction shows the user found the right line, not just a lucky guess.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SubtractionCheck}:] When the user presses DONE with an answer in the Subtraction Box, the system shall, if the answer is incorrect, clear it, turn the box red, and let the user try again, and, if correct, reset the box to white, show the remaining numbers of the line in their white cells (for task 1, show the answer in the complementary cell), and stop the timer.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_InputValidation}:] If the user presses DONE with an empty answer box, or enters anything other than the octal digits 0 to 7, the system shall show a message asking for a valid answer and shall not count it as an incorrect answer.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_UnrecognizedInput}:] If the user performs an input that the system does not recognize (for example, a key that has no function in the current state), the system shall show a message saying that the input was not recognized. \newline \textit{Rationale:} Tells users why nothing happened instead of leaving them stuck (Hazard Analysis SR17).
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_NextTask}:] When a new task begins, the system shall return the previous task's white cells (other than the starter) to their original colour, clear the previous question and answers, and resume the timer from its previous value.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_EndRound}:] After the subtraction in task 8 is answered correctly, the system shall end the round, display the final score, and allow a new round to begin.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_VerifyTask}:] Before presenting each task, the system shall check that the starter and the task's target cells add up to the correct sum (1001 octal for task 1, 2002 for task 2, and 4004 for tasks 3 to 8) and that the expected answers follow from them, and shall generate a new setup and log the failure if a check fails. \newline \textit{Rationale:} A wrong expected answer would mark correct answers wrong and teach incorrect arithmetic (Hazard Analysis SR9, SR12).
+ 
+\end{itemize}
+ 
+\noindent \textbf{Scoring and controls}
+\begin{itemize}
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_BasicPoints}:] When a task's subtraction is answered correctly, the system shall award the line points for the chosen scoring base, and shall award points for each additional number when the addition is correct, as follows (decimal / octal): task 1, 10 / 14; task 2, 20 / 30; tasks 3 and 4, 30 / 44; tasks 5 and 6, 40 / 60; tasks 7 and 8, 60 / 110; each additional number in tasks 2 to 8, 10 / 14. \newline \textit{Rationale:} Octal points are 20\% above decimal points after conversion, as in the rules.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_TimedScore}:] The system shall compute each task's timed score as the task's basic score $\times$ 1350 / $t$, where $t$ is the seconds spent on that task, rounded to the nearest whole number. \newline \textit{Rationale:} The rules give the constant as $2.63671875 \times 512$, which equals 1350. Faster completion scores more. Per-task time and the rounding are our assumptions.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Totals}:] After each task, the system shall display the user's updated total score, and after task 8 the final score, which is the sum of the eight timed scores.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_StopGame}:] When the user presses STOP GAME during a round, the system shall end the round, erase all progress in it, record no score, and return to its ready state.
+ 
+\end{itemize}
+ 
+\noindent \textbf{Saving and recovery}
+\begin{itemize}
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Autosave}:] The system shall automatically save the in-progress round each time its state changes, retrying up to 3 times if a save fails and telling the user if all attempts fail. \newline \textit{Rationale:} Prevents lost progress after a crash (Hazard Analysis SR5, SR6).
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Resume}:] When the user returns after the page was closed, reloaded, or crashed during a round, the system shall check that the saved round is valid and offer to resume it with the timer at its saved value, discarding it and telling the user if it is invalid.
+ 
+\end{itemize}
+ 
+\noindent \textbf{3D visualization}
+\begin{itemize}
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_3DView}:] The system shall provide a 3D view of the cube as an alternative to the slice display, with each number in the same cell as in the slice display, and shall let the user switch between views at any time without changing the round's state or pausing the timer. Cell selection in the 3D view shall behave as in \rref{FR_CellFeedback}. \newline \textit{Rationale:} The 3D view is an added feature that helps users see how the cube is built (Problem Statement Goal 1). Inner cells are reached by isolating layers (\rref{FR_3DLayers}).
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_3DNavigate}:] In the 3D view, the system shall let the user rotate and zoom the cube using either the pointer or the keyboard.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_3DLayers}:] In the 3D view, the system shall let the user choose any single layer along any axis and show it with the other layers faded or hidden, step to the adjacent layer, and restore all layers.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_3DHighlight}:] The system shall highlight the chosen layer and the cells the user has selected, using visibly different highlights, and shall keep the cell states and highlighting consistent with the round's current state in both views.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_PerformanceWarning}:] If the system detects that the 3D view is running below the minimum performance level set in the Non-Functional Requirements, the system shall warn the user and offer to switch to the slice display. \newline \textit{Rationale:} Gives users with slower devices a way to fix performance problems (Hazard Analysis SR14).
 
 \end{itemize}
-
-\plt{The requirements are given labels so that they can be referenced in other
-parts of the SRS.  The label names should be meaningful mnemonics, not numbers.}
-
+ 
+\noindent \textbf{Guided learning and tutorial}
+\begin{itemize}
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Tutorial}:] The system shall provide an interactive tutorial that walks the user through a fixed sample round, requiring them to practice each of the eight task types, and shall let the user skip, exit, or replay it at any time. The tutorial shall show only instructions that match the step the user has reached, and its results shall not be recorded in statistics or leaderboards.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ExplainCell}:] After an incorrect cell selection, the system shall display a message naming the type of line being sought and the rule it follows, without revealing the correct cell.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Hint}:] When the user requests a hint, the system shall display the coordinate step that the line in the current task follows (for example, ``each coordinate differs by 4'') without identifying a cell, and shall record the request.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_SolutionPath}:] After the user has made 3 incorrect attempts at the same step (3 incorrect cell selections in a task, or 3 incorrect answers to the same question), the system shall let the user request the solution to that step and shall record the request. For cell selection, the solution is shown by highlighting the correct cells one after another in the order the line is traced; for an addition or subtraction, it is shown as the worked octal calculation. \newline \textit{Rationale:} Showing the answer only after repeated attempts keeps the task a challenge.
+ 
+\end{itemize}
+ 
+\noindent \textbf{Accounts, statistics, and competitive play}
+\begin{itemize}
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_GuestPlay}:] The system shall let a user play without an account, and shall not send any data about a guest's play online.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_CreateAccount}:] The system shall let a user create an account with a unique username, a unique email address in a valid format, and a password of at least 8 characters, shall reject anything else with a message giving the reason, and shall show the entered username and email address and ask the user to confirm them before the account is created.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_UsernameRules}:] The system shall reject any username shorter than 3 or longer than 20 characters, or that contains a term on a prohibited-terms list. \newline \textit{Rationale:} Usernames appear on public leaderboards, so inappropriate names could harm other users (Hazard Analysis SR13).
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Login}:] The system shall let a user log in and log out, and shall reject invalid credentials with a message that does not say whether the username or the password was wrong. \newline \textit{Rationale:} Avoids revealing which usernames exist.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_PasswordReset}:] The system shall let a user who has forgotten their password request a reset link sent to their registered email address, without revealing whether the address is registered. \newline \textit{Rationale:} The Hazard Analysis lists email as stored user data, and account recovery is its purpose.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_RecordRound}:] When a logged-in user completes a round, the system shall record the final score, scoring base, total time, and date.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Statistics}:] The system shall let a logged-in user view their number of completed rounds, highest score, average score, and fastest round time, for each scoring base.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_Leaderboards}:] The system shall display, for each scoring base, leaderboards of the 10 highest final scores and the 10 fastest round times, showing username and score or time only. A score recorded by the system shall appear on the relevant leaderboards within 1 minute. \newline \textit{Rationale:} Separate boards by scoring base because octal scoring gives 20\% more points.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_LeaderboardIntegrity}:] The system shall create or change leaderboard and statistics records only from rounds it has completed, and shall reject any other request to do so, except for deletion under \rref{FR_DeleteAccount}. \newline \textit{Rationale:} Prevents tampering with rankings (Hazard Analysis SR10).
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_DailyChallenge}:] The system shall offer one daily challenge each day, with the same plane colour, orientation, and starter for every user, and a leaderboard of that day's results.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_ShareResults}:] After completing a daily challenge, the system shall let the user copy a summary of the date, final score, and total time that contains no cell number or answer. \newline \textit{Rationale:} Lets users compare results without spoiling the challenge for others.
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_DeleteAccount}:] The system shall let a logged-in user delete their account, which removes their username, email, credentials, scores, statistics, and leaderboard entries.
+ 
+\end{itemize}
+ 
+\noindent \textbf{Wellbeing}
+\begin{itemize}
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_PlayTimeReminder}:] After every hour of play in a session, the system shall remind the user how long they have been playing, without changing the round's state or the timer. \newline \textit{Rationale:} Reduces the risk of excessive use (Hazard Analysis SR21).
+ 
+\item[FR\refstepcounter{reqnum}\thereqnum \label{FR_DisableAnimations}:] The system shall let the user turn off animations, including the rotation animation in the 3D view and visual effects on cell feedback, and shall apply the choice immediately. \newline \textit{Rationale:} Reduces the risk of photosensitive seizures and eye strain from excessive or unintended flashing or animation (Hazard Analysis SR19).
+ 
+\end{itemize}
+ 
 % ============================================================== 
 \section{Data Requirements}
-
-\plt{The Data Requirements section describes what information the system must manage.
-  It includes the major data entities, their attributes, and the relationships
-  between them.  It also includes a data dictionary that defines the meaning of
-  each attribute.}
-
+ 
 \subsection{Major Data Entities}
-
-\plt{What information must exist for the system to accomplish its goals?}
-
-\plt{For each entity, provide a short explanation.}
-
+ 
 \begin{itemize}
-\item User
-\item Song
-\item Session
-\item Report
+\item User: a registered player.
+\item Cube Array: the fixed arrangement of the numbers 1 to 512 in the cube.
+\item Orientation: one of the 384 arrangements of the cube.
+\item Daily Challenge: the shared setup for one day's challenge.
+\item Round: one play-through of eight tasks, by a User or a guest.
+\item Task Attempt: the user's work on one task within a round.
+\item Saved Round: a saved copy of an in-progress round, used to resume it.
+\item Score Record: the result of a completed round.
+\item Used Starter List: the starters already shown to a player since the list was last cleared.
+\item Transaction Log: a record of the changes made to each database.
 \end{itemize}
-
+ 
 \subsection{Data Dictionary}
-
-\plt{For each entity, define all important attributes.}
-
-\begin{longtable}{p{0.20\textwidth} p{0.20\textwidth} p{0.45\textwidth}}
+ 
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.36\textwidth} >{\raggedright\arraybackslash}p{0.17\textwidth} >{\raggedright\arraybackslash}p{0.37\textwidth}}
 \toprule
 Attribute & Type & Description\\
 \midrule
-user\_id & UUID & Unique identifier\\
-email & String & User email address\\
+\endfirsthead
+\toprule
+Attribute & Type & Description\\
+\midrule
+\endhead
+User.username & Text & 3 to 20 characters, unique, shown publicly\\
+User.email & Text & Valid email format, unique, never shown publicly\\
+User.password\_hash & Text & Cryptographic hash of the password; the password itself is never stored\\
+User.created\_at & Timestamp & When the account was created\\
+CubeArray.array\_id & Integer & Identifies the array in use\\
+CubeArray.cell\_values & List of 512 Integers & Number in each cell, indexed by (x, y, z); each of 1 to 512 appears once\\
+Orientation.orientation\_id & Integer & 0 to 383\\
+DailyChallenge.date & Date & The day the challenge applies to\\
+DailyChallenge.plane\_colour & Enumeration & yellow, green, or blue\\
+DailyChallenge.orientation\_id & Integer & Orientation used\\
+DailyChallenge.starter\_value & Integer & 1 to 512\\
+Round.plane\_colour & Enumeration & yellow, green, or blue\\
+Round.orientation\_id & Integer & Orientation used\\
+Round.scoring\_base & Enumeration & decimal or octal\\
+Round.starter\_value & Integer & 1 to 512\\
+Round.starter\_coordinates & 3 Integers & Each 0 to 7\\
+Round.daily\_date & Date & Set only if the round is a daily challenge\\
+Round.status & Enumeration & in progress, completed, or stopped\\
+Attempt.task\_number & Integer & 1 to 8\\
+Attempt.extra\_count & Integer & Additional numbers chosen: 1 to 2 for task 2, 1 to 5 for tasks 3 to 8\\
+Attempt.selected\_cells & List of coordinate triples & Cells the user selected, in order\\
+Attempt.incorrect\_count & Integer & Incorrect cell selections\\
+Attempt.hint\_requests & Integer & Hints requested (\rref{FR_Hint})\\
+Attempt.solution\_requests & Integer & Solution requests (\rref{FR_SolutionPath})\\
+Attempt.elapsed\_seconds & Real & Time spent on the task\\
+Attempt.basic\_score & Integer & Points before the time formula\\
+Attempt.timed\_score & Integer & Points after the time formula\\
+SavedRound.saved\_at & Timestamp & When the round was last saved\\
+SavedRound.state & Round state & Everything needed to resume the round, including elapsed time\\
+SavedRound.integrity\_value & Checksum & Used to check the saved round is valid (\rref{FR_Resume})\\
+Score.final\_score & Integer & Sum of the eight timed scores\\
+Score.scoring\_base & Enumeration & decimal or octal\\
+Score.total\_seconds & Real & Total time for the round\\
+Score.achieved\_at & Timestamp & When the round was completed\\
+UsedStarter.starter\_value & Integer & A starter already shown to the player\\
+Log.timestamp & Timestamp & When the change was made\\
+Log.operation & Enumeration & create, update, or delete\\
+Log.record & Reference & The record that was changed\\
 \bottomrule
 \caption{Data Dictionary} \label{tab:DataDictionary}
 \end{longtable}
-
+}
+ 
 \subsection{Privacy and Data Retention}
-
-\plt{Discuss storage, retention, deletion, privacy controls,
- consent, encryption, and compliance requirements.}
-
-TODO
+ 
+\noindent \textbf{PR1:} The system shall store only the data in the data dictionary, and shall not collect real names or birthdates. \newline \textit{Rationale:} Intended users include high-school students, so collecting less personal data means less harm from a leak.
+ 
+\vspace{0.5em}
+\noindent \textbf{PR2:} The system shall use a user's email address only for account recovery (\rref{FR_PasswordReset}), and shall not display it or share it with any third party.
+ 
+\vspace{0.5em}
+\noindent \textbf{PR3:} The system shall store passwords only as cryptographic hashes. \newline \textit{Rationale:} Hazard Analysis SR2. A leak must not expose passwords that users may reuse elsewhere.
+ 
+\vspace{0.5em}
+\noindent \textbf{PR4:} The system shall encrypt email addresses and other sensitive user data in storage. \newline \textit{Rationale:} Hazard Analysis SR1.
+ 
+\vspace{0.5em}
+\noindent \textbf{PR5:} The system shall check that the stored cube array contains each of the numbers 1 to 512 exactly once, and shall not start a round if it does not. \newline \textit{Rationale:} A corrupted array would produce wrong expected answers (\rref{FR_VerifyTask}).
+ 
+\vspace{0.5em}
+\noindent \textbf{PR6:} The system shall automatically back up each database every 24 hours and keep the 7 most recent backups. \newline \textit{Rationale:} Hazard Analysis SR3. The interval and count are proposed values.
+ 
+\vspace{0.5em}
+\noindent \textbf{PR7:} The system shall log every change to each database with the time, operation, and record changed. \newline \textit{Rationale:} Hazard Analysis SR4.
+ 
+\vspace{0.5em}
+\noindent \textbf{PR8:} If a database is corrupted or data is lost, the system shall restore it from the most recent backup that passes an integrity check. \newline \textit{Rationale:} Hazard Analysis SR11.
+ 
+\vspace{0.5em}
+\noindent \textbf{PR9:} The system shall keep a user's scores and statistics until the account is deleted (\rref{FR_DeleteAccount}), and shall then remove the user's data from live databases immediately and from backups when those backups expire.
+ 
+\vspace{0.5em}
+\noindent \textbf{PR10:} The system shall not keep any online data from guest play (\rref{FR_GuestPlay}), and shall delete a locally saved round when the round is completed or stopped (\rref{FR_StopGame}).
 
 % ============================================================== 
 \section{Non-Functional Requirements}
@@ -1720,31 +1913,7 @@ contrast ratio of 3:1 against its adjacent background.
 % ============================================================== 
 \section{AI and Machine Learning Requirements}
 
-\plt{Refer to
-\href{https://gitlab.cas.mcmaster.ca/courses/capstone/-/blob/main/Lectures/Lxx_DrMosserGuestLecture/2026_09_Capstone.pdf?ref_type=heads}{Dr.
-Mosser's guest lecture} on AI requirements.}
-
-\plt{Include only when applicable.}
-
-\subsection{Model Inputs}
-
-TODO
-
-\subsection{Model Outputs}
-
-TODO
-
-\subsection{Evaluation Metrics}
-
-\plt{Accuracy, Precision, Recall, F1, BLEU, WER, etc.}
-
-TODO
-
-\subsection{Known Limitations}
-
-\plt{Explicitly document expected failure modes.}
-
-TODO
+The project does not include any AI or machine learning components, so this section does not apply.
 
 % ============================================================== 
 \section{Requirements Traceability Matrices}
@@ -1795,6 +1964,60 @@ requirements, data requirements, and AI requirements.  You don't need a
 rationale for everything, ust the major decisions that are not obvious.  You
 should have traceability to the entities in the document that you are
 referencing.}
+
+\subsection{Functional Requirements}
+
+\begin{itemize}
+\item \textbf{Round setup} (\rref{FR_SelectPlane}, \rref{FR_SelectOrientation}, \rref{FR_NoRepeatStarter}): \newline
+The plane colour, cube orientation, and starter are chosen at random, and a starter is not reused for 192 rounds, as set out in Dr.\ Rapoport's rules. This keeps rounds different from each other so players cannot memorize one arrangement, which supports the goal of a different set of tasks each round.
+
+\item \textbf{Tasks and answer checking} (\rref{FR_Task1}--\rref{FR_Task8}, \rref{FR_AdditionCheck}, \rref{FR_SubtractionCheck}): \newline
+The eight tasks, their target cells, and their order from easiest to hardest come directly from Dr.\ Rapoport's rules rather than from our own design. The addition and subtraction steps show that a user found the right line instead of clicking cells by chance, and they give practice with octal arithmetic.
+
+\item \textbf{Task verification and input handling} (\rref{FR_TaskOrder}, \rref{FR_VerifyTask}, \rref{FR_InputValidation}, \rref{FR_UnrecognizedInput}): \newline
+Each task is checked before it is shown, because a wrong expected answer would mark correct answers as wrong and teach incorrect octal arithmetic (Hazard Analysis SR8, SR9, SR12). Invalid or unrecognized input produces a message instead of counting as a mistake, so users are not penalized for typing errors or left stuck (SR17).
+
+\item \textbf{Scoring} (\rref{FR_BasicPoints}, \rref{FR_TimedScore}, \rref{FR_StopGame}): \newline
+The point values, the 20\% higher points for octal, and the time formula come from Dr.\ Rapoport's rules. We state the time constant as 1350, which equals the rules' $2.63671875 \times 512$, so that it is easy to check and test. A stopped round records no score, so abandoning a round cannot change a leaderboard.
+
+\item \textbf{Saving and recovery} (\rref{FR_Autosave}, \rref{FR_Resume}): \newline
+Progress is saved after every change and a failed save is retried three times, so a crash or lost connection does not cost the user a round (Hazard Analysis SR5, SR6). A saved round is checked before it is loaded, so a corrupted save cannot crash the game or load an incorrect state (SR7).
+
+\item \textbf{3D visualization} (\rref{FR_3DView}, \rref{FR_3DLayers}, \rref{FR_3DHighlight}, \rref{FR_PerformanceWarning}): \newline
+The 3D view is a feature we added to the game (Problem Statement Goal 1). The slice display from Dr.\ Rapoport's rules stays available, and each number stays in the same cell in both views. Layers can be isolated so users can reach inner cells that other cells hide. Both views must show the same cell states (Hazard Analysis SR15), and users on slower devices are warned and offered the slice display (SR14).
+
+\item \textbf{Guided learning and tutorial} (\rref{FR_Tutorial}, \rref{FR_ExplainCell}, \rref{FR_Hint}, \rref{FR_SolutionPath}): \newline
+These requirements come from the Problem Statement goal of teaching octal arithmetic and the cube's patterns while users play. A hint gives the coordinate step without naming a cell, and the full solution is available only after 3 incorrect attempts at the same step, following feedback from Dr.\ Rapoport, so help does not remove the challenge of the task. Tutorial steps and hints must match the user's current step (Hazard Analysis SR20).
+
+\item \textbf{Accounts and competitive play} (\rref{FR_GuestPlay}, \rref{FR_CreateAccount}, \rref{FR_UsernameRules}, \rref{FR_Leaderboards}, \rref{FR_LeaderboardIntegrity}, \rref{FR_DeleteAccount}): \newline
+Online play comes from the competitive goal in our Problem Statement. Guest play sends no data online, so students can try the game without an account. Usernames appear on public leaderboards, so they are restricted (Hazard Analysis SR13). Leaderboards are separate for each scoring base because octal scores are 20\% higher, and only the system can create or change leaderboard records so rankings stay fair (SR10). Because we store usernames and email addresses, users can delete their account and data.
+
+\item \textbf{Daily challenge} (\rref{FR_DailyChallenge}, \rref{FR_ShareResults}): \newline
+Every user receives the same setup each day so results can be compared, which gives users a reason to return. The shared summary leaves out cell numbers and answers so that sharing a result does not spoil the challenge for others.
+
+\item \textbf{Wellbeing} (\rref{FR_PlayTimeReminder}, \rref{FR_DisableAnimations}): \newline
+Both come from the Hazard Analysis. The hourly reminder reduces the risk of excessive use (SR21), and the option to turn off animations reduces the risk of photosensitive seizures and eye strain (SR19).
+\end{itemize}
+
+\subsection{Data Requirements}
+
+\begin{itemize}
+\item \textbf{Game data} (cube array, orientation, round, and task attempt): \newline
+The cube array holds each of the numbers 1 to 512 exactly once, as in Dr.\ Rapoport's documents, and has an identifier because those documents say the array may change. It is checked when loaded (PR5), because a corrupted array would produce wrong expected answers. Rounds and task attempts are stored separately so each task's time, mistakes, hints, and score can be recorded, which the scoring, statistics, and tutorial requirements depend on.
+
+\item \textbf{Saved rounds}: \newline
+A saved round includes an integrity value so it can be validated before it is loaded (\rref{FR_Resume}).
+
+\item \textbf{Statistics and leaderboards}: \newline
+These are calculated from score records instead of being stored separately, so the same information is not kept in two places and cannot disagree.
+
+\item \textbf{Personal data} (PR1--PR4): \newline
+Only a username, an email address, and a password hash are stored, with no real names or birthdates, because intended users include high-school students. The email address is used only for account recovery. Hashed passwords and encrypted data limit the harm if the database is leaked (Hazard Analysis SR1, SR2).
+
+\item \textbf{Backups, logging, and retention} (PR6--PR10): \newline
+Backups, change logs, and restoring from the last valid backup protect against lost or corrupted data (Hazard Analysis SR3, SR4, SR11), although the Hazard Analysis defers them until after the main features. Data is kept until the user deletes their account, and guest play is never stored online, since there is no reason to keep it.
+
+\end{itemize}
 
 \subsection{Nonfunctional Requirements}
 
@@ -1900,7 +2123,7 @@ it can be a vastly different implementation on release.
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_unlikelyPlaceholder}:] \plt{Give
     the unlikely changes.  The design can assume that the changes listed will
     not occur.}
 \item[(NFR\ref{NFR_18})]: Will not likely be lessening our goal to allow those without the ability to use a mouse to be able to interact with the program.
@@ -1946,6 +2169,7 @@ TODO
   by AI.  If any skills were created for AI agents to review the documentation,
   those should be disclosed here.}
 
+Generative AI was used to brainstorm a list of functional requirements and data requirements for our project (Sections 6 and 7). The rules and player instruction documents provided by Dr. Rapoport were used as context for the AI model to ensure the list of requirements was comprehensive and accurate to the game rules. Generative AI was also used to update the requirements to reflect feedback from Dr. Rapoport. In addition, it was used to draft the rationale for the functional requirements and data requirements in section 11. The AI model that was used was Claude Sonnet 5.5, with Medium effort. All AI-assisted content related to requirements and rationale was checked against Dr. Rapoport's documents and our Hazard Analysis before being included.
 For sections 2, 8, and 6.1 there was AI used for text generation using a particular format from unformatted text due to my unfamiliarity with LaTeX.
 
 \subsection{Appendix E: Reflection}
@@ -2026,6 +2250,15 @@ Questions 5 and 6 have been answered as a team.
   and Linear Algebra I will be important. Discrete Math allows me to ensure that the cube is always in a steady state and map out all of the possibilites the cube can take. 
   Linear Algebra will help as we are likely going to represent all 512 values inside the cube as a matrix, and being able to create formal rules on how the matrix can be 
   manipulated is important (whether it is a database check to ensure all the cube matrixes are actually magic cubes, or an instaneous check on what the user is currently entering).
+\end{enumerate}
+
+\subsection*{Allen Tong}
+
+\begin{enumerate}
+  \item What went well for me was having Dr. Rapoport's rules and player instruction documents to work from. The eight tasks, scoring system, and answer-checking steps were already specified, so I was able to write most of the base game requirements directly from them. In addition, having Dr. Rapoport review sections 6 and 7 went well, since his comments caught problems I would not have noticed.
+  \item My main pain point was understanding the game well enough to write precise requirements. I resolved this by writing the requirements one task at a time, checking each against the rules and instruction documents, and having sections 6 and 7 reviewed by the team and Dr. Rapoport to catch any mistakes in my understanding of the rules.
+  \item About half of the functional requirements in section 6 came from Dr. Rapoport, who is both a stakeholder and our supervisor. These requirements were based on his rules documents and the meetings we had with him as a full group.
+  \item SFWRENG 3RA3 will help the most because it taught us how to write precise and verifiable requirements. This is important because the SRS is the basis for everything we build and test. Requirements that are clearly written are easier to turn into test cases, and they prevent misunderstandings with the client in the future. SFWRENG 4HC3 will also help because it covers evaluating interactions and designing for users. This applies directly to our tutorial and hints components, which have to be usable for our intended users.
 \end{enumerate}
 
 \subsection*{Jacob Brodersen}
