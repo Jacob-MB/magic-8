@@ -126,11 +126,6 @@ October 19, 2026 & Amos Eeaghe & Added Section 1, 10, Appendix B and reflection\
 \section{Introduction} 
 % ==============================================================
 
-
-\plt{Include a reference to the template this work is based on. \citet{ISOIECIEEE29148_2018}
-justifies the SRS structure and \citet{ISOIECIEEE15288_2023} provides the
-broader life-cycle context that underlines modern requirements engineering
-practice.}
 This document specifies Magic-8, a free-to-play, web-based 3D puzzle game built around an 8×8×8 magic cube.
 It states the purpose, users, and project goals: to provide an engaging, navigable magic cube experience in which players complete tasks to practice addition and subtraction in base 8, supported by an introductory tutorial, guided hints, online competitive features, and task-based problem solving. 
 
@@ -1927,86 +1922,108 @@ The project does not include any AI or machine learning components, so this sect
 % ============================================================== 
 \section{Requirements Traceability Matrices}
 
-\begin{longtable}{p{0.15\textwidth} p{0.15\textwidth} p{0.20\textwidth} p{0.20\textwidth}}
+\begin{longtable}{p{0.20\textwidth} p{0.15\textwidth} p{0.55\textwidth}}
+\toprule
+Stakeholder Req & Use Case & Functional Req \\
+\midrule
+\endfirsthead
 
 \toprule
 Stakeholder Req & Use Case & Functional Req \\
 \midrule
-\srref{MagicCubeValidator} & \ucref{UC_Label2} & FR1, FR5, FR19, FR21, FR22, FR23, FR24, FR25 \\
-\srref{CubeVisualizer} & \ucref{UC_Label1}, \ucref{UC_Label5} & FR1, FR3, FR32, FR33, FR34, FR35, FR36 \\
-\srref{OctalExplainer} & \ucref{UC_Label6} & FR4, FR37, FR39, FR40, FR41 \\
-\srref{MagicCubeExplainer} & \ucref{UC_Label6} & FR2, FR3, FR37, FR38, FR41 \\
-\srref{CompletionVerifier} & \ucref{UC_Label2} & FR1, FR6, FR24, FR28, FR29 \\
-\srref{LevelGenerator} & \ucref{UC_Label1} & FR2, FR3, FR5, FR6 \\
-\srref{ScoreKeeper} & \ucref{UC_Label2}, \ucref{UC_Label3} & FR5, FR26, FR27, FR28 \\
-\bottomrule
+\endhead
 
-\caption{Traceability Between Stakeholder Requirements, Use Cases, and Functional Requirements} 
-\label{tab:SR2UC2FRtm}
+\endlastfoot
+
+\srref{MagicCubeValidator} & \ucref{UC_Label2} & \rref{FR_StartRound}, \rref{FR_ShowStarter}, \rref{FR_TaskOrder}, \rref{FR_CellFeedback}, \rref{FR_Task1}--\rref{FR_Task8}, \rref{FR_AdditionCheck}, \rref{FR_SubtractionCheck}, \rref{FR_InputValidation}, \rref{FR_NextTask}, \rref{FR_EndRound}, \rref{FR_VerifyTask} \\
+\addlinespace
+\srref{CubeVisualizer} & \ucref{UC_Label1}, \ucref{UC_Label5} & \rref{FR_StartRound}, \rref{FR_SelectOrientation}, \rref{FR_3DView}, \rref{FR_3DNavigate}, \rref{FR_3DLayers}, \rref{FR_3DHighlight}, \rref{FR_PerformanceWarning} \\
+\addlinespace
+\srref{OctalExplainer} & \ucref{UC_Label6} & \rref{FR_ChooseBase}, \rref{FR_Tutorial}, \rref{FR_ExplainCell}, \rref{FR_Hint}, \rref{FR_SolutionPath} \\
+\addlinespace
+\srref{MagicCubeExplainer} & \ucref{UC_Label6} & \rref{FR_SelectPlane}, \rref{FR_SelectOrientation}, \rref{FR_Tutorial}, \rref{FR_ExplainCell}, \rref{FR_SolutionPath} \\
+\addlinespace
+\srref{CompletionVerifier} & \ucref{UC_Label2} & \rref{FR_StartRound}, \rref{FR_NoRepeatStarter}, \rref{FR_EndRound}, \rref{FR_Totals}, \rref{FR_StopGame} \\
+\addlinespace
+\srref{LevelGenerator} & \ucref{UC_Label1} & \rref{FR_SelectPlane}, \rref{FR_SelectOrientation}, \rref{FR_ShowStarter}, \rref{FR_NoRepeatStarter} \\
+\addlinespace
+\srref{ScoreKeeper} & \ucref{UC_Label2}, \ucref{UC_Label3} & \rref{FR_ShowStarter}, \rref{FR_BasicPoints}, \rref{FR_TimedScore}, \rref{FR_Totals} \\
+\addlinespace
+\srref{BrowserDeployer} & \ucref{UC_Label1} & \rref{FR_StartRound}, \rref{FR_GuestPlay} \\
+\bottomrule
+\caption{Traceability Between Stakeholder Requirements, Use Cases, and Functional Requirements} \label{tab:SR2UC2FRtm}
 \end{longtable}
 
-\begin{longtable}{p{0.20\textwidth} p{0.20\textwidth}}
+\begin{longtable}{p{0.20\textwidth} p{0.40\textwidth}}
+\toprule
+Functional Req & Nonfunctional Req \\
+\midrule
+\endfirsthead
 
 \toprule
 Functional Req & Nonfunctional Req \\
 \midrule
-FR1 & \nfrref{NFR_1}, \nfrref{NFR_10}, \nfrref{NFR_9} \\
-FR2 & \nfrref{NFR_7} \\
-FR3 & \nfrref{NFR_7} \\
-FR4 & \nfrref{NFR_3} \\
-FR5 & \nfrref{NFR_1}, \nfrref{NFR_2}, \nfrref{NFR_9} \\
-FR6 & \nfrref{NFR_7} \\
-FR7 & \nfrref{NFR_5} \\
-FR8 & \nfrref{NFR_5} \\
-FR9 & \nfrref{NFR_6} \\
-FR10 & \nfrref{NFR_6} \\
-FR11 & \nfrref{NFR_12} \\
-FR12 & \nfrref{NFR_2} \\
-FR13 & \nfrref{NFR_18} \\
-FR14 & \nfrref{NFR_11} \\
-FR15 & \nfrref{NFR_19} \\
-FR16 & \nfrref{NFR_19} \\
-FR17 & \nfrref{NFR_11} \\
-FR18 & \nfrref{NFR_2} \\
-FR19 & \nfrref{NFR_2}, \nfrref{NFR_12}, \nfrref{NFR_9} \\
-FR20 & \nfrref{NFR_8} \\
-FR21 & \nfrref{NFR_11}, \nfrref{NFR_12} \\
-FR22 & \nfrref{NFR_12} \\
-FR23 & \nfrref{NFR_11} \\
-FR24 & \nfrref{NFR_7} \\
-FR25 & \nfrref{NFR_8} \\
-FR26 & \nfrref{NFR_8} \\
-FR27 & \nfrref{NFR_8} \\
-FR28 & \nfrref{NFR_2} \\
-FR29 & \nfrref{NFR_11}, \nfrref{NFR_17} \\
-FR30 & \nfrref{NFR_13} \\
-FR31 & \nfrref{NFR_13} \\
-FR32 & \nfrref{NFR_18}, \nfrref{NFR_9} \\
-FR33 & \nfrref{NFR_4}, \nfrref{NFR_9} \\
-FR34 & \nfrref{NFR_1}, \nfrref{NFR_4}, \nfrref{NFR_9} \\
-FR35 & \nfrref{NFR_19}, \nfrref{NFR_9} \\
-FR36 & \nfrref{NFR_18}, \nfrref{NFR_19}, \nfrref{NFR_9} \\
-FR37 & \nfrref{NFR_3} \\
-FR38 & \nfrref{NFR_2} \\
-FR39 & \nfrref{NFR_2} \\
-FR40 & \nfrref{NFR_2} \\
-FR41 & \nfrref{NFR_2} \\
-FR42 & \nfrref{NFR_14}, \nfrref{NFR_17} \\
-FR43 & \nfrref{NFR_14}, \nfrref{NFR_16} \\
-FR44 & \nfrref{NFR_12} \\
-FR45 & \nfrref{NFR_14}, \nfrref{NFR_16} \\
-FR46 & \nfrref{NFR_14}, \nfrref{NFR_16} \\
-FR47 & \nfrref{NFR_15} \\
-FR48 & \nfrref{NFR_15} \\
-FR49 & \nfrref{NFR_15} \\
-FR50 & \nfrref{NFR_11}, \nfrref{NFR_15} \\
-FR51 & \nfrref{NFR_17} \\
-FR52 & \nfrref{NFR_17} \\
-FR53 & \nfrref{NFR_15}, \nfrref{NFR_17} \\
-\bottomrule
-\caption{Traceability Between Functional and Nonfunctional Requirements}
-\label{tab:FR2Rtm}
+\endhead
 
+\endlastfoot
+
+\rref{FR_StartRound} & \nfrref{NFR_1}, \nfrref{NFR_10}, \nfrref{NFR_9} \\
+\rref{FR_SelectPlane} & \nfrref{NFR_7} \\
+\rref{FR_SelectOrientation} & \nfrref{NFR_7} \\
+\rref{FR_ChooseBase} & \nfrref{NFR_3} \\
+\rref{FR_ShowStarter} & \nfrref{NFR_1}, \nfrref{NFR_2}, \nfrref{NFR_9} \\
+\rref{FR_NoRepeatStarter} & \nfrref{NFR_7} \\
+\rref{FR_TaskOrder} & \nfrref{NFR_5} \\
+\rref{FR_CellFeedback} & \nfrref{NFR_5} \\
+\rref{FR_Task1} & \nfrref{NFR_6} \\
+\rref{FR_Task2} & \nfrref{NFR_6} \\
+\rref{FR_Task3} & \nfrref{NFR_12} \\
+\rref{FR_Task4} & \nfrref{NFR_2} \\
+\rref{FR_Task5} & \nfrref{NFR_18} \\
+\rref{FR_Task6} & \nfrref{NFR_11} \\
+\rref{FR_Task7} & \nfrref{NFR_19} \\
+\rref{FR_Task8} & \nfrref{NFR_19} \\
+\rref{FR_ChooseExtra} & \nfrref{NFR_11} \\
+\rref{FR_AdditionColumn} & \nfrref{NFR_2} \\
+\rref{FR_AdditionCheck} & \nfrref{NFR_2}, \nfrref{NFR_12}, \nfrref{NFR_9} \\
+\rref{FR_SubtractionPrompt} & \nfrref{NFR_8} \\
+\rref{FR_SubtractionCheck} & \nfrref{NFR_11}, \nfrref{NFR_12} \\
+\rref{FR_InputValidation} & \nfrref{NFR_12} \\
+\rref{FR_UnrecognizedInput} & \nfrref{NFR_11} \\
+\rref{FR_NextTask} & \nfrref{NFR_7} \\
+\rref{FR_EndRound} & \nfrref{NFR_8} \\
+\rref{FR_VerifyTask} & \nfrref{NFR_8} \\
+\rref{FR_BasicPoints} & \nfrref{NFR_8} \\
+\rref{FR_TimedScore} & \nfrref{NFR_8} \\
+\rref{FR_Totals} & \nfrref{NFR_2} \\
+\rref{FR_StopGame} & \nfrref{NFR_11}, \nfrref{NFR_17} \\
+\rref{FR_Autosave} & \nfrref{NFR_13} \\
+\rref{FR_Resume} & \nfrref{NFR_13} \\
+\rref{FR_3DView} & \nfrref{NFR_18}, \nfrref{NFR_9} \\
+\rref{FR_3DNavigate} & \nfrref{NFR_4}, \nfrref{NFR_9} \\
+\rref{FR_3DLayers} & \nfrref{NFR_1}, \nfrref{NFR_4}, \nfrref{NFR_9} \\
+\rref{FR_3DHighlight} & \nfrref{NFR_19}, \nfrref{NFR_9} \\
+\rref{FR_PerformanceWarning} & \nfrref{NFR_18}, \nfrref{NFR_19}, \nfrref{NFR_9} \\
+\rref{FR_Tutorial} & \nfrref{NFR_3} \\
+\rref{FR_ExplainCell} & \nfrref{NFR_2} \\
+\rref{FR_Hint} & \nfrref{NFR_2} \\
+\rref{FR_SolutionPath} & \nfrref{NFR_2} \\
+\rref{FR_GuestPlay} & \nfrref{NFR_14}, \nfrref{NFR_17} \\
+\rref{FR_CreateAccount} & \nfrref{NFR_14}, \nfrref{NFR_16} \\
+\rref{FR_UsernameRules} & \nfrref{NFR_12} \\
+\rref{FR_Login} & \nfrref{NFR_14}, \nfrref{NFR_16} \\
+\rref{FR_PasswordReset} & \nfrref{NFR_14}, \nfrref{NFR_16} \\
+\rref{FR_RecordRound} & \nfrref{NFR_15} \\
+\rref{FR_Statistics} & \nfrref{NFR_15} \\
+\rref{FR_Leaderboards} & \nfrref{NFR_15} \\
+\rref{FR_LeaderboardIntegrity} & \nfrref{NFR_11}, \nfrref{NFR_15} \\
+\rref{FR_DailyChallenge} & \nfrref{NFR_17} \\
+\rref{FR_ShareResults} & \nfrref{NFR_17} \\
+\rref{FR_DeleteAccount} & \nfrref{NFR_15}, \nfrref{NFR_17} \\
+\rref{FR_PlayTimeReminder} & \nfrref{NFR_11} \\
+\rref{FR_DisableAnimations} & \nfrref{NFR_18}, \nfrref{NFR_19} \\
+\bottomrule
+\caption{Traceability Between Functional and Nonfunctional Requirements} \label{tab:FR2Rtm}
 \end{longtable}
 
 % ============================================================== 
