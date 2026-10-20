@@ -82,6 +82,10 @@
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
 
+\newcounter{ulcnum} %Likely Change (LC) Number
+\newcommand{\ulthelcnum}{ULC\theulcnum}
+\newcommand{\ulcref}[1]{ULC\ref{#1}}
+
 \usepackage{fullpage}
 
 \begin{document}
@@ -166,16 +170,15 @@ Date 2 & 1.1 & Notes\\
 % ==============================================================
 
 
-\plt{Include a reference to the template this work is based on.  \citet{ISOIECIEEE29148_2018}
+\plt{Include a reference to the template this work is based on. \citet{ISOIECIEEE29148_2018}
 justifies the SRS structure and \citet{ISOIECIEEE15288_2023} provides the
 broader life-cycle context that underlines modern requirements engineering
 practice.}
-
-This document specifies \progname{Magic-8}, a free-to-play, web-based 3D puzzle game built around an 8×8×8 magic cube. 
+This document specifies Magic-8, a free-to-play, web-based 3D puzzle game built around an 8×8×8 magic cube.
 It states the purpose, users, and project goals: to provide an engaging, navigable magic cube experience in which players complete tasks to practice addition and subtraction in base 8, supported by an introductory tutorial, guided hints, online competitive features, and task-based problem solving. 
 
-The work is based on the provided IEEE SRS template provided in the course {cite} with reference to the ISO/IEC/IEEE 29148:2018 template \citet{ISOIECIEEE29148_2018}, which justifies the SRS structure, 
-and ISO/IEC/IEEE 15288:2023, which provides the broader life-cycle context underlying modern requirements engineering practice. Additional sections were added in the form of regulations and guiing protocols, and reasonable inputs & outputs to increase the team's refinement of the project scope and definition.
+The work is based on the provided IEEE SRS template provided in the course \citet{ISOIECIEEE29148_2018} with reference to the ISO/IEC/IEEE 29148:2018 template \citet{ISOIECIEEE29148_2018}, which justifies the SRS structure, 
+and ISO/IEC/IEEE 15288:2023 \citet{ISOIECIEEE15288_2023}, which provides the broader life-cycle context underlying modern requirements engineering practice. Additional sections were added in the form of regulations and guiing protocols, and reasonable inputs & outputs to increase the team's refinement of the project scope and definition.
 
 \subsection{Purpose}
 
@@ -185,10 +188,11 @@ The intent is to solve the lack of engaging resources available for learning and
 The following sections will outline the scope, functional requirements and the non-functional requirements that the team will adhere to produce a game that is both educative and fun.
 
 \subsection{Scope}
+\label{subsec:scope}
 
 \textbf{In-Scope and functionality}
 
-The project known as \progname will be a free-to-play web game where users will be presented with a 3D visualization of an 8$\times$8$\times$8 magic cube separated into slices.
+The project known as Magic-8 will be a free-to-play web game where users will be presented with a 3D visualization of an 8$\times$8$\times$8 magic cube separated into slices.
 Users receive a tutorial on addition and subtraction in base eight, a starting cell, and at least 8 tasks that, by solving the problems within, will navigate them through the cube as they move through its layers.
 Users will gain points for correctly solving the problems in a task; these points will be tied to a user's personal account.
 
@@ -1449,59 +1453,59 @@ Functional Requirements} \label{tab:SR2UC2FRtm}
 \toprule
 Functional Req & Nonfunctional Req \\
 \midrule
-FR1 & \nfrref{NFR_1}, \nfrref{NFR_10}, \nfrref{NFR_9} \\
-FR2 & \nfrref{NFR_7} \\
-FR3 & \nfrref{NFR_7} \\
-FR4 & \nfrref{NFR_3} \\
-FR5 & \nfrref{NFR_1}, \nfrref{NFR_2}, \nfrref{NFR_9} \\
-FR6 & \nfrref{NFR_7} \\
-FR7 & \nfrref{NFR_5} \\
-FR8 & \nfrref{NFR_5} \\
-FR9 & \nfrref{NFR_6} \\
-FR10 & \nfrref{NFR_6} \\
-FR11 & \nfrref{NFR_12} \\
-FR12 & \nfrref{NFR_2} \\
-FR13 & \nfrref{NFR_18} \\
-FR14 & \nfrref{NFR_11} \\
-FR15 & \nfrref{NFR_19} \\
-FR16 & \nfrref{NFR_19} \\
-FR17 & \nfrref{NFR_11} \\
-FR18 & \nfrref{NFR_2} \\
-FR19 & \nfrref{NFR_2}, \nfrref{NFR_12}, \nfrref{NFR_9} \\
-FR20 & \nfrref{NFR_8} \\
-FR21 & \nfrref{NFR_11}, \nfrref{NFR_12} \\
-FR22 & \nfrref{NFR_12} \\
-FR23 & \nfrref{NFR_11} \\
-FR24 & \nfrref{NFR_7} \\
-FR25 & \nfrref{NFR_8} \\
-FR26 & \nfrref{NFR_8} \\
-FR27 & \nfrref{NFR_8} \\
-FR28 & \nfrref{NFR_2} \\
-FR29 & \nfrref{NFR_11}, \nfrref{NFR_17} \\
-FR30 & \nfrref{NFR_13} \\
-FR31 & \nfrref{NFR_13} \\
-FR32 & \nfrref{NFR_18}, \nfrref{NFR_9} \\
-FR33 & \nfrref{NFR_4}, \nfrref{NFR_9} \\
-FR34 & \nfrref{NFR_1}, \nfrref{NFR_4}, \nfrref{NFR_9} \\
-FR35 & \nfrref{NFR_19}, \nfrref{NFR_9} \\
-FR36 & \nfrref{NFR_18}, \nfrref{NFR_19}, \nfrref{NFR_9} \\
-FR37 & \nfrref{NFR_3} \\
-FR38 & \nfrref{NFR_2} \\
-FR39 & \nfrref{NFR_2} \\
-FR40 & \nfrref{NFR_2} \\
-FR41 & \nfrref{NFR_2} \\
-FR42 & \nfrref{NFR_14}, \nfrref{NFR_17} \\
-FR43 & \nfrref{NFR_14}, \nfrref{NFR_16} \\
-FR44 & \nfrref{NFR_12} \\
-FR45 & \nfrref{NFR_14}, \nfrref{NFR_16} \\
-FR46 & \nfrref{NFR_14}, \nfrref{NFR_16} \\
-FR47 & \nfrref{NFR_15} \\
-FR48 & \nfrref{NFR_15} \\
-FR49 & \nfrref{NFR_15} \\
-FR50 & \nfrref{NFR_11}, \nfrref{NFR_15} \\
-FR51 & \nfrref{NFR_17} \\
-FR52 & \nfrref{NFR_17} \\
-FR53 & \nfrref{NFR_15}, \nfrref{NFR_17} \\
+FR1 & NFR\nfrref{NFR_1}, NFR\nfrref{NFR_10}, NFR\nfrref{NFR_9} \\
+FR2 & NFR\nfrref{NFR_7} \\
+FR3 & NFR\nfrref{NFR_7} \\
+FR4 & NFR\nfrref{NFR_3} \\
+FR5 & NFR\nfrref{NFR_1}, NFR\nfrref{NFR_2}, NFR\nfrref{NFR_9} \\
+FR6 & NFR\nfrref{NFR_7} \\
+FR7 & NFR\nfrref{NFR_5} \\
+FR8 & NFR\nfrref{NFR_5} \\
+FR9 & NFR\nfrref{NFR_6} \\
+FR10 & NFR\nfrref{NFR_6} \\
+FR11 & NFR\nfrref{NFR_12} \\
+FR12 & NFR\nfrref{NFR_2} \\
+FR13 & NFR\nfrref{NFR_18} \\
+FR14 & NFR\nfrref{NFR_11} \\
+FR15 & NFR\nfrref{NFR_19} \\
+FR16 & NFR\nfrref{NFR_19} \\
+FR17 & NFR\nfrref{NFR_11} \\
+FR18 & NFR\nfrref{NFR_2} \\
+FR19 & NFR\nfrref{NFR_2}, NFR\nfrref{NFR_12}, NFR\nfrref{NFR_9} \\
+FR20 & NFR\nfrref{NFR_8} \\
+FR21 & NFR\nfrref{NFR_11}, NFR\nfrref{NFR_12} \\
+FR22 & NFR\nfrref{NFR_12} \\
+FR23 & NFR\nfrref{NFR_11} \\
+FR24 & NFR\nfrref{NFR_7} \\
+FR25 & NFR\nfrref{NFR_8} \\
+FR26 & NFR\nfrref{NFR_8} \\
+FR27 & NFR\nfrref{NFR_8} \\
+FR28 & NFR\nfrref{NFR_2} \\
+FR29 & NFR\nfrref{NFR_11}, NFR\nfrref{NFR_17} \\
+FR30 & NFR\nfrref{NFR_13} \\
+FR31 & NFR\nfrref{NFR_13} \\
+FR32 & NFR\nfrref{NFR_18}, NFR\nfrref{NFR_9} \\
+FR33 & NFR\nfrref{NFR_4}, NFR\nfrref{NFR_9} \\
+FR34 & NFR\nfrref{NFR_1}, NFR\nfrref{NFR_4}, NFR\nfrref{NFR_9} \\
+FR35 & NFR\nfrref{NFR_19}, NFR\nfrref{NFR_9} \\
+FR36 & NFR\nfrref{NFR_18}, NFR\nfrref{NFR_19}, NFR\nfrref{NFR_9} \\
+FR37 & NFR\nfrref{NFR_3} \\
+FR38 & NFR\nfrref{NFR_2} \\
+FR39 & NFR\nfrref{NFR_2} \\
+FR40 & NFR\nfrref{NFR_2} \\
+FR41 & NFR\nfrref{NFR_2} \\
+FR42 & NFR\nfrref{NFR_14}, NFR\nfrref{NFR_17} \\
+FR43 & NFR\nfrref{NFR_14}, NFR\nfrref{NFR_16} \\
+FR44 & NFR\nfrref{NFR_12} \\
+FR45 & NFR\nfrref{NFR_14}, NFR\nfrref{NFR_16} \\
+FR46 & NFR\nfrref{NFR_14}, NFR\nfrref{NFR_16} \\
+FR47 & NFR\nfrref{NFR_15} \\
+FR48 & NFR\nfrref{NFR_15} \\
+FR49 & NFR\nfrref{NFR_15} \\
+FR50 & NFR\nfrref{NFR_11}, NFR\nfrref{NFR_15} \\
+FR51 & NFR\nfrref{NFR_17} \\
+FR52 & NFR\nfrref{NFR_17} \\
+FR53 & NFR\nfrref{NFR_15}, NFR\nfrref{NFR_17} \\
 \bottomrule
 \caption{Traceability Between Functional and Nonfunctional Requirements}
 \label{tab:FR2Rtm}
@@ -1518,6 +1522,14 @@ requirements, data requirements, and AI requirements.  You don't need a
 rationale for everything, ust the major decisions that are not obvious.  You
 should have traceability to the entities in the document that you are
 referencing.}
+
+\subsection{Scope}
+
+\begin{itemize}
+
+\item \textbf{Order 8 cube (\ref{}):}
+\item 
+\end{itemize}
 
 \subsection{Nonfunctional Requirements}
 
