@@ -573,6 +573,32 @@ The suggestions provided by Microsoft Copilot were not implemented directly. Ins
     such as integer overflow.
 \end{enumerate}
 
+\subsection*{Nehan Munir}
+\begin{enumerate}
+    \item I worked on the SRS-IEEE document and so I dont really have any comments on what went smoothly specifically when
+    writing this hazard analysis.
+    \item I worked on the SRS-IEEE document and so I dont really have any comments on what pain points were experienced 
+    specifically when writing this hazard analysis.
+    \item Before this milestone, we were wondering what risks can a game really have, when the examples brought up in class were all
+    about Capstone projects with real consequences for messing up (such as ones helping the medical industry [failure can lead to misdiagnosis and at worst, death] 
+    or a mechatronic project used to map caves [losing the robot due to errant control leads to tangible financial detriments]). During our TA meeting, we humourously
+    brought this up to up to our TA, who suggested thinking about old videogames. Old videogames have a seizure warning before loading into the main screen, due to flashing lights.
+    As our game was browser-based with a very memory-intensive 3D cube visulization, a memory leak can easily cause the 3D visualization to mess up and cause flickering (seen with older graphic cards).
+    \item As stated before, memory leakage is a very important issue to cover as the project should never surpass the browser heap limit (essentially 'browser RAM'), as exceeding it (due to not 
+    terminating instances that aren't needed before [ex. imagine the project is running every instance of the 3D visualization locally saved]). This can lead to flickering and while seizures are a physical harm,
+    causing browsers to crash can lead to losing unsaved progress on other tabs. Another worry is cybersecurity as DDoS attacks might not be able to extract well protected data (such as user data), it can still flood
+    the browser deployment, resulting in financial costs as the DNS server provider is trying to respond to every DNS query.
+\end{enumerate}
+
+\subsection*{Allen Tong}
+
+\begin{enumerate}
+    \item I did not write any of the sections in the Hazard Analysis document as my main focus was on the SRS.
+    \item I did not write any of the sections in the Hazard Analysis document as my main focus was on the SRS.
+    \item As Jacob and Josh described, before this deliverable we had already anticipated photosensitive seizures and the possible leaking of user account data. The risks we thought of during the deliverable were data loss or corruption and the loss or incorrect loading of game state. These came from our meeting with our TA and from comparing our game to the sample Hazard Analysis.
+    \item One possible risk other than physical harm is the loss of user data or progress. This is important to consider because the game depends on users returning, and losing a round or a ranking can quickly turn into frustration or loss of trust. Another risk is a security breach, where someone gains unauthorized access to accounts or systems. For our game, this could mean a compromised account or edited scores and rankings on the leaderboard. This is important because players depend on their accounts and scores being their own. A single breach can make the entire leaderboard untrustworthy, damaging trust in the whole product.
+\end{enumerate}
+
 \bibliographystyle {plainnat}
 \bibliography{../../refs/References}
 
