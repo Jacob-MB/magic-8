@@ -1887,7 +1887,14 @@ visual contrast helps make interface elements distinguishable.
     the likely changes, with traceability to the entity that is likely to change.}
 \item[(NFR\ref{NFR_1}, NFR\ref{NFR_2})]: If it is found that the 100ms response times are unreasonable can easily be changed to more fitting ones.
 \item[(NFR\ref{NFR_19})]: May need to change the given standard for contrast if it is not considered enough.
-
+\item[(UC\ref{UC_Label3})]: The team still aren't really aware of how they want the scoring mechanism to work as timing doesn't feel like the funnest scoring method.
+So far, they followed Dr. Rapoport's idea, but this might change after testing from stakeholders. Also, a lot of the work the system does can be offloaded to the scoring system,
+as the scoring system is just a glorified time signal in this use case.
+\item[(UC\ref{UC_Label4})]: There might be too much saving involved in this, as the internal object representing the game in the system is saved before being changed on the front end (which the user sees)
+every single time. It might be useful to use the browser cache so data is saved only at major steps.
+\item[(UC\ref{UC_Label5})]: The team still hasn't started learning about 3D visualization and how it translates to a browser, so extensive QA is needed to arrive at an approachable cube visualization.
+\item[(UC\ref{UC_Label8})]: There are multiple ideas on how the Daily Challenge is going to be implemented, and since it is a strech goal and the team doesn't really know what aspects of their project is "fun",
+it can be a vastly different implementation on release.
 \end{itemize}
 
 \section{Unlikely Changes}    
@@ -1899,7 +1906,9 @@ visual contrast helps make interface elements distinguishable.
     not occur.}
 \item[(NFR\ref{NFR_18})]: Will not likely be lessening our goal to allow those without the ability to use a mouse to be able to interact with the program.
 \item[(NFR\ref{NFR_9}, NFR\ref{NFR_10})]: The web based approach was one of the first comments made by Dr. Rapoport and so unless there is no other option we would like to continue with this method.
-
+\item[(UC\ref{UC_Label1}, UC\ref{UC_Label2}, UC\ref{UC_Label7})]: These describe core aspects of the magic 8 project, so they are very unlikely to change as there were numerous meetings to arrive at these.
+Obviously, the rules of how magic cubes and octal is not going to change, so the use cases here are locked for now. Account creation is unlikely to change as numerous components depend on it, so changing its workflow would require significant changes throughout the codebase.
+\item[(UC\ref{UC_Label6})]: Whilst this might not be optimal way to teach the subject matters related to our project, it is the best the team currently came up with. Also, as it is a stretch goal, there isn't going to be a lot of focus on it until the principle project is finished.
 \end{itemize}
 
 \newpage{}
