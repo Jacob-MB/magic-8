@@ -110,59 +110,17 @@
 \toprule {\bf Date} & {\bf Developer(s)} & {\bf Notes}\\
 \midrule
 October 19, 2026 & Nehan Munir & Added SRs, Personas, UCs and (U)LCs\\
+October 19, 2026 & Amos Eeaghe & Added Section 1, 10, Appendix B and reflection\\
 \bottomrule
 \end{tabularx}
 
 ~\\
-\plt{All capstone SRS documents should have a reflection appendix.}
+
 
 \newpage
 
 \pagenumbering{arabic}
 
-\plt{This SRS template is based on the IEEE template, with input from co-pilot
-  and S. Smith. It will get you started.  You should not modify the section
-  headings, without first discussing the change with the course instructor.
-  Modification means you are not following the template, which loses some of the
-  advantage of a template, especially standardization.}
-
-\plt{Feel free to change the appearance of the report by modifying the LaTeX
-  commands.}
-
-\plt{This template document assumes that a single program is being documented.
-  If you are documenting a family of models, you should start with a commonality
-  analysis.}
-
-\plt{The SRS is not generally written, or read, sequentially.  The SRS is a
-  reference document.  It is generally read in an ad hoc order, as the need
-  arises.}
-
-\plt{Guiding principles for the SRS document:
-\begin{itemize}
-\item Do not repeat the same information at the same abstraction level.  If
-  information is repeated, the repetition should be at a different abstraction
-  level.
-\end{itemize}
-}
-
-\plt{The template description comments should be disabled before submitting this
-  document for grading.}
-
-\plt{You can borrow any wording from the text given in the template.  It is part
-  of the template, and not considered an instance of academic integrity.  Of
-  course, you need to cite the source of the template.}
-
-\plt{When the documentation is done, it should be possible to trace back to the
-  source of every piece of information.  Some information will come from
-  external sources, like terminology.}
-
-\plt{An SRS document should have the following qualities: unambiguous,
-  consistent, complete, validatable, abstract and traceable.}
-
-\plt{The overall goal of the SRS is that someone can learn,
-  understand and verify the captured domain knowledge.  They should not have to
-  trust the authors of the SRS on any statements.  They should be able to
-  independently verify/derive every statement made.}
 
 % ============================================================== 
 \section{Introduction} 
@@ -1969,18 +1927,6 @@ The project does not include any AI or machine learning components, so this sect
 % ============================================================== 
 \section{Requirements Traceability Matrices}
 
-\plt{The Requirements Traceability Matrix (RTM) is a table that shows the
-relationship between different types of requirements. It is used to ensure that
-all requirements are traceable and that no requirements are missed. The typical
-flow is: Stakeholder Need -> Use Case -> Requirement}
-
-\plt{There is also a traceability matrix between functional and nonfunctional
-  requirements. The purpose of some FRs is to satisfy NFRs.  Therefore, it is
-  important to show the relationship between the two.}
-
-\plt{Further traceability to test cases and modules will be given in other
-documents.}
-
 \begin{longtable}{p{0.15\textwidth} p{0.15\textwidth} p{0.20\textwidth} p{0.20\textwidth}}
 
 \toprule
@@ -1992,10 +1938,11 @@ Stakeholder Req & Use Case & Functional Req \\
 \srref{MagicCubeExplainer} & \ucref{UC_Label6} & FR2, FR3, FR37, FR38, FR41 \\
 \srref{CompletionVerifier} & \ucref{UC_Label2} & FR1, FR6, FR24, FR28, FR29 \\
 \srref{LevelGenerator} & \ucref{UC_Label1} & FR2, FR3, FR5, FR6 \\
-\srref{ScoreKeeper} & \ucref{UC_Label2}, \ucref{UC_Label3} & FR5, FR26, FR27, FR28 \\\bottomrule
+\srref{ScoreKeeper} & \ucref{UC_Label2}, \ucref{UC_Label3} & FR5, FR26, FR27, FR28 \\
+\bottomrule
 
-\caption{Traceability Between Stakeholder Requirements, Use Cases, and
-Functional Requirements} \label{tab:SR2UC2FRtm}
+\caption{Traceability Between Stakeholder Requirements, Use Cases, and Functional Requirements} 
+\label{tab:SR2UC2FRtm}
 \end{longtable}
 
 \begin{longtable}{p{0.20\textwidth} p{0.20\textwidth}}
@@ -2066,12 +2013,6 @@ FR53 & \nfrref{NFR_15}, \nfrref{NFR_17} \\
 
 \section{Rationale}
 
-\plt{Provide a rationale for the decisions made in the documentation.  Rationale
-should be provided for scope decisions, functional requirements, nonfunctioanl
-requirements, data requirements, and AI requirements.  You don't need a
-rationale for everything, ust the major decisions that are not obvious.  You
-should have traceability to the entities in the document that you are
-referencing.}
 
 \subsection{Scope}
 
@@ -2081,6 +2022,8 @@ referencing.}
 would massively balloon the scope and difficulty in assuring all cubes are perfect magic cubes.
 \item \textbf{Browser based play (Section\ref{subsec:scope}):} The game is strictly web-based as we believe a browser-based game is sufficient to reach a large enough number of our intended users; browser play maximizes access across devices
 and locations.
+\end{itemize}
+
 \subsection{Functional Requirements}
 
 \begin{itemize}
@@ -2396,8 +2339,6 @@ for Section 10 AI was used to create the table structures.
 
 \subsection{Appendix E: Reflection}
 
-\plt{This isn't part of the SRS, but it is part of the course.}
-
 The information in this section will be used to evaluate the team members on the
 graduate attribute of Lifelong Learning.
 
@@ -2424,6 +2365,8 @@ Questions 5 and 6 have been answered as a team.
   further understanding of the concepts as well as watching instructional videos on the topic from online sources
   such as youtube. He mainly plans to focus on breaking down the code since that will be sure to work with pygame while
   some videos that are found can be witholding crucial information.
+
+  Amos will be taking on the task of learning how to hanle WebAssembly translation and its hanling through asyncio. The first method he will use is guided visual examples and tutorials on youtube and the second method is through agent assite review of the documentation for the asyncio library. These methods were chosen due to his familiarity with the youtube platform for learning and the ease at which documentation can be simplified and understood with the help of AI agents.
 
   Jacob will be completing the task of furthering the team's understanding of magic cubes and their patterns. The first method Jacob will use is discussions with the supervisor, Dr. Rapoport. Dr. Rapoport is already very knowledgeable on magic cubes and their properties as well as the context of the project. As such, Dr. Rapoport will be a very useful source of information. The second method Jacob will use is literature review. Magic cubes and their properties are well documented in academic literature as well as other online sources (e.g., websites). Jacob will use this literature review to supplement knowledge gained from discussions with Dr. Rapoport.
 
