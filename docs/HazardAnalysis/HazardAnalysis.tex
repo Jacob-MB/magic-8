@@ -3,6 +3,16 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{ltablex}
+\usepackage{pdflscape}
+\usepackage{natbib}
+
+\keepXColumns
+
+% Defines new column types that use ragged right so the table doesn't look awful
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -36,9 +46,9 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+October 17, 2026 & Jacob Brodersen & Added Initial Draft of the Hazard Analysis\\
+October 18, 2026 & Jacob Brodersen & Revised Initial Draft of the Hazard Analysis\\
+October 19, 2026 & Jacob Brodersen & Finalized Hazard Analysis\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -51,93 +61,459 @@ Date2 & Name(s) & Description of changes\\
 
 \pagenumbering{arabic}
 
-\wss{You are free to modify this template.}
-
 \section{Introduction}
 
-\wss{You can include your definition of what a hazard is here.}
+\subsection{Background}
 
-\section{Scope and Purpose of Hazard Analysis}
+A most perfect magic cube is a cube where each voxel's value is a distinct number from 1 to n\textasciicircum{}3 and all rows, columns, pillars, 2-dimensional diagonals, 3-dimensional diagonals (triagonals), and broken space diagonals in the cube sum to the same number, also called the magic constant. The order-eight cube is the smallest order most perfect magic cube. Using octal within this order-8 magic cube showcases the magic properties of the cube with the above prescribed lines summing to 4004, half lines summing to 2002, and the complementary numbers (+4 4 4 for the x y z coordinates from a given voxel) summing to 1001 (all in octal).
 
-\wss{You should say what \textbf{loss} could be incurred because of the
-hazards.}
+Our project, Magic 8, is a web-based application that serves as a recreational mathematics game as well as an educational tool for octal addition and subtraction. In this proposed game, players start with one voxel (number) in a most perfect magic cube visible while all other voxels remain hidden. The player must then complete tasks related to finding the voxels belonging to lines that sum to the magic constant. Each round of the game includes eight tasks that increase in difficulty as the player progresses.
+
+\subsection{Hazard Definition}
+
+A hazard is defined as a system state that if combined with a specific environmental condition, can cause harm/damage. Hazards can result from software defects or incorrectly defined system behavior. These hazards can be categorized as health, data, education, and usability hazards.
+
+\section{Scope and Purpose of Hazard Analysis}\label{sec:ScopeandPurpose}
+
+The purpose of this Hazard Analysis is to identify hazards related to the Magic 8 application and subsequently perform a Failure Mode and Effect Analysis (FMEA) to mitigate the found hazards. Below is the description of the losses that could be incurred because of the hazards. Out of scope features include accessibility concerns, advanced cybersecurity (beyond simply encrypting data and securing passwords), and optimizing or extending the software for outdated or insufficient user hardware or software. Although these considerations will be important for future updates (past the capstone timeline), they do not fit within the scope of a first official version of the application.
+
+\subsection{Health}
+
+This category is described as the loss of health due to use of the system. This includes both physical health (e.g., photosensitive seizure, see \citet{PhotoSeizure}) as well as mental health (e.g., bullying through the application and addiction).
+
+\subsection{Data}
+
+This category is described as the deletion, corruption, or leakage of data. One loss related to this category is the unauthorized disclosure of private user account information (e.g., password). Another loss is the corruption or deletion of data (both user data as well as game data).
+
+\subsection{Education}
+
+This category is described as the loss of educational value. This involves harming the user's knowledge of octal addition and subtraction by either teaching them incorrectly or adding to their confusion of the mathematical concept.
+
+\subsection{Usability}
+
+This category is described as the loss of user engagement, satisfaction, or trust. Any of these losses would reduce the usability of the application and subsequently make it a less valuable product.
 
 \section{System Boundaries and Components}
 
-\wss{Dividing the system into components will help you brainstorm the hazards.
-You shouldn't do a full design of the components, just get a feel for the major
-ones.  For projects that involve hardware, the components will typically include
-each individual piece of hardware.  If your software will have a database, or an
-important library, these are also potential components.}
+The following table describes the main components within the system boundary. Out of scope considerations are described in the \hyperref[sec:ScopeandPurpose]{Scope and Purpose of Hazard Analysis} section.
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|Y|Y|}
+
+    % Header
+    \caption{System Components} \\
+    \hline
+    \textbf{Component} &
+    \textbf{Description} \\
+    \hline
+    \endfirsthead
+
+    % Subsequent pages header
+    \hline
+    \textbf{Component} &
+    \textbf{Description} \\
+    \hline
+    \endhead
+
+    % Prompt that the table continues
+    \hline
+    \multicolumn{2}{r}{\textit{Continued on next page}} \\
+    \endfoot
+
+    % No footer on last page
+    \hline
+    \endlastfoot
+
+    % Table Rows...
+    User Database &
+    Stores user account specific data including usernames, emails, passwords, and individual high scores. \\
+
+    \hline
+
+    User Manager &
+    Handles all aspects of user accounts including account creation, account management, and account deletion. \\
+
+    \hline
+
+    Competitive / Leaderboard Database &
+    Stores data related to online, competitive statistics such as global high scores, fastest solve times, and rankings. \\
+
+    \hline
+
+    Competitive / Leaderboard Manager &
+    Handles display and management of competitive statistics and leaderboards. \\
+
+    \hline
+
+    Game State Manager &
+    Handles the gameplay for the application. This involves taking in user actions and evaluating them against the current task, progressing through tasks in a round, saving progress of a current game, etc. \\
+
+    \hline
+
+    Visualization/Rendering Manager &
+    Handles the rendering and projection calculations associated with the 3D visualization. This includes both the magic cube itself and highlighting related to the current task. \\
+
+    \hline
+
+    Hint/Tutorial Manager &
+    Handles the hints, feedback, and tutorial steps related to the game as well as educational help for octal arithmetic. \\
+
+    \hline
+
+    User Interface &
+    Handles user input and output for the labels, buttons, and text fields of the application. Essentially, this component handles all user input and output that is not related to rendering the 3D space. \\
+
+    \hline
+
+    Task Generator &
+    Handles the task generation process for a given round including generating both the problem and solution for a generated task and ramping up difficulty as a round progresses. \\
+
+\end{tabularx}
+
+Outside of the system boundary are the users themselves and their associated hardware (computer) and web browser. In terms of external interaction, all of the input and output associated with the system goes through the User Interface component with the exception of the 3D visualization output, which is handled by the Visualization/Rendering Manager.
 
 \section{Critical Assumptions}
 
-\wss{These assumptions that are made about the software or system.  You should
-minimize the number of assumptions that remove potential hazards.  For instance,
-you could assume a part will never fail, but it is generally better to include
-this potential failure mode.}
+The following are critical assumptions that are made about the system. These are necessary so that the scope of the analysis can be focused on realistic and manageable hazards.
 
+One assumption is that users operate modern, standards-compliant web browsers. Another assumption is that external hosting providers meet uptime targets. A third assumption is that the external services the system uses for data storage have general protections against malicious behaviour, reducing but not removing data risks. Finally, it is assumed that external libraries are free from critical vulnerabilities (however manual checks will still be done to insure the content is reasonable).
+
+\begin{landscape}
 \section{Failure Mode and Effect Analysis}
 
-\wss{Include your FMEA table here. This is the most important part of this document.}
-\wss{The safety requirements in the table do not have to have the prefix SR.
-The most important thing is to show traceability to your SRS. You might trace to
-requirements you have already written, or you might need to add new
-requirements.}
-\wss{If no safety requirement can be devised, other mitigation strategies can be
-entered in the table, including strategies involving providing additional
-documentation, and/or test cases.}
+Below is the Failure Mode and Effect Analysis (FMEA) table. Each row represents an independent failure mode of the system and includes the related component, cause(s) of failure, effect(s) of failure, recommended action(s), and related Safety and Security Requirements.
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|P{2.3cm}|Y|Y|Y|Y|P{1.7cm}|P{0.8cm}|}
+
+    % Header
+    \caption{Failure Mode and Effect Analysis (FMEA)} \label{TblFMEA} \\
+    \hline
+    \textbf{Component} &
+    \textbf{Failure Modes} &
+    \textbf{Cause(s) of Failure} &
+    \textbf{Effect(s) of Failure} &
+    \textbf{Recommended Action(s)} &
+    \textbf{SR} &
+    \textbf{Ref.} \\
+    \hline
+    \endfirsthead
+
+    % Subsequent pages header
+    \hline
+    \textbf{Component} &
+    \textbf{Failure Modes} &
+    \textbf{Cause(s) of Failure} &
+    \textbf{Effect(s) of Failure} &
+    \textbf{Recommended Action(s)} &
+    \textbf{SR} &
+    \textbf{Ref.} \\
+    \hline
+    \endhead
+
+    % Prompt that the table continues
+    \hline
+    \multicolumn{7}{r}{\textit{Continued on next page}} \\
+    \endfoot
+
+    % No footer on last page
+    \hline
+    \endlastfoot
+
+    % Table Rows...
+    User Database &
+    User data exposed to unauthorized individuals &
+    - Weak password storage &
+    - User privacy breach\newline- Loss of trust &
+    - Encrypt sensitive data\newline- Hash based passwords\newline- Conduct security audits &
+    - \hyperref[req:SR1]{SR1}\newline- \hyperref[req:SR2]{SR2}\newline- PR3\newline- PR4 &
+    H1-a \\
+
+    \hline
+
+    User Database &
+    User data lost or corrupted &
+    - Error in saving\newline- Database crash &
+    - Loss of user account information &
+    - Automated backups\newline- Transaction logging\newline- Recovery procedures &
+    - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11}\newline- PR6\newline- PR7\newline- PR8 &
+    H1-b \\
+
+    \hline
+
+    User Manager &
+    Inappropriate and/or harmful usernames &
+    - Inadequate review or control of public usernames &
+    - Decrease in user well-being &
+    - Restrictions on username content &
+    - \hyperref[req:SR13]{SR13}\newline- FR44 &
+    H2-a \\
+
+    \hline
+
+    Competitive / Leaderboard Database &
+    Incorrect leaderboard rankings &
+    - Database corruption or loss of data &
+    - User frustration\newline- Loss of user engagement &
+    - Automated backups\newline- Transaction logging\newline- Recovery procedures\newline- Ranking validation &
+    - \hyperref[req:SR3]{SR3}\newline- \hyperref[req:SR4]{SR4}\newline- \hyperref[req:SR11]{SR11}\newline- PR6\newline- PR7\newline- PR8 &
+    H3-a \\
+
+    \hline
+
+    Competitive / Leaderboard Database &
+    Unauthorized modification of leaderboard and competitive data &
+    - Insufficient access controls &
+    - User frustration leading to loss of user engagement &
+    - Role-based access control &
+    - \hyperref[req:SR10]{SR10}\newline- FR50 &
+    H3-b \\
+
+    \hline
+
+    Competitive / Leaderboard Manager &
+    Incorrect competitive statistics or leaderboard displayed &
+    - Unsynchronized connection to Competitive / Leaderboard Database\newline- Software bug &
+    - Users feel unaccomplished and disatisfied that their achievements are not recognized\newline- Loss of user engagement &
+    - Ensure that Competitive / Leaderboard Manager is up to date with Competitive / Leaderboard Database\newline- Formally verify component software correctly displays the competitive/leaderboard data &
+    - \hyperref[req:SR18]{SR18} &
+    H4-a \\
+
+    \hline
+
+    Game State Manager &
+    Progress not saved &
+    - Game crash\newline- Failed save &
+    - Loss of user progress leading to frustration and disengagement &
+    - Autosave functionality\newline- Save retries &
+    - \hyperref[req:SR5]{SR5}\newline- \hyperref[req:SR6]{SR6}\newline- FR30 &
+    H5-a \\
+
+    \hline
+
+    Game State Manager &
+    Incorrect game state loaded &
+    - Corrupted save data\newline- Incorrect state flow &
+    - Correct answer marked incorrect or vice versa\newline- User confusion leading to decreased educational value and disengagement &
+    - Save integrity checks\newline- Validate state flow &
+    - \hyperref[req:SR7]{SR7}\newline- FR31 &
+    H5-b \\
+
+    \hline
+
+    Game State Manager &
+    User becomes addicted to the gameplay &
+    - Insufficient reminders of gameplay time &
+    - Addictive or excessive use of the application &
+    - Remind user when they have been playing for an extended period of time &
+    - \hyperref[req:SR21]{SR21} &
+    H5-c \\
+
+    \hline
+
+    Visualization / Rendering Manager &
+    Cube or highlighting incorrectly displayed &
+    - Projection error\newline- Visualization / Rendering Manager is relying on an outdated or incorrect game state &
+    - User confusion leading to reduced educational value\newline- Lead user to incorrect decisions &
+    - Formal verification of projection algorithm\newline- Gameplay testing to ensure correct cube and highlighting is displayed\newline- Ensure that the Visualization / Rendering Manager is using the current game state &
+    - \hyperref[req:SR15]{SR15} &
+    H6-a \\
+
+    \hline
+
+    Visualization / Rendering Manager &
+    Unstable refresh rate or screen tearing &
+    - Software bug\newline- Incorrect application of animation &
+    - User disorientation leading to disengagement\newline- Risk of photosensitive seizure &
+    - Unit testing of component\newline- Ensure user has minimum hardware specification to sustain refresh rate &
+    - \hyperref[req:SR14]{SR14} &
+    H6-b \\
+
+    \hline
+
+    Visualization / Rendering Manager &
+    Excessive and unintended flashing or animation &
+    - Graphics bug\newline- Excessive use of animation &
+    - Photosensitive seizure risk\newline- Eye strain &
+    - Unit testing of component to reduce chance of unintended flashes/animations\newline- User testing of animations to ensure the animations are not excessive\newline- Allow user to disable animations that can pose a risk of photosensitive seizures &
+    - \hyperref[req:SR19]{SR19} &
+    H6-c \\
+
+    \hline
+
+    Hint / Tutorial Manager &
+    Incorrect hint provided &
+    - Hints are not properly encoded\newline- Tutorial/hint state flow is incorrect\newline- Hint / Tutorial Manager is not synchronized with game state &
+    - User confusion and frustration\newline- User disengagement\newline- Loss of educational value &
+    - Unit testing of component to ensure correct hint is provided\newline- Validation of hint/tutorial state flow\newline- Ensure that the hint / tutorial manager is synchronized with the current game state &
+    - \hyperref[req:SR20]{SR20} &
+    H7-a \\
+
+    \hline
+
+    Hint / Tutorial Manager &
+    Incorrect octal arithmetic provided in a hint &
+    - Octal arithmetic is not properly encoded when generating hints &
+    - Loss of educational value &
+    - Unit testing of component's octal arithmetic\newline- Formal verification of octal arithmetic calculations &
+    N/A &
+    H7-b \\
+
+    \hline
+
+    User Interface &
+    User input interpreted incorrectly &
+    - Input parsing error (e.g., text fields such as username and email)\newline- User action(s) mapped incorrectly to game command(s) &
+    - Incorrect action taken leading to incorrect game state\newline- User frustration / disengagement\newline- Loss of educational value &
+    - Unit testing of encoded actions\newline- Allow users to confirm parsed data (e.g., confirm user account data before submitting) &
+    - \hyperref[req:SR16]{SR16} &
+    H8-a \\
+
+    \hline
+
+    User Interface &
+    User input not registered &
+    - Event handling bug &
+    - Inability to progress\newline- User frustration / disengagement &
+    - Formally validate that all user input leads to an event\newline- Inform user of errors in handling an input event &
+    - \hyperref[req:SR17]{SR17} &
+    H8-b \\
+
+    \hline
+
+    Task Generator &
+    Duplicate task generated &
+    - Insufficient shuffling of tasks &
+    - Loss of user engagement\newline- Ineffective education &
+    - Check tasks for uniqueness in a given round\newline- Validate randomness of task generation &
+    - \hyperref[req:SR8]{SR8}\newline- FR6 &
+    H9-a \\
+
+    \hline
+
+    Task Generator &
+    Invalid task generated &
+    - Logic error\newline- Error in task generation algorithm &
+    - Unsolvable puzzle leading to disengagement\newline- User confusion / loss in educational value &
+    - Validate solvability of task before giving it to the user &
+    - \hyperref[req:SR9]{SR9}\newline- FR25 &
+    H9-b \\
+
+    \hline
+
+    Task Generator &
+    Generated task has incorrect expected answer &
+    - Logic error &
+    - Correct answer is marked incorrect and an incorrect answer could be marked correct\newline- Loss of educational value\newline- User frustration and disengagement &
+    - Validate the generated solution before giving the task to the user &
+    - \hyperref[req:SR12]{SR12}\newline- FR25 &
+    H9-c \\
+
+\end{tabularx}
+\end{landscape}
 
 \section{Safety and Security Requirements}
 
-\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-rationale design process how and why to fake it.)}
+This section outlines the Safety and Security Requirements that were developed from the FMEA table.\newline
+
+\noindent\textbf{SR1\label{req:SR1}:} The system shall encrypt sensitive user data.
+
+\noindent\textbf{SR2\label{req:SR2}:} The system shall store user account passwords as cryptographic hashes.
+
+\noindent\textbf{SR3\label{req:SR3}:} The system shall automatically generate a backup for each database.
+
+\noindent\textbf{SR4\label{req:SR4}:} The system shall log all transactions for each database.
+
+\noindent\textbf{SR5\label{req:SR5}:} The system shall automatically save game progress every time there is a change in game state.
+
+\noindent\textbf{SR6\label{req:SR6}:} The system shall attempt to save the game state three times before failing and notifying the user.
+
+\noindent\textbf{SR7\label{req:SR7}:} The system shall ensure that a save state is valid before loading it as the current game state.
+
+\noindent\textbf{SR8\label{req:SR8}:} The system shall ensure that each generated task has not already been generated in the current round.
+
+\noindent\textbf{SR9\label{req:SR9}:} The system shall ensure that each generated task is solvable.
+
+\noindent\textbf{SR10\label{req:SR10}:} The system shall only allow authorized users to modify competitive statistics and leaderboard records.
+
+\noindent\textbf{SR11\label{req:SR11}:} The system shall restore database data from the most recent, valid backup in the event of database corruption or data loss.
+
+\noindent\textbf{SR12\label{req:SR12}:} The system shall ensure that a generated solution correctly solves its related generated task.
+
+\noindent\textbf{SR13\label{req:SR13}:} The system shall ensure that public usernames meet guidelines for user conduct.
+
+\noindent\textbf{SR14\label{req:SR14}:} The system shall warn the user if their hardware specification does not meet minimum requirements to run the application.
+
+\noindent\textbf{SR15\label{req:SR15}:} The system shall ensure that the rendered cube and highlighting is consistent with the current game state.
+
+\noindent\textbf{SR16\label{req:SR16}:} The system shall allow users to confirm parsed data before submitting.
+
+\noindent\textbf{SR17\label{req:SR17}:} The system shall inform the user if an input event is not recognized.
+
+\noindent\textbf{SR18\label{req:SR18}:} The system shall ensure that the displayed competitive/leaderboard is up to date (synchronized with the Competitive / Leaderboard Database).
+
+\noindent\textbf{SR19\label{req:SR19}:} The system shall allow users to disable animations that may induce photosensitive seizures.
+
+\noindent\textbf{SR20\label{req:SR20}:} The system shall ensure that the Tutorial / Hint Manager is synchronized with the current game state.
+
+\noindent\textbf{SR21\label{req:SR21}:} The system shall remind the user how long they have been playing every hour.
 
 \section{Roadmap}
 
-\wss{Which safety requirements will be implemented as part of the capstone timeline?
-Which requirements will be implemented in the future?}
+This section outlines which safety and security requirements will be implemented as part of the capstone timeline, and which safety and security requirements will be deferred. The requirements implemented as part of the capstone timeline are considered high priority requirements.
+
+\subsection{Safety and Security Requirements for Capstone Timeline}
+
+\begin{itemize}
+    \item \hyperref[req:SR1]{SR1}: It is important that our user data is secure as we are planning to release the game on the internet within the capstone timeline.
+    \item \hyperref[req:SR2]{SR2}: Similar to \hyperref[req:SR1]{SR1}, it is important that the user accounts are secure as we are planning to release the game on the internet within the capstone timeline.
+    \item \hyperref[req:SR5]{SR5}: An important game mechanic is saving the game state to ensure that the application is convenient for users.
+    \item \hyperref[req:SR6]{SR6}: Similar to \hyperref[req:SR5]{SR5}, saving the game state is an important mechanic and ensures that the application allows users to exit and resume play.
+    \item \hyperref[req:SR7]{SR7}: Ensuring that a save state is valid before loading is crucial to ensure that the game does not crash the game if the save is corrupted.
+    \item \hyperref[req:SR8]{SR8}: An important goal in our game is user engagement. If a generated task is duplicated, user satisfaction could be significantly decreased.
+    \item \hyperref[req:SR9]{SR9}: If a task is not solvable, user frustration and confusion will increase. This increases the chance that users will abandon the game.
+    \item \hyperref[req:SR12]{SR12}: If a solution does not correctly solve the current task, user frustration and confusion will increase. This increases the chance that users will abandon the game.
+    \item \hyperref[req:SR13]{SR13}: Because we are planning to release the game on the internet within the capstone timeline, it is important that we protect our users from harmful language.
+    \item \hyperref[req:SR14]{SR14}: Notifying the user if their hardware specifications do not meet minimum requirements is important because it gives the user an actionable fix if they are experiencing performance issues with the game.
+    \item \hyperref[req:SR15]{SR15}: Incorrect highlighting can increase user frustration and confusion, leading to decreased user engagement, satisfaction, and education.
+    \item \hyperref[req:SR16]{SR16}: By allowing users to confirm parsed data before submitting, the chance of the user submitting parsed information that they did not intend decreases. In turn, this improves user satisfaction.
+    \item \hyperref[req:SR17]{SR17}: By informing users when input events are not recognized, users can better understand what is going wrong. This will reduce user confusion.
+    \item \hyperref[req:SR18]{SR18}: One of the main features for the capstone timeline is competitive statistics and leaderboards. Therefore, it is imperitive that these statistics/leaderboards are accurately displayed.
+    \item \hyperref[req:SR19]{SR19}: Because the application will be released to the public within the capstone timeline, it is imperative that this version of the application takes into account the risk of photosensitive seizures.
+    \item \hyperref[req:SR20]{SR20}: Effective education of octal arithmetic is an important goal of the application. To achieve this goal in the capstone timeline, the Tutorial / Hint Manager must show up to date hints / tutorial steps based on the game's state.
+\end{itemize}
+
+\subsection{Deferred Safety and Security Requirements}
+
+\begin{itemize}
+    \item \hyperref[req:SR3]{SR3}: Although creating a backup is important, due to the recreational nature of the application, it is not a significant detriment if data is lost or corrupted.
+    \item \hyperref[req:SR4]{SR4}: Similar to SR3, because the data stored is not entirely important (other than it being secure), it is not our main priority to prevent data loss or corruption.
+    \item \hyperref[req:SR10]{SR10}: Although general rules regarding how the leaderboards are modified will be set up during the capstone timeline, it is not immediately critical to stop malicious users from modifying competitive statistics / leaderboard results.
+    \item \hyperref[req:SR11]{SR11}: This requirement is not possible without \hyperref[req:SR3]{SR3}, which itself is deferred. The reasoning for this requirement being deferred follows the same reasoning as \hyperref[req:SR3]{SR3}.
+    \item \hyperref[req:SR21]{SR21}: Although addiction can be a concern, it cannot be prioritized over more prevelent risks such as photosensitive seizures. Additionally, addiction-prevention features like this already exist externally (e.g., screen time controls), so there are other methods in place to control usage if necessary while this requirement is deferred.
+\end{itemize}
 
 \newpage{}
 
 \section{Appendix --- Generative AI Use Disclosure}
 
-\wss{ChatGPT (version 5) was used to brainstorm ideas for the template for this disclose section.}
-
 \subsection{AI Tools Used}
 
-\wss{Give the name of the AI tool(s) used and the version.}
+Microsoft Copilot version 155.0 was used in support of researching and reviewing this document.
 
 \subsection{How and Where Used}
 
-\wss{Explain what the tool(s) were used for.  Examples include: brainstorming,
-explaining a technical concept, reviewing the document, generating or modifying
-text, generating or modifying diagrams, identifying errors or omissions or
-inconsistencies.}
+First, Generative AI was useful in reading the assignment description and our current version of the document to provide recommendations for the FMEA table and Safety and Security Requirements. This use affected the FMEA and Safety and Security Requirements sections.
 
-\wss{For each of the uses, identify which parts of the document were affected.}
-
-\wss{You do not need to report every interaction, but you should disclose the 
-uses that materially contributed to your work}
+Finally, the main use for Generative AI was receiving the project description and rubric as well as a draft of the document and suggesting additions and/or modifications. In this context, Generative AI was used as a reviewer for the document with the task of checking high-level concepts such as meeting all the rubric requirements and document structure/clarity. This document was originally written manually using original ideas and thinking. Once completed, the document, along with the guidelines for the document, was entered. This approach was generally used for the entire document, section by section, to collect feedback.
 
 \subsection{Verification of AI-Generated Content}
 
-\wss{\begin{itemize}
-    \item Describe how the team checked AI-generated or AI-assisted material
-    before including it in the document.
-    \item In particular, verify factual claims, technical assertions,
-    requirements, calculations, references, and other information for which an
-    AI system may produce incorrect or fabricated results.
-    \item \textbf{The team is responsible for the accuracy, completeness,
-consistency, and appropriateness of the submitted document, regardless of
-whether material was generated by a human or an AI system.}
-\end{itemize}}
+The suggestions provided by Microsoft Copilot were not implemented directly. Instead, to ensure the content was reasonable/quality and fit the tone and intent of our document, the comments were reviewed by a team member and then implemented manually. Generative AI was not used to create whole paragraphs or generate facts independently.
 
 \newpage{}
 
 \section{Appendix --- Reflection}
-
-\wss{Not required for CAS 741}
 
 \input{../Reflection.text}
 
@@ -152,6 +528,30 @@ whether material was generated by a human or an AI system.}
     \item Other than the risk of physical harm (some projects may not have any
     appreciable risks of this form), list at least 2 other types of risk in
     software products. Why are they important to consider?
+\end{enumerate}
+
+\subsection*{Jacob Brodersen}
+
+\begin{enumerate}
+    \item The Hazard Definition section went well while writing this deliverable. In particular, I found that the examples and lecture slides were very helpful in creating our own hazard definition.
+    
+    Another section that went well was the Safety and Security requirements section. I found that after writing the FMEA table, the associated requirements became clear.
+
+    Finally, I thought that writing the background section went well. This went well because much of it was already defined in the problem statement document. Additionally, feedback from the Problem Statement document and from our supervisor, Dr. Rapoport, allowed us to refine the background and adapt it for this document.
+
+    \item One pain point that I experienced during this deliverable was creating the FMEA table. This was difficult and time-consuming because it involved a lot of brainstorming. At first, I found myself trying to think of how a full row would come together before starting on the idea. This became cumbersome and stifled my creativity. To resolve this issue, I decided to simply focus on coming up with failure modes by themselves. This allowed me to brainstorm at a high level without getting bogged down on the specific details of the failure mode.
+    
+    Another pain point I experienced during this deliverable was figuring out how to connect the various sections together to make an interconnected document. When looking at the document as a whole, it was very overwhelming, and I was not sure how I was going to make the different sections consistent. To solve this, I found it useful to focus on one section at a time. For example, I made sure that I had all of my components finalized and well-defined before making the FMEA table.
+    
+    \item Before this deliverable, our team initially anticipated the health-related risk, inducing photosensitive seizures. We also considered the risk of leaking sensitive information like users' passwords. Another risk we thought of beforehand was the risk of losing educational value as education is one of the main goals of our application. Finally, our application being a game, we foresaw the risk of losing user engagement, satisfaction, and/or trust.
+
+    During this deliverable, we thought of risks related to data loss or corruption. These risks came about by talking with our TA during the informal meeting. Another risk that we found during the Hazard Analysis process was risks relating to the game state, such as losing game state data or loading the incorrect game state. We realized the importance of this risk after looking at the RLCatan sample Hazard Analysis. With strong parallels to our game-based project, we found that the risks associated with the Game State Manager were similar. As such, we adapted aspects from that example project to fit our program/application. Finally, through brainstorming, we came up with an additional health hazard related to mental health with bullying / hateful language.
+
+    \item One significant risk other than physical harm is leakage of sensitive data. This is important to consider because this risk becoming a reality can lead to loss of trust if it is sensitive user data. Furthermore, sensitive data leakage can result in more serious consequences (e.g., financial, identity theft, fraud, etc.).
+
+    A second risk other than physical harm that is particularly important to our project is the risk of losing educational value. One of the main goals of our project is to provide an educational aspect to our game for octal arithmetic. A risk is that our game does not achieve this goal or even worse, does the opposite and hurts the users' knowledge related to octal arithmetic. This risk is important to consider because if it were to become a reality, a main selling point of our game would become void or could even become a liability of our application.
+
+    Finally, separate from physical harm is harm to mental well-being. For example, one of the hazards we identified was bullying or hateful comments through the use of usernames. This is important because as creators, we are responsible for helping safeguard our users from not only physical harm, but mental harm as well.
 \end{enumerate}
 
 \subsection*{Josh Engel}
@@ -172,5 +572,25 @@ whether material was generated by a human or an AI system.}
     to false alarms through many fields such as finance or truly lead to the loss or unwanted modification of sensitive data due to issues
     such as integer overflow.
 \end{enumerate}
+
+\subsection*{Nehan Munir}
+\begin{enumerate}
+    \item I worked on the SRS-IEEE document and so I dont really have any comments on what went smoothly specifically when
+    writing this hazard analysis.
+    \item I worked on the SRS-IEEE document and so I dont really have any comments on what pain points were experienced 
+    specifically when writing this hazard analysis.
+    \item Before this milestone, we were wondering what risks can a game really have, when the examples brought up in class were all
+    about Capstone projects with real consequences for messing up (such as ones helping the medical industry [failure can lead to misdiagnosis and at worst, death] 
+    or a mechatronic project used to map caves [losing the robot due to errant control leads to tangible financial detriments]). During our TA meeting, we humourously
+    brought this up to up to our TA, who suggested thinking about old videogames. Old videogames have a seizure warning before loading into the main screen, due to flashing lights.
+    As our game was browser-based with a very memory-intensive 3D cube visulization, a memory leak can easily cause the 3D visualization to mess up and cause flickering (seen with older graphic cards).
+    \item As stated before, memory leakage is a very important issue to cover as the project should never surpass the browser heap limit (essentially 'browser RAM'), as exceeding it (due to not 
+    terminating instances that aren't needed before [ex. imagine the project is running every instance of the 3D visualization locally saved]). This can lead to flickering and while seizures are a physical harm,
+    causing browsers to crash can lead to losing unsaved progress on other tabs. Another worry is cybersecurity as DDoS attacks might not be able to extract well protected data (such as user data), it can still flood
+    the browser deployment, resulting in financial costs as the DNS server provider is trying to respond to every DNS query.
+\end{enumerate}
+
+\bibliographystyle {plainnat}
+\bibliography{../../refs/References}
 
 \end{document}
