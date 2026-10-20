@@ -1318,10 +1318,6 @@ environment, the visible cube orientation updates within
 100 milliseconds for at least 95\% of measured supported
 rotation inputs.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{CubeVisualizer}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_2}:]
@@ -1337,10 +1333,6 @@ uncertainty when solving a puzzle.
 \textit{Fit Criterion:} Under the defined reference test
 environment, at least 95\% of accepted cell-value edits are
 visibly reflected within 100 milliseconds.
-
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{MagicCubeValidator}.
 
 
 % --------------------------------------------------
@@ -1362,10 +1354,6 @@ help from another person.
 usability evaluation shall successfully open a puzzle without
 external assistance or prior training.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{MagicCubeExplainer}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_4}:]
@@ -1382,10 +1370,6 @@ orientation to inspect and interact with its cells.
 \textit{Fit Criterion:} At least 80\% of participants in a
 usability evaluation shall successfully perform each defined
 cube-rotation task without external assistance.
-
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{CubeVisualizer}.
 
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
@@ -1405,10 +1389,6 @@ usability evaluation shall correctly select the requested
 cell in each defined cell-selection task without external
 assistance.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{CubeVisualizer}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_6}:]
@@ -1425,10 +1405,6 @@ sequence of actions.
 \textit{Fit Criterion:} At least 80\% of participants in a
 usability evaluation shall successfully enter and submit
 a valid value for a selected cell without external assistance.
-
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{CubeVisualizer}.
 
 
 % --------------------------------------------------
@@ -1452,8 +1428,6 @@ unintentionally affect unrelated functionality.
 separate components responsible for each of the four specified
 areas, with documented responsibilities for each component.
 
-\textit{Stakeholder Requirements:} \srref{LevelGenerator}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_8}:]
@@ -1470,8 +1444,6 @@ application to be executed for every test.
 \textit{Fit Criterion:} The automated test suite for core
 mathematical operations shall execute without launching the
 user interface or rendering the three-dimensional cube.
-
-\textit{Stakeholder Requirements:} \srref{MagicCubeValidator}.
 
 
 % --------------------------------------------------
@@ -1493,8 +1465,6 @@ browser outside the stated compatibility requirements.
 shall pass on every browser and browser version included in
 the system's documented support list.
 
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_10}:]
@@ -1512,8 +1482,6 @@ laptop devices without installing a separate application.
 shall be able to launch and use the game through a supported
 browser without installing Python or a standalone desktop
 application.
-
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
 
 
 % --------------------------------------------------
@@ -1536,10 +1504,6 @@ unintended changes or false puzzle representations.
 the puzzle state satisfies the defined state-validity rules
 after every state update in the test suite.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{CompletionVerifier}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_12}:]
@@ -1557,10 +1521,6 @@ defined category of invalid cell-value input and verify that
 the input is rejected, the puzzle state remains valid, and
 the application continues operating.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{MagicCubeValidator}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_13}:]
@@ -1577,10 +1537,6 @@ progress or puzzle data has been saved when it has not.
 \textit{Fit Criterion:} Tests that simulate each defined
 online storage failure shall verify that the system displays
 an appropriate failure indication.
-
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
 
 
 % --------------------------------------------------
@@ -1603,10 +1559,6 @@ all requests involving account credentials or user data use
 HTTPS with valid TLS, and that the system does not transmit
 such information through unencrypted HTTP requests.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_15}:]
@@ -1625,10 +1577,6 @@ an authenticated test account cannot retrieve, modify, or
 delete private data belonging to another test account through
 any supported operation.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_16}:]
@@ -1644,10 +1592,6 @@ authorization.
 \textit{Fit Criterion:} Inspection of application-controlled
 persistent storage shall find no authentication secrets
 stored in plaintext.
-
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
 
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
@@ -1665,10 +1609,6 @@ of data that must be protected.
 collection operations, and persistent storage shall confirm
 that every collected or retained personal information field
 has a documented functional purpose.
-
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
 
 
 % --------------------------------------------------
@@ -1692,10 +1632,6 @@ that users can access and operate every essential puzzle
 control, including puzzle navigation, cell selection, and
 cell-value editing, without pointer interaction.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
-
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum
 \label{NFR_19}:]
@@ -1712,9 +1648,6 @@ assessment shall confirm that every essential interface
 text element and control meets the specified minimum
 contrast ratio of 3:1 against its adjacent background.
 
-\textit{Traces:} FR??.
-
-\textit{Stakeholder Requirements:} \srref{BrowserDeployer}.
 
 \end{itemize}
 
