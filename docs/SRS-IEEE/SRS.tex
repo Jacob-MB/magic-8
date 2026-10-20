@@ -817,6 +817,59 @@ rationale for everything, ust the major decisions that are not obvious.  You
 should have traceability to the entities in the document that you are
 referencing.}
 
+\subsection{Functional Requirements}
+
+\begin{itemize}
+\item \textbf{Round setup} (\rref{FR_SelectPlane}, \rref{FR_SelectOrientation}, \rref{FR_NoRepeatStarter}): \newline
+The plane colour, cube orientation, and starter are chosen at random, and a starter is not reused for 192 rounds, as set out in Dr.\ Rapoport's rules. This keeps rounds different from each other so players cannot memorize one arrangement, which supports the goal of a different set of tasks each round.
+
+\item \textbf{Tasks and answer checking} (\rref{FR_Task1}--\rref{FR_Task8}, \rref{FR_AdditionCheck}, \rref{FR_SubtractionCheck}): \newline
+The eight tasks, their target cells, and their order from easiest to hardest come directly from Dr.\ Rapoport's rules rather than from our own design. The addition and subtraction steps show that a user found the right line instead of clicking cells by chance, and they give practice with octal arithmetic.
+
+\item \textbf{Task verification and input handling} (\rref{FR_TaskOrder}, \rref{FR_VerifyTask}, \rref{FR_InputValidation}, \rref{FR_UnrecognizedInput}): \newline
+Each task is checked before it is shown, because a wrong expected answer would mark correct answers as wrong and teach incorrect octal arithmetic (Hazard Analysis SR8, SR9, SR12). Invalid or unrecognized input produces a message instead of counting as a mistake, so users are not penalized for typing errors or left stuck (SR17).
+
+\item \textbf{Scoring} (\rref{FR_BasicPoints}, \rref{FR_TimedScore}, \rref{FR_StopGame}): \newline
+The point values, the 20\% higher points for octal, and the time formula come from Dr.\ Rapoport's rules. We state the time constant as 1350, which equals the rules' $2.63671875 \times 512$, so that it is easy to check and test. A stopped round records no score, so abandoning a round cannot change a leaderboard.
+
+\item \textbf{Saving and recovery} (\rref{FR_Autosave}, \rref{FR_Resume}): \newline
+Progress is saved after every change and a failed save is retried three times, so a crash or lost connection does not cost the user a round (Hazard Analysis SR5, SR6). A saved round is checked before it is loaded, so a corrupted save cannot crash the game or load an incorrect state (SR7).
+
+\item \textbf{3D visualization} (\rref{FR_3DView}, \rref{FR_3DLayers}, \rref{FR_3DHighlight}, \rref{FR_PerformanceWarning}): \newline
+The 3D view is a feature we added to the game (Problem Statement Goal 1). The slice display from Dr.\ Rapoport's rules stays available, and each number stays in the same cell in both views. Layers can be isolated so users can reach inner cells that other cells hide. Both views must show the same cell states (Hazard Analysis SR15), and users on slower devices are warned and offered the slice display (SR14).
+
+\item \textbf{Guided learning and tutorial} (\rref{FR_Tutorial}, \rref{FR_ExplainCell}, \rref{FR_Hint}, \rref{FR_SolutionPath}): \newline
+These requirements come from the Problem Statement goal of teaching octal arithmetic and the cube's patterns while users play. A hint gives the coordinate step without naming a cell, and the full solution is available only after 3 incorrect attempts at the same step, following feedback from Dr.\ Rapoport, so help does not remove the challenge of the task. Tutorial steps and hints must match the user's current step (Hazard Analysis SR20).
+
+\item \textbf{Accounts and competitive play} (\rref{FR_GuestPlay}, \rref{FR_CreateAccount}, \rref{FR_UsernameRules}, \rref{FR_Leaderboards}, \rref{FR_LeaderboardIntegrity}, \rref{FR_DeleteAccount}): \newline
+Online play comes from the competitive goal in our Problem Statement. Guest play sends no data online, so students can try the game without an account. Usernames appear on public leaderboards, so they are restricted (Hazard Analysis SR13). Leaderboards are separate for each scoring base because octal scores are 20\% higher, and only the system can create or change leaderboard records so rankings stay fair (SR10). Because we store usernames and email addresses, users can delete their account and data.
+
+\item \textbf{Daily challenge} (\rref{FR_DailyChallenge}, \rref{FR_ShareResults}): \newline
+Every user receives the same setup each day so results can be compared, which gives users a reason to return. The shared summary leaves out cell numbers and answers so that sharing a result does not spoil the challenge for others.
+
+\item \textbf{Wellbeing} (\rref{FR_PlayTimeReminder}, \rref{FR_DisableAnimations}): \newline
+Both come from the Hazard Analysis. The hourly reminder reduces the risk of excessive use (SR21), and the option to turn off animations reduces the risk of photosensitive seizures and eye strain (SR19).
+\end{itemize}
+
+\subsection{Data Requirements}
+
+\begin{itemize}
+\item \textbf{Game data} (cube array, orientation, round, and task attempt): \newline
+The cube array holds each of the numbers 1 to 512 exactly once, as in Dr.\ Rapoport's documents, and has an identifier because those documents say the array may change. It is checked when loaded (PR5), because a corrupted array would produce wrong expected answers. Rounds and task attempts are stored separately so each task's time, mistakes, hints, and score can be recorded, which the scoring, statistics, and tutorial requirements depend on.
+
+\item \textbf{Saved rounds}: \newline
+A saved round includes an integrity value so it can be validated before it is loaded (\rref{FR_Resume}).
+
+\item \textbf{Statistics and leaderboards}: \newline
+These are calculated from score records instead of being stored separately, so the same information is not kept in two places and cannot disagree.
+
+\item \textbf{Personal data} (PR1--PR4): \newline
+Only a username, an email address, and a password hash are stored, with no real names or birthdates, because intended users include high-school students. The email address is used only for account recovery. Hashed passwords and encrypted data limit the harm if the database is leaked (Hazard Analysis SR1, SR2).
+
+\item \textbf{Backups, logging, and retention} (PR6--PR10): \newline
+Backups, change logs, and restoring from the last valid backup protect against lost or corrupted data (Hazard Analysis SR3, SR4, SR11), although the Hazard Analysis defers them until after the main features. Data is kept until the user deletes their account, and guest play is never stored online, since there is no reason to keep it.
+\end{itemize}
+
 \section{Likely Changes}    
 
 \noindent \begin{itemize}
@@ -872,7 +925,7 @@ TODO
   by AI.  If any skills were created for AI agents to review the documentation,
   those should be disclosed here.}
 
-Generative AI was used to brainstorm a list of functional requirements and data requirements for our project (Sections 6 and 7). The rules and player instruction documents provided by Dr. Rapoport were used as context for the AI model to ensure the list of requirements was comprehensive and accurate to the game rules. Generative AI was also used to update the requirements to reflect feedback from Dr. Rapoport. The AI model that was used was Claude Sonnet 5.5, with Medium effort.
+Generative AI was used to brainstorm a list of functional requirements and data requirements for our project (Sections 6 and 7). The rules and player instruction documents provided by Dr. Rapoport were used as context for the AI model to ensure the list of requirements was comprehensive and accurate to the game rules. Generative AI was also used to update the requirements to reflect feedback from Dr. Rapoport. In addition, it was used to draft the rationale for the functional requirements and data requirements in section 11. The AI model that was used was Claude Sonnet 5.5, with Medium effort. All AI-assisted content related to requirements and rationale was checked against Dr. Rapoport's documents and our Hazard Analysis before being included.
 
 \subsection{Appendix E: Reflection}
 
