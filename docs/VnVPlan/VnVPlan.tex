@@ -249,7 +249,7 @@ SRS Verification Checklist:
   \begin{itemize}
     \item Abstract
     \item Unambiguous
-    \item Traceable (expand on this?)
+    \item Traceable (clearly labelled and numbered)
     \item Validatable
     \item Complete
     \item Consistent
@@ -265,7 +265,7 @@ SRS Verification Checklist:
 
 \wss{Create a checklists?}
 
-The design verification entails ensuring that the system correctly follows requirements and specifications. To do this, the following strategies will be used:
+The design verification entails ensuring the usability and correctness of the system. To do this, the following strategies will be used:
 
 \begin{itemize}
   \item Module Interface Specification (MIS) review by each team member:
@@ -321,10 +321,20 @@ CAS741) for a partial usability survey.}
 The below list outlines the methods used to verify the implementation:
 
 \begin{itemize}
-  \item Code walkthrough by each team member
-  \item Unit tests (ADD REFERENCE TO THOSE TESTS)
   \item System tests (ADD REFERENCE)
-  \item Static analyzers…
+  \item Run a linter (ADD REF) to check for errors, style inconsistencies, etc.
+  \item Run a dynamic analyzer (ADD REF) to check for code coverage during testing
+  \item All requirements (stakeholder, functional, data, and non-functional) have an associated system test-suite (except for usability related requirements, see next point)
+  \item To ensure that non-functional usability requirements of the system are achieved, usability testing with users will be conducted (e.g., NFR5)
+  \item Code walkthrough by each team member
+  \begin{itemize}
+    \item This review will focus on logic errors throughout the code that could cause issues with functionality or performance rather than linking back to specific requirements
+  \end{itemize}
+  \item Peer code review through GitHub issues
+  \begin{itemize}
+    \item Similarly to the code review by team members, this focuses on general logic errors rather than looking for specific items linking to requirements
+  \end{itemize}
+
 \end{itemize}
 
 \subsection{Automated Testing and Verification Tools}
