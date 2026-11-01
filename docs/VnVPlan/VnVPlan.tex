@@ -238,7 +238,17 @@ issue tracker?}
 
 There are a few key approaches that will be used to verify the SRS.
 
-First, ad hoc feedback from reviewers will be used. There will be two primary reviewer categories for the document: the project supervisor (Dr. Rapoport) and peer reviewers (classmates). For the project supervisor, the SRS document will be provided ahead of a meeting in which the supervisor can bring up their concerns or recommendations for the document. In particular, during the meeting with the supervisor, we will ask targeted questions primarily focused around the functional and stakeholder requirements. For the peer reviewers, we will utilize GitHub's issue tracker where the reviewers can read over the document on their own time and create formalized recommendations for improvement.
+First, ad hoc feedback from reviewers will be used. There will be two primary reviewer categories for the document: the project supervisor (Dr. Rapoport) and peer reviewers (classmates). For the project supervisor, the SRS document will be provided ahead of a meeting in which the supervisor can bring up their concerns or recommendations for the document. In particular, during the meeting with the supervisor, we will ask targeted questions primarily focused around the functional and stakeholder requirements:
+
+\begin{itemize}
+  \item Do the stakeholder requirements accurately capture your project goals?
+  \item Do the functional requirements support your vision for gameplay?
+  \begin{itemize}
+    \item Are there any missing functional requirements that you would like to see added?
+  \end{itemize}
+\end{itemize}
+
+For the peer reviewers, we will utilize GitHub's issue tracker where the reviewers can read over the document on their own time and create formalized recommendations for improvement.
 
 Second, internal reviews will be performed. Initially, each team member works on their own section with limited interaction (other than ensuring consistency where work overlaps between sections). Once each team member has an initial draft of their work, another team member will be assigned to review their work. Once each team member has reviewed their assigned team member's work, we will hold a team meeting. In this team meeting, each team member will have a chance to voice their concerns/recommendations. The whole team will then give their input as to what course of action should follow.
 
@@ -251,11 +261,17 @@ SRS Verification Checklist:
     \item Unambiguous
     \item Traceable (clearly labelled and numbered)
     \item Validatable
+    \item Verifiable
     \item Complete
     \item Consistent
   \end{itemize}
+  \item Each feature and goal identified through stakeholder elicitation has an associated requirement
+  \item No conflicting requirements
   \item All assumptions are clearly defined
+  \item All hazards and constraints are documented
 \end{itemize}
+
+Any problems identified during the SRS Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Design Verification}
 
@@ -265,22 +281,28 @@ SRS Verification Checklist:
 
 \wss{Create a checklists?}
 
-The design verification entails ensuring the usability and correctness of the system. To do this, the following strategies will be used:
+The design verification entails ensuring that the software's design is correct and complete. To do this, the following strategies will be used:
 
 \begin{itemize}
-  \item Module Interface Specification (MIS) review by each team member:
+  \item Module Interface Specification (MIS) review by each team member as well as peer review by classmates:
   \begin{itemize}
     \item Ensure that each requirement is traced to a module
     \item Ensure that each module correctly adheres to the linked requirements
     \item Ensure that all expected inputs and outputs of each module are clearly defined
-    \item Each module should follow SOLID principles
+    \item Each module should follow SOLID principles (NOT GOOD???)
   \end{itemize}
-  \item System Architecture review by each team member (ensure that the software architecture is appropriate for the system)
+  \item System Architecture review by each team member as well as peer review by classmates:
   \begin{itemize}
-    \item Ensure that subsystem responsibilities are well-seperated
+    \item Ensure that subsystem responsibilities are well-separated
     \item Ensure architecture supports maintainability and extensibility
+    \item Ensure that all major system components are represented
+    \item Ensure that all interfaces are clearly defined (both between subcomponents as well as external interfaces)
+    \item Ensure that the architecture supports all requirements
+    \item Ensure that dependencies between subsystems are minimized and necessary
   \end{itemize}
 \end{itemize}
+
+Any problems identified during the Design Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Verification and Validation Plan Verification}
 
@@ -304,13 +326,13 @@ Finally, TA feedback will be utilized. Due to the TA's extensive knowledge of Vn
 VnV Checklist:
 
 \begin{itemize}
-  \item VnV Plan has methods to verify that all requirements are met
-  \begin{itemize}
-    \item In other words, all requirements have at least one associated verification method
-  \end{itemize}
-  \item Verification and validation method scope is feasible
+  \item Every requirement has at least one associated verification method
+  \item Verification and validation activities are feasible with the available resources and timeline of the capstone
   \item All test cases are traceable to requirements
+  \item Test coverage is sufficient to provide confidence in system correctness
 \end{itemize}
+
+Any problems identified during the VnV Plan process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Implementation Verification}
 
@@ -328,23 +350,27 @@ CAS741) for a partial usability survey.}
 The below list outlines the methods used to verify the implementation:
 
 \begin{itemize}
-  \item Run a linter (ADD REF) to check for errors, style inconsistencies, etc.
-  \item Run a dynamic analyzer (ADD REF) to check for code coverage during testing
-  \item All requirements (stakeholder, functional, data, and non-functional) have an associated system test-suite (REF SECTION 4) (except for usability related requirements, see next point)
-  \item Unit testing as described in (REF SECTION 5)
-  \item To ensure that non-functional usability requirements of the system are achieved, usability testing with users will be conducted (e.g., NFR5)
+  \item Run Pylint (ADD REF) to check for errors, style inconsistencies, etc.
+  \item Measure code coverage for testing using Coverage.py (ADD REF)
   \item Code walkthrough by each team member
   \begin{itemize}
-    \item This review will focus on logic errors throughout the code that could cause issues with functionality or performance rather than linking back to specific requirements
+    \item Focus on logic errors throughout the code that could cause issues with functionality or performance
     \item Reviews will be submitted through pull requests before merging on GitHub
   \end{itemize}
   \item Peer code review through GitHub issues
   \begin{itemize}
-    \item Similarly to the code review by team members, this focuses on general logic errors rather than looking for specific items linking to requirements
+    \item Focus on general logic errors, maintainability concerns, performance concerns, and potential defects
   \end{itemize}
   \item Automated test execution (REF AUTOMATED TESTING AND VERIFICATION TOOLS)
-
+  \begin{itemize}
+    \item Ensure that each requirement (stakeholder, functional, data, and non-functional) has an associated system test-suite (REF SECTION 4) (except for usability related requirements, see below)
+    \item Unit testing as described in (REF SECTION 5)
+    \item Automated execution of tests through GitHub Actions
+  \end{itemize}
+  \item To verify non-functional usability requirements of the system, usability testing with users will be conducted (e.g., NFR5)
 \end{itemize}
+
+Any problems identified during the Implementation Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Automated Testing and Verification Tools}
 
@@ -362,6 +388,8 @@ that document.}
 
 \wss{The details of this section will likely evolve as you get closer to the
   implementation.}
+
+NEED TOOLS FOR WEB ASSEMBLY??
 
 Below are the various tools our team plans to use for automated testing:
 
@@ -394,9 +422,9 @@ as a Rev 0 demo for the supervisor.}
 
 To validate the software, there are a few different methods.
 
-First, our team will perform review sessions with our project supervisor, Dr. Rapoport. Dr. Rapoport is the main stakeholder of the project and therefore, a review session will help to determine whether the software meets Dr. Rapoport's overall vision for the project.
+First, our team will perform review sessions with our project supervisor, Dr. Rapoport. Dr. Rapoport is the main stakeholder of the project and therefore, review sessions will help to determine whether the software meets Dr. Rapoport's overall vision for the project. A main review session will be a demonstration with the Rev 0 product. This review will occur shortly after the scheduled Rev 0 demo for the class. During these review sessions, Dr. Rapoport will be tasked with validating whether the current version of the software aligns with the identified stakeholder requirements in the SRS and whether the software supports his overall product vision including gameplay and educational value.
 
-Second, for a more detailed analysis of whether the software meets user needs, we will perform user testing sessions where users with the defined characteristics of our stakeholder groups (see X) will play through the game. While the test subjects are playing the game, our team will collect feedback from them on their experience. General validation of software usability will be covered if at least 80\% of the participants are able to complete all core gameplay tasks without intervention. Additionally, at the end of the session our team will ask structured questions about the user's experience. These questions are listed below:
+Second, for a more detailed analysis of whether the software meets user needs, we will perform user testing sessions where users with the defined characteristics of our stakeholder groups (see X) will play through the game. While the test subjects are playing the game, our team will collect feedback from them on their experience. General validation of software usability will be successful if at least 80\% of the participants are able to complete all core gameplay tasks without intervention and no major usability concerns are commonly identified during the sessions. Additionally, at the end of the session our team will ask structured questions about the user's experience. These questions are listed below:
 
 \begin{itemize}
   \item Which parts did you find most intuitive when using the software?
@@ -407,7 +435,7 @@ Second, for a more detailed analysis of whether the software meets user needs, w
 
 Third, our Custom Documents (CDs) also promote software validation. Our CD Fall is the User/Stakeholder/Client Interview Report. This document will allow us to clarify user/stakeholder/client goals and requirements and we can then cross-check these against the software specification. Our CD Winter is the Usability Report. This document can help to validate that the software fits with the user's mental model of the gameplay and usability features.
 
-Feedback collected from the above methods will be documented and converted into GitHub issues.
+Any problems identified during the Software Validation process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \section{System Tests}
 
