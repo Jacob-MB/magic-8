@@ -11,6 +11,9 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\usepackage{ltablex}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \input{../Comments.text}
 \input{../Common.text}
@@ -138,11 +141,86 @@ how they relate to your VnV efforts.}
 \wss{Introduce this section.  You can provide a roadmap of the sections to
   come.}
 
+This section describes the verification and validation processes that will be implemented. This includes the roles and responsibilities of the verification and validation team, the SRS verification plan, the design verification plan, the VnV plan verification plan, the implementation verification plan, the automated testing and verification tools, and the software validation plan.
+
 \subsection{Verification and Validation Team}
 
 \wss{Your teammates.  Maybe your supervisor.
   You should do more than list names.  You should say what each person's role is
   for the project's verification.  A table is a good way to summarize this information.}
+
+The following table lists the role and responsibilities for individuals working on the project's verification and validation.
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|Y|Y|Y|}
+
+    % Header
+    \caption{Verification and Validation Team} \\
+    \hline
+    \textbf{Name} &
+    \textbf{Role} &
+    \textbf{Responsibilities} \\
+    \hline
+    \endfirsthead
+
+    % Subsequent pages header
+    \hline
+    \textbf{Name} &
+    \textbf{Role} &
+    \textbf{Responsibilities} \\
+    \hline
+    \endhead
+
+    % Prompt that the table continues
+    \hline
+    \multicolumn{3}{r}{\textit{Continued on next page}} \\
+    \endfoot
+
+    % No footer on last page
+    \hline
+    \endlastfoot
+
+    Jacob Brodersen &
+    Creative Director and Team Lead &
+    - Ensure consistency across subfields of work\newline- Verify traceability\newline- Validation of stakeholder requirements\newline- Coordinate document inspections \\
+
+    \hline
+
+    Allen Tong &
+    Webmaster &
+    - Website verification\newline- Website content validation \\
+
+    \hline
+
+    Amos Edeaghe &
+    Back-End Lead &
+    - Verification of gameplay logic\newline- Unit testing \\
+
+    \hline
+
+    Joshua Engel &
+    Front-End Lead &
+    - User input and output verification\newline- Rendering/projection verification \\
+
+    \hline
+
+    Nehan Munir &
+    Systems Analyst &
+    - Verify interoperability of system components\newline- System architecture and design verification and validation \\
+
+    \hline
+
+    Dr. Paul Rapoport &
+    Project Supervisor &
+    - Work with Team Lead to validate the overall application \\
+
+    \hline
+
+    Lucas Dutton &
+    Project TA &
+    - Provide feedback on verification and validation techniques (focus on coverage, effectiveness, and feasibility) \\
+
+\end{tabularx}
 
 \subsection{SRS Verification}
 
@@ -158,6 +236,27 @@ issue tracker?}
 
 \wss{Maybe create an SRS checklist?}
 
+There are a few key approaches that will be used to verify the SRS.
+
+First, ad hoc feedback from reviewers will be used. There will be two primary reviewer categories for the document: the project supervisor (Dr. Rapoport) and peer reviewers (classmates). For the project supervisor, the SRS document will be provided ahead of a meeting in which the supervisor can bring up their concerns or recommendations for the document. In particular, during the meeting with the supervisor, we will ask targeted questions primarily focused around the functional and stakeholder requirements. For the peer reviewers, we will utilize GitHub's issue tracker where the reviewers can read over the document on their own time and create formalized recommendations for improvement.
+
+Second, internal reviews will be performed. Initially, each team member works on their own section with limited interaction (other than ensuring consistency where work overlaps between sections). Once each team member has an initial draft of their work, another team member will be assigned to review their work. Once each team member has reviewed their assigned team member's work, we will hold a team meeting. In this team meeting, each team member will have a chance to voice their concerns/recommendations. The whole team will then give their input as to what course of action should follow.
+
+SRS Verification Checklist:
+
+\begin{itemize}
+  \item Every requirement is:
+  \begin{itemize}
+    \item Abstract
+    \item Unambiguous
+    \item Traceable (expand on this?)
+    \item Validatable
+    \item Complete
+    \item Consistent
+  \end{itemize}
+  \item All assumptions are clearly defined
+\end{itemize}
+
 \subsection{Design Verification}
 
 \wss{Plans for design verification}
@@ -165,6 +264,19 @@ issue tracker?}
 \wss{The review will include reviews by your classmates}
 
 \wss{Create a checklists?}
+
+The design verification entails ensuring that the system correctly follows requirements and specifications. To do this, the following strategies will be used:
+
+\begin{itemize}
+  \item Module Interface Specification (MIS) review by each team member:
+  \begin{itemize}
+    \item Ensure that each requirement is traced to a module
+    \item Ensure that each module correctly adheres to the linked requirements
+    \item Ensure that all expected inputs and outputs of each module are clearly defined
+    \item Each module should follow SOLID principles
+  \end{itemize}
+  \item System Architecture review by each team member (ensure that the software architecture is appropriate for the system)
+\end{itemize}
 
 \subsection{Verification and Validation Plan Verification}
 
@@ -174,6 +286,24 @@ verified.  Techniques for this include review and mutation testing.}
 \wss{The review will include reviews by your classmates}
 
 \wss{Create a checklists?}
+
+There are a few different methods that will be used for verifying the VnV plan.
+
+First, each team member will review the document as a whole. Key goals of this review include ensuring consistency across the document and ensuring that all descriptions are concise and clear.
+
+Second, mutation testing will be performed. Specifically, errors will purposefully be introduced (e.g., omitted requirements, incorrect expected outputs, etc.) to see if the VnV plan's review and testing methods would catch the error. This method provides confidence that the methods in this plan are adequate.
+
+Third, peer review of the document will be conducted. This review process will happen through GitHub issues. Similar to the team member review, this will focus on consistency/unambiguity checks and clarity of the document.
+
+Finally, TA feedback will be utilized. Due to the TA's extensive knowledge of VnV plans, this will allow for deeper analysis into whether the methods within the VnV plan are effective and efficient at verifying the requirements and ensuring sufficient test coverage.
+
+VnV Checklist:
+
+\begin{itemize}
+  \item VnV Plan has methods to verify that all requirements are met
+  \item Testing scope is feasible
+  \item All test cases are traceable to requirements
+\end{itemize}
 
 \subsection{Implementation Verification}
 
@@ -187,6 +317,15 @@ verified.  Techniques for this include review and mutation testing.}
 \wss{The final class presentation in CAS 741 could be used as a code
 walkthrough.  There is also a possibility of using the final presentation (in
 CAS741) for a partial usability survey.}
+
+The below list outlines the methods used to verify the implementation:
+
+\begin{itemize}
+  \item Code walkthrough by each team member
+  \item Unit tests (ADD REFERENCE TO THOSE TESTS)
+  \item System tests (ADD REFERENCE)
+  \item Static analyzers…
+\end{itemize}
 
 \subsection{Automated Testing and Verification Tools}
 
@@ -204,6 +343,15 @@ that document.}
 
 \wss{The details of this section will likely evolve as you get closer to the
   implementation.}
+
+Below are the various tools our team plans to use for automated testing:
+
+\begin{itemize}
+  \item Unit and System Testing: Pytest
+  \item Build Verification and Automatic Test Execution: GitHub Actions
+  \item Linter: Pylint
+  \item Code Coverage: Coverage.py
+\end{itemize}
 
 \subsection{Software Validation}
 
@@ -224,6 +372,21 @@ The feedback from your supervisor will be very useful for improving your project
 as a Rev 0 demo for the supervisor.}
 
 \wss{This section might reference back to the SRS verification section.}
+
+To validate the software, there are a few different methods.
+
+First, our team will perform review sessions with our project supervisor, Dr. Rapoport. Dr. Rapoport is the main stakeholder of the project and therefore, a review session will help to determine whether the software meets Dr. Rapoport's overall vision for the project.
+
+Second, for a more detailed analysis of whether the software meets user needs, we will perform user testing sessions where users with the defined characteristics of our stakeholder groups (see X) will play through the game. While the test subjects are playing the game, our team will collect feedback from them on their experience. General validation of software usability will be covered if at least 80\% of the participants are able to complete all core gameplay tasks without intervention. Additionally, at the end of the session our team will ask structured questions about the user's experience. These questions are listed below:
+
+\begin{itemize}
+  \item Which parts did you find most intuitive when using the software?
+  \item Which parts did you find most frustrating and/or confusing when using the software?
+  \item If you could change one part of the software, what would you change?
+  \item If you could keep one part of the software, what would you keep?
+\end{itemize}
+
+Third, our Custom Documents (CDs) also promote software validation. Our CD Fall is the User/Stakeholder/Client Interview Report. This document will allow us to clarify user/stakeholder/client goals and requirements and we can then cross-check these against the software specification. Our CD Winter is the Usability Report. This document can help to validate that the software fits with the user's mental model of the gameplay and usability features.
 
 \section{System Tests}
 
