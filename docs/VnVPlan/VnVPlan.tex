@@ -288,62 +288,484 @@ How test will be performed:
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.  Not all projects will
-  necessarily have nonfunctional requirements related to accuracy.}
+%\wss{The nonfunctional requirements for accuracy will likely just reference the
+%  appropriate functional tests from above.  The test cases should mention
+%  reporting the relative error for these tests.  Not all projects will
+%  necessarily have nonfunctional requirements related to accuracy.}
 
-\wss{For some nonfunctional tests, you won't be setting a target threshold for
-passing the test, but rather describing the experiment you will do to measure
-the quality for different inputs.  For instance, you could measure speed versus
-the problem size.  The output of the test isn't pass/fail, but rather a summary
-table or graph.}
+%\wss{For some nonfunctional tests, you won't be setting a target threshold for
+%passing the test, but rather describing the experiment you will do to measure
+%the quality for different inputs.  For instance, you could measure speed versus
+%the problem size.  The output of the test isn't pass/fail, but rather a summary
+%table or graph.}
 
-\wss{Tests related to usability could include conducting a usability test and
-  survey.  The survey will be in the Appendix.}
+%\wss{Tests related to usability could include conducting a usability test and
+%  survey.  The survey will be in the Appendix.}
 
-\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-format for the tests given below.}
+%\wss{Static tests, review, inspections, and walkthroughs, will not follow the
+%format for the tests given below.}
 
-\wss{If you introduce static tests in your plan, you need to provide details.
-How will they be done?  In cases like code (or document) walkthroughs, who will
-be involved? Be specific.}
+%\wss{If you introduce static tests in your plan, you need to provide details.
+%How will they be done?  In cases like code (or document) walkthroughs, who will
+%be involved? Be specific.}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+The following tests evaluate the nonfunctional requirements defined in the
+Software Requirements Specification (SRS). Testing will assess the
+performance, usability, maintainability, portability, reliability,
+security, privacy, and accessibility of the Magic-8 application.
+
+Performance tests will measure response times under a defined
+environment. Usability tests will involve participants who have not
+previously used magic-8. Maintainability requirements will be
+evaluated through code inspections and automated tests.
+Reliability, security, and accessibility will be assessed through
+automated and manual testing.
+
+No accuracy nonfunctional requirements were defined in the
+SRS. Mathematical correctness will instead be evaluated through the
+corresponding functional tests in Section 4.1.
+
+\subsubsection{Performance Testing}
+
+\paragraph{Cube Manipulation Performance}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{NFR-T1: Cube Rotation Response Time\\}
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+Type: Nonfunctional, Dynamic, Automated.
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+Initial State: The application is running in the reference test
+environment, and a state containing a fully initialized three-dimensional
+cube is open.
+
+Input/Condition: A series of supported cube manipulation inputs, including
+horizontal and vertical rotations, as well as choosing a plane of the cube.
+
+Output/Result: The visible cube orientation updates within 100
+milliseconds for at least 95\% of the measured rotation inputs.
+
+How test will be performed: An automated test will simulate supported
+rotation inputs and record the time between each input being received
+and the corresponding visible orientation update. The test will be
+repeated for a sufficient number of rotation inputs to get a reliable
+measurement. The percentage of updates completed within 100 milliseconds
+will be calculated and compared against the 95\% requirement.
+
+\item{NFR-T2: Cell-Value Editing Response Time\\}
+
+Type: Nonfunctional, Dynamic, Automated.
+
+Initial State: The application is running in the reference test
+environment, and the state has an editable cell selected.
+
+Input: A series of valid cell-value edits submitted through the supported
+input controls.
+
+Output: Accepted cell-value edits are visibly reflected within 100
+milliseconds for at least 95\% of measured edits.
+
+How test will be performed: An automated test will submit valid
+cell-value edits and record the time between submission and the visible
+update of the corresponding cell. The test will be repeated across
+multiple cells and values. The percentage of accepted edits reflected
+within 100 milliseconds will be calculated and compared against the
+95\% requirement.
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
 
-...
+\subsubsection{Usability Testing}
+
+\paragraph{First-Time User Interaction}
+
+\begin{enumerate}
+
+\item{NFR-T3: Puzzle Opening Usability\\}
+
+Type: Nonfunctional, Dynamic, Manual, User Evaluation.
+
+Initial State: The application is open on its initial screen, and the
+participant has not previously used Magic-8 or received instructions
+on how to operate it.
+
+Input/Condition: The participant is asked to locate and open a puzzle.
+
+Output/Result: At least 80\% of participants successfully open a puzzle
+without external assistance or prior training.
+
+How test will be performed: Participants will be given the application
+and asked to open a puzzle. The evaluator will observe whether each
+participant completes the task independently. The number of successful
+participants will be recorded and divided by the total number of
+participants. The resulting percentage will be compared against the
+80\% requirement.
+
+\item{NFR-T4: Cube Manipulation Usability\\}
+
+Type: Nonfunctional, Dynamic, Manual, User Evaluation.
+
+Initial State: A puzzle is open, and the three-dimensional cube is
+visible to the participant.
+
+Input/Condition: The participant is asked to rotate the cube using
+the available rotation controls to view different sides and orientations.
+
+Output/Result: At least 80\% of participants successfully complete
+each defined cube-rotation task without external assistance.
+
+How test will be performed: Participants will be given several
+rotation tasks that require them to change the orientation of the
+three-dimensional cube. The evaluator will record whether each task
+is completed independently and correctly. The success rate for each
+defined task will be calculated and compared against the 80\% requirement.
+
+\item{NFR-T5: Cell Selection Usability\\}
+
+Type: Nonfunctional, Dynamic, Manual, User Evaluation.
+
+Initial State: A puzzle is open, and the participant can interact
+with the visible cube.
+
+Input/Condition: The participant is asked to select specific cells
+identified by their positions within the cube.
+
+Output/Result: At least 80\% of participants correctly select the
+requested cells without external assistance.
+
+How test will be performed: Participants will be given a series of
+cell-selection tasks. The evaluator will record whether the correct
+cell is selected for each task without assistance. The percentage
+of participants successfully completing each defined task will be
+calculated and compared against the 80\% requirement.
+
+\item{NFR-T6: Cell-Value Editing Usability\\}
+
+Type: Nonfunctional, Dynamic, Manual, User Evaluation.
+
+Initial State: A puzzle is open, and the participant has selected
+a cell that allows its value to be edited.
+
+Input/Condition: The participant is asked to enter and submit a valid
+value for the selected cell.
+
+Output/Result: At least 80\% of participants successfully enter and
+submit a valid cell value without external assistance.
+
+How test will be performed: Participants will be asked to select
+a cell, enter a specified valid value, and submit the change. The
+evaluator will record whether the participant successfully completes
+the task independently. The percentage of successful participants
+will be calculated and compared against the 80\% requirement.
+
+\end{enumerate}
+
+Along with these tests participants may be asked to describe any difficulties
+they had with the applciation for further development.
+
+\subsubsection{Maintainability Testing}
+
+\paragraph{Code Organization and Independent Testing}
+
+The maintainability requirements will be evaluated through static
+inspection and automated testing rather than conventional user-based
+tests.
+
+\begin{enumerate}
+
+\item{NFR-T7: Separation of System Components\\}
+
+Type: Nonfunctional, Static, Manual, Code Inspection.
+
+Initial State: The completed application source code and its
+accompanying documentation are available for inspection.
+
+Input/Condition: The source code is reviewed to identify the organization
+of mathematical logic, user-interface logic, three-dimensional
+visualization logic, and online storage interactions.
+
+Output/Result: Four identifiable components responsible for the
+specified areas are found, and each component has documented
+responsibilities.
+
+How test will be performed: Members of the development team will
+inspect the source code and supporting documentation. The inspection
+will identify the components responsible for each of the four specified
+areas and verify that their responsibilities are documented.
+The results will be recorded in an inspection checklist.
+
+\item{NFR-T8: Independent Mathematical Logic Testing\\}
+
+Type: Nonfunctional, Dynamic, Automated.
+
+Initial State: The automated test suite for the core mathematical
+operations is available.
+
+Input/Condition: The mathematical test suite is executed without
+launching the user interface or rendering the three-dimensional cube.
+
+Output/Result: The mathematical test suite executes successfully
+without requiring the user interface or three-dimensional visualization.
+
+How test will be performed: The mathematical test suite will be
+executed independently from the application interface and visualization
+components. The test execution process and results will be inspected
+to confirm that the mathematical operations can be tested without
+launching either component.
+
+\end{enumerate}
+
+
+\subsubsection{Portability Testing}
+
+\paragraph{Browser Compatibility and Deployment}
+
+\begin{enumerate}
+
+\item{NFR-T9: Browser Compatibility\\}
+
+Type: Nonfunctional, Dynamic, Manual and Automated.
+
+Initial State: The application is deployed and accessible through
+the chosen supported browsers.
+
+Input/Condition: The core functional test suite is executed using
+each supported browser version.
+
+Output/Result: All core functional tests pass on every chosen browser and version.
+
+How test will be performed: The core functional test suite from
+Section 4.1 will be executed separately on each supported browser.
+The results will be recorded for each browser and compared to identify
+any differences in functionality or behaviour. The requirement is
+satisfied when the core functional test suite passes on every chosen browser.
+
+\item{NFR-T10: Browser-Based Deployment\\}
+
+Type: Nonfunctional, Dynamic, Manual.
+
+Initial State: A clean reference device is available with a supported
+desktop or laptop web browser installed. Python and any standalone
+Magic-8 application have not been installed.
+
+Input/Condition: The tester accesses the deployed Magic-8 application
+through the supported web browser.
+
+Output/Result: The application launches and can be used without
+installing Python or a standalone desktop application.
+
+How test will be performed: A clean reference device will be used
+to access the deployed application through a supported browser.
+The tester will then open the application and perform basic interactions.
+
+\end{enumerate}
+
+
+\subsubsection{Reliability Testing}
+
+\paragraph{Puzzle State and Failure Handling}
+
+\begin{enumerate}
+
+\item{NFR-T11: Puzzle-State Integrity\\}
+
+Type: Nonfunctional, Dynamic, Automated.
+
+Initial State: A valid puzzle state has been initialized.
+
+Input/Condition: A sequence of supported cube manipulations,
+cell selections, and accepted cell-value edits is performed.
+
+Output/Result: The puzzle state remains valid after every supported
+state update and continues to satisfy the state-validity rules.
+
+How test will be performed: Automated tests will perform sequences
+of cube manipulations, cell selections, and valid cell-value edits.
+After each operation, the resulting puzzle state will be checked
+against the state-validity rules. This will verify no error states
+are met through supported intputs.
+
+\item{NFR-T12: Invalid Input Handling\\}
+
+Type: Nonfunctional, Dynamic, Automated.
+
+Initial State: A valid puzzle is open, and a cell-value input control
+is available.
+
+Input: Invalid cell-value inputs, including unsupported numerical
+values, values outside the permitted range, and incorrectly formatted
+inputs.
+
+Output: Invalid inputs are rejected, the puzzle state remains valid,
+and the application continues operating without terminating.
+
+How test will be performed: Automated tests will submit each defined
+category of invalid input through the supported cell-editing controls.
+After each submission, the resulting puzzle state will be checked
+to ensure it is still valid.
+
+\item{NFR-T13: Online Operation Failure Handling\\}
+
+Type: Nonfunctional, Dynamic, Manual and Automated.
+
+Initial State: The application is running with online storage
+functionality available.
+
+Input/Condition: Online storage operations are attempted while
+simulating failures such as a lost network connection, unavailable
+server, or rejected storage request.
+
+Output/Result: The application displays an appropriate failure
+message when unsuccessful.
+
+How test will be performed: The online storage operations will
+be tested under simulated failure conditions. Network access may
+be interrupted or server responses may be configured to return
+failure results. The tester will verify that the application
+displays an appropriate failure message for each simulated
+failure and does not incorrectly indicate that the operation
+was successful.
+
+\end{enumerate}
+
+
+\subsubsection{Security and Privacy Testing}
+
+\paragraph{Network Security and User Data Protection}
+
+\begin{enumerate}
+
+\item{NFR-T14: Network Communication Security\\}
+
+Type: Nonfunctional, Dynamic, Manual, Security Testing.
+
+Initial State: The application is deployed with account functionality
+and network communication enabled.
+
+Input/Condition: Account creation, login, and operations involving
+user data are performed while monitoring network requests.
+
+Output/Result: All network requests involving account credentials
+or user data use HTTPS with valid TLS. None of which is
+transmitted through unencrypted HTTP requests.
+
+How test will be performed: A network inspection tool will be used
+to monitor requests generated during account creation, login, and
+user-data operations. The protocol used for each relevant request
+will be inspected, and TLS validity will be verified. Also checking
+no data is not transmitted through unencrypted HTTP requests.
+
+\item{NFR-T15: User Data Isolation\\}
+
+Type: Nonfunctional, Dynamic, Automated, Security Testing.
+
+Initial State: At least two separate test accounts have been
+created, each containing private stored data.
+
+Input/Condition: One authenticated test account attempts to retrieve,
+modify, or delete private data belonging to the other test account.
+
+Output/Result: The system prevents the authenticated user from
+accessing or modifying another user's private stored data.
+
+How test will be performed: Automated authorization tests will
+authenticate using one test account and attempt to access private
+data belonging to the second account through every supported
+operation. Attempts to retrieve, modify, or delete the other
+account's data will be recorded.
+
+\item{NFR-T16: Authentication Secret Protection\\}
+
+Type: Nonfunctional, Static, Manual, Security Inspection.
+
+Initial State: The application source code and application-controlled
+persistent storage are available for inspection.
+
+Input/Condition: Authentication-related information is examined
+in the application's persistent storage and relevant storage
+operations.
+
+Output/Result: No authentication secrets are found stored in
+plaintext within application-controlled persistent storage.
+
+How test will be performed: The development team will inspect
+the application's persistent storage, including relevant local
+storage and database records. Checking if any authentication-related values
+are stored in plaintext. The inspection results will be documented.
+
+\item{NFR-T17: Personal Data Minimization\\}
+
+Type: Nonfunctional, Static, Manual, Privacy Inspection.
+
+Initial State: The application's data fields, collection operations,
+and persistent storage structures are available for inspection.
+
+Input/Condition: All personal information collected or retained
+by the application is reviewed alongside its documented functional
+purpose.
+
+Output/Result: Every collected or retained personal information
+field has a documented purpose related to the application's
+implemented functionality.
+
+How test will be performed: The development team will inspect
+the application's data fields, account information requirements,
+collection operations, and persistent storage. Each personal
+information field will be compared against the functionality
+that requires it. Any field without a documented functional
+purpose will be identified and reviewed for removal.
+
+\end{enumerate}
+
+
+\subsubsection{Accessibility Testing}
+
+\paragraph{Keyboard Accessibility and Visual Contrast}
+
+\begin{enumerate}
+
+\item{NFR-T18: Keyboard Accessibility\\}
+
+Type: Nonfunctional, Dynamic, Manual.
+
+Initial State: The application is open, and a puzzle is available
+for interaction.
+
+Input/Condition: The tester uses only a keyboard to navigate
+the application and operate essential puzzle controls, including
+puzzle navigation, cell selection, and cell-value editing.
+
+Output/Result: All essential puzzle controls can be accessed
+and operated using a keyboard without requiring pointer interaction.
+
+How test will be performed: The tester will disable pointer
+interaction and use keyboard inputs to navigate the application.
+Each essential puzzle control will be accessed and operated
+using the supported keyboard controls. 
+
+\item{NFR-T19: Visual Contrast\\}
+
+Type: Nonfunctional, Static, Automated and Manual, Accessibility
+Inspection.
+
+Initial State: The application interface is available for
+inspection.
+
+Input/Condition: The contrast between essential interface text
+and controls and their adjacent backgrounds is measured.
+
+Output/Result: Every essential interface text element and control
+meets a minimum contrast ratio of 3:1 against its adjacent
+background.
+
+How test will be performed: An automated or manual contrast
+assessment tool will be used to inspect the application's
+essential interface text and controls. The contrast ratio
+of each element against its adjacent background will be recorded.
+Any element with a contrast ratio below 3:1 will be identified
+for correction.
+
+\end{enumerate}
 
 \subsection{Traceability Between Test Cases and Requirements}
 
@@ -436,36 +858,7 @@ How test will be performed:
 \wss{These tests may involve collecting performance data from previously
   mentioned functional tests.}
 
-\subsubsection{Module ?}
-		
-\begin{enumerate}
 
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-
-\end{enumerate}
 
 \subsubsection{Module ?}
 
