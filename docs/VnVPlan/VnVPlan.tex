@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{longtable}
 \hypersetup{
     colorlinks,
     citecolor=blue,
@@ -771,6 +772,60 @@ for correction.
 
 \wss{Provide a table that shows which test cases are supporting which
   requirements.}
+
+\subsection{Traceability Between Test Cases and Requirements}
+
+Table \ref{tab:TestTraceability} provides the traceability
+between the nonfunctional test cases defined in Section 4.2
+and their corresponding nonfunctional requirements in the SRS.
+Each requirement is associated with at least one test case
+that evaluates whether its specified criteria have been met.
+
+\begin{longtable}{|p{0.18\textwidth}|p{0.38\textwidth}|p{0.34\textwidth}|}
+\hline
+\textbf{Test Case ID} & \textbf{Test Case Description} & \textbf{Requirement Verified} \\
+\hline
+NFR-T1 & Cube Rotation Response Time & NFR\_1: Cube Manipulation Performance \\
+\hline
+NFR-T2 & Cell-Value Editing Response Time & NFR\_2: Cell-Value Editing Performance \\
+\hline
+NFR-T3 & Puzzle Opening Usability & NFR\_3: Puzzle Opening Usability \\
+\hline
+NFR-T4 & Cube Manipulation Usability & NFR\_4: Cube Manipulation Usability \\
+\hline
+NFR-T5 & Cell Selection Usability & NFR\_5: Cell Selection Usability \\
+\hline
+NFR-T6 & Cell-Value Editing Usability & NFR\_6: Cell-Value Editing Usability \\
+\hline
+NFR-T7 & Separation of System Components & NFR\_7: Separation of System Components \\
+\hline
+NFR-T8 & Independent Mathematical Logic Testing & NFR\_8: Independent Testing of Mathematical Logic \\
+\hline
+NFR-T9 & Browser Compatibility & NFR\_9: Browser Compatibility \\
+\hline
+NFR-T10 & Browser-Based Deployment & NFR\_10: Browser-Based Deployment \\
+\hline
+NFR-T11 & Puzzle-State Integrity & NFR\_11: Puzzle-State Integrity \\
+\hline
+NFR-T12 & Invalid Input Handling & NFR\_12: Invalid Input Handling \\
+\hline
+NFR-T13 & Online Operation Failure Handling & NFR\_13: Online Operation Failure Handling \\
+\hline
+NFR-T14 & Network Communication Security & NFR\_14: Network Communication Security \\
+\hline
+NFR-T15 & User Data Isolation & NFR\_15: User Data Isolation \\
+\hline
+NFR-T16 & Authentication Secret Protection & NFR\_16: Authentication Secret Protection \\
+\hline
+NFR-T17 & Personal Data Minimization & NFR\_17: Personal Data Minimization \\
+\hline
+NFR-T18 & Keyboard Accessibility & NFR\_18: Keyboard Accessibility \\
+\hline
+NFR-T19 & Visual Contrast & NFR\_19: Visual Contrast \\
+\hline
+\caption{Traceability Between Nonfunctional Test Cases and Requirements}
+\label{tab:TestTraceability}
+\end{longtable}
 
 \section{Unit Test Description}
 
