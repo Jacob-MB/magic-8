@@ -14,6 +14,7 @@
 
 \input{../Comments.text}
 \input{../Common.text}
+\renewcommand{\wss}[1]{} 
 
 \begin{document}
 
@@ -30,7 +31,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
+November 02, 2026 & Amos Edeaghe & Added General Information\\
 Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
@@ -92,6 +93,12 @@ This document ... \wss{provide an introductory blurb and roadmap of the
 \wss{Say what software is being tested.  Give its name and a brief overview of
   its general functions.}
 
+  The software being tested is called Magic 8. Magic 8 is a free-to-play, web-based 3D puzzle game built around an 8x8x8 magic cube.
+Users are given a starting cell and tasks to solve to guide their navigation through the magic cube, ending with them performing addition or subtraction in octal to confirm each task's completion.
+The game allows users to navigate the cube to select cells by moving through its faces and slices or by rotating the cube. Upon completing a task, the users
+are given a score based on the task's difficulty and the time taken to complete it. Magic 8's goal is to provide a fun and engaging resource to interact with base 8 and magic cubes that is accessible to those interested.
+  
+
 \subsection{Objectives}
 
 \wss{State what is intended to be accomplished.  The objective will be around
@@ -111,6 +118,15 @@ so what are you going to prioritize?  As an example, if your system depends on a
 external library, you can explicitly state that you will assume that external library 
 has already been verified by its implementation team.}
 
+The objective of this document is to check if the project exhibits sufficient usability and builds confidence in its correctness. The focus
+on usability is due to the project's game nature, with a goal of being both fun and engaging through its task-based system; insufficient usability would
+build frustration amongst users and hamper that experience. The web-based game would have users solving tasks with an asynchronous system to rotate,
+move through, and solve the tasks in the cube. As such, usability, user validation, and correctness are required for a satisfactory user experience and to encourage
+users to adopt the tool.
+
+The project will make use of certain third-party libraries; due to resource constraints, the team has decided to work under the assumption that all used third-party
+libraries and dependencies are already verified by their implementation teams.
+
 \subsection{Custom Documents}
 
 \wss{Summarize the CDs (Custom Documents) that were tackled by this project.  CDs 
@@ -120,6 +136,15 @@ been approved by the course instructor as included in your problem statement.
 You can use a pull request to update your CDs (in TeamComposition.csv or
 Repos.csv) if your plan changes as a result of the VnV planning exercise.}
 
+The custom document \textbf{User/Stakeholder/Client Interview Report} was chosen to provie the team with a deeper unerstaning of what 
+a typical user would want from the game. Through a mix of structured and unstructured interviews of our stakeholders we will
+gain a better view of how they envision gameplay and what they find intuitive or difficult so they can be considered integrated in the validation
+of our system.
+
+The other custom document that will be tackle is the \textbf{Usability Report} would provie wimiliar information on how users experience the game but through observations 
+of their interaction with the system. The goal is to use this document to measure the goal metrics set for fun, difficulty and usability.
+
+
 \subsection{Relevant Documentation}
 
 \wss{Reference relevant documentation.  This will definitely include your SRS
@@ -128,7 +153,14 @@ Repos.csv) if your plan changes as a result of the VnV planning exercise.}
   is done, they will be written.  You can create BibTeX entries for your
   documents and within those entries include a hyperlink to the documents.}
 
-\citet{SRS}
+To guide the testing of our system, the Verification and Validation plan will make use of the following documents:
+
+  \begin{itemize}
+  \item Software Requirements Specification (SRS) \citet{SRS-IEEE}: The SRS details all the functional and non-functional requirements the project must meet. These requirements serve as the basis for the tests that are designed with the belief that by checking against and satisfying these requirements, the system will have satisfactory usability and correctness.
+  \item Module Interface Specification (MIS): The MIS details the usage, purpose, and specification of the interfaces for each module that makes up Magic 8; as such, it is a necessary reference for verifying the interactions between the interfaces and the system.
+  \item Module Guide (MG): This provides the layout for the modules that make up the system, their hierarchy, connection to requirements, and their decomposition. It is used to ensure the internal flow of the system is covered in the tests.
+  \end{itemize}
+
 
 \wss{Don't just list the other documents.  You should explain why they are relevant and 
 how they relate to your VnV efforts.}
