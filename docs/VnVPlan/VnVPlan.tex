@@ -149,7 +149,7 @@ This section describes the verification and validation processes that will be im
   You should do more than list names.  You should say what each person's role is
   for the project's verification.  A table is a good way to summarize this information.}
 
-The following table lists the role and responsibilities for individuals working on the project's verification and validation.
+The following table lists the role(s) and responsibilities for individuals working on the project's verification and validation.
 
 \renewcommand{\arraystretch}{1.3}
 \begin{tabularx}{\linewidth}{|Y|Y|Y|}
@@ -158,7 +158,7 @@ The following table lists the role and responsibilities for individuals working 
     \caption{Verification and Validation Team} \\
     \hline
     \textbf{Name} &
-    \textbf{Role} &
+    \textbf{Role(s)} &
     \textbf{Responsibilities} \\
     \hline
     \endfirsthead
@@ -166,7 +166,7 @@ The following table lists the role and responsibilities for individuals working 
     % Subsequent pages header
     \hline
     \textbf{Name} &
-    \textbf{Role} &
+    \textbf{Role(s)} &
     \textbf{Responsibilities} \\
     \hline
     \endhead
@@ -182,25 +182,25 @@ The following table lists the role and responsibilities for individuals working 
 
     Jacob Brodersen &
     Creative Director and Team Lead &
-    - Ensure consistency across subfields of work\newline- Verify traceability\newline- Validation of stakeholder requirements\newline- Coordinate document inspections \\
+    - Ensure consistency across subfields of work\newline- Verify traceability\newline- Validation of stakeholder requirements\newline- Coordinate document inspections\newline- Delegate verification and validation tasks \\
 
     \hline
 
     Allen Tong &
     Webmaster &
-    - Website verification\newline- Website content validation \\
+    - Website content verification\newline- Website content validation \\
 
     \hline
 
     Amos Edeaghe &
     Back-End Lead &
-    - Verification of gameplay logic\newline- Unit testing \\
+    - Verification of gameplay logic\newline- Verification of databases \\
 
     \hline
 
     Joshua Engel &
     Front-End Lead &
-    - User input and output verification\newline- Rendering/projection verification \\
+    - User input and output verification\newline- Rendering / projection verification \\
 
     \hline
 
@@ -211,13 +211,13 @@ The following table lists the role and responsibilities for individuals working 
     \hline
 
     Dr. Paul Rapoport &
-    Project Supervisor &
-    - Work with Team Lead to validate the overall application \\
+    Project Supervisor and Primary Stakeholder &
+    - Work with Team Lead to validate the overall application and documentation \\
 
     \hline
 
     Lucas Dutton &
-    Project TA &
+    Project TA and Primary Reviewer &
     - Provide feedback on verification and validation techniques (focus on coverage, effectiveness, and feasibility) \\
 
 \end{tabularx}
@@ -238,9 +238,10 @@ issue tracker?}
 
 There are a few key approaches that will be used to verify the SRS.
 
-First, ad hoc feedback from reviewers will be used. There will be two primary reviewer categories for the document: the project supervisor (Dr. Rapoport) and peer reviewers (classmates). For the project supervisor, the SRS document will be provided ahead of a meeting in which the supervisor can bring up their concerns or recommendations for the document. In particular, during the meeting with the supervisor, we will ask targeted questions primarily focused around the functional and stakeholder requirements:
+First, ad hoc feedback from reviewers will be used. There will be three primary reviewer categories for the document: the project supervisor (Dr. Rapoport), peer reviewers (classmates), and Lucas (our TA). For the project supervisor, the SRS document will be provided ahead of a meeting in which the supervisor can bring up their concerns or recommendations for the document. In addition to accepting Dr. Rapoport's unstructured feedback, we will ask targeted questions primarily focused around the functional and stakeholder requirements:
 
 \begin{itemize}
+  \item Do the Introduction and System Overview sections fully capture your intended problem, purpose, and scope?
   \item Do the stakeholder requirements accurately capture your project goals?
   \item Do the functional requirements support your vision for gameplay?
   \begin{itemize}
@@ -248,7 +249,9 @@ First, ad hoc feedback from reviewers will be used. There will be two primary re
   \end{itemize}
 \end{itemize}
 
-For the peer reviewers, we will utilize GitHub's issue tracker where the reviewers can read over the document on their own time and create formalized recommendations for improvement.
+For the peer reviewers, this will be an asynchronous process utilizing GitHub's issue tracker where the reviewers can read over the document on their own time and create formalized recommendations for improvement.
+
+For Lucas, this will be an asynchronous process in the form of grading the SRS document. Lucas is very knowledgeable in SRS work and can focus on the more technical aspects of the document that the other reviewers may miss out on. This is a structured process as Lucas will be using the SRS grading rubric to evaluate the correctness of the SRS document.
 
 Second, internal reviews will be performed. Initially, each team member works on their own section with limited interaction (other than ensuring consistency where work overlaps between sections). Once each team member has an initial draft of their work, another team member will be assigned to review their work. Once each team member has reviewed their assigned team member's work, we will hold a team meeting. In this team meeting, each team member will have a chance to voice their concerns/recommendations. The whole team will then give their input as to what course of action should follow.
 
@@ -271,7 +274,7 @@ SRS Verification Checklist:
   \item All hazards and constraints are documented
 \end{itemize}
 
-Any problems identified during the SRS Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
+Any matters identified during the SRS Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Design Verification}
 
@@ -302,7 +305,7 @@ The design verification entails ensuring that the software's design is correct a
   \end{itemize}
 \end{itemize}
 
-Any problems identified during the Design Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
+Any matters identified during the Design Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Verification and Validation Plan Verification}
 
@@ -332,7 +335,7 @@ VnV Checklist:
   \item Test coverage is sufficient to provide confidence in system correctness
 \end{itemize}
 
-Any problems identified during the VnV Plan process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
+Any matters identified during the VnV Plan process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Implementation Verification}
 
@@ -350,8 +353,8 @@ CAS741) for a partial usability survey.}
 The below list outlines the methods used to verify the implementation:
 
 \begin{itemize}
-  \item Run Pylint (ADD REF) to check for errors, style inconsistencies, etc.
-  \item Measure code coverage for testing using Coverage.py (ADD REF)
+  \item Run Pylint (see \ref{sec:AutoTestandVerTools}) to check for errors, style inconsistencies, etc.
+  \item Measure code coverage for testing using Coverage.py (see \ref{sec:AutoTestandVerTools})
   \item Code walkthrough by each team member
   \begin{itemize}
     \item Focus on logic errors throughout the code that could cause issues with functionality or performance
@@ -361,18 +364,19 @@ The below list outlines the methods used to verify the implementation:
   \begin{itemize}
     \item Focus on general logic errors, maintainability concerns, performance concerns, and potential defects
   \end{itemize}
-  \item Automated test execution (REF AUTOMATED TESTING AND VERIFICATION TOOLS)
+  \item Automated test execution (see \ref{sec:AutoTestandVerTools})
   \begin{itemize}
-    \item Ensure that each requirement (stakeholder, functional, data, and non-functional) has an associated system test-suite (REF SECTION 4) (except for usability related requirements, see below)
-    \item Unit testing as described in (REF SECTION 5)
+    \item Ensure that each requirement (stakeholder, functional, data, and non-functional) has an associated system test-suite (defined in \ref{sec:SysTest}) (except for usability related requirements, see below)
+    \item Unit testing as described in \ref{sec:UnitTest}
     \item Automated execution of tests through GitHub Actions
   \end{itemize}
-  \item To verify non-functional usability requirements of the system, usability testing with users will be conducted (e.g., NFR5)
+  \item To verify non-functional usability requirements of the system, usability testing with users will be conducted (e.g., testing percentage of users that can perform a task without external assistance, see \ref{sec:UsabilitySurvey})
 \end{itemize}
 
-Any problems identified during the Implementation Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
+Any matters identified during the Implementation Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Automated Testing and Verification Tools}
+\label{sec:AutoTestandVerTools}
 
 \wss{What tools are you using for automated testing.  Likely a unit testing
   framework and maybe a profiling tool, like ValGrind.  Other possible tools
@@ -397,8 +401,15 @@ Below are the various tools our team plans to use for automated testing:
   \item Automated Unit and System Testing: Pytest
   \item Build Verification and Automatic Test Execution for Pull Requests: GitHub Actions
   \item Linter for Static Analysis / Coding Standard Enforcement: Pylint
-  \item Code Coverage for Testing: Coverage.py
+  \item Code Coverage for Testing: Coverage.py through Pytest-cov
+  \begin{itemize}
+    \item Code coverage metrics will be summarized as percentage of statements and branches covered as well as traceability of which test covered which statement/branch.
+  \end{itemize}
+  \item Static Type Checking: Mypy
+  \item Performance Measurement: cProfile, Timeit, and Tracemalloc
 \end{itemize}
+
+Note that these tools are consistent with the tools listed in the Expected Technology section of the \href{https://github.com/Jacob-MB/magic-8/blob/main/pdfs/DevelopmentPlan/DevelopmentPlan.pdf}{Development Plan}.
 
 \subsection{Software Validation}
 
@@ -431,13 +442,15 @@ Second, for a more detailed analysis of whether the software meets user needs, w
   \item Which parts did you find most frustrating and/or confusing when using the software?
   \item If you could change one part of the software, what would you change?
   \item If you could keep one part of the software, what would you keep?
+  \item Are there any additional features you would like to see?
 \end{itemize}
 
 Third, our Custom Documents (CDs) also promote software validation. Our CD Fall is the User/Stakeholder/Client Interview Report. This document will allow us to clarify user/stakeholder/client goals and requirements and we can then cross-check these against the software specification. Our CD Winter is the Usability Report. This document can help to validate that the software fits with the user's mental model of the gameplay and usability features.
 
-Any problems identified during the Software Validation process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
+Any matters identified during the Software Validation process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \section{System Tests}
+\label{sec:SysTest}
 
 \wss{There should be text between all headings, even if it is just a roadmap of
 the contents of the subsections.}
@@ -563,6 +576,7 @@ How test will be performed:
   requirements.}
 
 \section{Unit Test Description}
+\label{sec:UnitTest}
 
 \wss{This section should not be filled in until after the MIS (detailed design
   document) has been completed.}
@@ -703,6 +717,7 @@ The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
 Their values are defined in this section for easy maintenance.
 
 \subsection{Usability Survey Questions?}
+\label{sec:UsabilitySurvey}
 
 \wss{This is a section that would be appropriate for some projects.}
 
