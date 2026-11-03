@@ -492,7 +492,59 @@ Their values are defined in this section for easy maintenance.
 
 \subsection{Usability Survey Questions?}
 
-\wss{This is a section that would be appropriate for some projects.}
+During the semi-structured interview with the users, these quetions will serve as stress points to drive the interview when it reaches a lull. While these questions are deeply connected to the SRS documentation, the interviewers are expected to come up with questions on the spot based on immediate feedback they received \b{during} the tech demo.
+
+\begin{enumerate}
+    \item \textbf{Menu Navigation:} Can you navigate to starting a game and view the leaderboard at the end? ( 1-5 scale: 1 = Very Easily, 4 = Not Without Help, 5 = Still Confused)
+    
+    \textbf{Rationale:} This question serves as a surrogate for
+    \hyperref[NFR_19]{Non-Functional Req  19} (Visual Contrast) based on the capabilities of the user being asked the question as those with visual impairments will struggle to complete
+    the tutorial without high visual contrast and following accessibility guidelines. This is directly related to \hyperref[NFR_18]{Non-Functional Req  18} (Keyboard Accessibility) 
+    as some of the users tested for the interview might be asked to demonstrate using the website without a mouse (ex. using the coordinate navigation feature instead of choosing cells with a mouse).
+    These nonfunctional requirements are related to test cases NFR-T18 and NFR-T19. 
+    
+    \item \textbf{Visual Clarity:} After entering a wrong answer, were you able to understand how the answer is wrong? (Yes / No / With Interviewer Help)
+    
+    \textbf{Rationale:} This question directly validates \hyperref[FR_39]{Functional Req 39} (Guided Learning: Cell Selection), as guided learning is built into the project since the stakeholders ask
+    for a game that will teach octal and magic squares to its users. The user should be able to see what rule they are breaking when they are selecting a wrong cell, so they can learn where they are 
+    going wrong. It also validates \hyperref[FR_41]{Functional Req 41} (Guided Learning: Repeated Mistakes) as more mistakes should result in the website getting more descriptive with its hints and essentially 
+    holding their hand to the answer. It should essentially act as how the interviewer will if the user got stuck (hence giving the option to choose "With Interviewer Help", which means that the user was unable to follow the website hints).
+    
+    \item \textbf{Guided Learning Information Retention:} Are you able to complete the following octal magic sqaure after the tutorial? (Yes / No / After 3 mins)
+    
+    \textbf{Rationale:} After the guided learning section, the user is given a printed-out octal magic square (Sudoku-like). This is used to test out if the lessons and examples were taught well enough to 
+    see if the user can jump into the level system. The guided learning section has a test function of sorts where the website generates questions and verifies users' answers. This is also useful for the interviewer to infer 
+    how well the user will do in the actual game. This question validates that the premise of \hyperref[UC-6]{Usage Case 6} (Guided Learning and Tutorial) remains even if every step isn't followed.
+    
+    \item \textbf{Reponse Time:} Does the screen refresh before you start thinking about the next step? (Yes / No)
+    
+    \textbf{Rationale:} This is an important question to ask as the current scoring system of the game is dependent on the time taken to solve the magic cube. If the user has to wait for their last answer to 
+    appear on the cube or for their answer to get verified, this can add minutes to the time spent playing, and greatly depress the user's final score. This question is directly related to
+    \hyperref[NFR-T1]{Non-Functional Requirement - Test 1} (Cube Rotation Response Time) and \hyperref[NFR-T2]{Non-Functional Requirement - Test 2} (Cell-Value Editing Response Time), except it will be done by the users 
+    rather than found computationally. Users don't really care about the website's response times past a certain value as they don't have a small enough reaction time, and this question gives a reasonable response time 
+    to aim for in computational tests.
+    
+    
+    \item \textbf{Portability:} Are you able to access it via your favoured browser? (Yes / No)
+    
+    \textbf{Rationale:} This is an important question to ask as different browsers might have different nooks and crannies that might pose difficulties (if the website has to allow usage on older browsers) or
+    benefits (if a browser has an efficient implementation for displaying 3D models). Having a portable project also allows the team to create a browser-based mobile implementation as a stretch goal. This is
+    related to \hyperref[NFR-T9]{Non-Functional Requirement - Test 9} (Browser Compatibility) and \hyperref[NFR-T10]{Non-Functional Requirement - Test 10} (Browser-Based Deployment). Although a tester (on the 
+    Capstone team) can easily try to go through all major browser implementations, letting the user do it gives the user a sense of comfort as they are using the browser they are used to.
+
+    
+    \item \textbf{Account Creation:} After creating an account, do you see your other scores? (Yes / No)
+    
+    \textbf{Rationale:} While the team can easily simulate creating accounts and running games on multiple different accounts, they will still approach building the UI related to account creation as people that
+    used multiple UIs. The useability might seem normal for software engineers, but hard to follow for younger students interested in learning octal, or older gentlemen not familiar with browser games (Persona 2).
+    Navigating the account creation and using it to check scores will give the interviewers a good handle on how easy it is follow the game's flow. User Interviews will give a nice qualitative assessment to the 
+    quantitative assessments from \hyperref[NFR-T15]{Non-Functional Requirement - Test 15} (User Data Isolation) and \hyperref[NFR-T16]{Non-Functional Requirement - Test 16} (Authentication Secret Protection).
+
+
+
+
+    \end{enumerate}
+
 
 \newpage{}
 
