@@ -106,6 +106,7 @@ jobs:
           # pdflatex finds lmodern.sty but not the fonts it maps to, failing
           # with "Font rm-lmr7 at 600 not found".
           sudo updmap-sys >/dev/null
+          sudo fmtutil-sys --all
 
           pdflatex --version | head -1
           pandoc --version | head -1
