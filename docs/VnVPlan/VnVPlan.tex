@@ -1,6 +1,7 @@
 \documentclass[12pt, titlepage]{article}
 
 \usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{hyperref}
@@ -70,26 +71,42 @@ in.}
 
 \section{Symbols, Abbreviations, and Acronyms}
 
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{l l} 
-  \toprule		
-  \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  T & Test\\
-  \bottomrule
-\end{tabular}\\
+\begin{longtable}{p{0.25\textwidth} p{0.65\textwidth}}
+\toprule
+Term & Definition\\
+\midrule
+SOLID principles & Principles to male code readable and maintainable \\
+SRP & Single-Responsibility Principle: A class has a singular responsibility \\
+OCP & Open-closed Principle: Open for extension, closed for modification \\
+LSP & Liskov Substitution Principle: Subobects can use their base objects' functions \\
+ISP & Integration Segregation Principle: Interfaces shouldn't be vast and aimless \\
+DIP & Dependency Inversion Principle: Focus on abstractions \\
+VnV & System Verification and Validation \\
+MIS & Module Interface Specification: A standard and formal speecification that acts like the implementation is a black box \\
+Base 8 & A number system using the digits 0 to 7 where the value for each digit in decimal can be found by multiplying by 8 to the power of n where n represents the number of positions from the right. \\
+Octal & Another name for base 8. \\
+Magic square & A square array of positive integers where the sum of each individual row, column, or main diagonal is the same.\\
+Magic cube & The 3-dimensional equivalent of a magic square where the sums of each row, column, pillar, main diagonal, or triagonal is the same. \\
+Magic constant & The fixed sum obtained when doing sums in any row, column, or main diagonal in a magic square. \\
+Most perfect magic cube & A magic cube where all rows, columns, pillars, diagonals, triagonals, and broken space diagonals add up to the magic constant. \\
+Triagonal & A line or set of cells connecting two opposite vertices through the interior of a cube and hence moves across all three axes. \\
+Broken space diagonal & A diagonal that wraps around the cube's boundaries.\\
+Voxel & A single 3D cell within the magic cube. \\
+Slice & A 2D display providing all the voxels within a certain cross section of the magic cube.\\
+Round & A single playthrough of the game consisting of 8 sequential tasks. \\
+Starter & The initial randomly chosen visible voxel that acts as a starting point for the player to start solving tasks.\\
+\bottomrule
+\caption{Definitions and Acronyms} \label{tab:DefinitionsAndAcronyms}
+\end{longtable}
 
-\wss{symbols, abbreviations, or acronyms --- you can simply reference the SRS
-  \citep{SRS} tables, if appropriate}
-
-\wss{Remove this section if it isn't needed}
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
+This document provides a Verification and Validation plan for Team Magic's Magic-8 project. This document will lay out how testing will be done for the browser-based 
+octal magic cube game as a black box, and automated tools to ensure that the source code is statically correct. It also currently contains the tests for the functional
+and non functional requirement, alongside user interiew questions. After the formalization and completion of the MIS, this will also contain descriptions of the unit tests.
 
 \section{General Information}
 
@@ -1188,7 +1205,59 @@ Their values are defined in this section for easy maintenance.
 \subsection{Usability Survey Questions?}
 \label{sec:UsabilitySurvey}
 
-\wss{This is a section that would be appropriate for some projects.}
+During the semi-structured interview with the users, these quetions will serve as stress points to drive the interview when it reaches a lull. While these questions are deeply connected to the SRS documentation, the interviewers are expected to come up with questions on the spot based on immediate feedback they received \b{during} the tech demo.
+
+\begin{enumerate}
+    \item \textbf{Menu Navigation:} Can you navigate to starting a game and view the leaderboard at the end? ( 1-5 scale: 1 = Very Easily, 4 = Not Without Help, 5 = Still Confused)
+    
+    \textbf{Rationale:} This question serves as a surrogate for
+    \hyperref[NFR_19]{Non-Functional Req  19} (Visual Contrast) based on the capabilities of the user being asked the question as those with visual impairments will struggle to complete
+    the tutorial without high visual contrast and following accessibility guidelines. This is directly related to \hyperref[NFR_18]{Non-Functional Req  18} (Keyboard Accessibility) 
+    as some of the users tested for the interview might be asked to demonstrate using the website without a mouse (ex. using the coordinate navigation feature instead of choosing cells with a mouse).
+    These nonfunctional requirements are related to test cases NFR-T18 and NFR-T19. 
+    
+    \item \textbf{Visual Clarity:} After entering a wrong answer, were you able to understand how the answer is wrong? (Yes / No / With Interviewer Help)
+    
+    \textbf{Rationale:} This question directly validates \hyperref[FR_39]{Functional Req 39} (Guided Learning: Cell Selection), as guided learning is built into the project since the stakeholders ask
+    for a game that will teach octal and magic squares to its users. The user should be able to see what rule they are breaking when they are selecting a wrong cell, so they can learn where they are 
+    going wrong. It also validates \hyperref[FR_41]{Functional Req 41} (Guided Learning: Repeated Mistakes) as more mistakes should result in the website getting more descriptive with its hints and essentially 
+    holding their hand to the answer. It should essentially act as how the interviewer will if the user got stuck (hence giving the option to choose "With Interviewer Help", which means that the user was unable to follow the website hints).
+    
+    \item \textbf{Guided Learning Information Retention:} Are you able to complete the following octal magic sqaure after the tutorial? (Yes / No / After 3 mins)
+    
+    \textbf{Rationale:} After the guided learning section, the user is given a printed-out octal magic square (Sudoku-like). This is used to test out if the lessons and examples were taught well enough to 
+    see if the user can jump into the level system. The guided learning section has a test function of sorts where the website generates questions and verifies users' answers. This is also useful for the interviewer to infer 
+    how well the user will do in the actual game. This question validates that the premise of \hyperref[UC-6]{Usage Case 6} (Guided Learning and Tutorial) remains even if every step isn't followed.
+    
+    \item \textbf{Reponse Time:} Does the screen refresh before you start thinking about the next step? (Yes / No)
+    
+    \textbf{Rationale:} This is an important question to ask as the current scoring system of the game is dependent on the time taken to solve the magic cube. If the user has to wait for their last answer to 
+    appear on the cube or for their answer to get verified, this can add minutes to the time spent playing, and greatly depress the user's final score. This question is directly related to
+    \hyperref[NFR-T1]{Non-Functional Requirement - Test 1} (Cube Rotation Response Time) and \hyperref[NFR-T2]{Non-Functional Requirement - Test 2} (Cell-Value Editing Response Time), except it will be done by the users 
+    rather than found computationally. Users don't really care about the website's response times past a certain value as they don't have a small enough reaction time, and this question gives a reasonable response time 
+    to aim for in computational tests.
+    
+    
+    \item \textbf{Portability:} Are you able to access it via your favoured browser? (Yes / No)
+    
+    \textbf{Rationale:} This is an important question to ask as different browsers might have different nooks and crannies that might pose difficulties (if the website has to allow usage on older browsers) or
+    benefits (if a browser has an efficient implementation for displaying 3D models). Having a portable project also allows the team to create a browser-based mobile implementation as a stretch goal. This is
+    related to \hyperref[NFR-T9]{Non-Functional Requirement - Test 9} (Browser Compatibility) and \hyperref[NFR-T10]{Non-Functional Requirement - Test 10} (Browser-Based Deployment). Although a tester (on the 
+    Capstone team) can easily try to go through all major browser implementations, letting the user do it gives the user a sense of comfort as they are using the browser they are used to.
+
+    
+    \item \textbf{Account Creation:} After creating an account, do you see your other scores? (Yes / No)
+    
+    \textbf{Rationale:} While the team can easily simulate creating accounts and running games on multiple different accounts, they will still approach building the UI related to account creation as people that
+    used multiple UIs. The useability might seem normal for software engineers, but hard to follow for younger students interested in learning octal, or older gentlemen not familiar with browser games (Persona 2).
+    Navigating the account creation and using it to check scores will give the interviewers a good handle on how easy it is follow the game's flow. User Interviews will give a nice qualitative assessment to the 
+    quantitative assessments from \hyperref[NFR-T15]{Non-Functional Requirement - Test 15} (User Data Isolation) and \hyperref[NFR-T16]{Non-Functional Requirement - Test 16} (Authentication Secret Protection).
+
+
+
+
+    \end{enumerate}
+
 
 \newpage{}
 
@@ -1238,6 +1307,7 @@ graduate attribute of Lifelong Learning.
   member pursue, and why did they make this choice?
 \end{enumerate}
 
+
 \subsection*{Team Answers}
 
 Questions 3 and 4 have been answered as a team.
@@ -1248,9 +1318,13 @@ Questions 3 and 4 have been answered as a team.
   
   Another skill we will need is automated testing of the browser interface, since many of the system tests in Section 4.1 are run by a script that clicks cells, enters answers, and reads the screen. Allen will focus on this skill.
   
+  Another knowledge area that the team has to learn is applying functional languages to prove that cube states are valid. This can be important when generating new cube states (a stretch goal discussed with the TA) or ensuring that if the user chose the wrong cell, it can dynamically realize that the user chose the wrong cell, rather than it being baked into the code (hard written).
+  
   \item Jacob is focusing on learning the performance measurement tools: cProfile, Timeit, Tracemalloc, and Mitata. The first approach to mastering this skill is reading the documentation on the different libraries. Jacob will first focus on reading the quick start guides and introductions and then read method documentation as required. A second approach to mastering this skill is reviewing example uses of the libraries. The tools are very popular and as such, have been applied to many projects. By reviewing projects that are similar to this project, Jacob can gain a deeper understanding of how to properly utilize the tools.
   
   Allen is focusing on learning automated browser interface testing. The first approach is reading the documentation and getting started guides for a browser testing tool such as Playwright. The second approach is to practice by writing a few of the system tests from Section 4.1 (for example, ST-FR-1 and ST-FR-4) against an early version of the game, so the learning is applied directly to our own project.
+
+  Nehan will be learning and applying what he learned side by side with his functional programming course. This gives him access to a professor and TA that he can ask for help if he needs it, alongside countless online resources. As this isn't important for the first revision of the app or PoC, Nehan can analyze if he is able to take on this task (a stretch goal verifying generated cubes). If not, he is always able to use an object-oriented language to validate game states.
 \end{enumerate}
 
 \subsection*{Jacob Brodersen}
@@ -1266,5 +1340,16 @@ Questions 3 and 4 have been answered as a team.
   \item What went well for me was writing Section 4.1. Since I wrote the functional requirements in the SRS, I already knew how each requirement was supposed to behave, so the tests came naturally from them. I could work out the expected values directly from the rules, such as the scoring formula and the octal subtraction constants, and group related requirements into a single test. It also made the traceability table in Section 4.3 straightforward because I knew which requirements each test needed to cover.
   \item One pain point was the number of tests. My first draft had a test for almost every requirement, which came to 46 tests and was too much for this document. I resolved this by grouping related requirements together, which brought it down to 22 tests while still covering all 55 requirements.
 \end{enumerate}
+
+\subsection*{Nehan Munir}
+
+\begin{enumerate}
+  \item This was the most effortless deliverable I have done so far, and while the tasks (Interview Questions) I have been assigned were simple, also having a clearly defined mental visualization of how the final project will 
+  look also helps. This mental image has been created after having focused and etensive deliverables that outline the flow of the game, alongside multiple in-person and virtual meetings with the team and the supervisor.
+  \item One of the pain points that I had was trying to link the SRS and VnV test plans with the user useability questions. I wanted to ensure that it contains the bidirectionality and linkage so that when looking back at this
+  document while writing our code, I can see how we arrived at each decision and what else it is related to. I solved this problem by realizing what I was asked to do, which doesn't really correspond with other elements of the
+  VnV plan, which was mostly about test the team can do indiidually (either computationally simulating workload or using static analysis tools), while my parts had to be done with a tech illiterate user in mind. This led me to leaning in
+  to using my questions as a qualitative assessment substitute to the quantitative tests in other sections.  
+\end {enumerate}
 
 \end{document}
