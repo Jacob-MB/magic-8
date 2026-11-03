@@ -12,9 +12,13 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\usepackage{ltablex}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \input{../Comments.text}
 \input{../Common.text}
+\renewcommand{\wss}[1]{} 
 
 \begin{document}
 
@@ -31,8 +35,9 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+October 31, 2026 & 1.0 & Jacob Brodersen added rough draft of Section 3 \\
+November 1, 2026 & 1.1 & Jacob Brodersen refined Section 3 \\
+November 02, 2026 & 1.2 & Amos Edeaghe added Section 2 \\
 \bottomrule
 \end{tabularx}
 
@@ -93,6 +98,12 @@ This document ... \wss{provide an introductory blurb and roadmap of the
 \wss{Say what software is being tested.  Give its name and a brief overview of
   its general functions.}
 
+  The software being tested is called Magic 8. Magic 8 is a free-to-play, web-based 3D puzzle game built around an 8x8x8 magic cube.
+Users are given a starting cell and tasks to solve to guide their navigation through the magic cube, ending with them performing addition or subtraction in octal to confirm each task's completion.
+The game allows users to navigate the cube to select cells by moving through its faces and slices or by rotating the cube. Upon completing a task, the users
+are given a score based on the task's difficulty and the time taken to complete it. Magic 8's goal is to provide a fun and engaging resource to interact with base 8 and magic cubes that is accessible to those interested.
+  
+
 \subsection{Objectives}
 
 \wss{State what is intended to be accomplished.  The objective will be around
@@ -112,6 +123,15 @@ so what are you going to prioritize?  As an example, if your system depends on a
 external library, you can explicitly state that you will assume that external library 
 has already been verified by its implementation team.}
 
+The objective of this document is to check if the project exhibits sufficient usability and builds confidence in its correctness. The focus
+on usability is due to the project's game nature, with a goal of being both fun and engaging through its task-based system; insufficient usability would
+build frustration amongst users and hamper that experience. The web-based game would have users solving tasks with an asynchronous system to rotate,
+move through, and solve the tasks in the cube. As such, usability, user validation, and correctness are required for a satisfactory user experience and to encourage
+users to adopt the tool.
+
+The project will make use of certain third-party libraries; due to resource constraints, the team has decided to work under the assumption that all used third-party
+libraries and dependencies are already verified by their implementation teams.
+
 \subsection{Custom Documents}
 
 \wss{Summarize the CDs (Custom Documents) that were tackled by this project.  CDs 
@@ -121,6 +141,15 @@ been approved by the course instructor as included in your problem statement.
 You can use a pull request to update your CDs (in TeamComposition.csv or
 Repos.csv) if your plan changes as a result of the VnV planning exercise.}
 
+The custom document \textbf{User/Stakeholder/Client Interview Report} was chosen to provie the team with a deeper unerstaning of what 
+a typical user would want from the game. Through a mix of structured and unstructured interviews of our stakeholders we will
+gain a better view of how they envision gameplay and what they find intuitive or difficult so they can be considered integrated in the validation
+of our system.
+
+The other custom document that will be tackle is the \textbf{Usability Report} would provie wimiliar information on how users experience the game but through observations 
+of their interaction with the system. The goal is to use this document to measure the goal metrics set for fun, difficulty and usability.
+
+
 \subsection{Relevant Documentation}
 
 \wss{Reference relevant documentation.  This will definitely include your SRS
@@ -129,7 +158,14 @@ Repos.csv) if your plan changes as a result of the VnV planning exercise.}
   is done, they will be written.  You can create BibTeX entries for your
   documents and within those entries include a hyperlink to the documents.}
 
-\citet{SRS}
+To guide the testing of our system, the Verification and Validation plan will make use of the following documents:
+
+  \begin{itemize}
+  \item Software Requirements Specification (SRS) \citet{SRS-IEEE}: The SRS details all the functional and non-functional requirements the project must meet. These requirements serve as the basis for the tests that are designed with the belief that by checking against and satisfying these requirements, the system will have satisfactory usability and correctness.
+  \item Module Interface Specification (MIS): The MIS details the usage, purpose, and specification of the interfaces for each module that makes up Magic 8; as such, it is a necessary reference for verifying the interactions between the interfaces and the system.
+  \item Module Guide (MG): This provides the layout for the modules that make up the system, their hierarchy, connection to requirements, and their decomposition. It is used to ensure the internal flow of the system is covered in the tests.
+  \end{itemize}
+
 
 \wss{Don't just list the other documents.  You should explain why they are relevant and 
 how they relate to your VnV efforts.}
@@ -139,11 +175,86 @@ how they relate to your VnV efforts.}
 \wss{Introduce this section.  You can provide a roadmap of the sections to
   come.}
 
+This section describes the verification and validation processes that will be implemented. This includes the roles and responsibilities of the verification and validation team, the SRS verification plan, the design verification plan, the VnV plan verification plan, the implementation verification plan, the automated testing and verification tools, and the software validation plan.
+
 \subsection{Verification and Validation Team}
 
 \wss{Your teammates.  Maybe your supervisor.
   You should do more than list names.  You should say what each person's role is
   for the project's verification.  A table is a good way to summarize this information.}
+
+The following table lists the role(s) and responsibilities for individuals working on the project's verification and validation.
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|Y|Y|Y|}
+
+    % Header
+    \caption{Verification and Validation Team} \\
+    \hline
+    \textbf{Name} &
+    \textbf{Role(s)} &
+    \textbf{Responsibilities} \\
+    \hline
+    \endfirsthead
+
+    % Subsequent pages header
+    \hline
+    \textbf{Name} &
+    \textbf{Role(s)} &
+    \textbf{Responsibilities} \\
+    \hline
+    \endhead
+
+    % Prompt that the table continues
+    \hline
+    \multicolumn{3}{r}{\textit{Continued on next page}} \\
+    \endfoot
+
+    % No footer on last page
+    \hline
+    \endlastfoot
+
+    Jacob Brodersen &
+    VnV Creative Director and Team Lead &
+    - Ensure consistency across subfields of work\newline- Verify traceability\newline- Validation of stakeholder requirements\newline- Coordinate document inspections\newline- Delegate verification and validation tasks \\
+
+    \hline
+
+    Allen Tong &
+    VnV Back-End Lead &
+    - Verification of gameplay logic\newline- Verification of databases \\
+
+    \hline
+
+    Amos Edeaghe &
+    VnV Webmaster &
+    - Website content verification\newline- Website content validation \\
+
+    \hline
+
+    Joshua Engel &
+    VnV Systems Analyst &
+    - Verify interoperability of system components\newline- System architecture and design verification and validation \\
+
+    \hline
+
+    Nehan Munir &
+    VnV Front-End Lead &
+    - User input and output verification\newline- Rendering / projection verification \\
+
+    \hline
+
+    Dr. Paul Rapoport &
+    Project Supervisor and Primary Stakeholder &
+    - Work with Team Lead to validate the overall application and documentation \\
+
+    \hline
+
+    Lucas Dutton &
+    Project TA and Primary Reviewer &
+    - Provide feedback on verification and validation techniques (focus on coverage, effectiveness, and feasibility) \\
+
+\end{tabularx}
 
 \subsection{SRS Verification}
 
@@ -159,6 +270,49 @@ issue tracker?}
 
 \wss{Maybe create an SRS checklist?}
 
+There are a few key approaches that will be used to verify the SRS.
+
+First, ad hoc feedback from reviewers will be used. There will be three primary reviewer categories for the document: the project supervisor (Dr. Rapoport), peer reviewers (classmates), and Lucas (our TA). For the project supervisor, the SRS document will be provided ahead of a meeting in which the supervisor can bring up their concerns or recommendations for the document. In addition to accepting Dr. Rapoport's unstructured feedback, we will ask targeted questions primarily focused around the functional and stakeholder requirements:
+
+\begin{itemize}
+  \item Is there anything in particular that you found ambiguous or confusing?
+  \item Do the Introduction and System Overview sections fully capture your intended problem, purpose, and scope?
+  \item Do the stakeholder requirements accurately capture your project goals?
+  \item Do the functional requirements support your vision for gameplay?
+  \begin{itemize}
+    \item Are there any missing functional requirements that you would like to see added?
+  \end{itemize}
+\end{itemize}
+
+Note that Dr. Rapoport's work in the SRS is more validation-related than verification-related, but this review is still important, so it has been included here. Additionally, these questions still may prompt verification-related fixes.
+
+For the peer reviewers, this will be an asynchronous process utilizing GitHub's issue tracker where the reviewers can read over the document on their own time and create formalized recommendations for improvement.
+
+For Lucas, this will be an asynchronous process in the form of grading the SRS document. Lucas is very knowledgeable in SRS work and can focus on the more technical aspects of the document that the other reviewers may miss out on. This is a structured process as Lucas will be using the SRS grading rubric to evaluate the correctness of the SRS document.
+
+Second, internal reviews will be performed. Initially, each team member works on their own section with limited interaction (other than ensuring consistency where work overlaps between sections). Once each team member has an initial draft of their work, another team member will be assigned to review their work. Once each team member has reviewed their assigned team member's work, we will hold a team meeting. In this team meeting, each team member will have a chance to voice their concerns/recommendations. The whole team will then give their input as to what course of action should follow.
+
+SRS Verification Checklist:
+
+\begin{itemize}
+  \item Every requirement is:
+  \begin{itemize}
+    \item Abstract
+    \item Unambiguous
+    \item Traceable (clearly labelled and numbered)
+    \item Validatable
+    \item Verifiable
+    \item Complete
+    \item Consistent
+  \end{itemize}
+  \item Each feature and goal identified through stakeholder elicitation has an associated requirement
+  \item No conflicting requirements
+  \item All assumptions are clearly defined
+  \item All hazards and constraints are documented
+\end{itemize}
+
+Any matters identified during the SRS Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
+
 \subsection{Design Verification}
 
 \wss{Plans for design verification}
@@ -166,6 +320,29 @@ issue tracker?}
 \wss{The review will include reviews by your classmates}
 
 \wss{Create a checklists?}
+
+The design verification entails ensuring that the software's design is correct and complete. To do this, the following strategies will be used:
+
+\begin{itemize}
+  \item Module Interface Specification (MIS) review by each team member as well as peer review by classmates:
+  \begin{itemize}
+    \item Ensure that each requirement is traced to a module
+    \item Ensure that each module correctly adheres to the linked requirements
+    \item Ensure that all expected inputs and outputs of each module are clearly defined
+    \item Each module should follow SOLID principles
+  \end{itemize}
+  \item System Architecture review by each team member as well as peer review by classmates:
+  \begin{itemize}
+    \item Ensure that subsystem responsibilities are well-separated
+    \item Ensure architecture supports maintainability and extensibility
+    \item Ensure that all major system components are represented
+    \item Ensure that all interfaces are clearly defined (both between subcomponents as well as external interfaces)
+    \item Ensure that the architecture supports all requirements
+    \item Ensure that dependencies between subsystems are minimized and necessary
+  \end{itemize}
+\end{itemize}
+
+Any matters identified during the Design Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Verification and Validation Plan Verification}
 
@@ -175,6 +352,27 @@ verified.  Techniques for this include review and mutation testing.}
 \wss{The review will include reviews by your classmates}
 
 \wss{Create a checklists?}
+
+There are a few different methods that will be used for verifying the VnV plan.
+
+First, each team member will review the document as a whole. Key goals of this review include ensuring consistency across the document and ensuring that all descriptions are concise and clear.
+
+Second, mutation testing will be performed. Specifically, errors will purposefully be introduced (e.g., omitted requirements, incorrect expected outputs, etc.) to see if the VnV plan's review and testing methods would catch the error. This method provides confidence that the methods in this plan are adequate.
+
+Third, peer review of the document will be conducted. This review process will happen through GitHub issues. Similar to the team member review, this will focus on consistency/unambiguity checks and clarity of the document.
+
+Finally, TA feedback will be utilized. Due to the TA's extensive knowledge of VnV plans, this will allow for deeper analysis into whether the methods within the VnV plan are effective and efficient at verifying the requirements and ensuring sufficient test coverage.
+
+VnV Checklist:
+
+\begin{itemize}
+  \item Every requirement has at least one associated verification method
+  \item Verification and validation activities are feasible with the available resources and timeline of the capstone
+  \item All test cases are traceable to requirements
+  \item Test coverage is sufficient to provide confidence in system correctness
+\end{itemize}
+
+Any matters identified during the VnV Plan process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
 
 \subsection{Implementation Verification}
 
@@ -189,7 +387,33 @@ verified.  Techniques for this include review and mutation testing.}
 walkthrough.  There is also a possibility of using the final presentation (in
 CAS741) for a partial usability survey.}
 
+The below list outlines the methods used to verify the implementation:
+
+\begin{itemize}
+  \item Run Pylint (see \ref{sec:AutoTestandVerTools}) to check for errors, style inconsistencies, etc.
+  \item Measure code coverage for testing using Coverage.py (see \ref{sec:AutoTestandVerTools})
+  \item Code walkthrough by each team member
+  \begin{itemize}
+    \item Focus on logic errors throughout the code that could cause issues with functionality or performance
+    \item Reviews will be submitted through pull requests before merging on GitHub
+  \end{itemize}
+  \item Peer code review through GitHub issues
+  \begin{itemize}
+    \item Focus on general logic errors, maintainability concerns, performance concerns, and potential defects
+  \end{itemize}
+  \item Automated test execution (see \ref{sec:AutoTestandVerTools})
+  \begin{itemize}
+    \item Ensure that each requirement (stakeholder, functional, data, and non-functional) has an associated system test-suite (defined in \ref{sec:SysTest}) (except for usability related requirements, see below)
+    \item Unit testing as described in \ref{sec:UnitTest}
+    \item Automated execution of tests through GitHub Actions
+  \end{itemize}
+  \item To verify non-functional usability requirements of the system, usability testing with users will be conducted (e.g., testing percentage of users that can perform a task without external assistance, see \ref{sec:UsabilitySurvey})
+\end{itemize}
+
+Any matters identified during the Implementation Verification process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
+
 \subsection{Automated Testing and Verification Tools}
+\label{sec:AutoTestandVerTools}
 
 \wss{What tools are you using for automated testing.  Likely a unit testing
   framework and maybe a profiling tool, like ValGrind.  Other possible tools
@@ -205,6 +429,22 @@ that document.}
 
 \wss{The details of this section will likely evolve as you get closer to the
   implementation.}
+
+Below are the various tools our team plans to use for automated testing:
+
+\begin{itemize}
+  \item Automated Unit and System Testing: Pytest (Python) and Jest (JavaScript)
+  \item Build Verification and Automatic Test Execution for Pull Requests: GitHub Actions
+  \item Linter for Static Analysis / Coding Standard Enforcement: Pylint (Python) and ESLint (JavaScript)
+  \item Code Coverage for Testing: Coverage.py through Pytest-cov (Python) and Jest (JavaScript)
+  \begin{itemize}
+    \item Code coverage metrics will be summarized as percentage of statements and branches covered as well as traceability of which test covered which statement/branch.
+  \end{itemize}
+  \item Static Type Checking: Mypy (Python) and TypeScript (superset for JavaScript)
+  \item Performance Measurement: cProfile, Timeit, and Tracemalloc (Python) and Mitata (JavaScript)
+\end{itemize}
+
+Note that these tools are consistent with the tools listed in the Expected Technology section of the \href{https://github.com/Jacob-MB/magic-8/blob/main/pdfs/DevelopmentPlan/DevelopmentPlan.pdf}{Development Plan}.
 
 \subsection{Software Validation}
 
@@ -226,7 +466,26 @@ as a Rev 0 demo for the supervisor.}
 
 \wss{This section might reference back to the SRS verification section.}
 
+To validate the software, there are a few different methods.
+
+First, our team will perform review sessions with our project supervisor, Dr. Rapoport. Dr. Rapoport is the main stakeholder of the project and therefore, review sessions will help to determine whether the software meets Dr. Rapoport's overall vision for the project. A main review session will be a demonstration with the Rev 0 product. This review will occur shortly after the scheduled Rev 0 demo for the class. During these review sessions, Dr. Rapoport will be tasked with validating whether the current version of the software aligns with the identified stakeholder requirements in the SRS and whether the software supports his overall product vision including gameplay and educational value.
+
+Second, for a more detailed analysis of whether the software meets user needs, we will perform user testing sessions where users with the defined characteristics of our stakeholder groups (see \href{https://github.com/Jacob-MB/magic-8/blob/main/pdfs/SRS-IEEE/SRS.pdf}{SRS}) will play through the game. While the test subjects are playing the game, our team will collect feedback from them on their experience. General validation of software usability will be successful if at least 80\% of the participants are able to complete all core gameplay tasks without intervention and no major usability concerns are commonly identified during the sessions. Additionally, at the end of the session our team will ask structured questions about the user's experience. These questions are listed below:
+
+\begin{itemize}
+  \item Which parts did you find most intuitive when using the software?
+  \item Which parts did you find most frustrating and/or confusing when using the software?
+  \item If you could change one part of the software, what would you change?
+  \item If you could keep one part of the software, what would you keep?
+  \item Are there any additional features you would like to see?
+\end{itemize}
+
+Third, our Custom Documents (CDs) also promote software validation. Our CD Fall is the User/Stakeholder/Client Interview Report. This document will allow us to clarify user/stakeholder/client goals and requirements and we can then cross-check these against the software specification. Our CD Winter is the Usability Report. This document can help to validate that the software fits with the user's mental model of the gameplay and usability features. Note that these CDs are heavily related to, and have some overlap, with the first two methods, review sessions with Dr. Rapoport and user testing sessions. 
+
+Any matters identified during the Software Validation process will be converted into GitHub issues. Once an issue is attended to, it will be reviewed again to ensure that it adheres to the guidelines laid out in this section before being resolved.
+
 \section{System Tests}
+\label{sec:SysTest}
 
 \subsection{Tests for Functional Requirements}
 \label{sec:fr-tests}
@@ -784,6 +1043,7 @@ FR55 & ST-FR-22\\
 \end{longtable}
 
 \section{Unit Test Description}
+\label{sec:UnitTest}
 
 \wss{This section should not be filled in until after the MIS (detailed design
   document) has been completed.}
@@ -924,6 +1184,7 @@ The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
 Their values are defined in this section for easy maintenance.
 
 \subsection{Usability Survey Questions?}
+\label{sec:UsabilitySurvey}
 
 \wss{This is a section that would be appropriate for some projects.}
 
@@ -935,13 +1196,19 @@ Their values are defined in this section for easy maintenance.
 
 Claude Sonnet 5.5 (Medium) by Anthropic
 
+Microsoft Copilot version 156.0 was used in support of researching and reviewing Section 3 of this document.
+
 \subsection{How and Where Used}
 
 Claude was used to help draft the system tests for the functional requirements in Section 4.1. Using the functional requirements from Section 6.2 of the SRS as context, the system tests were created, with related requirements grouped into one test. Claude was also used to build the functional requirements traceability table in Section 4.3.
 
+For Section 3, Generative AI was used in the context of receiving the project description and rubric as well as a draft of the document and suggesting additions and/or modifications. In this context, Generative AI was used as a reviewer for the document with the task of checking high-level concepts such as meeting all the rubric requirements and document structure/clarity. This document was originally written manually using original ideas and thinking. Once completed, the document, along with the guidelines for the document, was entered. This approach was generally used for the entire document, section by section, to collect feedback. One additional task that Generative AI was particularly useful for was ensuring that no points were missing from the various checklists in Section 3. After the original checklist was written, Generative AI would suggest other potential points (or modifications to existing points) that would enhance the checklist and make it more complete.
+
 \subsection{Verification of AI-Generated Content}
 
 The system tests were checked against the functional requirements in the SRS and the traceability table against the tests. Scoring and octal calculations were recomputed, and one incorrect example was corrected before inclusion. The team remains responsible for the accuracy and completeness of all content in this document, regardless of whether it was generated by AI or written by a team member.
+
+The suggestions provided by Microsoft Copilot for Section 3 were not implemented directly. Instead, to ensure the content was reasonable/quality and fit the tone and intent of our document, the comments were reviewed by a team member and then implemented manually. Generative AI was not used to create whole paragraphs or generate facts independently.
 
 \newpage{}
 
@@ -969,14 +1236,27 @@ graduate attribute of Lifelong Learning.
   member pursue, and why did they make this choice?
 \end{enumerate}
 
+\subsection*{Team Answers}
+
 Questions 3 and 4 have been answered as a team.
 
 \begin{enumerate}
   \setcounter{enumi}{2}
-  \item Another skill we will need is automated testing of the browser interface, since many of the system tests in Section 4.1 are run by a script that clicks cells, enters answers, and reads the screen.
-  \item Allen is focusing on learning automated browser interface testing. The first approach is reading the documentation and getting started guides for a browser testing tool such as Playwright. The second approach is to practice by writing a few of the system tests from Section 4.1 (for example, ST-FR-1 and ST-FR-4) against an early version of the game, so the learning is applied directly to our own project.
+  \item One main knowledge/skill point that the team will need to acquire is the tool usage for the performance measurement tools, cProfile, Timeit, and Tracemalloc. Our team is not very familiar with the tools past what they are used for. However, the tools will be very useful in ensuring that our software meets performance standards. Jacob will focus on learning these tools as described in the next question answer.
+  
+  Another skill we will need is automated testing of the browser interface, since many of the system tests in Section 4.1 are run by a script that clicks cells, enters answers, and reads the screen. Allen will focus on this skill.
+  
+  \item Jacob is focusing on learning the performance measurement tools, cProfile, Timeit, and Tracemalloc. The first approach to mastering this skill is reading the documentation on the different libraries. Jacob will first focus on reading the quick start guides and introductions and then read method documentation as required. A second approach to mastering this skill is reviewing example uses of the libraries. The tools are very popular and as such, have been applied to many projects. By reviewing projects that are similar to this project, Jacob can gain a deeper understanding of how to properly utilize the tools.
+  
+  Allen is focusing on learning automated browser interface testing. The first approach is reading the documentation and getting started guides for a browser testing tool such as Playwright. The second approach is to practice by writing a few of the system tests from Section 4.1 (for example, ST-FR-1 and ST-FR-4) against an early version of the game, so the learning is applied directly to our own project.
 \end{enumerate}
 
+\subsection*{Jacob Brodersen}
+
+\begin{enumerate}
+  \item Laying out the roles and responsibilities for each team member in the Verification and Validation Team table went well. This went well because we had already laid out the base responsibilities from the Team Member Roles section of the Development Plan. Although the section in Development Plan did not describe roles/responsibilities specifically for verification and validation, I kept the verification and validation roles and responsibilities very similar to the roles and responsibilities to the project as a whole. However, I have designed the VnV roles and responsibilities so that they are not the same individual doing the VnV section as the roles and responsibilities they had for the design/implementation. This works best because the people who worked on a given component should not be the one reviewing it as to avoid compounding a single perspective on a section of work.
+  \item One paint point I experienced during this deliverable was determining what strategies to use for Design Verification. To resolve this, I spent time reviewing the example documents as well as the prompt comments for the section. This review along with some brainstorming allowed me to determine strategies that would be applicable and effective at verifying the design for this project.
+\end{enumerate}
 
 \subsection*{Allen Tong}
 
