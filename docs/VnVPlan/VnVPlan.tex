@@ -325,7 +325,7 @@ The design verification entails ensuring that the software's design is correct a
     \item Ensure that each requirement is traced to a module
     \item Ensure that each module correctly adheres to the linked requirements
     \item Ensure that all expected inputs and outputs of each module are clearly defined
-    \item Each module should follow SOLID principles (NOT GOOD???)
+    \item Each module should follow SOLID principles
   \end{itemize}
   \item System Architecture review by each team member as well as peer review by classmates:
   \begin{itemize}
@@ -426,20 +426,18 @@ that document.}
 \wss{The details of this section will likely evolve as you get closer to the
   implementation.}
 
-NEED TOOLS FOR WEB ASSEMBLY??
-
 Below are the various tools our team plans to use for automated testing:
 
 \begin{itemize}
-  \item Automated Unit and System Testing: Pytest
+  \item Automated Unit and System Testing: Pytest (Python) and Jest (JavaScript)
   \item Build Verification and Automatic Test Execution for Pull Requests: GitHub Actions
-  \item Linter for Static Analysis / Coding Standard Enforcement: Pylint
-  \item Code Coverage for Testing: Coverage.py through Pytest-cov
+  \item Linter for Static Analysis / Coding Standard Enforcement: Pylint (Python) and ESLint (JavaScript)
+  \item Code Coverage for Testing: Coverage.py through Pytest-cov (Python) and Jest (JavaScript)
   \begin{itemize}
     \item Code coverage metrics will be summarized as percentage of statements and branches covered as well as traceability of which test covered which statement/branch.
   \end{itemize}
-  \item Static Type Checking: Mypy
-  \item Performance Measurement: cProfile, Timeit, and Tracemalloc
+  \item Static Type Checking: Mypy (Python) and TypeScript (superset for JavaScript)
+  \item Performance Measurement: cProfile, Timeit, and Tracemalloc (Python) and Mitata (JavaScript)
 \end{itemize}
 
 Note that these tools are consistent with the tools listed in the Expected Technology section of the \href{https://github.com/Jacob-MB/magic-8/blob/main/pdfs/DevelopmentPlan/DevelopmentPlan.pdf}{Development Plan}.
