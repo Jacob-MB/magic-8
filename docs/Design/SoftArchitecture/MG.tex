@@ -161,7 +161,15 @@ change.
   hardware on which the software is running.
 \item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
   initial input data.
-\item ...
+\item KEEP THE ABOVE TWO???
+\item [\refstepcounter{acnum} \actheacnum \label{acNB}:] Additional number bases, cube orders, and gameplay rulesets are likely to be added in future versions.
+\item [\refstepcounter{acnum} \actheacnum \label{acS}:] The scoring system (i.e., how score is calculated for a round).
+\item [\refstepcounter{acnum} \actheacnum \label{acUD}:] How user data is saved.
+\item [\refstepcounter{acnum} \actheacnum \label{acGD}:] How game state data is saved.
+\item [\refstepcounter{acnum} \actheacnum \label{acRV}:] The algorithms and techniques used to render and visualize the 3D game space.
+\item [\refstepcounter{acnum} \actheacnum \label{acAA}:] User account authentication and account management.
+\item [\refstepcounter{acnum} \actheacnum \label{acC}:] Competitive features and data.
+\item [\refstepcounter{acnum} \actheacnum \label{acG}:] The gameplay algorithms including task generation, solution validation, and tutorial content.
 \end{description}
 
 \wss{Anticipated changes relate to changes that would be made in requirements,
@@ -180,7 +188,11 @@ decisions will be changed.
 \begin{description}
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
   (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+\item KEEP FIRST ONE???
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucI}:] The game control input devices (keyboard/mouse or touchscreen).
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucO}:] The game output devices (screen).
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucWB}:] The game is web-browser based.
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucM}:] The mathematical properties of octal arithmetic and magic cubes upon which the game logic is based.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -191,8 +203,33 @@ below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module (DO I KEEP THIS???)
+\item [\refstepcounter{mnum} \mthemnum \label{mUI}:] User Interface Module
+\item [\refstepcounter{mnum} \mthemnum \label{m3DV}:] 3D Visualization/Projection Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mCR}:] Cube Representation Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mN}:] Navigation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mRC}:] Round Control Module
+\item [\refstepcounter{mnum} \mthemnum \label{mGDS}:] Game Data Storage Module
+\item [\refstepcounter{mnum} \mthemnum \label{mGSL}:] Game Save and Load Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mR}:] Ruleset Module
+\item [\refstepcounter{mnum} \mthemnum \label{mS}:] Scoring Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mRG}:] Round Generation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTG}:] Task Generation Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mUM}:] User Management Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUDS}:] User Data Storage Module
+
+COMBINE THESE FOUR???
+\item [\refstepcounter{mnum} \mthemnum \label{mC}:] Competitive Module
+\item [\refstepcounter{mnum} \mthemnum \label{mL}:] Leaderboard Module
+\item [\refstepcounter{mnum} \mthemnum \label{mDC}:] Daily Challenge Module
+\item [\refstepcounter{mnum} \mthemnum \label{mCDS}:] Competitive Data Storage Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mT}:] Tutorial Module (Need this?)
 \end{description}
 
 
@@ -266,6 +303,15 @@ to be implemented.
 \item[Implemented By:] OS
 \end{description}
 
+\subsubsection{User Interface Module (\mref{mUI})}
+
+\begin{description}
+\item[Secrets:] Input and output handling.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
 \subsection{Behaviour-Hiding Module}
 
 \begin{description}
@@ -289,6 +335,98 @@ to be implemented.
   [Information to include for leaf modules in the decomposition by secrets tree.]
 \end{description}
 
+NOTE: Probably need a setting module...
+
+\subsubsection{3D Visualization/Projection Module (\mref{m3DV})}
+
+\begin{description}
+\item[Secrets:] Algorithm to translate 3D space and game state into a 2D projection (with all visualization features).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Navigation Module (\mref{mN})}
+
+\begin{description}
+\item[Secrets:] Logic to navigate user through application including all menus, settings, transition into a game round, etc.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Round Control Module (\mref{mRC})}
+
+\begin{description}
+\item[Secrets:] Logic to progress the user throughout round and tasks within a round.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Ruleset Module (\mref{mR})}
+
+\begin{description}
+\item[Secrets:] The rules of a gameplay round including the number and sequence of tasks, cube order, number-base, additional number counts for each task, and valid line-types (e.g., complement, diagonal).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Scoring Module (\mref{mS})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to calculate task/round scores and performance metrics.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{User Management Module (\mref{mUM})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to authenticate users and manage user accounts (e.g., create/delete account, login/logout, password reset, etc.).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Competitive Module (\mref{mC})}
+
+\begin{description}
+\item[Secrets:] Algorithms for managing competitive features.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Leaderboard Module (\mref{mL})}
+
+\begin{description}
+\item[Secrets:] Algorithms to create and modify leaderboards.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Daily Challenge Module (\mref{mDC})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to create, schedule, and manage daily challenges.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Tutorial Module (\mref{mT})}
+
+\begin{description}
+\item[Secrets:] Algorithms to structure, sequence, and present (in a vitual sense, not an external output sense) tutorial content.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
 \subsubsection{Etc.}
 
 
@@ -303,6 +441,69 @@ to be implemented.
   % Changes in these modules are more likely to be motivated by a desire to
   % improve performance than by externally imposed changes.
 \item[Implemented By:] --
+\end{description}
+
+\subsubsection{Cube Representation Module (\mref{mCR})}
+
+\begin{description}
+\item[Secrets:] The internal data structure used to represent of the cube in a given state (i.e., game space).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Game Data Storage Module (\mref{mGDS})}
+
+\begin{description}
+\item[Secrets:] Game data storage location/format.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Game Save and Load Module (\mref{mGSL})}
+
+\begin{description}
+\item[Secrets:] Algorithm to save and load game data.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Round Generation Module (\mref{mRG})}
+
+\begin{description}
+\item[Secrets:] Algorithm to compose a round (i.e., number of tasks, difficulty progression, etc.).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Task Generation Module (\mref{mTG})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to generate an individual task based on given parameters (e.g., task-type, cube formation, starter, etc.).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{User Data Storage Module (\mref{mUDS})}
+
+\begin{description}
+\item[Secrets:] Software representation of user-related data and how it is stored. Is this right?!?!?!?
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Competitive Data Storage Module (\mref{mCDS})}
+
+\begin{description}
+\item[Secrets:] Competitive-related data storage location/format.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
 \end{description}
 
 \subsubsection{Etc.}
