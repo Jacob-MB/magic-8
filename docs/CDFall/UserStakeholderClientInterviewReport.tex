@@ -1,0 +1,115 @@
+\documentclass{article}
+
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\title{CD Fall - User/Stakeholder/Client Interview Report\\\progname}
+
+\author{\authname}
+
+\date{}
+
+\input{../Common.text}
+
+\begin{document}
+
+\maketitle
+
+\begin{table}[hp]
+\caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
+\midrule
+DATE & Name(s) & Description \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Methodology}
+
+Empathy Map?
+
+The interviews to be conducted will be semi-structured. The first part of the interview will involve the interviewer(s) explaining the application to the interviewee (see Introductory Explanation). Next, the interviewer(s) will ask prepared, open-ended questions (see Survey Questions) as well as follow-up questions guided by the evolving conversation. Once all survey questions have been posed and discussed, the interviewee will be asked to share any final comments or concerns. After the interviewee responds with their potential comments or concerns, the interview will be concluded.
+
+\section{Introductory Explanation}
+
+The application under discussion today is a web-based game. We will begin with an explanation of the game and then move on to some open-ended survey questions. This game is based on the mathematical properties of magic cubes. For some background, a most perfect magic cube is a cube where each voxel's value is a distinct number from 1 to n\textasciicircum{}3 and all rows, columns, pillars, 2-dimentional diagonals, 3- dimensional diagonals (triagonals), and broken space diagonals in the cube sum to the same number, also called the magic constant (show example magic cube). The order-eight cube is the smallest order most perfect magic cube. Using octal within this order-8 magic cube showcases the magic properties of the cube with the mentioned lines summing to 4004, half lines summing to 2002, and the complementary numbers (+4 4 4 for the x y z coordinates from a given voxel) summing to 1001 (all in octal).
+
+It is in this context that we propose an octal-base puzzle game to provide a fun and engaging means of learning and utilizing the octal number base. In this proposed game, players start with one voxel (number) in a most perfect magic cube visible with all other voxels hidden. The player must then complete a series of tasks involving finding the voxels associated with the prescribed lines adding up to the magic constant. For example, ADD EXAMPLE OF TASKS… Each round of the game will involve eight tasks of increasing difficulty for the player to complete. This game involves a lot of addition and subtraction which can help teach the player octal arithmetic.
+
+\section{Survey Questions}
+
+\begin{enumerate}
+    \item What are your first impressions of this game concept?
+    \begin{enumerate}
+        \item Potential follow-up question: Does the game sound fun and/or interesting to you? Why or why not?
+    \end{enumerate}
+    \item Do you think that this game would be helpful in teaching users about octal arithmetic? Why or why not?
+    \begin{enumerate}
+        \item Potential follow-up question: What features should the game include to build on the octal arithmetic teaching aspect?
+    \end{enumerate}
+    \item What strategies and approaches do you think will best help to teach users about how to play the game?
+    \begin{enumerate}
+        \item If required, prompt the interviewee with options including a user manual, interactive tutorial going through a sample round of the game, or a video.
+    \end{enumerate}
+    \item What method/structure do you think would be most effective to visualize the game space (i.e., how you would view the game)?
+    \begin{enumerate}
+        \item If required, prompt the interviewee with options including a fully navigable 3D space (allowing users to move slices around themselves) or something more structured such as fixed view angles that the user can select between.
+        \item Potential follow-up question: What visual cues would help you in understanding your current task and progress in the game?
+    \end{enumerate}
+    \item What do you think of the round format for the gameplay (eight tasks per round of increasing difficulty)?
+    \item What features/structure/format would motivate you to continue playing this game over multiple sessions?
+    \item The game is planned to have competitive leaderboards in which users can post high scores for a daily, fixed round of the game.
+    \begin{enumerate}
+        \item Do you think that this is a feature that would improve enjoyment and engagement?
+        \item What information would you like to see on a competitive leaderboard?
+        \item What other features would you like to see in this online, competitive section of the game?
+    \end{enumerate}
+    \item In the future, we plan to expand the game to other sizes of magic cubes and different number bases (e.g., hexadecimal number base with a 12x12x12 magic cube). This will also come with slightly different rules due to the magic cube having different properties. Do you think these differing environments and rulesets will increase user engagement? Do you think this would be more confusing? How would you like to see this implemented in the game (if at all)?
+    \item Overall, are there any additional features that you would like to see in the game?
+    \item Do you foresee any challenges with this game idea?
+    \begin{enumerate}
+        \item Potential follow-up question: In particular, what issues do you foresee with the alternative number base?
+    \end{enumerate}
+\end{enumerate}
+
+\section{Interviews}
+
+\subsection{Stakeholder A (Client)}
+
+This stakeholder has a stake in terms of wanting a recreational mathematics game based around magic cubes.
+
+\subsection{Stakeholder B}
+
+This stakeholder has a stake in terms of being an authority figure in the secondary education system that could potentially use this application as a teaching tool.
+
+\subsection{User A}
+
+This user fits the characteristics of a person who enjoys online games and recreational mathematics.
+
+\subsection{User B}
+
+This user fits the characteristics of a person who would utilize the game for the purpose of learning alternative number bases.
+
+\section{Analysis}
+
+\subsection{Stakeholder A (Client)}
+
+\subsection{Stakeholder B}
+
+\subsection{User A}
+
+\subsection{User B}
+
+\section*{Appendix - Interview Transcripts}
+
+\subsection*{Stakeholder A (Client)}
+
+\subsection*{Stakeholder B}
+
+\subsection*{User A}
+
+\subsection*{User B}
+
+\end{document}
