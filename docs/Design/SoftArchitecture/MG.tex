@@ -211,8 +211,7 @@ actually be implemented.
 
 \item [\refstepcounter{mnum} \mthemnum \label{mN}:] Navigation Module
 \item [\refstepcounter{mnum} \mthemnum \label{mRC}:] Round Control Module
-\item [\refstepcounter{mnum} \mthemnum \label{mGDS}:] Game Data Storage Module
-\item [\refstepcounter{mnum} \mthemnum \label{mGSL}:] Game Save and Load Module
+\item [\refstepcounter{mnum} \mthemnum \label{mGDM}:] Game Data Management Module
 
 \item [\refstepcounter{mnum} \mthemnum \label{mR}:] Ruleset Module
 \item [\refstepcounter{mnum} \mthemnum \label{mS}:] Scoring Module
@@ -221,13 +220,10 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{mTG}:] Task Generation Module
 
 \item [\refstepcounter{mnum} \mthemnum \label{mUM}:] User Management Module
-\item [\refstepcounter{mnum} \mthemnum \label{mUDS}:] User Data Storage Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUDM}:] User Data Management Module
 
-COMBINE THESE FOUR???
-\item [\refstepcounter{mnum} \mthemnum \label{mC}:] Competitive Module
 \item [\refstepcounter{mnum} \mthemnum \label{mL}:] Leaderboard Module
 \item [\refstepcounter{mnum} \mthemnum \label{mDC}:] Daily Challenge Module
-\item [\refstepcounter{mnum} \mthemnum \label{mCDS}:] Competitive Data Storage Module
 
 \item [\refstepcounter{mnum} \mthemnum \label{mT}:] Tutorial Module (Need this?)
 \end{description}
@@ -391,19 +387,10 @@ NOTE: Probably need a setting module...
 \item[Type of Module:]
 \end{description}
 
-\subsubsection{Competitive Module (\mref{mC})}
-
-\begin{description}
-\item[Secrets:] Algorithms for managing competitive features.
-\item[Services:]
-\item[Implemented By:]
-\item[Type of Module:]
-\end{description}
-
 \subsubsection{Leaderboard Module (\mref{mL})}
 
 \begin{description}
-\item[Secrets:] Algorithms to create and modify leaderboards.
+\item[Secrets:] The algorithms to create, remove, and modify leaderboards.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -452,19 +439,10 @@ NOTE: Probably need a setting module...
 \item[Type of Module:]
 \end{description}
 
-\subsubsection{Game Data Storage Module (\mref{mGDS})}
+\subsubsection{Game Data Management Module (\mref{mGDM})}
 
 \begin{description}
-\item[Secrets:] Game data storage location/format.
-\item[Services:]
-\item[Implemented By:]
-\item[Type of Module:]
-\end{description}
-
-\subsubsection{Game Save and Load Module (\mref{mGSL})}
-
-\begin{description}
-\item[Secrets:] Algorithm to save and load game data.
+\item[Secrets:] The algorithms to save, modify, delete, and load game data.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -488,19 +466,10 @@ NOTE: Probably need a setting module...
 \item[Type of Module:]
 \end{description}
 
-\subsubsection{User Data Storage Module (\mref{mUDS})}
+\subsubsection{User Data Management Module (\mref{mUDM})}
 
 \begin{description}
-\item[Secrets:] Software representation of user-related data and how it is stored. Is this right?!?!?!?
-\item[Services:]
-\item[Implemented By:]
-\item[Type of Module:]
-\end{description}
-
-\subsubsection{Competitive Data Storage Module (\mref{mCDS})}
-
-\begin{description}
-\item[Secrets:] Competitive-related data storage location/format.
+\item[Secrets:] The algorithms to save, modify, delete, and load user data (THIS INCLUDES COMPETITIVE GAME STATS THE THE LEADERBOARD MODULE WILL GRAB?).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
