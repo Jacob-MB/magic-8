@@ -157,11 +157,7 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item KEEP THE ABOVE TWO???
+\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific hardware on which the software is running.
 \item [\refstepcounter{acnum} \actheacnum \label{acNB}:] Additional number bases, cube orders, and gameplay rulesets are likely to be added in future versions.
 \item [\refstepcounter{acnum} \actheacnum \label{acS}:] The scoring system (i.e., how score is calculated for a round).
 \item [\refstepcounter{acnum} \actheacnum \label{acUD}:] How user data is saved.
@@ -203,7 +199,7 @@ below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module (DO I KEEP THIS???)
+\item [\refstepcounter{mnum} \mthemnum \label{mVH}:] Virtual Hardware Module
 \item [\refstepcounter{mnum} \mthemnum \label{mUI}:] User Interface Module
 \item [\refstepcounter{mnum} \mthemnum \label{m3DV}:] 3D Visualization/Projection Module
 
@@ -292,7 +288,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash
 (\emph{--}) is shown, this means that the module is not a leaf and will not have
 to be implemented.
 
-\subsection{Hardware Hiding Modules (\mref{mHH})}
+\subsection{Hardware Hiding Modules}
 
 \begin{description}
 \item[Secrets:]The data structure and algorithm used to implement the virtual
@@ -300,13 +296,22 @@ to be implemented.
 \item[Services:]Serves as a virtual hardware used by the rest of the
   system. This module provides the interface between the hardware and the
   software. So, the system can use it to display outputs or to accept inputs.
-\item[Implemented By:] OS
+\item[Implemented By:] --
+\end{description}
+
+\subsubsection{Virtual Hardware Module (\mref{mVH})}
+
+\begin{description}
+\item[Secrets:] The interface to the input and output devices.
+\item[Services:]
+\item[Implemented By:] pygame-ce, pygbag, and the web browser
+\item[Type of Module:]
 \end{description}
 
 \subsubsection{User Interface Module (\mref{mUI})}
 
 \begin{description}
-\item[Secrets:] Input and output handling.
+\item[Secrets:] The mapping between device input events and abstract commands, and between display requests and drawn output.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
