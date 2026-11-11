@@ -157,15 +157,24 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific hardware on which the software is running.
-\item [\refstepcounter{acnum} \actheacnum \label{acNB}:] Additional number bases, cube orders, and gameplay rulesets are likely to be added in future versions.
-\item [\refstepcounter{acnum} \actheacnum \label{acS}:] The scoring system (i.e., how score is calculated for a round).
+\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific hardware and browser environment on which the software is running.
+\item[\refstepcounter{acnum} \actheacnum \label{acUI}:] The mapping between device inputs and game commands, and between display requests and drawn output.
+\item[\refstepcounter{acnum} \actheacnum \label{acCR}:] The data structure and algorithms used to represent and manipulate the magic cube.
+\item[\refstepcounter{acnum} \actheacnum \label{acN}:] The screens and menus in the application and the transitions/structure between them.
+\item[\refstepcounter{acnum} \actheacnum \label{acRC}:] The sequence of steps within a round and within each task.
+\item [\refstepcounter{acnum} \actheacnum \label{acR}:] The rules of a round including the number and sequence of tasks, the cube order, and the valid line types for the tasks.
+\item[\refstepcounter{acnum} \actheacnum \label{acRG}:] The algorithms and techniques used to generate a gameplay round given the rules of a round.
+\item [\refstepcounter{acnum} \actheacnum \label{acS}:] The scoring system (i.e., how score is calculated for a task and round).
+\item[\refstepcounter{acnum} \actheacnum \label{acTG}:] How a task is generated given the task-type, cube formation, extra number count, and starter.
 \item [\refstepcounter{acnum} \actheacnum \label{acUD}:] How user data is saved.
-\item [\refstepcounter{acnum} \actheacnum \label{acGD}:] How game state data is saved.
+\item [\refstepcounter{acnum} \actheacnum \label{acGD}:] How and when game state data is saved.
 \item [\refstepcounter{acnum} \actheacnum \label{acRV}:] The algorithms and techniques used to render and visualize the 3D game space.
-\item [\refstepcounter{acnum} \actheacnum \label{acAA}:] User account authentication and account management.
-\item [\refstepcounter{acnum} \actheacnum \label{acC}:] Competitive features and data.
-\item [\refstepcounter{acnum} \actheacnum \label{acG}:] The gameplay algorithms including task generation, solution validation, and tutorial content.
+\item [\refstepcounter{acnum} \actheacnum \label{acAA}:] How user accounts are authenticated and managed.
+\item [\refstepcounter{acnum} \actheacnum \label{acL}:] The structure and types of leaderboards presented.
+\item[\refstepcounter{acnum} \actheacnum \label{acDC}:] How the daily challenges are created and run.
+\item[\refstepcounter{acnum} \actheacnum \label{acT}:] The content and state flow of the tutorial.
+\item[\refstepcounter{acnum} \actheacnum \label{acSE}:] The application settings available.
+\item[\refstepcounter{acnum} \actheacnum \label{acNB}:] The number base in which values are shown to and entered by the user.
 \end{description}
 
 \wss{Anticipated changes relate to changes that would be made in requirements,
@@ -188,7 +197,8 @@ decisions will be changed.
 \item [\refstepcounter{ucnum} \uctheucnum \label{ucI}:] The game control input devices (keyboard/mouse or touchscreen).
 \item [\refstepcounter{ucnum} \uctheucnum \label{ucO}:] The game output devices (screen).
 \item [\refstepcounter{ucnum} \uctheucnum \label{ucWB}:] The game is web-browser based.
-\item [\refstepcounter{ucnum} \uctheucnum \label{ucM}:] The mathematical properties of octal arithmetic and magic cubes upon which the game logic is based.
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucM}:] The mathematical properties of magic cubes upon which the game logic is based.
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucD}:] Gameplay logic operates on decimal-base values, independent of the number base shown to the user.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -476,7 +486,7 @@ to be implemented.
 \subsubsection{Task Generation Module (\mref{mTG})}
 
 \begin{description}
-\item[Secrets:] The algorithm used to generate an individual task based on given parameters (e.g., task-type, cube formation, starter, etc.).
+\item[Secrets:] The algorithm used to generate an individual task based on given parameters (task-type, cube formation, extra number count, and starter).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -494,7 +504,7 @@ to be implemented.
 \subsubsection{Number Base Translation Module (\mref{mNBT})}
 
 \begin{description}
-\item[Secrets:] Algorithms to convert between the integer values used in gameplay logic and their external user representation in the given number base.
+\item[Secrets:] Algorithms to convert between the decimal-base values used in gameplay logic and their external user representation in the given number base.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
