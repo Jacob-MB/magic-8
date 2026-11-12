@@ -157,11 +157,24 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item ...
+\item [\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific hardware and browser environment on which the software is running.
+\item [\refstepcounter{acnum} \actheacnum \label{acUI}:] The mapping between device inputs and game commands, and between display requests and drawn output.
+\item [\refstepcounter{acnum} \actheacnum \label{acCR}:] The data structure and algorithms used to represent and manipulate the magic cube.
+\item [\refstepcounter{acnum} \actheacnum \label{acN}:] The screens and menus in the application and the transitions/structure between them.
+\item [\refstepcounter{acnum} \actheacnum \label{acRC}:] The sequence of steps within a round and within each task.
+\item [\refstepcounter{acnum} \actheacnum \label{acR}:] The rules of a round including the number and sequence of tasks, the cube order, and the valid line types for the tasks.
+\item [\refstepcounter{acnum} \actheacnum \label{acRG}:] The algorithms and techniques used to generate a gameplay round given the rules of a round.
+\item [\refstepcounter{acnum} \actheacnum \label{acS}:] The scoring system (i.e., how score is calculated for a task and round).
+\item [\refstepcounter{acnum} \actheacnum \label{acTG}:] How a task is generated given the task-type, cube formation, extra number count, and starter.
+\item [\refstepcounter{acnum} \actheacnum \label{acUD}:] How user data is saved.
+\item [\refstepcounter{acnum} \actheacnum \label{acGD}:] How and when game state data is saved.
+\item [\refstepcounter{acnum} \actheacnum \label{acRE}:] The algorithms and techniques used to render the 3D space and game state.
+\item [\refstepcounter{acnum} \actheacnum \label{acAA}:] How user accounts are authenticated and managed.
+\item [\refstepcounter{acnum} \actheacnum \label{acL}:] The structure and types of leaderboards presented.
+\item [\refstepcounter{acnum} \actheacnum \label{acDC}:] How the daily challenges are created and run.
+\item [\refstepcounter{acnum} \actheacnum \label{acT}:] The content and state flow of the tutorial.
+\item [\refstepcounter{acnum} \actheacnum \label{acSE}:] The application settings available.
+\item [\refstepcounter{acnum} \actheacnum \label{acNB}:] The number base in which values are shown to and entered by the user.
 \end{description}
 
 \wss{Anticipated changes relate to changes that would be made in requirements,
@@ -178,9 +191,11 @@ will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucI}:] The game control input devices (keyboard/mouse or touchscreen).
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucO}:] The game output devices (screen).
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucWB}:] The game is web-browser based.
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucM}:] The mathematical properties of magic cubes upon which the game logic is based.
+\item [\refstepcounter{ucnum} \uctheucnum \label{ucD}:] Gameplay logic operates on decimal-base values, independent of the number base shown to the user.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -191,8 +206,33 @@ below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{mVH}:] Virtual Hardware Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUI}:] User Interface Module
+\item [\refstepcounter{mnum} \mthemnum \label{mRE}:] Rendering Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mCR}:] Cube Representation Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mN}:] Navigation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mRC}:] Round Control Module
+\item [\refstepcounter{mnum} \mthemnum \label{mGDM}:] Game Data Management Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mR}:] Ruleset Module
+\item [\refstepcounter{mnum} \mthemnum \label{mSC}:] Scoring Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mRG}:] Round Generation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTG}:] Task Generation Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mUM}:] User Management Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUDM}:] User Data Management Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mL}:] Leaderboard Module
+\item [\refstepcounter{mnum} \mthemnum \label{mDC}:] Daily Challenge Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mT}:] Tutorial Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mSE}:] Settings Module
+
+\item [\refstepcounter{mnum} \mthemnum \label{mNBT}:] Number Base Translation Module
 \end{description}
 
 
@@ -203,22 +243,31 @@ actually be implemented.
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding Module} & ~ \\
+\multirow{2}{0.3\textwidth}{Hardware-Hiding Module}
+& Virtual Hardware Module\\
+& User Interface Module\\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{10}{0.3\textwidth}{Behaviour-Hiding Module}
+& Rendering Module\\
+& Navigation Module\\
+& Round Control Module\\
+& Ruleset Module\\
+& Scoring Module\\
+& User Management Module\\
+& Leaderboard Module\\
+& Daily Challenge Module\\
+& Tutorial Module\\
+& Settings Module\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{6}{0.3\textwidth}{Software Decision Module}
+& Cube Representation Module\\
+& Round Generation Module\\
+& Task Generation Module\\
+& Game Data Management Module\\
+& User Data Management Module\\
+& Number Base Translation Module\\
 \bottomrule
 
 \end{tabular}
@@ -255,7 +304,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash
 (\emph{--}) is shown, this means that the module is not a leaf and will not have
 to be implemented.
 
-\subsection{Hardware Hiding Modules (\mref{mHH})}
+\subsection{Hardware Hiding Modules}
 
 \begin{description}
 \item[Secrets:]The data structure and algorithm used to implement the virtual
@@ -263,7 +312,25 @@ to be implemented.
 \item[Services:]Serves as a virtual hardware used by the rest of the
   system. This module provides the interface between the hardware and the
   software. So, the system can use it to display outputs or to accept inputs.
-\item[Implemented By:] OS
+\item[Implemented By:] --
+\end{description}
+
+\subsubsection{Virtual Hardware Module (\mref{mVH})}
+
+\begin{description}
+\item[Secrets:] The interface to the input and output devices.
+\item[Services:]
+\item[Implemented By:] pygame-ce, pygbag, and the web browser
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{User Interface Module (\mref{mUI})}
+
+\begin{description}
+\item[Secrets:] The mapping between device input events and abstract commands, and between display requests and drawn output.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
 \end{description}
 
 \subsection{Behaviour-Hiding Module}
@@ -278,15 +345,94 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{Rendering Module (\mref{mRE})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
+\item[Secrets:] The algorithms to translate the 3D space and game state into a 2D view, including layer isolation and highlighting.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Navigation Module (\mref{mN})}
+
+\begin{description}
+\item[Secrets:] Logic to navigate user through application including all menus, settings, transition into a game round, etc.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Round Control Module (\mref{mRC})}
+
+\begin{description}
+\item[Secrets:] Logic to progress the user throughout round and tasks within a round.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Ruleset Module (\mref{mR})}
+
+\begin{description}
+\item[Secrets:] The rules of a gameplay round including the number and sequence of tasks, cube order, number-base, additional number counts for each task, and valid line-types (e.g., complement, diagonal).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Scoring Module (\mref{mSC})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to calculate task/round scores and performance metrics.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{User Management Module (\mref{mUM})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to authenticate users and manage user accounts (e.g., create/delete account, login/logout, password reset, etc.).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Leaderboard Module (\mref{mL})}
+
+\begin{description}
+\item[Secrets:] The algorithms to create, remove, and modify leaderboards.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Daily Challenge Module (\mref{mDC})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to create, schedule, and manage daily challenges.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Tutorial Module (\mref{mT})}
+
+\begin{description}
+\item[Secrets:] Algorithms to structure, sequence, and present (in a vitual sense, not an external output sense) tutorial content.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Settings Module (\mref{mSE})}
+
+\begin{description}
+\item[Secrets:] Algorithms to access and modify base settings of the application (e.g., turning off animations, configuring play-time reminder, etc.).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
 \end{description}
 
 \subsubsection{Etc.}
@@ -303,6 +449,60 @@ to be implemented.
   % Changes in these modules are more likely to be motivated by a desire to
   % improve performance than by externally imposed changes.
 \item[Implemented By:] --
+\end{description}
+
+\subsubsection{Cube Representation Module (\mref{mCR})}
+
+\begin{description}
+\item[Secrets:] The internal data structure used to represent of the cube in a given state (i.e., game space).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Game Data Management Module (\mref{mGDM})}
+
+\begin{description}
+\item[Secrets:] The algorithms to save, modify, delete, and load game data.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Round Generation Module (\mref{mRG})}
+
+\begin{description}
+\item[Secrets:] Algorithm to compose a round (i.e., number of tasks, difficulty progression, etc.).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Task Generation Module (\mref{mTG})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to generate an individual task based on given parameters (task-type, cube formation, extra number count, and starter).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{User Data Management Module (\mref{mUDM})}
+
+\begin{description}
+\item[Secrets:] The algorithms to save, modify, delete, and load user data (THIS INCLUDES COMPETITIVE GAME STATS THE THE LEADERBOARD MODULE WILL GRAB?).
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Number Base Translation Module (\mref{mNBT})}
+
+\begin{description}
+\item[Secrets:] Algorithms to convert between the decimal-base values used in gameplay logic and their external user representation in the given number base.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
 \end{description}
 
 \subsubsection{Etc.}
