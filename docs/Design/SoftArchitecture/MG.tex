@@ -168,7 +168,7 @@ change.
 \item [\refstepcounter{acnum} \actheacnum \label{acTG}:] How a task is generated given the task-type, cube formation, extra number count, and starter.
 \item [\refstepcounter{acnum} \actheacnum \label{acUD}:] How user data is saved.
 \item [\refstepcounter{acnum} \actheacnum \label{acGD}:] How and when game state data is saved.
-\item [\refstepcounter{acnum} \actheacnum \label{acRV}:] The algorithms and techniques used to render and visualize the 3D game space.
+\item [\refstepcounter{acnum} \actheacnum \label{acRE}:] The algorithms and techniques used to render the 3D space and game state.
 \item [\refstepcounter{acnum} \actheacnum \label{acAA}:] How user accounts are authenticated and managed.
 \item [\refstepcounter{acnum} \actheacnum \label{acL}:] The structure and types of leaderboards presented.
 \item [\refstepcounter{acnum} \actheacnum \label{acDC}:] How the daily challenges are created and run.
@@ -208,7 +208,7 @@ actually be implemented.
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mVH}:] Virtual Hardware Module
 \item [\refstepcounter{mnum} \mthemnum \label{mUI}:] User Interface Module
-\item [\refstepcounter{mnum} \mthemnum \label{m3DV}:] 3D Visualization/Projection Module
+\item [\refstepcounter{mnum} \mthemnum \label{mRE}:] Rendering Module
 
 \item [\refstepcounter{mnum} \mthemnum \label{mCR}:] Cube Representation Module
 
@@ -347,10 +347,10 @@ to be implemented.
   [Information to include for leaf modules in the decomposition by secrets tree.]
 \end{description}
 
-\subsubsection{3D Visualization/Projection Module (\mref{m3DV})}
+\subsubsection{Rendering Module (\mref{mRE})}
 
 \begin{description}
-\item[Secrets:] Algorithm to translate 3D space and game state into a 2D projection (with all visualization features).
+\item[Secrets:] The algorithms to translate the 3D space and game state into a 2D view, including layer isolation and highlighting.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
