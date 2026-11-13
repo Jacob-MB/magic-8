@@ -10,8 +10,8 @@ of the main game.
 The line types (TaskType) and the cube size are the same for every ruleset
 and are kept as module-level definitions.
 
-All values are plain integers. Showing them in octal is the job of the
-number base translation module.
+All values are plain integers. Showing them in the player's number base is
+the job of number_base.py.
 """
 
 from dataclasses import dataclass

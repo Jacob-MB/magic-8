@@ -5,8 +5,8 @@ in the UI module calls its action methods when the player does something,
 then reads its state to decide what to draw.
 
 All numbers going in and out of the Round are plain integers. Showing them
-to the player in octal (and reading the player's octal answers) is the UI's
-job, using the number base translation module.
+to the player in their number base (and reading the player's answers) is the
+UI's job, using number_base.py.
 
 A task goes through these phases:
 
