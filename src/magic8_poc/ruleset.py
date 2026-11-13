@@ -33,8 +33,8 @@ class TaskType(Enum):
     # Task 1
     COMPLEMENT = 1
 
-    # Task 2: the half of the line that holds the starter (coordinates
-    # 0-3 or 4-7 on that axis), which always reaches an outer edge.
+    # Task 2: the half of the line that holds the starter (the lower or
+    # upper half of that axis), which always reaches an outer edge.
     HALF_ORTHOGONAL_X = 2
     HALF_ORTHOGONAL_Y = 3
     HALF_ORTHOGONAL_Z = 4
@@ -75,8 +75,8 @@ class Ruleset:
     Attributes:
         tasks_per_round: Number of tasks in a round.
         complement_sum: What a cell and its complement add up to.
-        half_line_sum: What the 4 cells of a half-line add up to.
-        full_line_sum: What the 8 cells of a full line add up to.
+        half_line_sum: What the cells of a half-line add up to.
+        full_line_sum: What the cells of a full line add up to.
         half_line_extra_counts: How many extra numbers a half-line task
             may add.
         full_line_extra_counts: How many extra numbers a full-line task

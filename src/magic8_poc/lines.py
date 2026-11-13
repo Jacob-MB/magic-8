@@ -1,13 +1,13 @@
-"""Geometry of the task target cells in the 8x8x8 magic cube.
+"""Geometry of the task target cells in the magic cube.
 
 Given a starter cell and a task type, compute the cells the player must
-select. All line arithmetic is modulo 8, so broken (split) lines wrap around
-the cube's boundaries.
+select. All line arithmetic is modulo the cube size, so broken (split) lines
+wrap around the cube's boundaries.
 
 Coordinates match the POC renderer (at zero rotation):
-    x: 0 -> 7 runs left -> right
-    y: 0 -> 7 runs bottom -> top
-    z: 0 -> 7 runs front -> back
+    x increases left -> right
+    y increases bottom -> top
+    z increases front -> back
 Therefore, (0, 0, 0) is the front, bottom, left of the cube.
 """
 
@@ -82,7 +82,9 @@ class TaskSolver:
         if (len(starter) != 3
                 or not all(isinstance(c, int) and 0 <= c < CUBE_SIZE
                            for c in starter)):
-            raise ValueError(f"Starter must be 3 integers in 0..7, got {starter!r}")
+            raise ValueError(
+                f"Starter must be 3 integers in 0..{CUBE_SIZE - 1}, "
+                f"got {starter!r}")
         self.starter: Coord = tuple(starter)
 
     def get_correct_cell_coords(self, task_type: TaskType) -> list[Coord]:
@@ -104,8 +106,10 @@ class TaskSolver:
 
         Orthogonals and half-orthogonals are always continuous. A diagonal
         or triagonal is continuous only when every changing axis is the same
-        number of steps from its starting edge (0 when the axis increases,
-        7 when it decreases); otherwise the line is split.
+        number of steps from its starting edge; otherwise the line is split.
+        The starting edge is the first coordinate (the lowest value, 0) when
+        the axis increases, or the last coordinate (the highest value for
+        the cube size, CUBE_SIZE - 1) when it decreases.
         """
         if task_type is TaskType.COMPLEMENT:
             raise ValueError("A complement is a single cell, not a line")
@@ -128,10 +132,13 @@ class TaskSolver:
                 continue
 
             if step == 1:
-                # The axis increases, so the line begins at coordinate 0.
+                # The axis increases, so the line begins at the first
+                # coordinate (the lowest value, 0).
                 steps_from_edge.append(coord)
             else:
-                # The axis decreases, so the line begins at coordinate 7.
+                # The axis decreases, so the line begins at the last
+                # coordinate (the highest value for the cube size,
+                # CUBE_SIZE - 1).
                 steps_from_edge.append((CUBE_SIZE - 1) - coord)
 
         # The line is continuous only if every moving axis is the same
@@ -145,10 +152,11 @@ class TaskSolver:
     def _get_complement(self) -> Coord:
         """Return the starter's complementary cell (task 1).
 
-        The complement is found by moving 4 cells along every axis, wrapping
-        around the cube with modulo 8. For example, the complement of
-        (1, 2, 3) is (5, 6, 7), and the complement of (6, 0, 5) is (2, 4, 1).
-        The starter and its complement always sum to 1001 (octal).
+        The complement is found by moving half the cube size along every
+        axis, wrapping around the cube. For example, in an 8x8x8 cube the
+        complement of (1, 2, 3) is (5, 6, 7), and the complement of
+        (6, 0, 5) is (2, 4, 1). The starter and its complement always add
+        up to the ruleset's complement sum.
         """
         x, y, z = self.starter
 
@@ -158,16 +166,17 @@ class TaskSolver:
         return (complement_x, complement_y, complement_z)
 
     def _get_half_orthogonal(self, axis: int) -> list[Coord]:
-        """Return the 3 other cells in the starter's half-line (task 2).
+        """Return the other cells in the starter's half-line (task 2).
 
-        An orthogonal line along one axis is split into two halves:
-        coordinates 0-3 and coordinates 4-7 on that axis. The half-line is
-        whichever half holds the starter, so it always reaches an outer edge
-        of the cube and never wraps around. The 4 cells of a half-line sum
-        to 2002 (octal).
+        An orthogonal line along one axis is split into two halves: the
+        lower half and the upper half of the coordinates on that axis. The
+        half-line is whichever half holds the starter, so it always reaches
+        an outer edge of the cube and never wraps around. The cells of a
+        half-line add up to the ruleset's half-line sum.
 
-        Example: for starter (1, 2, 3) along the x axis, the half-line is
-        x = 0..3, so the cells returned are (0, 2, 3), (2, 2, 3), (3, 2, 3).
+        Example: in an 8x8x8 cube, for starter (1, 2, 3) along the x axis,
+        the half-line is x = 0..3, so the cells returned are (0, 2, 3),
+        (2, 2, 3), (3, 2, 3).
 
         Args:
             axis: The axis the half-line runs along (0 = x, 1 = y, 2 = z).
@@ -175,7 +184,7 @@ class TaskSolver:
         starter_coord = self.starter[axis]
 
         # Find the first coordinate of the starter's half: 0 if the starter
-        # is in 0-3, or 4 if it is in 4-7.
+        # is in the lower half, or HALF if it is in the upper half.
         if starter_coord < HALF:
             half_start = 0
         else:
@@ -197,8 +206,9 @@ class TaskSolver:
         x, y, z = self.starter
         dx, dy, dz = direction
 
-        # Take 7 steps from the starter along the direction. Wrapping with
-        # modulo 8 lets a split line continue on the opposite side of the cube.
+        # Take CUBE_SIZE - 1 steps from the starter along the direction.
+        # Wrapping with modulo CUBE_SIZE lets a split line continue on the
+        # opposite side of the cube.
         cells = []
         for step in range(1, CUBE_SIZE):
             new_x = (x + step * dx) % CUBE_SIZE

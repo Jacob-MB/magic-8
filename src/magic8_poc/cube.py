@@ -12,14 +12,15 @@ CELL_COUNT = CUBE_SIZE ** 3
 
 
 class Cube:
-    """The 8x8x8 magic cube's numbers. They never change once created."""
+    """The magic cube's numbers. They never change once created."""
 
     def __init__(self, values: list[list[list[int]]]):
         """Create a cube from nested lists indexed values[x][y][z].
 
         Raises:
-            ValueError: If the values are not 8x8x8, or do not contain each
-                number from 1 to 512 exactly once.
+            ValueError: If the values are not CUBE_SIZE on every side, or
+                do not contain each number from 1 to CELL_COUNT exactly
+                once.
         """
         self._check_shape(values)
 
@@ -54,7 +55,7 @@ class Cube:
                     raise ValueError(message)
 
     def _check_numbers(self) -> None:
-        """Check every number from 1 to 512 appears exactly once."""
+        """Check every number from 1 to CELL_COUNT appears exactly once."""
         numbers = []
         for plane in self._values:
             for row in plane:

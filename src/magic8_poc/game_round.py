@@ -11,7 +11,8 @@ UI's job, using number_base.py.
 A task goes through these phases:
 
     SELECTING  -> the player clicks cells until every target cell is found
-    ADDING     -> (tasks 2-8) the player adds the starter and extra numbers
+    ADDING     -> (all but the complement task) the player adds the starter
+                  and extra numbers
     SUBTRACTING-> the player subtracts from the magic constant
     TASK_COMPLETE, or ROUND_COMPLETE after the last task
 """
@@ -192,7 +193,8 @@ class Round:
 
     @property
     def task_number(self) -> int:
-        """The current task, 1 to 8, or 0 before the first task starts."""
+        """The current task, counting from 1, or 0 before the first task
+        starts."""
         return self._task_index + 1
 
     @property
