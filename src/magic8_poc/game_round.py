@@ -1,4 +1,4 @@
-"""Gameplay logic for one round of eight tasks.
+"""Gameplay logic for one round of tasks.
 
 The Round class is a state machine. It has no loop of its own: the game loop
 in the UI module calls its action methods when the player does something,
@@ -13,7 +13,7 @@ A task goes through these phases:
     SELECTING  -> the player clicks cells until every target cell is found
     ADDING     -> (tasks 2-8) the player adds the starter and extra numbers
     SUBTRACTING-> the player subtracts from the magic constant
-    TASK_COMPLETE, or ROUND_COMPLETE after task 8
+    TASK_COMPLETE, or ROUND_COMPLETE after the last task
 """
 
 from enum import Enum
@@ -22,9 +22,7 @@ from magic8_poc.cube import Cube
 from magic8_poc.fixed_round import (CONTINUOUS_PLANE, STARTER, TASKS,
                                     TaskConfig)
 from magic8_poc.lines import Coord, Plane, TaskSolver
-from magic8_poc.ruleset import (TASKS_PER_ROUND, TaskType,
-                                allowed_extra_counts, has_addition_step,
-                                line_sum)
+from magic8_poc.ruleset import STANDARD_RULESET, Ruleset, TaskType
 
 
 class Phase(Enum):
@@ -35,7 +33,7 @@ class Phase(Enum):
     ADDING = 3          # Player is adding the numbers in the column
     SUBTRACTING = 4     # Player is subtracting from the magic constant
     TASK_COMPLETE = 5   # Task finished, waiting for START on the next task
-    ROUND_COMPLETE = 6  # All eight tasks finished
+    ROUND_COMPLETE = 6  # All of the round's tasks finished
 
 
 class SelectResult(Enum):
@@ -47,11 +45,12 @@ class SelectResult(Enum):
 
 
 class Round:
-    """One round of eight tasks around a single starter cell."""
+    """One round of tasks around a single starter cell."""
 
     def __init__(self, cube: Cube, starter: Coord = STARTER,
                  continuous_plane: Plane = CONTINUOUS_PLANE,
-                 tasks: list[TaskConfig] = TASKS, verify: bool = True):
+                 tasks: list[TaskConfig] = TASKS,
+                 ruleset: Ruleset = STANDARD_RULESET, verify: bool = True):
         """Create a round.
 
         Args:
@@ -59,7 +58,8 @@ class Round:
             starter: The cell whose number is shown from the start.
             continuous_plane: The round's continuous plane. The tasks must
                 be chosen to match it.
-            tasks: The eight tasks, in order.
+            tasks: The round's tasks, in order.
+            ruleset: The rules this round follows.
             verify: Check each task's line sums before it starts
                 (FR_VerifyTask). Turn off only when testing with a cube that
                 is not a real magic cube.
@@ -68,6 +68,7 @@ class Round:
             ValueError: If the tasks do not follow the ruleset (wrong number
                 of tasks, or an extra count outside the allowed range).
         """
+        self._ruleset = ruleset
         self._check_tasks(tasks)
 
         self._cube = cube
@@ -136,7 +137,7 @@ class Round:
 
         # Once every target is found, move on to the arithmetic.
         if len(self._correct_cells) == len(self._target_cells):
-            if has_addition_step(self.current_task_type):
+            if self._ruleset.has_addition_step(self.current_task_type):
                 self._phase = Phase.ADDING
             else:
                 # Nothing to add (task 1), so go straight to subtraction.
@@ -163,7 +164,7 @@ class Round:
         """Check the player's answer to the subtraction.
 
         A correct answer reveals the rest of the line's numbers and finishes
-        the task (or the round, after task 8). A wrong answer (or a call
+        the task (or the round, after the last task). A wrong answer (or a call
         outside the SUBTRACTING phase) returns False.
         """
         if self._phase is not Phase.SUBTRACTING:
@@ -246,7 +247,7 @@ class Round:
         """
         if self._phase in (Phase.READY, Phase.SELECTING):
             return []
-        if not has_addition_step(self.current_task_type):
+        if not self._ruleset.has_addition_step(self.current_task_type):
             return []
 
         values = []
@@ -260,7 +261,7 @@ class Round:
         before the first task starts."""
         if self.current_task_type is None:
             return 0
-        return line_sum(self.current_task_type)
+        return self._ruleset.line_sum(self.current_task_type)
 
     def value_at(self, cell: Coord) -> int:
         """Return the number in a cell."""
@@ -285,16 +286,16 @@ class Round:
             total += self.value_at(cell)
         return total
 
-    @staticmethod
-    def _check_tasks(tasks: list[TaskConfig]) -> None:
+    def _check_tasks(self, tasks: list[TaskConfig]) -> None:
         """Check the round's tasks follow the ruleset."""
-        if len(tasks) != TASKS_PER_ROUND:
+        tasks_per_round = self._ruleset.tasks_per_round
+        if len(tasks) != tasks_per_round:
             raise ValueError(
-                f"A round needs {TASKS_PER_ROUND} tasks, got {len(tasks)}")
+                f"A round needs {tasks_per_round} tasks, got {len(tasks)}")
 
         for index, task in enumerate(tasks):
             task_number = index + 1
-            allowed = allowed_extra_counts(task.task_type)
+            allowed = self._ruleset.allowed_extra_counts(task.task_type)
             if task.extra_count not in allowed:
                 raise ValueError(
                     f"Task {task_number}: extra count {task.extra_count} is "
