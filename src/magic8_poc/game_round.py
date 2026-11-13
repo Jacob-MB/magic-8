@@ -5,8 +5,8 @@ in the UI module calls its action methods when the player does something,
 then reads its state to decide what to draw.
 
 All numbers going in and out of the Round are plain integers. Showing them
-to the player in their number base (and reading the player's answers) is the
-UI's job, using number_base.py.
+to the player in the ruleset's number base (and reading the player's
+answers) is the UI's job, using number_base.py with ruleset.number_base.
 
 A task goes through these phases:
 
@@ -206,6 +206,12 @@ class Round:
     @property
     def starter(self) -> Coord:
         return self._solver.starter
+
+    @property
+    def ruleset(self) -> Ruleset:
+        """The rules this round follows, e.g. ruleset.number_base for the
+        base the UI shows numbers in."""
+        return self._ruleset
 
     @property
     def continuous_plane(self) -> Plane:

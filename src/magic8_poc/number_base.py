@@ -2,21 +2,18 @@
 
 The game logic works only with plain integers. This module converts those
 integers into the number base shown to the player, and reads the player's
-answers back from that base. Changing the base the player sees only needs a
-change here (or a different base passed in), not in the game logic.
+answers back from that base. Which base to use is a rule, so callers pass
+in the round's ruleset.number_base.
 """
-
-# The base the player sees numbers in.
-DISPLAY_BASE = 8
 
 # Digits used to write numbers, in order of value. Supports bases 2 to 16.
 DIGITS = "0123456789ABCDEF"
 
 
-def to_display(value: int, base: int = DISPLAY_BASE) -> str:
+def to_display(value: int, base: int) -> str:
     """Write a non-negative integer in the given base.
 
-    Example: to_display(513) returns "1001", since 513 is 1001 in octal.
+    Example: to_display(513, 8) returns "1001", since 513 is 1001 in octal.
     """
     _check_base(base)
     if value < 0:
@@ -47,7 +44,7 @@ def to_display(value: int, base: int = DISPLAY_BASE) -> str:
     return "".join(digits)
 
 
-def parse_answer(text: str, base: int = DISPLAY_BASE) -> int | None:
+def parse_answer(text: str, base: int) -> int | None:
     """Read the player's answer, written in the given base.
 
     Spaces around the answer are ignored, and letters may be upper or lower

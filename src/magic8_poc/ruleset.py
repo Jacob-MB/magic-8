@@ -1,8 +1,9 @@
 """Ruleset Module: the rules of a gameplay round.
 
 This module holds the rules from Dr. Rapoport's game. A Ruleset object
-holds the rules that a round follows: the number of tasks, the magic sums
-each kind of line adds up to, and how many extra numbers a task may add.
+holds the rules that a round follows: the number base the player works in,
+the number of tasks, the magic sums each kind of line adds up to, and how
+many extra numbers a task may add.
 Each Round is given a Ruleset, so different rounds (for example, future
 game modes) can follow different rules. STANDARD_RULESET holds the rules
 of the main game.
@@ -10,8 +11,8 @@ of the main game.
 The line types (TaskType) and the cube size are the same for every ruleset
 and are kept as module-level definitions.
 
-All values are plain integers. Showing them in the player's number base is
-the job of number_base.py.
+All values are plain integers. The ruleset decides which number base the
+player sees; number_base.py does the conversion to and from that base.
 """
 
 from dataclasses import dataclass
@@ -73,6 +74,8 @@ class Ruleset:
     """The rules a round follows. A ruleset cannot be changed once created.
 
     Attributes:
+        number_base: The base numbers are shown to and entered by the
+            player in.
         tasks_per_round: Number of tasks in a round.
         complement_sum: What a cell and its complement add up to.
         half_line_sum: What the cells of a half-line add up to.
@@ -83,6 +86,7 @@ class Ruleset:
             may add.
     """
 
+    number_base: int
     tasks_per_round: int
     complement_sum: int
     half_line_sum: int
@@ -125,6 +129,7 @@ class Ruleset:
 # The rules of the main game. Each extra-count limit leaves at least one of
 # the line's numbers for the player to find through the subtraction.
 STANDARD_RULESET = Ruleset(
+    number_base=8,                  # Octal
     tasks_per_round=8,
     complement_sum=0o1001,          # 513 in decimal
     half_line_sum=0o2002,           # 1026 in decimal
