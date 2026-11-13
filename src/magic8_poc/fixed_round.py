@@ -6,7 +6,7 @@ the PoC every round is the same, so these values never change.
 
 from dataclasses import dataclass
 
-from magic8_poc.lines import Coord, TaskType
+from magic8_poc.lines import Coord, Plane, TaskType
 
 
 @dataclass(frozen=True)
@@ -23,8 +23,8 @@ class TaskConfig:
 
 
 # The x and y axes form the continuous plane, so z is the axis not in the
-# plane.
-CONTINUOUS_AXES = ("x", "y")
+# plane. The task list below is written to match this plane.
+CONTINUOUS_PLANE = Plane.XY
 
 # Chosen so that the task 8 triagonal is split (it wraps around the cube).
 STARTER: Coord = (2, 5, 1)

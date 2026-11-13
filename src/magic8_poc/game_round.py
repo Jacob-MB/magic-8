@@ -14,8 +14,9 @@ A task goes through these phases:
 
 from enum import Enum
 
-from magic8_poc.fixed_round import STARTER, TASKS, TaskConfig
-from magic8_poc.lines import Coord, TaskSolver, TaskType
+from magic8_poc.fixed_round import (CONTINUOUS_PLANE, STARTER, TASKS,
+                                    TaskConfig)
+from magic8_poc.lines import Coord, Plane, TaskSolver, TaskType
 from magic8_poc.octal import (COMPLEMENT_SUM, HALF_LINE_SUM, LINE_SUM,
                               parse_octal, to_octal)
 
@@ -45,12 +46,15 @@ class Round:
     """One round of eight tasks around a single starter cell."""
 
     def __init__(self, cube: Cube, starter: Coord = STARTER,
+                 continuous_plane: Plane = CONTINUOUS_PLANE,
                  tasks: list[TaskConfig] = TASKS, verify: bool = True):
         """Create a round.
 
         Args:
             cube: The magic cube's numbers, indexed cube[x][y][z].
             starter: The cell whose number is shown from the start.
+            continuous_plane: The round's continuous plane. The tasks must
+                be chosen to match it.
             tasks: The eight tasks, in order.
             verify: Check each task's line sums before it starts
                 (FR_VerifyTask). Turn off only when testing with a cube that
@@ -58,6 +62,7 @@ class Round:
         """
         self._cube = cube
         self._solver = TaskSolver(starter)
+        self._continuous_plane = continuous_plane
         self._tasks = tasks
         self._verify = verify
 
@@ -188,6 +193,11 @@ class Round:
     @property
     def starter(self) -> Coord:
         return self._solver.starter
+
+    @property
+    def continuous_plane(self) -> Plane:
+        """The round's continuous plane (use .axes and .off_plane_axis)."""
+        return self._continuous_plane
 
     @property
     def target_cells(self) -> list[Coord]:

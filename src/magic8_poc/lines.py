@@ -12,6 +12,36 @@ HALF = CUBE_SIZE // 2
 
 Coord = tuple[int, int, int]
 
+# Axis numbers used throughout the game logic.
+X_AXIS = 0
+Y_AXIS = 1
+Z_AXIS = 2
+
+
+class Plane(Enum):
+    """The continuous plane of a round: the two axes it is made of.
+
+    Each value is the pair of axis numbers in the plane (0 = x, 1 = y,
+    2 = z). The remaining axis is the one not in the plane.
+    """
+
+    XY = (X_AXIS, Y_AXIS)
+    XZ = (X_AXIS, Z_AXIS)
+    YZ = (Y_AXIS, Z_AXIS)
+
+    @property
+    def axes(self) -> tuple[int, int]:
+        """The two axis numbers that make up the plane."""
+        return self.value
+
+    @property
+    def off_plane_axis(self) -> int:
+        """The axis number that is not in the plane."""
+        for axis in (X_AXIS, Y_AXIS, Z_AXIS):
+            if axis not in self.axes:
+                return axis
+        raise AssertionError("A plane always leaves out exactly one axis")
+
 
 class TaskType(Enum):
     """Line types that a task can ask the player to complete.
