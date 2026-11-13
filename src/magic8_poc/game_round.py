@@ -18,12 +18,11 @@ A task goes through these phases:
 
 from enum import Enum
 
+from magic8_poc.cube import Cube
 from magic8_poc.fixed_round import (CONTINUOUS_PLANE, STARTER, TASKS,
                                     TaskConfig)
 from magic8_poc.lines import Coord, Plane, TaskSolver, TaskType
 from magic8_poc.octal import COMPLEMENT_SUM, HALF_LINE_SUM, LINE_SUM
-
-Cube = list[list[list[int]]]
 
 
 class Phase(Enum):
@@ -54,7 +53,7 @@ class Round:
         """Create a round.
 
         Args:
-            cube: The magic cube's numbers, indexed cube[x][y][z].
+            cube: The magic cube's numbers.
             starter: The cell whose number is shown from the start.
             continuous_plane: The round's continuous plane. The tasks must
                 be chosen to match it.
@@ -260,8 +259,7 @@ class Round:
 
     def value_at(self, cell: Coord) -> int:
         """Return the number in a cell."""
-        x, y, z = cell
-        return self._cube[x][y][z]
+        return self._cube.value_at(cell)
 
     # ------------------------------------------------------------------
     # Helpers
