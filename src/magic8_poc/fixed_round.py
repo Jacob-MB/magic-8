@@ -6,7 +6,8 @@ the PoC every round is the same, so these values never change.
 
 from dataclasses import dataclass
 
-from magic8_poc.lines import Coord, Plane, TaskType
+from magic8_poc.lines import Coord, Plane
+from magic8_poc.ruleset import TaskType
 
 
 @dataclass(frozen=True)

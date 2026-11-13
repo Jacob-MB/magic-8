@@ -5,7 +5,8 @@ reads them only through Cube.value_at, so the storage can change without
 affecting other modules.
 """
 
-from magic8_poc.lines import CUBE_SIZE, Coord
+from magic8_poc.lines import Coord
+from magic8_poc.ruleset import CUBE_SIZE
 
 CELL_COUNT = CUBE_SIZE ** 3
 

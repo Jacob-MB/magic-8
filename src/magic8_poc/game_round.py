@@ -21,8 +21,10 @@ from enum import Enum
 from magic8_poc.cube import Cube
 from magic8_poc.fixed_round import (CONTINUOUS_PLANE, STARTER, TASKS,
                                     TaskConfig)
-from magic8_poc.lines import Coord, Plane, TaskSolver, TaskType
-from magic8_poc.octal import COMPLEMENT_SUM, HALF_LINE_SUM, LINE_SUM
+from magic8_poc.lines import Coord, Plane, TaskSolver
+from magic8_poc.ruleset import (TASKS_PER_ROUND, TaskType,
+                                allowed_extra_counts, has_addition_step,
+                                line_sum)
 
 
 class Phase(Enum):
@@ -61,7 +63,13 @@ class Round:
             verify: Check each task's line sums before it starts
                 (FR_VerifyTask). Turn off only when testing with a cube that
                 is not a real magic cube.
+
+        Raises:
+            ValueError: If the tasks do not follow the ruleset (wrong number
+                of tasks, or an extra count outside the allowed range).
         """
+        self._check_tasks(tasks)
+
         self._cube = cube
         self._solver = TaskSolver(starter)
         self._continuous_plane = continuous_plane
@@ -128,11 +136,11 @@ class Round:
 
         # Once every target is found, move on to the arithmetic.
         if len(self._correct_cells) == len(self._target_cells):
-            if self.current_task_type is TaskType.COMPLEMENT:
-                # Task 1 has nothing to add, so it goes straight to subtraction.
-                self._phase = Phase.SUBTRACTING
-            else:
+            if has_addition_step(self.current_task_type):
                 self._phase = Phase.ADDING
+            else:
+                # Nothing to add (task 1), so go straight to subtraction.
+                self._phase = Phase.SUBTRACTING
 
         return SelectResult.CORRECT
 
@@ -238,7 +246,7 @@ class Round:
         """
         if self._phase in (Phase.READY, Phase.SELECTING):
             return []
-        if self.current_task_type is TaskType.COMPLEMENT:
+        if not has_addition_step(self.current_task_type):
             return []
 
         values = []
@@ -248,14 +256,11 @@ class Round:
 
     @property
     def subtraction_constant(self) -> int:
-        """The magic constant the player subtracts from in this task."""
-        task_type = self.current_task_type
-        if task_type is TaskType.COMPLEMENT:
-            return COMPLEMENT_SUM
-        if task_type in (TaskType.HALF_ORTHOGONAL_X, TaskType.HALF_ORTHOGONAL_Y,
-                         TaskType.HALF_ORTHOGONAL_Z):
-            return HALF_LINE_SUM
-        return LINE_SUM
+        """The magic constant the player subtracts from in this task, or 0
+        before the first task starts."""
+        if self.current_task_type is None:
+            return 0
+        return line_sum(self.current_task_type)
 
     def value_at(self, cell: Coord) -> int:
         """Return the number in a cell."""
@@ -279,6 +284,22 @@ class Round:
         for cell in self._addition_cells():
             total += self.value_at(cell)
         return total
+
+    @staticmethod
+    def _check_tasks(tasks: list[TaskConfig]) -> None:
+        """Check the round's tasks follow the ruleset."""
+        if len(tasks) != TASKS_PER_ROUND:
+            raise ValueError(
+                f"A round needs {TASKS_PER_ROUND} tasks, got {len(tasks)}")
+
+        for index, task in enumerate(tasks):
+            task_number = index + 1
+            allowed = allowed_extra_counts(task.task_type)
+            if task.extra_count not in allowed:
+                raise ValueError(
+                    f"Task {task_number}: extra count {task.extra_count} is "
+                    f"not allowed (must be {allowed.start} to "
+                    f"{allowed.stop - 1})")
 
     def _check_task_sums(self) -> None:
         """Check the starter and targets add up to the task's magic sum."""

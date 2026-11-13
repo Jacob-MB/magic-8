@@ -1,13 +1,5 @@
-"""Octal number helpers and the magic cube's octal constants."""
-
-# Sum of a cell and its complement: 1001 (octal) = 513 (decimal).
-COMPLEMENT_SUM = 0o1001
-
-# Sum of the 4 cells in a half-line: 2002 (octal) = 1026 (decimal).
-HALF_LINE_SUM = 0o2002
-
-# Sum of the 8 cells in a full line: 4004 (octal) = 2052 (decimal).
-LINE_SUM = 0o4004
+"""Octal number helpers for showing numbers to the player and reading
+their answers."""
 
 OCTAL_DIGITS = "01234567"
 

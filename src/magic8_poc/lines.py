@@ -3,11 +3,18 @@
 Given a starter cell and a task type, compute the cells the player must
 select. All line arithmetic is modulo 8, so broken (split) lines wrap around
 the cube's boundaries.
+
+Coordinates match the POC renderer (at zero rotation):
+    x: 0 -> 7 runs left -> right
+    y: 0 -> 7 runs bottom -> top
+    z: 0 -> 7 runs front -> back
+Therefore, (0, 0, 0) is the front, bottom, left of the cube.
 """
 
 from enum import Enum
 
-CUBE_SIZE = 8
+from magic8_poc.ruleset import CUBE_SIZE, TaskType
+
 HALF = CUBE_SIZE // 2
 
 Coord = tuple[int, int, int]
@@ -41,51 +48,6 @@ class Plane(Enum):
             if axis not in self.axes:
                 return axis
         raise AssertionError("A plane always leaves out exactly one axis")
-
-
-class TaskType(Enum):
-    """Line types that a task can ask the player to complete.
-
-    Coordinates match the POC renderer (at zero rotation):
-        x: 0 -> 7 runs left -> right
-        y: 0 -> 7 runs bottom -> top
-        z: 0 -> 7 runs front -> back
-    Therefore, (0, 0, 0) is the front, bottom, left of the cube.
-
-    SAME / DIFF describe whether two axes change in the same direction
-    (both increase) or in different directions (one increases while the
-    other decreases) along the line.
-    """
-
-    # Task 1
-    COMPLEMENT = 1
-
-    # Task 2: the half of the line that holds the starter (coordinates
-    # 0-3 or 4-7 on that axis), which always reaches an outer edge.
-    HALF_ORTHOGONAL_X = 2
-    HALF_ORTHOGONAL_Y = 3
-    HALF_ORTHOGONAL_Z = 4
-
-    # Task 3
-    ORTHOGONAL_X = 5
-    ORTHOGONAL_Y = 6
-    ORTHOGONAL_Z = 7
-
-    # Tasks 4, 5 and 6. Continuous vs. split is a matter of where the line
-    # sits in the cube, not a different line: see TaskSolver.is_continuous.
-    DIAGONAL_XY_SAME = 8
-    DIAGONAL_XY_DIFF = 9
-    DIAGONAL_XZ_SAME = 10
-    DIAGONAL_XZ_DIFF = 11
-    DIAGONAL_YZ_SAME = 12
-    DIAGONAL_YZ_DIFF = 13
-
-    # Tasks 7 and 8. A triagonal direction is a sign vector (+-1, +-1, +-1)
-    # up to negation, so exactly these four pass through any cell.
-    TRIAGONAL_XYZ_SAME = 14
-    TRIAGONAL_XY_SAME_Z_DIFF = 15
-    TRIAGONAL_XZ_SAME_Y_DIFF = 16
-    TRIAGONAL_YZ_SAME_X_DIFF = 17
 
 
 # Step direction of each full line type.
