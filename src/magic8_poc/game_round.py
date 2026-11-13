@@ -4,6 +4,10 @@ The Round class is a state machine. It has no loop of its own: the game loop
 in the UI module calls its action methods when the player does something,
 then reads its state to decide what to draw.
 
+All numbers going in and out of the Round are plain integers. Showing them
+to the player in octal (and reading the player's octal answers) is the UI's
+job, using the number base translation module.
+
 A task goes through these phases:
 
     SELECTING  -> the player clicks cells until every target cell is found
@@ -17,8 +21,7 @@ from enum import Enum
 from magic8_poc.fixed_round import (CONTINUOUS_PLANE, STARTER, TASKS,
                                     TaskConfig)
 from magic8_poc.lines import Coord, Plane, TaskSolver, TaskType
-from magic8_poc.octal import (COMPLEMENT_SUM, HALF_LINE_SUM, LINE_SUM,
-                              parse_octal, to_octal)
+from magic8_poc.octal import COMPLEMENT_SUM, HALF_LINE_SUM, LINE_SUM
 
 Cube = list[list[list[int]]]
 
@@ -134,8 +137,8 @@ class Round:
 
         return SelectResult.CORRECT
 
-    def submit_addition(self, answer: str) -> bool:
-        """Check the player's octal sum of the addition column.
+    def submit_addition(self, answer: int) -> bool:
+        """Check the player's sum of the addition column.
 
         Returns True and moves on to subtraction if the answer is correct.
         A wrong answer (or a call outside the ADDING phase) returns False.
@@ -143,14 +146,14 @@ class Round:
         if self._phase is not Phase.ADDING:
             return False
 
-        if parse_octal(answer) != self._addition_sum():
+        if answer != self._addition_sum():
             return False
 
         self._phase = Phase.SUBTRACTING
         return True
 
-    def submit_subtraction(self, answer: str) -> bool:
-        """Check the player's octal answer to the subtraction.
+    def submit_subtraction(self, answer: int) -> bool:
+        """Check the player's answer to the subtraction.
 
         A correct answer reveals the rest of the line's numbers and finishes
         the task (or the round, after task 8). A wrong answer (or a call
@@ -160,7 +163,7 @@ class Round:
             return False
 
         expected = self.subtraction_constant - self._addition_sum()
-        if parse_octal(answer) != expected:
+        if answer != expected:
             return False
 
         self._line_revealed = True
@@ -230,16 +233,19 @@ class Round:
         return cells
 
     @property
-    def addition_values(self) -> list[str]:
-        """The octal numbers in the addition column: the starter, then the
-        extra numbers from the line. Empty for task 1 and before the
-        addition step.
+    def addition_values(self) -> list[int]:
+        """The numbers in the addition column: the starter, then the extra
+        numbers from the line. Empty for task 1 and before the addition step.
         """
         if self._phase in (Phase.READY, Phase.SELECTING):
             return []
         if self.current_task_type is TaskType.COMPLEMENT:
             return []
-        return [to_octal(self.value_at(cell)) for cell in self._addition_cells()]
+
+        values = []
+        for cell in self._addition_cells():
+            values.append(self.value_at(cell))
+        return values
 
     @property
     def subtraction_constant(self) -> int:
@@ -285,5 +291,4 @@ class Round:
         if total != self.subtraction_constant:
             raise ValueError(
                 f"Task {self.task_number} ({self.current_task_type.name}): "
-                f"cells sum to {to_octal(total)} (octal), expected "
-                f"{to_octal(self.subtraction_constant)}")
+                f"cells sum to {total}, expected {self.subtraction_constant}")
