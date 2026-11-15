@@ -2,6 +2,20 @@
 
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{ltablex}
+\usepackage{float}
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\keepXColumns
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% Bullet list for use inside table cells (e.g., the empathy map).
+\newcommand{\cellbullet}{\par\noindent\hangindent=1em\hangafter=1%
+  \makebox[1em][l]{\textbullet}\ignorespaces}
+\newenvironment{empathylist}
+  {\begin{minipage}[t]{\linewidth}\let\item\cellbullet}
+  {\strut\end{minipage}}
 
 \title{CD Fall - User/Stakeholder/Client Interview Report\\\progname}
 
@@ -44,6 +58,13 @@ Additionally, the interviewer(s) will be filling in an empathy map while complet
 The application under discussion today is a web-based game. We will begin with an explanation of the game and then move on to some open-ended survey questions. This game is based on the mathematical properties of magic cubes. For some background, a most perfect magic cube is a cube where each voxel's value is a distinct number from 1 to n\textasciicircum{}3 and all rows, columns, pillars, 2-dimentional diagonals, 3- dimensional diagonals (triagonals), and broken space diagonals in the cube sum to the same number, also called the magic constant (show example magic cube). The order-eight cube is the smallest order most perfect magic cube. Using octal within this order-8 magic cube showcases the magic properties of the cube with the mentioned lines summing to 4004, half lines summing to 2002, and the complementary numbers (+4 4 4 for the x y z coordinates from a given voxel) summing to 1001 (all in octal).
 
 It is in this context that we propose an octal-base puzzle game to provide a fun and engaging means of learning and utilizing the octal number base. In this proposed game, players start with one voxel (number) in a most perfect magic cube visible with all other voxels hidden. The player must then complete a series of tasks involving finding the voxels associated with the prescribed lines adding up to the magic constant. For example, a task could be to find the diagonal that passes through the starting voxel within its XY plane, going from the bottom to the top of the cube (relative to the player's view). Each round of the game will involve eight tasks of increasing difficulty for the player to complete. This game involves a lot of addition and subtraction which can help teach the player octal arithmetic.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{MagicCube.png}
+    \caption{Proof of concept visualization of the 8x8x8 magic cube (voxel values hidden)}
+    \label{fig:MagicCube}
+\end{figure}
 
 \section{Survey Questions}
 
