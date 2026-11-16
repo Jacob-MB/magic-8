@@ -17,6 +17,13 @@
     urlcolor=blue
 }
 
+\usepackage{xr}
+\externaldocument[SRS-]{../../SRS-IEEE/SRS}
+
+\newcommand{\rref}[1]{FR\ref{SRS-#1}}
+\newcommand{\nfrref}[1]{NFR\ref{SRS-#1}}
+\newcommand{\prref}[1]{PR\ref{SRS-#1}}
+
 \input{../../Comments.text}
 \input{../../Common.text}
 
@@ -527,92 +534,92 @@ requirements and between the modules and the anticipated changes.
 \endhead
 \bottomrule
 \endlastfoot
-FR1 & \mref{ADD REF}\\
-FR2 & \\
-FR3 & \\
-FR4 & \\
-FR5 & \\
-FR6 & \\
-FR7 & \\
-FR8 & \\
-FR9 & \\
-FR10 & \\
-FR11 & \\
-FR12 & \\
-FR13 & \\
-FR14 & \\
-FR15 & \\
-FR16 & \\
-FR17 & \\
-FR18 & \\
-FR19 & \\
-FR20 & \\
-FR21 & \\
-FR22 & \\
-FR23 & \\
-FR24 & \\
-FR25 & \\
-FR26 & \\
-FR27 & \\
-FR28 & \\
-FR29 & \\
-FR30 & \\
-FR31 & \\
-FR32 & \\
-FR33 & \\
-FR34 & \\
-FR35 & \\
-FR36 & \\
-FR37 & \\
-FR38 & \\
-FR39 & \\
-FR40 & \\
-FR41 & \\
-FR42 & \\
-FR43 & \\
-FR44 & \\
-FR45 & \\
-FR46 & \\
-FR47 & \\
-FR48 & \\
-FR49 & \\
-FR50 & \\
-FR51 & \\
-FR52 & \\
-FR53 & \\
-FR54 & \\
-FR55 & \\
+\rref{FR_StartRound} & \mref{ADD REF}\\
+\rref{FR_SelectPlane} & \\
+\rref{FR_SelectOrientation} & \\
+\rref{FR_ChooseBase} & \\
+\rref{FR_ShowStarter} & \\
+\rref{FR_NoRepeatStarter} & \\
+\rref{FR_TaskOrder} & \\
+\rref{FR_CellFeedback} & \\
+\rref{FR_Task1} & \\
+\rref{FR_Task2} & \\
+\rref{FR_Task3} & \\
+\rref{FR_Task4} & \\
+\rref{FR_Task5} & \\
+\rref{FR_Task6} & \\
+\rref{FR_Task7} & \\
+\rref{FR_Task8} & \\
+\rref{FR_ChooseExtra} & \\
+\rref{FR_AdditionColumn} & \\
+\rref{FR_AdditionCheck} & \\
+\rref{FR_SubtractionPrompt} & \\
+\rref{FR_SubtractionCheck} & \\
+\rref{FR_InputValidation} & \\
+\rref{FR_UnrecognizedInput} & \\
+\rref{FR_NextTask} & \\
+\rref{FR_EndRound} & \\
+\rref{FR_VerifyTask} & \\
+\rref{FR_BasicPoints} & \\
+\rref{FR_TimedScore} & \\
+\rref{FR_Totals} & \\
+\rref{FR_StopGame} & \\
+\rref{FR_Autosave} & \\
+\rref{FR_Resume} & \\
+\rref{FR_3DView} & \\
+\rref{FR_3DNavigate} & \\
+\rref{FR_3DLayers} & \\
+\rref{FR_3DHighlight} & \\
+\rref{FR_PerformanceWarning} & \\
+\rref{FR_Tutorial} & \\
+\rref{FR_ExplainCell} & \\
+\rref{FR_Hint} & \\
+\rref{FR_SolutionPath} & \\
+\rref{FR_GuestPlay} & \\
+\rref{FR_CreateAccount} & \\
+\rref{FR_UsernameRules} & \\
+\rref{FR_Login} & \\
+\rref{FR_PasswordReset} & \\
+\rref{FR_RecordRound} & \\
+\rref{FR_Statistics} & \\
+\rref{FR_Leaderboards} & \\
+\rref{FR_LeaderboardIntegrity} & \\
+\rref{FR_DailyChallenge} & \\
+\rref{FR_ShareResults} & \\
+\rref{FR_DeleteAccount} & \\
+\rref{FR_PlayTimeReminder} & \\
+\rref{FR_DisableAnimations} & \\
 \midrule
-NFR1 & \mref{ADD REF} \\
-NFR2 & \\
-NFR3 & \\
-NFR4 & \\
-NFR5 & \\
-NFR6 & \\
-NFR7 & \\
-NFR8 & \\
-NFR9 & \\
-NFR10 & \\
-NFR11 & \\
-NFR12 & \\
-NFR13 & \\
-NFR14 & \\
-NFR15 & \\
-NFR16 & \\
-NFR17 & \\
-NFR18 & \\
-NFR19 & \\
+\nfrref{NFR_1} & \mref{ADD REF} \\
+\nfrref{NFR_2} & \\
+\nfrref{NFR_3} & \\
+\nfrref{NFR_4} & \\
+\nfrref{NFR_5} & \\
+\nfrref{NFR_6} & \\
+\nfrref{NFR_7} & \\
+\nfrref{NFR_8} & \\
+\nfrref{NFR_9} & \\
+\nfrref{NFR_10} & \\
+\nfrref{NFR_11} & \\
+\nfrref{NFR_12} & \\
+\nfrref{NFR_13} & \\
+\nfrref{NFR_14} & \\
+\nfrref{NFR_15} & \\
+\nfrref{NFR_16} & \\
+\nfrref{NFR_17} & \\
+\nfrref{NFR_18} & \\
+\nfrref{NFR_19} & \\
 \midrule
-PR1 & \mref{ADD REF} \\
-PR2 & \\
-PR3 & \\
-PR4 & \\
-PR5 & \\
-PR6 & \\
-PR7 & \\
-PR8 & \\
-PR9 & \\
-PR10 & \\
+\prref{PR_1} & \mref{ADD REF} \\
+\prref{PR_2} & \\
+\prref{PR_3} & \\
+\prref{PR_4} & \\
+\prref{PR_5} & \\
+\prref{PR_6} & \\
+\prref{PR_7} & \\
+\prref{PR_8} & \\
+\prref{PR_9} & \\
+\prref{PR_10} & \\
 \end{longtable}
 
 \begin{table}[H]

@@ -78,6 +78,9 @@
 \newcommand{\rthenfrnum}{NFR\thenfrnum}
 \newcommand{\nfrref}[1]{NFR\ref{#1}}
 
+\newcounter{prnum} %Privacy and Data Retention Requirement (PR) Number
+\newcommand{\prref}[1]{PR\ref{#1}}
+
 \newcounter{lcnum} %Likely Change (LC) Number
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
@@ -1502,34 +1505,34 @@ Log.record & Reference & The record that was changed\\
  
 \subsection{Privacy and Data Retention}
  
-\noindent \textbf{PR1:} The system shall store only the data in the data dictionary, and shall not collect real names or birthdates. \newline \textit{Rationale:} Intended users include high-school students, so collecting less personal data means less harm from a leak.
+\noindent \refstepcounter{prnum}\label{PR_1}\textbf{PR\theprnum:} The system shall store only the data in the data dictionary, and shall not collect real names or birthdates. \newline \textit{Rationale:} Intended users include high-school students, so collecting less personal data means less harm from a leak.
  
 \vspace{0.5em}
-\noindent \textbf{PR2:} The system shall use a user's email address only for account recovery (\rref{FR_PasswordReset}), and shall not display it or share it with any third party.
+\noindent \refstepcounter{prnum}\label{PR_2}\textbf{PR\theprnum:} The system shall use a user's email address only for account recovery (\rref{FR_PasswordReset}), and shall not display it or share it with any third party.
  
 \vspace{0.5em}
-\noindent \textbf{PR3:} The system shall store passwords only as cryptographic hashes. \newline \textit{Rationale:} Hazard Analysis SR2. A leak must not expose passwords that users may reuse elsewhere.
+\noindent \refstepcounter{prnum}\label{PR_3}\textbf{PR\theprnum:} The system shall store passwords only as cryptographic hashes. \newline \textit{Rationale:} Hazard Analysis SR2. A leak must not expose passwords that users may reuse elsewhere.
  
 \vspace{0.5em}
-\noindent \textbf{PR4:} The system shall encrypt email addresses and other sensitive user data in storage. \newline \textit{Rationale:} Hazard Analysis SR1.
+\noindent \refstepcounter{prnum}\label{PR_4}\textbf{PR\theprnum:} The system shall encrypt email addresses and other sensitive user data in storage. \newline \textit{Rationale:} Hazard Analysis SR1.
  
 \vspace{0.5em}
-\noindent \textbf{PR5:} The system shall check that the stored cube array contains each of the numbers 1 to 512 exactly once, and shall not start a round if it does not. \newline \textit{Rationale:} A corrupted array would produce wrong expected answers (\rref{FR_VerifyTask}).
+\noindent \refstepcounter{prnum}\label{PR_5}\textbf{PR\theprnum:} The system shall check that the stored cube array contains each of the numbers 1 to 512 exactly once, and shall not start a round if it does not. \newline \textit{Rationale:} A corrupted array would produce wrong expected answers (\rref{FR_VerifyTask}).
  
 \vspace{0.5em}
-\noindent \textbf{PR6:} The system shall automatically back up each database every 24 hours and keep the 7 most recent backups. \newline \textit{Rationale:} Hazard Analysis SR3. The interval and count are proposed values.
+\noindent \refstepcounter{prnum}\label{PR_6}\textbf{PR\theprnum:} The system shall automatically back up each database every 24 hours and keep the 7 most recent backups. \newline \textit{Rationale:} Hazard Analysis SR3. The interval and count are proposed values.
  
 \vspace{0.5em}
-\noindent \textbf{PR7:} The system shall log every change to each database with the time, operation, and record changed. \newline \textit{Rationale:} Hazard Analysis SR4.
+\noindent \refstepcounter{prnum}\label{PR_7}\textbf{PR\theprnum:} The system shall log every change to each database with the time, operation, and record changed. \newline \textit{Rationale:} Hazard Analysis SR4.
  
 \vspace{0.5em}
-\noindent \textbf{PR8:} If a database is corrupted or data is lost, the system shall restore it from the most recent backup that passes an integrity check. \newline \textit{Rationale:} Hazard Analysis SR11.
+\noindent \refstepcounter{prnum}\label{PR_8}\textbf{PR\theprnum:} If a database is corrupted or data is lost, the system shall restore it from the most recent backup that passes an integrity check. \newline \textit{Rationale:} Hazard Analysis SR11.
  
 \vspace{0.5em}
-\noindent \textbf{PR9:} The system shall keep a user's scores and statistics until the account is deleted (\rref{FR_DeleteAccount}), and shall then remove the user's data from live databases immediately and from backups when those backups expire.
+\noindent \refstepcounter{prnum}\label{PR_9}\textbf{PR\theprnum:} The system shall keep a user's scores and statistics until the account is deleted (\rref{FR_DeleteAccount}), and shall then remove the user's data from live databases immediately and from backups when those backups expire.
  
 \vspace{0.5em}
-\noindent \textbf{PR10:} The system shall not keep any online data from guest play (\rref{FR_GuestPlay}), and shall delete a locally saved round when the round is completed or stopped (\rref{FR_StopGame}).
+\noindent \refstepcounter{prnum}\label{PR_10}\textbf{PR\theprnum:} The system shall not keep any online data from guest play (\rref{FR_GuestPlay}), and shall delete a locally saved round when the round is completed or stopped (\rref{FR_StopGame}).
 
 % ============================================================== 
 \section{Non-Functional Requirements}
@@ -2077,7 +2080,7 @@ Both come from the Hazard Analysis. The hourly reminder reduces the risk of exce
 
 \begin{itemize}
 \item \textbf{Game data} (cube array, orientation, round, and task attempt): \newline
-The cube array holds each of the numbers 1 to 512 exactly once, as in Dr.\ Rapoport's documents, and has an identifier because those documents say the array may change. It is checked when loaded (PR5), because a corrupted array would produce wrong expected answers. Rounds and task attempts are stored separately so each task's time, mistakes, hints, and score can be recorded, which the scoring, statistics, and tutorial requirements depend on.
+The cube array holds each of the numbers 1 to 512 exactly once, as in Dr.\ Rapoport's documents, and has an identifier because those documents say the array may change. It is checked when loaded (\prref{PR_5}), because a corrupted array would produce wrong expected answers. Rounds and task attempts are stored separately so each task's time, mistakes, hints, and score can be recorded, which the scoring, statistics, and tutorial requirements depend on.
 
 \item \textbf{Saved rounds}: \newline
 A saved round includes an integrity value so it can be validated before it is loaded (\rref{FR_Resume}).
@@ -2085,10 +2088,10 @@ A saved round includes an integrity value so it can be validated before it is lo
 \item \textbf{Statistics and leaderboards}: \newline
 These are calculated from score records instead of being stored separately, so the same information is not kept in two places and cannot disagree.
 
-\item \textbf{Personal data} (PR1--PR4): \newline
+\item \textbf{Personal data} (\prref{PR_1}--\prref{PR_4}): \newline
 Only a username, an email address, and a password hash are stored, with no real names or birthdates, because intended users include high-school students. The email address is used only for account recovery. Hashed passwords and encrypted data limit the harm if the database is leaked (Hazard Analysis SR1, SR2).
 
-\item \textbf{Backups, logging, and retention} (PR6--PR10): \newline
+\item \textbf{Backups, logging, and retention} (\prref{PR_6}--\prref{PR_10}): \newline
 Backups, change logs, and restoring from the last valid backup protect against lost or corrupted data (Hazard Analysis SR3, SR4, SR11), although the Hazard Analysis defers them until after the main features. Data is kept until the user deletes their account, and guest play is never stored online, since there is no reason to keep it.
 
 \end{itemize}
