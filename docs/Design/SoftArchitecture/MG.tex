@@ -1,5 +1,6 @@
 \documentclass[12pt, titlepage]{article}
 
+\usepackage{longtable}
 \usepackage{fullpage}
 \usepackage[round]{natbib}
 \usepackage{multirow}
@@ -514,28 +515,105 @@ requirements and between the modules and the anticipated changes.
 
 % the table should use mref, the requirements should be named, use something
 % like fref
-\begin{table}[H]
-\centering
-\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+\begin{longtable}{p{0.3\textwidth} p{0.6\textwidth}}
+\caption{Trace Between Requirements and Modules} \label{TblRT}\\
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+\endfirsthead
+\toprule
+\textbf{Req.} & \textbf{Modules}\\
+\midrule
+\endhead
 \bottomrule
-\end{tabular}
-\caption{Trace Between Requirements and Modules}
-\label{TblRT}
-\end{table}
+\endlastfoot
+FR1 & \mref{ADD REF}\\
+FR2 & \\
+FR3 & \\
+FR4 & \\
+FR5 & \\
+FR6 & \\
+FR7 & \\
+FR8 & \\
+FR9 & \\
+FR10 & \\
+FR11 & \\
+FR12 & \\
+FR13 & \\
+FR14 & \\
+FR15 & \\
+FR16 & \\
+FR17 & \\
+FR18 & \\
+FR19 & \\
+FR20 & \\
+FR21 & \\
+FR22 & \\
+FR23 & \\
+FR24 & \\
+FR25 & \\
+FR26 & \\
+FR27 & \\
+FR28 & \\
+FR29 & \\
+FR30 & \\
+FR31 & \\
+FR32 & \\
+FR33 & \\
+FR34 & \\
+FR35 & \\
+FR36 & \\
+FR37 & \\
+FR38 & \\
+FR39 & \\
+FR40 & \\
+FR41 & \\
+FR42 & \\
+FR43 & \\
+FR44 & \\
+FR45 & \\
+FR46 & \\
+FR47 & \\
+FR48 & \\
+FR49 & \\
+FR50 & \\
+FR51 & \\
+FR52 & \\
+FR53 & \\
+FR54 & \\
+FR55 & \\
+\midrule
+NFR1 & \mref{ADD REF} \\
+NFR2 & \\
+NFR3 & \\
+NFR4 & \\
+NFR5 & \\
+NFR6 & \\
+NFR7 & \\
+NFR8 & \\
+NFR9 & \\
+NFR10 & \\
+NFR11 & \\
+NFR12 & \\
+NFR13 & \\
+NFR14 & \\
+NFR15 & \\
+NFR16 & \\
+NFR17 & \\
+NFR18 & \\
+NFR19 & \\
+\midrule
+PR1 & \mref{ADD REF} \\
+PR2 & \\
+PR3 & \\
+PR4 & \\
+PR5 & \\
+PR6 & \\
+PR7 & \\
+PR8 & \\
+PR9 & \\
+PR10 & \\
+\end{longtable}
 
 \begin{table}[H]
 \centering
