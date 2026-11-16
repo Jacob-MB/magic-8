@@ -138,7 +138,7 @@ This user fits the characteristics of a person who would utilize the game for th
 
 \subsection{Stakeholder A (Client)}
  
-The first topic we discussed was showing the client our current progress/idea on the visualization of the game space. The client mentioned here that for some of the tasks, part of the intended challenge is not being able to fully navigate the space of the cube (i.e., view should be fixed on a certain plane). However, note that the client was apprehensive about closing off the possibility of other options. From this, it was decided that both versions would be tried and left to user testing to see the pros and cons of each version. Also, it was noted here that the client had some trouble understanding the view of slices for our current version of the visualization (i.e., it was not clear to the client what was happening as the visualization moved through the different slices of the cube on the same plane). From this, we concluded that it would be beneficial to have some type of skeleton of the rest of the cube instead of having it disappear when a certain slice is focused on.
+The first topic we discussed was showing the client our current progress/idea on the visualization of the game space. The client mentioned here that for some of the tasks, part of the intended challenge is not being able to fully navigate the space of the cube (i.e., view should be fixed on a certain plane). However, note that the client was apprehensive about closing off the possibility of other options. From this, it was decided that both versions would be tried and left to user testing to see the pros and cons of each version. Also, it was noted here that the client had some trouble understanding the view of slices for our current version of the visualization (i.e., it was not clear to the client what was happening as the visualization moved through the different slices of the cube on the same plane). From this, we concluded that it would be beneficial to have some type of skeleton of the rest of the cube instead of having it disappear when a certain slice is focused on. The client also asked whether the game would use the 384 predefined variants of the magic cube that they have, or other generated cubes. It was decided that the proof of concept would use one fixed cube, while the code would be kept open to support both options in the future.
 
 Survey question 1 was skipped.
 
@@ -156,11 +156,11 @@ The client was asked if it would make sense to have the number base be different
 
 For survey question 7, the client was unsure of competitive engagement, noting that the game is relatively simple and does not have traditional levels. However, the client did not seem opposed to our current competitive components of the game (leaderboards, daily challenges, etc.). The client mentioned that we could experiment with the round format as well to switch up the format (e.g., add more tasks to a round).
 
-For survey question 8, the client noted that the question mentions using hexadecimal in a 12x12x12 magic cube. This was a mistake in the old version of the survey questions and has since been fixed. However, it brought about the interesting discussion about utilizing number bases differing from the magic cube order (see above).
+For survey question 8, the client noted that the question mentions using hexadecimal in a 12x12x12 magic cube. This was a mistake in the old version of the survey questions and has since been fixed. However, it brought about the interesting discussion about utilizing number bases differing from the magic cube order (see above). Furthermore, the client found the 12x12x12 cube interesting, noting that although it may not share every property of the order-eight cube, it still has enough to be an option. The client did caution that hexadecimal would be harder for players because the larger number of single digits makes arithmetic (and especially fractions) more difficult.
 
-For survey question 9, the client did not have any further suggestions.
+For survey question 9, the client did not have any further suggestions, noting that the team's task is to go beyond the client's own ideas, and that they were curious what the other interviewees would suggest.
 
-For survey question 10, the client thought that the users would have a particularly difficult time with the triagonals (especially when they are split across boundaries) and navigating the spatial aspects of the game.
+For survey question 10, the client thought that the users would have a particularly difficult time with the triagonals (especially when they are split across boundaries) and navigating the spatial aspects of the game. The client described three ways players might handle lines split across boundaries: moving planes/cubes so the line continues past the edge, working it out algebraically, or visually jumping to the cells.
 
 The empathy map for this interview is shown in Table~\ref{tab:StakeAEmpathyMap}.
 
@@ -211,7 +211,7 @@ Feel &
   \item Unsure about whether fixing the user's view of the cube is the best option; open to other alternatives
   \item Does not want their opinions/ideas to interfere with our creativity; open to trying many different alternatives and features to their own
   \item Prefers when the magic cube's properties are properly shown by the number base (e.g., octal showcases an order-eight magic cube's properties)
-  \item Wary of number-bases and cube-orders that are too high (e.g., hexadecimal) because arithmetic will become confusing
+  \item Wary of hexadecimal because arithmetic with more single digits (and especially fractions) is harder; more generally wary of larger number bases as well as larger cube dimensions and orders because the gameplay becomes much more difficult
 \end{empathylist} \\
 \end{tabularx}
 
@@ -222,12 +222,12 @@ Key Takeaways:
     \item When focusing view on individual slices, leave skeleton of rest of cube insteading of making it invisible
     \item Esnure that the game is fun before worrying about educational value
     \item Look into extending to different game modes that include multiplication and division
-    \item Create a tutorial video of some sort to excite potential users and to teach them the game fundementals
+    \item Create a tutorial video of some sort to excite potential users and show what the game is about
     \item Look into features that existing video games use to excite players ("bells and whistles")
-    \item Look into potential of mismatching number bases with cube orders, but be wary of user confusion
+    \item Keep the number base matched to the cube order to showcase the magic properties; consider a separate, more difficult mode using number bases that do not showcase the magic properties
     \item Experiment with round format (i.e., difficulty progression, number of tasks)
     \item Focus particularly on ensuring the split triagonals and navigation of spatial aspects of the game are intuitive
-    \item ANYTHING ELSE???
+    \item Keep the code open to support both the 384 predefined cube formations and generated cubes
 \end{itemize}
 
 \subsection{Stakeholder B}
