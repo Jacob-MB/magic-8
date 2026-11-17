@@ -343,7 +343,7 @@ to be implemented.
 \subsubsection{User Interface Module (\mref{mUI})}
 
 \begin{description}
-\item[Secrets:] How user input is received and translated into commands, and how the application state is presented to the user.
+\item[Secrets:] How user input is received and translated into commands, and how the application state is presented to the user, including drawing every screen. The projections and calculations for the game space are done by \mref{mRE}.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -361,7 +361,7 @@ to be implemented.
 \subsubsection{Navigation Module (\mref{mN})}
 
 \begin{description}
-\item[Secrets:] Logic to navigate user through application including all menus, settings, transition into a game round, etc.
+\item[Secrets:] Logic to navigate the user through the application, including all menus, the settings screen, and the transitions into and out of a game round.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -379,7 +379,7 @@ to be implemented.
 \subsubsection{Ruleset Module (\mref{mR})}
 
 \begin{description}
-\item[Secrets:] The rules of a gameplay round including the number and sequence of tasks, cube order, number-base, additional number counts for each task, and valid line-types (e.g., complement, diagonal).
+\item[Secrets:] The rules of a gameplay round including the number and sequence of tasks, cube order, number-base, additional number counts for each task, valid line-types (e.g., complement, diagonal), and which scoring scheme applies.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -388,7 +388,7 @@ to be implemented.
 \subsubsection{Scoring Module (\mref{mSC})}
 
 \begin{description}
-\item[Secrets:] The algorithms used to calculate task/round scores and performance metrics.
+\item[Secrets:] The available scoring schemes, and the algorithms each uses to calculate task/round scores and performance metrics.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -433,7 +433,7 @@ to be implemented.
 \subsubsection{Settings Module (\mref{mSE})}
 
 \begin{description}
-\item[Secrets:] Algorithms to access and modify base settings of the application (e.g., turning off animations, configuring play-time reminder, etc.).
+\item[Secrets:] Algorithms to access and modify base settings of the application (e.g., turning off animations and configuring the play-time reminder).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -664,9 +664,9 @@ shown; since the relation is transitive, indirect uses follow from the arrows.
 Modules \mref{mVH}, \mref{mR}, \mref{mSC}, \mref{mCR}, \mref{mGDM},
 \mref{mTG}, \mref{mNBT}, and \mref{mSCM} use no other module. \mref{mUI} sits
 at the top because it is the only point of contact with the user: it reads
-input through \mref{mVH}, passes the resulting commands to \mref{mN}, obtains
-the view of the game space from \mref{mRE}, draws all other screens itself from
-data provided by \mref{mN}, and displays the result through \mref{mVH}. No other module uses
+input through \mref{mVH}, passes the resulting commands to \mref{mN}, and
+draws every screen through \mref{mVH}, using data provided by \mref{mN} and,
+for the game space, the projected view produced by \mref{mRE}. No other module uses
 \mref{mUI}, so all game logic, including \mref{mN}, \mref{mRC}, and \mref{mT},
 can be tested without launching the user interface or rendering the cube
 (\nfrref{NFR_7}, \nfrref{NFR_8}).
