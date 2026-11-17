@@ -183,6 +183,7 @@ change.
 \item [\refstepcounter{acnum} \actheacnum \label{acT}:] The content and state flow of the tutorial.
 \item [\refstepcounter{acnum} \actheacnum \label{acSE}:] The application settings available.
 \item [\refstepcounter{acnum} \actheacnum \label{acNB}:] The number base in which values are shown to and entered by the user.
+\item [\refstepcounter{acnum} \actheacnum \label{acSCM}:] How the application communicates with the online server (e.g., the server provider, its interface, and the network protocol).
 \end{description}
 
 \wss{Anticipated changes relate to changes that would be made in requirements,
@@ -215,32 +216,26 @@ actually be implemented.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mVH}:] Virtual Hardware Module
+
 \item [\refstepcounter{mnum} \mthemnum \label{mUI}:] User Interface Module
 \item [\refstepcounter{mnum} \mthemnum \label{mRE}:] Rendering Module
-
-\item [\refstepcounter{mnum} \mthemnum \label{mCR}:] Cube Representation Module
-
 \item [\refstepcounter{mnum} \mthemnum \label{mN}:] Navigation Module
 \item [\refstepcounter{mnum} \mthemnum \label{mRC}:] Round Control Module
-\item [\refstepcounter{mnum} \mthemnum \label{mGDM}:] Game Data Management Module
-
 \item [\refstepcounter{mnum} \mthemnum \label{mR}:] Ruleset Module
 \item [\refstepcounter{mnum} \mthemnum \label{mSC}:] Scoring Module
-
-\item [\refstepcounter{mnum} \mthemnum \label{mRG}:] Round Generation Module
-\item [\refstepcounter{mnum} \mthemnum \label{mTG}:] Line Geometry Module
-
 \item [\refstepcounter{mnum} \mthemnum \label{mUM}:] User Management Module
-\item [\refstepcounter{mnum} \mthemnum \label{mUDM}:] User Data Management Module
-
 \item [\refstepcounter{mnum} \mthemnum \label{mL}:] Leaderboard Module
 \item [\refstepcounter{mnum} \mthemnum \label{mDC}:] Daily Challenge Module
-
 \item [\refstepcounter{mnum} \mthemnum \label{mT}:] Tutorial Module
-
 \item [\refstepcounter{mnum} \mthemnum \label{mSE}:] Settings Module
 
+\item [\refstepcounter{mnum} \mthemnum \label{mCR}:] Cube Representation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mGDM}:] Game Data Management Module
+\item [\refstepcounter{mnum} \mthemnum \label{mRG}:] Round Generation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTG}:] Line Geometry Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUDM}:] User Data Management Module
 \item [\refstepcounter{mnum} \mthemnum \label{mNBT}:] Number Base Translation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mSCM}:] Server Communication Module
 \end{description}
 
 
@@ -251,12 +246,12 @@ actually be implemented.
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-\multirow{2}{0.3\textwidth}{Hardware-Hiding Module}
+Hardware-Hiding Module
 & Virtual Hardware Module\\
-& User Interface Module\\
 \midrule
 
-\multirow{10}{0.3\textwidth}{Behaviour-Hiding Module}
+\multirow{11}{0.3\textwidth}{Behaviour-Hiding Module}
+& User Interface Module\\
 & Rendering Module\\
 & Navigation Module\\
 & Round Control Module\\
@@ -269,13 +264,14 @@ actually be implemented.
 & Settings Module\\
 \midrule
 
-\multirow{6}{0.3\textwidth}{Software Decision Module}
+\multirow{7}{0.3\textwidth}{Software Decision Module}
 & Cube Representation Module\\
+& Game Data Management Module\\
 & Round Generation Module\\
 & Line Geometry Module\\
-& Game Data Management Module\\
 & User Data Management Module\\
 & Number Base Translation Module\\
+& Server Communication Module\\
 \bottomrule
 
 \end{tabular}
@@ -332,15 +328,6 @@ to be implemented.
 \item[Type of Module:]
 \end{description}
 
-\subsubsection{User Interface Module (\mref{mUI})}
-
-\begin{description}
-\item[Secrets:] How user input is received and translated into commands, and how the application state is presented to the user.
-\item[Services:]
-\item[Implemented By:]
-\item[Type of Module:]
-\end{description}
-
 \subsection{Behaviour-Hiding Module}
 
 \begin{description}
@@ -351,6 +338,15 @@ to be implemented.
   hardware-hiding module and the software decision module. The programs in this
   module will need to change if there are changes in the SRS.
 \item[Implemented By:] --
+\end{description}
+
+\subsubsection{User Interface Module (\mref{mUI})}
+
+\begin{description}
+\item[Secrets:] How user input is received and translated into commands, and how the application state is presented to the user.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
 \end{description}
 
 \subsubsection{Rendering Module (\mref{mRE})}
@@ -510,6 +506,15 @@ to be implemented.
 \item[Type of Module:]
 \end{description}
 
+\subsubsection{Server Communication Module (\mref{mSCM})}
+
+\begin{description}
+\item[Secrets:] The protocol and interface used to exchange data with the online server, including the server's request formats, secure transport, and the handling of failed requests.
+\item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
 \section{Traceability Matrix} \label{SecTM}
 
 This section shows two traceability matrices: between the modules and the
@@ -657,7 +662,7 @@ because they use modules from the lower levels.
 An arrow from module A to module B means that A uses B. Only direct uses are
 shown; since the relation is transitive, indirect uses follow from the arrows.
 The modules on the bottom row (\mref{mVH}, \mref{mR}, \mref{mNBT}, and
-\mref{mUDM}) use no other module. \mref{mUI} sits at the top because it is
+\mref{mSCM}) use no other module. \mref{mUI} sits at the top because it is
 the only point of contact with the user: it reads input through \mref{mVH},
 passes the resulting commands to \mref{mN}, obtains the 2D view of the current
 state from \mref{mRE}, and displays it through \mref{mVH}. No other module uses

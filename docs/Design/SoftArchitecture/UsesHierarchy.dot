@@ -10,30 +10,31 @@ digraph UsesHierarchy {
 
     // Hardware-hiding modules
     VH  [label = "M1\nVirtual Hardware"];
-    UI  [label = "M2\nUser Interface"];
 
     // Behaviour-hiding modules
+    UI  [label = "M2\nUser Interface"];
     RE  [label = "M3\nRendering"];
-    N   [label = "M5\nNavigation"];
-    RC  [label = "M6\nRound Control"];
-    R   [label = "M8\nRuleset"];
-    SC  [label = "M9\nScoring"];
-    UM  [label = "M12\nUser Management"];
-    L   [label = "M14\nLeaderboard"];
-    DC  [label = "M15\nDaily Challenge"];
-    T   [label = "M16\nTutorial"];
-    SE  [label = "M17\nSettings"];
+    N   [label = "M4\nNavigation"];
+    RC  [label = "M5\nRound Control"];
+    R   [label = "M6\nRuleset"];
+    SC  [label = "M7\nScoring"];
+    UM  [label = "M8\nUser Management"];
+    L   [label = "M9\nLeaderboard"];
+    DC  [label = "M10\nDaily Challenge"];
+    T   [label = "M11\nTutorial"];
+    SE  [label = "M12\nSettings"];
 
     // Software decision modules
-    CR  [label = "M4\nCube Representation"];
-    GDM [label = "M7\nGame Data Management"];
-    RG  [label = "M10\nRound Generation"];
-    TG  [label = "M11\nLine Geometry"];
-    UDM [label = "M13\nUser Data Management"];
+    CR  [label = "M13\nCube Representation"];
+    GDM [label = "M14\nGame Data Management"];
+    RG  [label = "M15\nRound Generation"];
+    TG  [label = "M16\nLine Geometry"];
+    UDM [label = "M17\nUser Data Management"];
     NBT [label = "M18\nNumber Base Translation"];
+    SCM [label = "M19\nServer Communication"];
 
     // Modules that use no other module sit on the bottom row
-    { rank = sink; VH; R; NBT; UDM; }
+    { rank = sink; VH; R; NBT; SCM; }
 
     // User Interface is the only point of contact with the user, so it sits at the top
     UI  -> { N RE NBT VH };
@@ -47,7 +48,8 @@ digraph UsesHierarchy {
     CR  -> R;
     SC  -> R;
     GDM -> CR;
-    UM  -> UDM;
+    UM  -> { UDM SCM };
     L   -> UDM;
     SE  -> UDM;
+    UDM -> SCM;
 }
