@@ -38,17 +38,14 @@ digraph UsesHierarchy {
 
     // User Interface is the only point of contact with the user, so it sits at the top
     UI  -> { N RE NBT VH };
-    N   -> { RC T DC UM L SE UDM };
+    N   -> { RC T DC UM L SE };
     T   -> { RC R };
-    DC  -> { RG L UDM };
+    DC  -> { RG UDM };
     RC  -> { RG TG SC GDM CR R UDM };
-    RG  -> { TG R CR UDM };
-    RE  -> { CR NBT SE };
-    TG  -> R;
-    CR  -> R;
-    SC  -> R;
-    GDM -> CR;
-    UM  -> { UDM SCM };
+    RG  -> { TG R CR };
+    // Rendering reads the state it draws from Round Control's read-only access programs
+    RE  -> { RC NBT SE };
+    UM  -> { UDM };
     L   -> UDM;
     SE  -> UDM;
     UDM -> SCM;
