@@ -410,7 +410,7 @@ to be implemented.
 \subsubsection{Leaderboard Module (\mref{mL})}
 
 \begin{description}
-\item[Secrets:] The algorithms to create, remove, and modify leaderboards.
+\item[Secrets:] The data structure and algorithms used to select and rank recorded round results into leaderboards (e.g., by scoring base, score or time, all-time or daily challenge).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -428,7 +428,7 @@ to be implemented.
 \subsubsection{Tutorial Module (\mref{mT})}
 
 \begin{description}
-\item[Secrets:] Algorithms to structure, sequence, and present (in a vitual sense, not an external output sense) tutorial content.
+\item[Secrets:] Algorithms to structure, sequence, and present (in a virtual sense, not an external output sense) tutorial content.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -442,9 +442,6 @@ to be implemented.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
-
-\subsubsection{Etc.}
-
 
 \subsection{Software Decision Module}
 
@@ -462,7 +459,7 @@ to be implemented.
 \subsubsection{Cube Representation Module (\mref{mCR})}
 
 \begin{description}
-\item[Secrets:] The internal data structure used to represent of the cube in a given state (i.e., game space).
+\item[Secrets:] The internal data structure used to represent the cube in a given state (i.e., game space).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -498,7 +495,7 @@ to be implemented.
 \subsubsection{User Data Management Module (\mref{mUDM})}
 
 \begin{description}
-\item[Secrets:] The algorithms to save, modify, delete, and load user data (THIS INCLUDES COMPETITIVE GAME STATS THE THE LEADERBOARD MODULE WILL GRAB?).
+\item[Secrets:] The data structure and algorithms to save, modify, delete, and load user data, including account records, settings, used starters, and recorded round results (the source of personal statistics and leaderboard rankings).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -512,8 +509,6 @@ to be implemented.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
-
-\subsubsection{Etc.}
 
 \section{Traceability Matrix} \label{SecTM}
 
