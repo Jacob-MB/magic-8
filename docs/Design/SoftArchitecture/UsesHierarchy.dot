@@ -42,7 +42,7 @@ digraph UsesHierarchy {
     T   -> { RC R };
     DC  -> { RG UDM };
     RC  -> { RG TG SC GDM CR R UDM };
-    RG  -> { TG R CR };
+    RG  -> { TG R };
     // Rendering reads the state it draws from Round Control's read-only access programs
     RE  -> { RC NBT SE };
     UM  -> { UDM };
