@@ -136,7 +136,7 @@ This user fits the characteristics of a person who would utilize the game for th
 
 \subsection{User C}
 
-This user fits the characteristics of a person who plays a lot of online browser games, including those containing competitive online play. He is interested in the different bases as he is trying to do projects rooted in binary.
+This user fits the characteristics of a person who plays a lot of online browser games, including those containing competitive online play. He is interested in different number bases as he is trying to do projects rooted in binary.
 
 \section{Analysis}
 
@@ -533,7 +533,96 @@ Key Takeaways:
   \item Explore multiplayer modes (cooperative, head-to-head, team vs. team), with fair skill-based matchmaking so players are not discouraged
 \end{itemize}
 
-\subsection{User B}
+\subsection{User C}
+
+
+For question 1, User C doesn't seem to be interested in the game at all and struggles to find ways to make the game seem more interesting to his age demographic (high schooler plus early university). He does feel like doing an octal magic cube online instead of a base-10 magic square (shown to him as an example of the properties of a magic cube) doesn't really add anything interesting to the original magic square concept, but he was interested in the different strategies people can use to solve a paritially-filled cube (like how complements work). After learning about the strategies someone can use, he thought that it become repetitveness as he will need to follow the same steps all the time, compared to other daily games that have a sense of randomness to each daily challenge. The interviewer wasn't able to conince him that the game would be seen as anything other than practise for tests.
+
+For question 2, User C did think that it would help with practising for a test, but it would be able to teach the concept well (as he didn't know about the team's goal to implement lessons into the project at this time). In terms of recommendation, he did suggest having different bases before it was brought up (likely due to not learning octal in high school, so he struggles to see the worth of it compared to binary and headecimal). The interiewer brought up different methods of teaching later on, but it doesn't really affect individual games (as the ideal plathrough would be playing the tutorial once and the game multiple times).
+
+For question 3, User C didn't really bring up any recommendations for teaching octal and magic squares. After the interviewer brought up strategies that others might like (and ideas brainstormed by the team), he felt like having a video and examples are the best way to learn about the tips and strategies to beat this game, ala Khan Academy method. Later on, he did seem like it was a lot easier to teach people tips and tricks beforehand, as he thought that the user would have enough filled in cells to solve the octal magic cube without any hints, but learning complements is fundamental to solving the cube. 
+
+For question 4, User C had some interesting ideas on how to display the cube. When shown the rough 3D visualization for the cube, he was interested in how you were able to see the different planes for a selected cell. However, he did like the initial 2D visualizations shown by Dr. Rapoport a lot more than the 3D visualization as he liked seeing more information on the screen (it made it easier for him to understand how disjoint and triagonals work). When asked about the blown out method (where there are spaces between every cell, not layers), he didn't really react and pushed his own ideas instead as he thought it would be "too much" to have separate cubes. He was asked abouth how Dr. Rapoport's visualizations were hard to read as having the appropiate amount of space between the layers would make it difficult to read the cell numbers on a laptop screen. He liked having a ghostly (or translucent) form of the other layers when on a specific layer to keep track of where he is within the cube (didn't really react to the coordinate system). He had the idea to display an individual layer as is on the PoC, but only keep the ghostly version of the corners of the cube (which would help with orthogonals running along those axis).
+
+For question 5, it did take him longer to understand the concept of the different levels and how it added to the difficulty of the game. It took demonstrations on both visualizations until he arrived at how it got difficult. He did like the daily game version of the game more.
+
+For question 6. User C just didn't feel the need to play the game, unless it was worth marks for a school course. No matter how much he was encouraged to brainstorm ideas to make it more fun. When asked how daily games keep his attention, he did say the competitive elements of the game would encourage further playtime.
+
+For question 7, User C did agree with Dr. Rapoport's idea to keep scores via time, but didn't really respond directly to adding a time penalty to making a mistake. When first proposed with the daily game idea, he did think that it would be too long to have a daily leaderboard of time scores, and he suggested adding breaks. In order to add breaks, the interviewer and user came up with the idea of allowing breaks between levels, but randomizing the cube in between breaks. He also proposed adding more information about the top runs, such as the user inputs they make on a "video player", so users are able to learn the tricks the top players are doing. As he wasn't sure about how the daily challenge would work, he recommended adding seperate leaderboards based on how many levels were completed, and streaks to keep people plaing.
+
+For question 8, he did like the idea of being able to add more custom cubes (different number systems and sizes) via AI generation, but did stress it would be hard to verify the cubes are real magic cubes. Different audiences might like other bases than octal, such as binary and hexadecimal for computer hobbyists, and base-10 for people searching for their Sudoku replacement.
+
+For question 9, User C didn't really suggest any new features, but was generally agreeable with the etra features the team might add. When talking about anything that will hook the attention of teenagers, he suggested adding different backgrough colours, but that seemed like adding coding for the sake of coding to him. Otherwise, no real suggestions to have this keep anyone's attention.
+
+For question 10, he didn't really find any challenges with coding the base game, but with attracting and maintaining anyone's interest. He jokingly feared that it will make the developers hated if students were forced to play the game. He found lots of problems with AI-generating more cubes due to the compatibility of verifying cubes. In order to teach the user about their generated cube, the interviewer suggested adding a LLM wrapper trained on the octal and magic cube guides and the generated cube, but the user thought it would be hard for the AI to find reasonable strategies for the user to sole the cube (either going to be too complex or not found in the first place). 
+
+The empathy map for this interview is shown in Table~\ref{tab:UserBEmpathyMap}.
+
+\begin{tabularx}{\textwidth}{l Y}
+\caption{User C Empathy Map} \label{tab:UserBEmpathyMap}\\
+\toprule
+\textbf{Quadrant} & \textbf{Observations}\\
+\midrule
+\endfirsthead
+\multicolumn{2}{l}{\small\textit{Table~\ref{tab:UserBEmpathyMap} continued}}\\
+\toprule
+\textbf{Quadrant} & \textbf{Observations}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Say &
+\begin{empathylist}
+  \item Adding an octal system to a base-10 magic square doesn't seem interesting
+  \item Adding another layer to a magic square (to make it a magic cube) doesn't seem interesting, just hard to make
+  \item The game doesn't seem like it will be played for fun like other dail games, but played for practise for computer technology classes.
+  \item The teaching would be better as videos and examples, like Khan Academy, compared to reading lessons.
+  \item He agreed adding steps to the different levels will help out with solving the entire cube.
+  \item He suggested adding translucent layers to show where you are in the cube, but better to only add the corner pieces so it doesn't become overwhelming.
+  \item Suggested adding custom cubes will be hard on the developers.
+  \item Agreed with scoring people based on how long it takes, and indifferent to punishing mistakes.
+  \item Agreed with the leaderboard idea, and wanted different boards based on levels played.
+  \item Suggested adding streaks and other rewards to keep people playing.
+\end{empathylist} \\
+\midrule
+Think &
+\begin{empathylist}
+  \item Thinks it wouldn't be enjoyable in a recreational setting, as there are better ways to learn about the subect matters involved.
+  \item Would only play the game if they understood the concept before playing the game and use it as a practise tool for tests.
+  \item Game will get repetitive very quickly if people aren't using it as an educational tool.
+  \item Thinks that the teaching apparatus in the game will have to be structured in a way to progressively teach harder levels, and they have to be good to teach the difficult concepts.
+  \item Thinks that adding AI-generated content will be more trouble than it is worth.
+  \item Thinks actually forcing kids to play this would be a safety risk for the developers.
+\end{empathylist} \\
+\midrule
+Do &
+\begin{empathylist}
+  \item Do teach users how the number system and magic squares work, as initially he thought that it just booted people into the game and user knows nothing about the systems.
+  \item Do add videos to the tutorials and progressively teach different properties in steps, as user learns quickly via Khan Academy and how the lessons doesn't teach everything at once.
+  \item Do add a translucent cube frame instead of all the other layers being translucent as the user doesn't see the reason for the information overload.
+  \item Do add leaderboard information (as a viewable step-by-step guide), as user is a cube speedrunner and learns from seeing the skips the world's best speedrunners use. 
+  \item Do add streaks, as he thinks it is useful, addicting element in the social media platforms he uses.
+  \item Add different backgrounds, as he finds it engaging in the browser games he plays.
+\end{empathylist}\\
+\midrule
+Feel &
+\begin{empathylist}
+  \item Feels like the game in its current state isn't interesting enough to look at (suggested either adding custom or changing backgrounds).
+  \item Feels like he would only play it if it will affect a course grade, not even as practise.
+  \item Feels a little limited by only being able to solve for one magic constant all the time (limiting subtraction potential).
+\end{empathylist} \\
+\end{tabularx}
+
+Key Takeaways:
+
+\begin{itemize}
+  \item Stressed how uninteresting the game concept is and thought that adding "bells and whistles" will not save an idea that sinks the ship.
+  \item If used in an educational enironment, very likely to still not keep the attention of those that need it to practise.
+  \item Adding streaks and breaks will encourage people to play a marathon method of the daily game.
+  \item Adding a translucent frame to the deselected layers would help with the spatial awareness of the selected layer.
+  \item Tutorials will be better in a video format with examples to test the knowledge of the users.
+  \item Not really interested in different number bases and cube sizes if it requires utilizing non-deterministic code.
+\end{itemize}
 
 \section*{Appendix - Interview Transcripts}
 
