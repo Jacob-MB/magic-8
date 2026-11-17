@@ -1,4 +1,12 @@
 {
+  "docs/CDFall/UserStakeholderClientInterviewReport.tex": [
+    "docs/CDFall/MagicCube.png",
+    "docs/CDFall/MagicCubeSlice.png",
+    "docs/CDFall/MagicCubeSliceWithNumbers.png",
+    "docs/CDFall/UserStakeholderClientInterviewReport.tex",
+    "docs/Common.text",
+    "refs/References.bib"
+  ],
   "docs/CDs/MLReport/main.tex": [
     "docs/CDs/MLReport/acl.sty",
     "docs/CDs/MLReport/custom.bib",
