@@ -370,7 +370,7 @@ to be implemented.
 \subsubsection{Round Control Module (\mref{mRC})}
 
 \begin{description}
-\item[Secrets:] Logic to progress the user throughout round and tasks within a round.
+\item[Secrets:] Logic to progress the user through a round and the tasks within it, including the selected cell, the player's answers, and recording the result unless the round is marked as a tutorial round.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -397,7 +397,7 @@ to be implemented.
 \subsubsection{User Management Module (\mref{mUM})}
 
 \begin{description}
-\item[Secrets:] The algorithms used to authenticate users and manage user accounts (e.g., create/delete account, login/logout, password reset, etc.), to keep track of the current user's session (logged in or playing as a guest), and to compute a user's personal statistics (e.g., completed rounds, highest and average score, fastest round time) from their recorded round results.
+\item[Secrets:] The algorithms used to authenticate users and manage user accounts (e.g., create/delete account, login/logout, password reset), to keep track of the current user's session (logged in or playing as a guest), and to compute a user's personal statistics (e.g., completed rounds, highest and average score, fastest round time) from their recorded round results.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -464,7 +464,7 @@ to be implemented.
 \subsubsection{Game Data Management Module (\mref{mGDM})}
 
 \begin{description}
-\item[Secrets:] The algorithms to save, modify, delete, and load game data.
+\item[Secrets:] The algorithms to save, modify, delete, and load snapshots of the in-progress round, stored on the device for autosave and resume.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
