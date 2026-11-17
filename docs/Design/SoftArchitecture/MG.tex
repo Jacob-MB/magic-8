@@ -166,14 +166,14 @@ change.
 
 \begin{description}
 \item [\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific hardware and browser environment on which the software is running.
-\item [\refstepcounter{acnum} \actheacnum \label{acUI}:] The mapping between device inputs and game commands, and between display requests and drawn output.
+\item [\refstepcounter{acnum} \actheacnum \label{acUI}:] How user input is received and translated into commands, and how the application state is presented to the user.
 \item [\refstepcounter{acnum} \actheacnum \label{acCR}:] The data structure and algorithms used to represent and manipulate the magic cube.
 \item [\refstepcounter{acnum} \actheacnum \label{acN}:] The screens and menus in the application and the transitions/structure between them.
 \item [\refstepcounter{acnum} \actheacnum \label{acRC}:] The sequence of steps within a round and within each task.
 \item [\refstepcounter{acnum} \actheacnum \label{acR}:] The rules of a round including the number and sequence of tasks, the cube order, and the valid line types for the tasks.
 \item [\refstepcounter{acnum} \actheacnum \label{acRG}:] The algorithms and techniques used to generate a gameplay round given the rules of a round.
 \item [\refstepcounter{acnum} \actheacnum \label{acS}:] The scoring system (i.e., how score is calculated for a task and round).
-\item [\refstepcounter{acnum} \actheacnum \label{acTG}:] How a task is generated given the task-type, cube formation, extra number count, and starter.
+\item [\refstepcounter{acnum} \actheacnum \label{acTG}:] The algorithms used to compute the cells of a line from a starter and a line type.
 \item [\refstepcounter{acnum} \actheacnum \label{acUD}:] How user data is saved.
 \item [\refstepcounter{acnum} \actheacnum \label{acGD}:] How and when game state data is saved.
 \item [\refstepcounter{acnum} \actheacnum \label{acRE}:] The algorithms and techniques used to render the 3D space and game state.
@@ -228,7 +228,7 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{mSC}:] Scoring Module
 
 \item [\refstepcounter{mnum} \mthemnum \label{mRG}:] Round Generation Module
-\item [\refstepcounter{mnum} \mthemnum \label{mTG}:] Task Generation Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTG}:] Line Geometry Module
 
 \item [\refstepcounter{mnum} \mthemnum \label{mUM}:] User Management Module
 \item [\refstepcounter{mnum} \mthemnum \label{mUDM}:] User Data Management Module
@@ -272,7 +272,7 @@ actually be implemented.
 \multirow{6}{0.3\textwidth}{Software Decision Module}
 & Cube Representation Module\\
 & Round Generation Module\\
-& Task Generation Module\\
+& Line Geometry Module\\
 & Game Data Management Module\\
 & User Data Management Module\\
 & Number Base Translation Module\\
@@ -335,7 +335,7 @@ to be implemented.
 \subsubsection{User Interface Module (\mref{mUI})}
 
 \begin{description}
-\item[Secrets:] The mapping between device input events and abstract commands, and between display requests and drawn output.
+\item[Secrets:] How user input is received and translated into commands, and how the application state is presented to the user.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -356,7 +356,7 @@ to be implemented.
 \subsubsection{Rendering Module (\mref{mRE})}
 
 \begin{description}
-\item[Secrets:] The algorithms to translate the 3D space and game state into a 2D view, including layer isolation and highlighting.
+\item[Secrets:] The algorithms to translate the 3D space and game state into a 2D view, including layer isolation and highlighting. The module produces the view but does not display it.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -483,10 +483,10 @@ to be implemented.
 \item[Type of Module:]
 \end{description}
 
-\subsubsection{Task Generation Module (\mref{mTG})}
+\subsubsection{Line Geometry Module (\mref{mTG})}
 
 \begin{description}
-\item[Secrets:] The algorithm used to generate an individual task based on given parameters (task-type, cube formation, extra number count, and starter).
+\item[Secrets:] The algorithms used to compute the cells of a line in the cube from a starter and a line type, including wrapping for split lines, whether a line is continuous, and the order in which the line is traced.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -654,18 +654,20 @@ the modules. It can be seen that the graph is a directed acyclic graph
 system, and modules in the higher level of the hierarchy are essentially simpler
 because they use modules from the lower levels.
 
-\wss{The uses relation is not a data flow diagram.  In the code there will often
-be an import statement in module A when it directly uses module B.  Module B
-provides the services that module A needs.  The code for module A needs to be
-able to see these services (hence the import statement).  Since the uses
-relation is transitive, there is a use relation without an import, but the
-arrows in the diagram typically correspond to the presence of import statement.}
-
-\wss{If module A uses module B, the arrow is directed from A to B.}
+An arrow from module A to module B means that A uses B. Only direct uses are
+shown; since the relation is transitive, indirect uses follow from the arrows.
+The modules on the bottom row (\mref{mVH}, \mref{mCR}, \mref{mR}, \mref{mNBT},
+and \mref{mUDM}) use no other module. \mref{mUI} sits at the top because it is
+the only point of contact with the user: it reads input through \mref{mVH},
+passes the resulting commands to \mref{mN}, obtains the 2D view of the current
+state from \mref{mRE}, and displays it through \mref{mVH}. No other module uses
+\mref{mUI}, so all game logic, including \mref{mN}, \mref{mRC}, and \mref{mT},
+can be tested without launching the user interface or rendering the cube
+(\nfrref{NFR_7}, \nfrref{NFR_8}).
 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
+\includegraphics[width=\textwidth]{UsesHierarchy.png}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}

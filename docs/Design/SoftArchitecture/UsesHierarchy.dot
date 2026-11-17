@@ -1,0 +1,52 @@
+// Uses hierarchy for the Magic 8 Module Guide (MG.tex, Figure "Use hierarchy among modules").
+// An arrow A -> B means module A uses module B.
+// Regenerate the figure with:
+//   dot -Tpng -Gdpi=200 UsesHierarchy.dot -o UsesHierarchy.png
+
+digraph UsesHierarchy {
+    rankdir = TB;
+    node [shape = box, style = rounded, fontname = "Helvetica", fontsize = 11];
+    edge [arrowsize = 0.7];
+
+    // Hardware-hiding modules
+    VH  [label = "M1\nVirtual Hardware"];
+    UI  [label = "M2\nUser Interface"];
+
+    // Behaviour-hiding modules
+    RE  [label = "M3\nRendering"];
+    N   [label = "M5\nNavigation"];
+    RC  [label = "M6\nRound Control"];
+    R   [label = "M8\nRuleset"];
+    SC  [label = "M9\nScoring"];
+    UM  [label = "M12\nUser Management"];
+    L   [label = "M14\nLeaderboard"];
+    DC  [label = "M15\nDaily Challenge"];
+    T   [label = "M16\nTutorial"];
+    SE  [label = "M17\nSettings"];
+
+    // Software decision modules
+    CR  [label = "M4\nCube Representation"];
+    GDM [label = "M7\nGame Data Management"];
+    RG  [label = "M10\nRound Generation"];
+    TG  [label = "M11\nLine Geometry"];
+    UDM [label = "M13\nUser Data Management"];
+    NBT [label = "M18\nNumber Base Translation"];
+
+    // Modules that use no other module sit on the bottom row
+    { rank = sink; VH; CR; R; NBT; UDM; }
+
+    // User Interface is the only point of contact with the user, so it sits at the top
+    UI  -> { N RE VH };
+    N   -> { RC T DC UM L SE UDM };
+    T   -> { RC R };
+    DC  -> { RG L UDM };
+    RC  -> { RG TG SC GDM CR NBT UDM };
+    RG  -> { TG R CR UDM };
+    RE  -> { CR NBT SE };
+    TG  -> { CR R };
+    SC  -> R;
+    GDM -> CR;
+    UM  -> UDM;
+    L   -> UDM;
+    SE  -> UDM;
+}
