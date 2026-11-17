@@ -48,6 +48,7 @@ November 16, 2026 & Jacob Brodersen & Added analyses, empathy maps, key takeaway
 November 16, 2026 & Jacob Brodersen & Revised analyses for consistency and fixed typos\\
 November 16, 2026 & Joshua Engel & Included User C analysis\\
 November 16, 2026 & Amos Edeaghe & Included User D analysis\\
+November 16, 2026 & Nehan Munir & Included User E transcript and analysis\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -169,6 +170,12 @@ They enjoy playing games with friends and comparing their strategies and results
 This interviewee represents the primary user group of recreational mathematics players.
 
 This interview took place on November 12, 2026.
+
+\subsection{User E}
+
+This user fits the characteristics of a person who plays a lot of online browser games, including those containing competitive online play. He is interested in different number bases as he is trying to do projects rooted in binary.
+
+This interview took place on November 16, 2026.
 
 \section{Analysis}
 
@@ -821,6 +828,97 @@ Key Takeaways:
 \item Focus on UI and design to ensure that the complex 3D space and large number of values are communicated efficiently
 \item Keep the game browser-based; do not prioritize mobile compatibility
 \item Consider adding a speedrunning feature for players who enjoy time-based challenges
+\end{itemize}
+
+\subsection{User E}
+
+
+For question 1, User E doesn't seem to be interested in the game at all and struggles to find ways to make the game seem more interesting to his age demographic (high schooler plus early university). He does feel like doing an octal magic cube online instead of a base-10 magic square (shown to him as an example of the properties of a magic cube) doesn't really add anything interesting to the original magic square concept, but he was interested in the different strategies people can use to solve a paritially-filled cube (like how complements work). After learning about the strategies someone can use, he thought that it become repetitveness as he will need to follow the same steps all the time, compared to other daily games that have a sense of randomness to each daily challenge. The interviewer wasn't able to conince him that the game would be seen as anything other than practise for tests.
+
+For question 2, User E did think that it would help with practising for a test, but it would be able to teach the concept well (as he didn't know about the team's goal to implement lessons into the project at this time). In terms of recommendation, he did suggest having different bases before it was brought up (likely due to not learning octal in high school, so he struggles to see the worth of it compared to binary and headecimal). The interiewer brought up different methods of teaching later on, but it doesn't really affect individual games (as the ideal plathrough would be playing the tutorial once and the game multiple times).
+
+For question 3, User E didn't really bring up any recommendations for teaching octal and magic squares. After the interviewer brought up strategies that others might like (and ideas brainstormed by the team), he felt like having a video and examples are the best way to learn about the tips and strategies to beat this game, ala Khan Academy method. Later on, he did seem like it was a lot easier to teach people tips and tricks beforehand, as he thought that the user would have enough filled in cells to solve the octal magic cube without any hints, but learning complements is fundamental to solving the cube. 
+
+For question 4, User E had some interesting ideas on how to display the cube. When shown the rough 3D visualization for the cube, he was interested in how you were able to see the different planes for a selected cell. However, he did like the initial 2D visualizations shown by Dr. Rapoport a lot more than the 3D visualization as he liked seeing more information on the screen (it made it easier for him to understand how disjoint and triagonals work). When asked about the blown out method (where there are spaces between every cell, not layers), he didn't really react and pushed his own ideas instead as he thought it would be "too much" to have separate cubes. He was asked abouth how Dr. Rapoport's visualizations were hard to read as having the appropiate amount of space between the layers would make it difficult to read the cell numbers on a laptop screen. He liked having a ghostly (or translucent) form of the other layers when on a specific layer to keep track of where he is within the cube (didn't really react to the coordinate system). He had the idea to display an individual layer as is on the PoC, but only keep the ghostly version of the corners of the cube (which would help with orthogonals running along those axis).
+
+For question 5, it did take him longer to understand the concept of the different levels and how it added to the difficulty of the game. It took demonstrations on both visualizations until he arrived at how it got difficult. He did like the daily game version of the game more.
+
+For question 6. User E just didn't feel the need to play the game, unless it was worth marks for a school course. No matter how much he was encouraged to brainstorm ideas to make it more fun. When asked how daily games keep his attention, he did say the competitive elements of the game would encourage further playtime.
+
+For question 7, User E did agree with Dr. Rapoport's idea to keep scores via time, but didn't really respond directly to adding a time penalty to making a mistake. When first proposed with the daily game idea, he did think that it would be too long to have a daily leaderboard of time scores, and he suggested adding breaks. In order to add breaks, the interviewer and user came up with the idea of allowing breaks between levels, but randomizing the cube in between breaks. He also proposed adding more information about the top runs, such as the user inputs they make on a "video player", so users are able to learn the tricks the top players are doing. As he wasn't sure about how the daily challenge would work, he recommended adding seperate leaderboards based on how many levels were completed, and streaks to keep people plaing.
+
+For question 8, he did like the idea of being able to add more custom cubes (different number systems and sizes) via AI generation, but did stress it would be hard to verify the cubes are real magic cubes. Different audiences might like other bases than octal, such as binary and hexadecimal for computer hobbyists, and base-10 for people searching for their Sudoku replacement.
+
+For question 9, User E didn't really suggest any new features, but was generally agreeable with the etra features the team might add. When talking about anything that will hook the attention of teenagers, he suggested adding different backgrough colours, but that seemed like adding coding for the sake of coding to him. Otherwise, no real suggestions to have this keep anyone's attention.
+
+For question 10, he didn't really find any challenges with coding the base game, but with attracting and maintaining anyone's interest. He jokingly feared that it will make the developers hated if students were forced to play the game. He found lots of problems with AI-generating more cubes due to the compatibility of verifying cubes. In order to teach the user about their generated cube, the interviewer suggested adding a LLM wrapper trained on the octal and magic cube guides and the generated cube, but the user thought it would be hard for the AI to find reasonable strategies for the user to sole the cube (either going to be too complex or not found in the first place). 
+
+The empathy map for this interview is shown in Table~\ref{tab:UserBEmpathyMap}.
+
+\begin{tabularx}{\textwidth}{l Y}
+\caption{User E Empathy Map} \label{tab:UserBEmpathyMap}\\
+\toprule
+\textbf{Quadrant} & \textbf{Observations}\\
+\midrule
+\endfirsthead
+\multicolumn{2}{l}{\small\textit{Table~\ref{tab:UserBEmpathyMap} continued}}\\
+\toprule
+\textbf{Quadrant} & \textbf{Observations}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Say &
+\begin{empathylist}
+  \item Adding an octal system to a base-10 magic square doesn't seem interesting
+  \item Adding another layer to a magic square (to make it a magic cube) doesn't seem interesting, just hard to make
+  \item The game doesn't seem like it will be played for fun like other dail games, but played for practise for computer technology classes.
+  \item The teaching would be better as videos and examples, like Khan Academy, compared to reading lessons.
+  \item He agreed adding steps to the different levels will help out with solving the entire cube.
+  \item He suggested adding translucent layers to show where you are in the cube, but better to only add the corner pieces so it doesn't become overwhelming.
+  \item Suggested adding custom cubes will be hard on the developers.
+  \item Agreed with scoring people based on how long it takes, and indifferent to punishing mistakes.
+  \item Agreed with the leaderboard idea, and wanted different boards based on levels played.
+  \item Suggested adding streaks and other rewards to keep people playing.
+\end{empathylist} \\
+\midrule
+Think &
+\begin{empathylist}
+  \item Thinks it wouldn't be enjoyable in a recreational setting, as there are better ways to learn about the subect matters involved.
+  \item Would only play the game if they understood the concept before playing the game and use it as a practise tool for tests.
+  \item Game will get repetitive very quickly if people aren't using it as an educational tool.
+  \item Thinks that the teaching apparatus in the game will have to be structured in a way to progressively teach harder levels, and they have to be good to teach the difficult concepts.
+  \item Thinks that adding AI-generated content will be more trouble than it is worth.
+  \item Thinks actually forcing kids to play this would be a safety risk for the developers.
+\end{empathylist} \\
+\midrule
+Do &
+\begin{empathylist}
+  \item Do teach users how the number system and magic squares work, as initially he thought that it just booted people into the game and user knows nothing about the systems.
+  \item Do add videos to the tutorials and progressively teach different properties in steps, as user learns quickly via Khan Academy and how the lessons doesn't teach everything at once.
+  \item Do add a translucent cube frame instead of all the other layers being translucent as the user doesn't see the reason for the information overload.
+  \item Do add leaderboard information (as a viewable step-by-step guide), as user is a cube speedrunner and learns from seeing the skips the world's best speedrunners use. 
+  \item Do add streaks, as he thinks it is useful, addicting element in the social media platforms he uses.
+  \item Add different backgrounds, as he finds it engaging in the browser games he plays.
+\end{empathylist}\\
+\midrule
+Feel &
+\begin{empathylist}
+  \item Feels like the game in its current state isn't interesting enough to look at (suggested either adding custom or changing backgrounds).
+  \item Feels like he would only play it if it will affect a course grade, not even as practise.
+  \item Feels a little limited by only being able to solve for one magic constant all the time (limiting subtraction potential).
+\end{empathylist} \\
+\end{tabularx}
+
+Key Takeaways:
+
+\begin{itemize}
+  \item Stressed how uninteresting the game concept is and thought that adding "bells and whistles" will not save an idea that sinks the ship.
+  \item If used in an educational enironment, very likely to still not keep the attention of those that need it to practise.
+  \item Adding streaks and breaks will encourage people to play a marathon method of the daily game.
+  \item Adding a translucent frame to the deselected layers would help with the spatial awareness of the selected layer.
+  \item Tutorials will be better in a video format with examples to test the knowledge of the users.
+  \item Not really interested in different number bases and cube sizes if it requires utilizing non-deterministic code.
 \end{itemize}
 
 \appendix
@@ -2258,7 +2356,7 @@ Ah.
 You know, you don't have the, like, in addition to the leaderboard, like, for the people that aren't in the top, I mean, this is maybe going beyond the scope that the project is, no, like, but like the number who you have the number of users that you're expecting, but like something like here, yeah, here's where you place it, even if you're not in the leaderboard.
 Like, among the masses, you were thirty-sixth percentile, like, OK, you know.
 can be a way to still rank someone without needing to tell them they're like 957,000, you know.
-Yeah, you were better than 13% of people, exactly.
+Yeah, you were better than 13\% of people, exactly.
 Okay.
 So in the future, we plan to add some other sizes of magic cubes, like 12 by 12 by 12, 16 by 16 by 16.
 Due to the nature of like magic cubes, like cubes in general, not all of them would be magic, so they would have different rule sets. Do you think that would be like 10 different properties? Do you think that would be more confusing or would it like increase user engagement? Or just how would you like to see it implemented?
@@ -2290,6 +2388,812 @@ So those are all the questions I had planned. Do you have like any closing quest
 So, thank you for participating.
 
 \newpage
+
+\subsection*{User E}
+
+\noindent \textbf{User}
+
+Hello!
+
+\noindent \textbf{Nehan Munir}
+
+We ust went through the game concept. What are your first impressions of this kind of game concept?
+
+\noindent \textbf{User}
+
+Do.
+
+\noindent \textbf{Nehan Munir}
+
+You know what first impressions mean.
+
+\noindent \textbf{User}
+
+It's not very interesting, to be honest.
+
+\noindent \textbf{Nehan Munir}
+
+OK, why isn't it interesting?
+
+\noindent \textbf{User}
+
+It's just a 3D version of a game that already exists, and it's 8 by 8 by 8.
+
+\noindent \textbf{Nehan Munir}
+
+What is a 3D version of?
+
+\noindent \textbf{User}
+
+The game you're talking about.
+
+\noindent \textbf{Nehan Munir}
+
+What game was it talking about? Magic squares, Yeah. OK, um, So what would make it interesting then? Like, let me give you an example. What's so fun about Wordle, huh? You're just writing it in a word. It's not really that interesting. Do you play any daily games? Well, what do you think are some bad aspects of daily games that makes it not interesting to you, but interesting to a lot of people?
+
+\noindent \textbf{User}
+
+Well, for this game you could algorithmically figure it out.
+
+\noindent \textbf{User}
+
+Intuition part of that game, so I would follow a routine and it works.
+
+\noindent \textbf{Nehan Munir}
+
+So what would be a challenge for you?
+
+\noindent \textbf{User}
+
+In this game, yeah. Just how big the grid is?
+
+\noindent \textbf{Nehan Munir}
+
+So let's say that you're. It would be like a good scoring matrix metric for you.
+
+\noindent \textbf{User}
+
+Scoring for what?
+
+\noindent \textbf{Nehan Munir}
+
+Like if you're playing, this is a browser based game right? So there's going to be other people playing as well. So if there was a leaderboard, how do you score against someone else time? Time.
+
+\noindent \textbf{User}
+
+Time to fully complete it.
+
+\noindent \textbf{Nehan Munir}
+
+You think someone's gonna spend a lot of time completing an 8 by 8 by 8 cube? That's 512 cubes. So that means that you have to do 512 calculations.
+
+\noindent \textbf{User}
+
+So assume you're already filling out some cells for them.
+
+\noindent \textbf{Nehan Munir}
+
+OK, but you start off with only one number.
+
+\noindent \textbf{User}
+
+Like just a sum of.
+
+\noindent \textbf{Nehan Munir}
+
+Would you split up the game or no? Or would you like have them just give them hey, solve 511 uh. Octal additions and subtractions.
+
+\noindent \textbf{User}
+
+I would instead hide what the actual number is. Fill out some cells and then let them. Try solving it if it's possible.
+
+\noindent \textbf{Nehan Munir}
+
+What would make it interesting for you? Would you have like some mini games in between or? I like to You don't like math at all, right?
+
+\noindent \textbf{User}
+
+This isn't. This is arithemtic, not maths. OK.
+
+\noindent \textbf{Nehan Munir}
+
+You're, you're too old to just have, uh, you're too old to just ask, umm, addition subtraction questions to yeah. But have you like ever added and subtracted like an octal format before? No, like in your computer technology class did you only do like hexadecimals or?
+
+\noindent \textbf{User}
+
+Yeah, hexadecimal.
+
+\noindent \textbf{Nehan Munir}
+
+Is there any concept that you want to add that make this game funner? For example, this is going to be shown. Umm, high schoolers.
+
+\noindent \textbf{User}
+
+What is the point of the game?
+
+\noindent \textbf{Nehan Munir}
+
+Institute of Users about octal arithmetic.
+
+\noindent \textbf{User}
+
+This seems like it's good for practice only.
+
+\noindent \textbf{Nehan Munir}
+
+Yes, but also teaches you. So what do you think would be a good teacher or no?
+
+\noindent \textbf{User}
+
+You learn it first, and then you apply it, and you apply it a bunch of times. Practice.
+
+\noindent \textbf{Nehan Munir}
+
+So you don't think would be useful in helping teaching users about octal arithmetics? Like what make it better for you? I will make it as a better teacher.
+
+\noindent \textbf{User}
+
+If the game actually taught you what ocular pathetic is, or maybe if it. Add different versions with different base systems.
+
+\noindent \textbf{Nehan Munir}
+
+How do you like it to teach you? Would would you want it to like test your like at first tell you what octal, how octal and magic squares work, and then like give you an example and then like walk through it interactively or?
+
+\noindent \textbf{User}
+
+What you said.
+
+\noindent \textbf{Nehan Munir}
+
+What about like videos? Would you like a YouTube video or what would be easier to learn from like Khan Academy or?
+
+\noindent \textbf{User}
+
+What video is probably easier? And Khan Academy.
+
+\noindent \textbf{Nehan Munir}
+
+So a Khan Academy video followed by the questions that they have.
+
+\noindent \textbf{User}
+
+Yeah.
+
+\noindent \textbf{Nehan Munir}
+
+OK, so. What strategies and approaches do you think will best help teach users about how to play the game? So you talked about the octal part, right? How do you teach people about the magic square part like?
+
+\noindent \textbf{User}
+
+That should be pretty easy. You just say every row of the grid. Is equal to this specific number. Same way every column and every. Z column and then additionally every diagonal.
+
+\noindent \textbf{Nehan Munir}
+
+Yeah, I think you're gonna have to speak up. But the problem is you look at this cube, right? So obviously if you're just doing a regular diagonal from one corner to the other, it's 8 squares in between, right? But imagine you're doing one that only has four squares. Yeah. So you know what happens in that case. Because. Because it's because the property still holds, right?
+
+\noindent \textbf{User}
+
+Wait, you have to. This has to equal something special.
+
+\noindent \textbf{Nehan Munir}
+
+All of them have to Or is it only those? It's called disjoint. So the thing how it works is that some of these three fits, but then imagine on another side of the map the other 8 -, 3, so the remaining cubes, then the remaining 5 cubes also work together. So imagine it's like this on the other side, OK. So 2 here and then seven here or something like that.
+
+\noindent \textbf{User}
+
+Wait, does these three have to equal the magic number?
+
+\noindent \textbf{Nehan Munir}
+
+No, it can't. This can't add to the magic number. But then these plus another seven. Like imagine there's plus another 5. So imagine this line if you add those two together, then add to the magic number. So it's pretty, it's not as easy as you initially thought, right? Plus.
+
+\noindent \textbf{User}
+
+Wait, is that the rule or does it just happen?
+
+\noindent \textbf{Nehan Munir}
+
+It just happened, but we're also testing people out. What is that happen? It's magic number, so that's why. So and then this is, this is just diagonally right. But then you can also go inside, right? And so it's also some of them. Would also be. In a 3D way, so it goes from like the. A place close to a place far away from you. So those are pretty hard to like learn about, right? Or it's hard to visualize. So what kind of visualization would help you like learn about this?
+
+\noindent \textbf{User}
+
+First you'd teach row column and Z column and then you teach. Face diagonals, I mean the layer diagonals and then you teach cube diagonals. You just. Give an example you like. Show a picture while transparent, using transparency to hide the cells that aren't relevant in example.
+
+\noindent \textbf{Nehan Munir}
+
+OK. So what method structure would you think would be most effective to visualize the game space? How would you view the game? So do you like? This demo that we that we have so far. And then you flip through each of the planes for that specific square.
+
+\noindent \textbf{User}
+
+Wait, can the square be inside? Yeah.
+
+\noindent \textbf{Nehan Munir}
+
+So you're able to go inside as well.
+
+\noindent \textbf{User}
+
+The thing is, how can you even tell? Only making it transparent would be better.
+
+\noindent \textbf{Nehan Munir}
+
+OK, so you'd like a ghost like you'd like daughter squares to kind of be like? Uh, translucent or like a ghost feature, right?
+
+\noindent \textbf{User}
+
+Yeah. And does it show your XYZ? Get us.
+
+\noindent \textbf{Nehan Munir}
+
+You're also able to go inside, but I'm not sure how to do that yet because I didn't write this. OK, so. Do you think that be better than this? Like would you rather have it like you see every single square? Like you could like flip through each of these?
+
+\noindent \textbf{User}
+
+And you could have it so you could expand the cube if you like. It begins as a cube, but then if you click a button it like displaces open up.
+
+\noindent \textbf{Nehan Munir}
+
+Would you like if you blow it up? I don't know what it's called, but imagine instead of just having. A flat plane, no show. Show the image again. Each of these are like separated by a little bit. Each single small cell, every plane is separated. What about every single cue? Which would be better? Just a plain kind of like this? Kind of like this or.
+
+\noindent \textbf{User}
+
+Our separate cube is too much. And then from the layers you can choose a specific layer and then choose what to change it.
+
+\noindent \textbf{Nehan Munir}
+
+So when? You're in the cube, right? If you blow it up. You're probably going to get lost on where you actually are in the cube, right?
+
+\noindent \textbf{User}
+
+No.
+
+\noindent \textbf{Nehan Munir}
+
+Like, let's say that you only see one of them, right? So what do you see all of them? How do you like? How do you like people to like represent umm? Where in the QBR would you like to see a ghost feature including all the missing layers on top? Or would you just like a coordinate system in a coordinate that says that this is the fourth and the X axis or whatever? Fort grow in the X axis or what? Or something like that.
+
+\noindent \textbf{User}
+
+I'd rather see the ghost thing so I can see the numbers and the other layers.
+
+\noindent \textbf{Nehan Munir}
+
+Yeah, but it'll be translucent, so it's gonna be harder to see the number, right?
+
+\noindent \textbf{User}
+
+I I would prefer to still see it. Still have that information quickly.
+
+\noindent \textbf{Nehan Munir}
+
+OK, so you see this image right here and there's like a lot of space in between each different layer. What do you like if you're on one layer for there to be a little bit of space and then, uh, three of them stacks on top of each other like compactly? Because imagine you only have a laptop screen to see it, right? And obviously. Um, if we do like the dimensions of this laptop, you'd be able to see them, but you'd only be able to see them like you can't really read the numbers. So how do you like it to be displayed? How do you like the top three and the other layers to be?
+
+\noindent \textbf{User}
+
+Displayed only show the numbers above and below like directly above and below. So if you're in. Sell 555. And you're in layer, the wide layer, then you could see. Cell 5. Uh, no, you can see cell 45. 5. So in a way you can.
+
+\noindent \textbf{Nehan Munir}
+
+Are you talking about the cells or the layers? Because. The only one is clear, Yeah.
+
+\noindent \textbf{User}
+
+You OK say you're in this? Layer and you're selecting this one. Then you can see this, this and above, and this isn't below. If you move your cursor over here, then you see. These numbers above in the law.
+
+\noindent \textbf{Nehan Munir}
+
+OK, so you'd like a kind of like a table leg. So you want a table that's flat, so that's the layer that you're currently on and then like. A table like when describing. OK.
+
+\noindent \textbf{User}
+
+It is a completion work.
+
+\noindent \textbf{Nehan Munir}
+
+At 3%.
+
+\noindent \textbf{User}
+
+What do you like actually mark it on? How good it is or whatever.
+
+\noindent \textbf{Nehan Munir}
+
+You want me to wonder did you make this game up or you are going to be one out of eight interviews? So if mines bad, it's still there's like still other people that might be better. What do you think of Durant format? OK, so the gameplay system is. There's going to be 8 different levels for one cube, OK. What so First off. There's gonna be 8 levels for one cube. Their first level is you have one of these numbers. You have only one number. Then you find a number, you find its compliment. So complement is 4 in the XYZ axis. So you travel. So imagine this one. So you travel 4 and X4 into Y and then you travel 4 inside. OK. And these two numbers will add up to 1001. And the second level is you need to solve half orthogonal which is 4 numbers and then a full line, then diagonal and then a disjoint A disjoint orthogonal. So you see 4 numbers here. But then what matches up with only these three numbers? If you have 3 numbers then somehow on the other side of the cube another? Another five cubes will add up to 1004 thousand 4 OK. An intragonals, uh, destroying triangles. So like that? So increasing difficulty is, yeah. So that's what we're going to teach stuff. So how long would you expect someone to finish each level? Can they're different, Uh. So you know how Wordle is like, only you guess a word, right? So instead of this is going to be a regular game.
+
+\noindent \textbf{User}
+
+There's no guessing, there's only objective character.
+
+\noindent \textbf{Nehan Munir}
+
+Yeah, so you scored him over something else. So our current, our current supervisor made the plan to score people off of, umm, time. So how long it takes? But he didn't say anything about mistakes or like, what if you accidentally select the wrong square to put in a number or you put in the wrong octal numbers? You could punish people for that as well, right?
+
+\noindent \textbf{User}
+
+How do you punish them?
+
+\noindent \textbf{Nehan Munir}
+
+You could say that you lose 5 seconds if you like putting the wrong number or something like that. So your final score is going to be how long it took plus 5 seconds. Or something like that, because you wanted to solve it as quickly as possible, right?
+
+\noindent \textbf{User}
+
+Who made this game idea?
+
+\noindent \textbf{Nehan Munir}
+
+Our our supervisor.
+
+\noindent \textbf{Nehan Munir}
+
+That I can't what features? OK so ish. What? What do you think of the Iran format? So imagine one game you need to solve like. Umm. Imagine it takes like 50 calculations to solve one whole game and each level is going to take like. Starting with only one calculation all the way to like. 8 calculations, right? Did you think it? This is going to take a harder and harder. It's going to get harder and harder.
+
+\noindent \textbf{User}
+
+Did you like score based off of the game? The very last currently time. The very last time, yeah.
+
+\noindent \textbf{Nehan Munir}
+
+For all 8 levels, but we're also thinking about having a daily mode, um, which we'll talk about later. And we'll ask your ideas on how you think we should structure that. So do you think it's better that it gets harder overtime or what?
+
+\noindent \textbf{User}
+
+Do you mean the cube gets bigger or how much earth make you have to do to? Fell apart.
+
+\noindent \textbf{Nehan Munir}
+
+Like first you saw only two, then you saw the whole line and stuff like that, then diagonal. Do you think that's better or not?
+
+\noindent \textbf{User}
+
+Sure.
+
+\noindent \textbf{Nehan Munir}
+
+OK, what features, structure, format would motivate you to continue playing this game over multiple sessions?
+
+\noindent \textbf{User}
+
+If someone forced it as part of a mark, then we'll do it.
+
+\noindent \textbf{Nehan Munir}
+
+So if in your computer technology class you had to solve this, you have to do this as part of your high school curriculum, Huh.
+
+\noindent \textbf{User}
+
+If it was part of my grade, then yeah.
+
+\noindent \textbf{Nehan Munir}
+
+What if so you wouldn't play this game with your teachers? Like hey, I found this uh.
+
+\noindent \textbf{User}
+
+Don't say cool game, just say game.
+
+\noindent \textbf{Nehan Munir}
+
+Well, your teacher would say cool game, right? Though Mr. Wong's light Hey I find this cool game on Internet. It'll really help you study for your math test, for your octal test or your binary test. Because you can also have. As you can see you can have like order 8 of regular numbers. But you could also have like a three by three by three of like just regular, uh, base 10 numbers. Then you have like a binary cube. What?
+
+\noindent \textbf{User}
+
+Yeah, I get it. I get it. You can customize what you like.
+
+\noindent \textbf{Nehan Munir}
+
+Yeah, so it would help what? What feature structure format would motivate you to continue playing?
+
+\noindent \textbf{User}
+
+Frozen incentive.
+
+\noindent \textbf{Nehan Munir}
+
+Outside of class, imagine you're just a Wardle player.
+
+\noindent \textbf{User}
+
+I guess comparison against other people.
+
+\noindent \textbf{Nehan Munir}
+
+Would you like to be compared to, uh, based on your time or would you allow like breaks? And then how do you what because?
+
+\noindent \textbf{User}
+
+Time and breaks between levels because you can't plan ahead during in the middle of a level I think. Where can you?
+
+\noindent \textbf{Nehan Munir}
+
+You can if you randomize the queue. Like if there's more than one magic cube that you can use, you could like switch it up between levels so no one can change. So you see magic squares. So like a three by three by three. And you need to swap the numbers. OK, so the game is planned to have. Competitive leaderboards in which users can post high scores for a daily fixed round of the game. Do you think this is a feature that would improve enjoyment and engagement? What information would you like to see on a competitive leaderboard? What other feature would you like to see in this online competitive section of the game?
+
+\noindent \textbf{User}
+
+I think having time is good. Are there multiple different solutions to? I don't know the math about it, but.
+
+\noindent \textbf{Nehan Munir}
+
+Technically no, it's it's fixed. Yeah, you're all of your numbers will only add up to 4004 at the end.
+
+\noindent \textbf{User}
+
+Maybe if you had a. Recording of everything maybe like. Ted talk maybe for every round everyone plays, you record when they inputted a number or solved a particular thing so you can. Kind of replay how to top people. Solve them, see how fast they did it in real time. Kind of. Like almost like recording their screen of what they did.
+
+\noindent \textbf{Nehan Munir}
+
+This is going to be a browser game, so. Uh, you have to think about like cache memory and stuff like that, yeah.
+
+\noindent \textbf{User}
+
+You're gonna take a lot of memory, but. Honestly, it's not even that much memory.
+
+\noindent \textbf{Nehan Munir}
+
+Screen recording.
+
+\noindent \textbf{User}
+
+No not. You need a separate app like not a screen recording you hold like whenever they solve 1 cell. You've recorded timestamp plus what cell? That's like only a few bits. Where bytes.
+
+\noindent \textbf{Nehan Munir}
+
+OK, so you want a leaderboard of like everyone's score and then for the top five people, imagine you also have like a record of like when they didn't want everyone for every attempt for everything. Along with the numbers stating the score, it also stores.
+
+\noindent \textbf{User}
+
+Uh, the whole recreation of Dura dumped. So people can rewatch it. You know what I mean? Yeah.
+
+\noindent \textbf{Nehan Munir}
+
+So if you're doing a daily game, would you like to play like the whole game? Because it take like 8 rounds so it might take like quite a long time to like finish the whole game. So how which what would you do?
+
+\noindent \textbf{User}
+
+Maybe you can have one streak for. Maybe the 1st 2 levels and then another. Streak for. The entire game and then. You can use it. You can incentivize people to have a longer streak somehow. In a particular category. Maybe the lot of people who play it for longer get more awards or something.
+
+\noindent \textbf{Nehan Munir}
+
+So obviously if you have 8 levels, you start off with only one square being populated with its actual number, right? Then you try to use it to solve the whole queue. Would you like it if you have like a sudoku? If it's like todoko where you have like. Some numbers fill out, but then you try to solve it. Well, like checking out like where you can like by solving the entire thing. Yeah, imagine you have like. 50 to like 70\% of the cube filled. So then all you have to do is go four and four, like 4 and X4 and Y and four and Z and then find this complement. So just don't get what you mean by complement. So.
+
+\noindent \textbf{User}
+
+And how would people even know to use to whatever that complementary is?
+
+\noindent \textbf{Nehan Munir}
+
+Because we teach them in the.
+
+\noindent \textbf{Nehan Munir}
+
+We're trying to have a learning feature as well, so we teach them the tutorial. Like with the Academy video complement, you're teaching a whole different concept of how to play this game efficiently that has nothing to do with. Base 7 arithmetic.
+
+\noindent \textbf{Nehan Munir}
+
+Compliments are in base 7 though. What are they? An octal? So this is. This is what it complements into. This is what a compliment is. So you have. This square over here, right? So you could go 4IN uh, four in the X4 in the Y and four deep, and then this number plus this number would add up to 1001. OK. So if add up to 1001, that's just a metric. That's just how it works. So that's like the whole thing. So imagine you have, uh, you start off with. It's always going to add up for octal. Uh, order 8 cubes. Every single row. Will always add up to 4004 no matter what, OK?
+
+\noindent \textbf{User}
+
+So the magic number is 4004.
+
+\noindent \textbf{Nehan Munir}
+
+Yeah, all the time. Yeah, all, every single thing in the 8 by 8 girl, uh, and eight. Yeah, I get it. The number is 4004. So some of the tricks is that, you know that half of this would always add up to half of 4004. So 2002. How do you know that? Let's just tell magic squares work because you need to have rules in order to make sure that everything adds up to the magic number, right? And then you also know that this and this compliment which is 4 in each axis would always add up to 1001. So half of that OK.
+
+\noindent \textbf{User}
+
+That is in the 2002.
+
+\noindent \textbf{Nehan Munir}
+
+2 numbers. This is 4 numbers. This is half a line. Half a line will always add up to 2002. Then 1 + 1 that goes in four in each axis would always add up to four 1001.
+
+\noindent \textbf{User}
+
+OK, this game seems very difficult to do on your own.
+
+\noindent \textbf{Nehan Munir}
+
+Yeah, that's what we have, tutorials. But it's pretty. The concept is simple. All you have to do.
+
+\noindent \textbf{User}
+
+Is let someone derive that by themselves?
+
+\noindent \textbf{Nehan Munir}
+
+That's the you're you're gonna teach them beforehand. Aaron, teach them the tips and tricks beforehand. So that's why I told you that there was a tutorial section right here. Look.
+
+\noindent \textbf{User}
+
+It's OK. What's the next question? You're not going to use this interview anywhere? I am.
+
+\noindent \textbf{Nehan Munir}
+
+In the future we plan to expand the game to other sizes of magic cubes in different number bases, such as dozen number 8, so zero to 11 with a 12 by 12 by 12. This will also come with slightly different rules due to the magic cube having different properties. Do you think these differing environments and rulesets will increase user engagement? Do you think this will be more confusing? How would you like to see this implemented in the game, if at all?
+
+\noindent \textbf{User}
+
+Well, maybe those base numbers have more interesting. Types of more interesting properties what which are. Maybe simpler for most audiences or. Maybe more difficult for other audiences. Maybe I could have a level of difficulty or like a different version of the.
+
+\noindent \textbf{Nehan Munir}
+
+How do you want this to come? Uh, would you like to umm, imagine what you do is that, oh, I want to create my own brand new costum cube, cute custom cube and it has umm, 6 by 6 by 6, but it works in like, I don't know hexadecimal. Would you like it? Would you like to program to like generate you on YouTube that no one has ever seen before? Or would you like to just have a base set of cubes and you just choose one of them?
+
+\noindent \textbf{User}
+
+Well, you have to change it up.
+
+\noindent \textbf{Nehan Munir}
+
+Or else it's the same game over and over again. OK, so so far there's only one version of A8 by there's 384 versions of a 8 by 8 by 8 order 8 cube. OK, octal cube. But our supervisor uses ChatGPT. What about 11 by 11 and 12 by 12? Yeah, The problem is that you're going to have to verify that the cube is right. So our what our supervisor did was use a AI agent to see if there's more than 884 cubes. Because think about it, there's no math proof to like.
+
+\noindent \textbf{User}
+
+Figure it out now.
+
+\noindent \textbf{Nehan Munir}
+
+Now how does AI even do that quickly? So think about this. You have an 8 by 8. You have an 8 by 8. Thank you. So you have 512 squares, right? So how do you find out each? How many different combinations of daredevils is? First of all, I need to know what the magic number is. You'll learn this in your the Data Management course.
+
+\noindent \textbf{User}
+
+What is the magic number? If it's, why? If it's like. Only 8. Then is there only like 1 possible? How many? There's only one possible magic number.
+
+\noindent \textbf{Nehan Munir}
+
+As far as we know. So you have an 8 by 8 by 8 number. 4004. So every single row would add up to 4004 eight by 8 by 8. UH-8 squares. That's why 8 squares diagonally I don't.
+
+\noindent \textbf{User}
+
+Think he can simply calculate that with that?
+
+\noindent \textbf{Nehan Munir}
+
+Would you would you be able to calculate how many unique numbers there can be on octal square? First of all, it doesn't. It doesn't have to. It doesn't have to fall as the magic square rule. So you have 512 numbers. How many combinations? How many different square cubes can you make?
+
+\noindent \textbf{User}
+
+It doesn't have to follow the magic number thing. Yeah, imagine you have an already, just filling it in randomly. Well, what's your Max number? What's your minimum number?
+
+\noindent \textbf{Nehan Munir}
+
+It's just 512. It's zero to 512 in octal. So imagine you.
+
+\noindent \textbf{User}
+
+It's like 212. Choose 512.
+
+\noindent \textbf{Nehan Munir}
+
+OK, good. So what did that be?
+
+\noindent \textbf{User}
+
+Have you been announcing?
+
+\noindent \textbf{Nehan Munir}
+
+What would that be?
+
+\noindent \textbf{User}
+
+512 to the power of 2.
+
+\noindent \textbf{Nehan Munir}
+
+What is the symbol?
+
+\noindent \textbf{User}
+
+Oh, factorial. OK.
+
+\noindent \textbf{Nehan Munir}
+
+So.
+
+\noindent \textbf{User}
+
+Now what?
+
+\noindent \textbf{Nehan Munir}
+
+So this is how many squares you're going to have to check. Formatikkue. So imagine you can do 10 billion operations per.
+
+\noindent \textbf{User}
+
+That's a little more than 10 billion. Yeah, but imagine you can do 510 billion operations a second, a second, OK, on your computer.
+
+\noindent \textbf{Nehan Munir}
+
+That's a lot of seconds.
+
+\noindent \textbf{User}
+
+Yeah, right. You just divide. You just subtract 10 from this number, right? Hey, you said, uh, you said practice. Umm 10 to the power of. I don't imagine you have 10. Yeah, a lot. So it's going to take forever, right? Sure. So what are teacher? Did he a supervisor? Did he just use an AI agent? And So what he told his agent was to find me another order 8 octosed Q OK.
+
+\noindent \textbf{Nehan Munir}
+
+And then how does this AI do it then? I need to just end the interview every night. 
+
+\noindent \textbf{User}
+
+How many people are doing this? Did you have a chance to do a different game?
+
+\noindent \textbf{Nehan Munir}
+
+OK, greetings. I asked one of my AI agents to create an 8 by 8 nasty magic cube in which all edge included half orthogonals in the XYZ. Also sum up to 2002. OK, but which is not a cubed out of giving you. So he gave us the cube. And then he in a short time it did it. I checked he checked every single line and it seemed to be correct. And then I it asked how many distinct solutions you could come up with and it said 6.3 * 10 to the power of 10. Which may be incorrect. However, it's very large, so if you want 10 distinct cube it shouldn't be hard to make them. And then he said that all the 384 that he has are like reflections or rotations of one different cube. But using a I he was able to get 600 like it estimated that there is 6.3 * 10 to the power of 10 of non reflected non.
+
+\noindent \textbf{User}
+
+Have you figured out how to? How to generate these?
+
+\noindent \textbf{Nehan Munir}
+
+Cubes. No, this is a supervisor. He said that he was able.
+
+\noindent \textbf{User}
+
+To no do you need to do it or is he doing?
+
+\noindent \textbf{Nehan Munir}
+
+So we're asking. Would you like something? Imagine if you asked it for a dozen number base with 12 by 12 by 12 magic cube. What happens if that we don't have it? So what we do is that an AI does it and then we have like we have a custom program that creates its own verifier, then it verifies the cube and then they pass it on to you. Would you like that or not?
+
+\noindent \textbf{User}
+
+I personally don't care about your.
+
+\noindent \textbf{Nehan Munir}
+
+Do you understand what the question is?
+
+\noindent \textbf{User}
+
+Yeah, that would be cool.
+
+\noindent \textbf{User}
+
+OK. Do you think that? How do you know that the cubits valid have to verify it fails?
+
+\noindent \textbf{Nehan Munir}
+
+That's up to you.
+
+\noindent \textbf{Nehan Munir}
+
+OK, would you like to would you like to see this implemented in the game, if at all?
+
+\noindent \textbf{User}
+
+I'm going to say no, so you don't have to do all that.
+
+\noindent \textbf{Nehan Munir}
+
+Who cares? OK, and if it was implemented?
+
+\noindent \textbf{Nehan Munir}
+
+You have to do it anyways.
+
+\noindent \textbf{User}
+
+I'm not going to answer that question if it was if it was implemented. How do you make a tutorial for the like? How would the student learn about it? Would it also be another AI generated like kind of like an LLM teaching them or not? How did I work?
+
+\noindent \textbf{User}
+
+You just teach them sure what videos and then?
+
+\noindent \textbf{Nehan Munir}
+
+Yeah, but you don't have video because the cube format is different from anything else that we know. This is something that you make up, but you don't know how to learn it. You just said that I want a dozen number base with toll by toll by toll Magic Cube, but we don't have that code on us. The game is still the same, right? Yeah, but there's different magic numbers. So this time you just told him that instead of equaling to 8 by 8 by 8, instead this particular number, what if an summing to that, what if an LM's like automatically takes a request and then takes in all the evidence that we have for like our 8 by 8 by 8 octal cube base. And then it tries to like give you something that you can read and like examples that you can do. Would you like that or not? Sure. So it teaches you. OK. Overall, are there any additional overall, are there any additional features that you would like to see in the game? No any bells and whistles like there's a daily mode with a leaderboard. There's obviously your own game, like a eight round game and there's also. Uh, would you like to use their accounts, different user accounts so you can like record all your previous history or yeah. Or would you like it more to be like an arcade game?
+
+\noindent \textbf{User}
+
+We would go along with something that Wordle does, or if you log in, you get to see your past history.
+
+\noindent \textbf{Nehan Munir}
+
+OK. And do you see any force, do you foresee any challenges with this game idea?
+
+\noindent \textbf{User}
+
+I don't see many people playing the game. I don't see them for being. Having fun with it to be honest.
+
+\noindent \textbf{Nehan Munir}
+
+What if it was forced upon every Hamilton District school board, umm, students? Would you see any challenges that way? You're forced to play around no matter what. If you're in high school.
+
+\noindent \textbf{User}
+
+Well, if they have to play it then. The challenges, they would hate you, the maker of the game.
+
+\noindent \textbf{Nehan Munir}
+
+OK, what maker is portrayable? OK, let me give you an example. Umm.
+
+\noindent \textbf{Nehan Munir}
+
+That's what they would take.
+
+\noindent \textbf{Nehan  Munir}
+
+It's called Bells and Whistles incentive inside the game. Not like your teaching gives you a better mark or something like that, but it would be an incentive.
+
+\noindent \textbf{User}
+
+For a high schooler, uh, barely anything within. Scientifies them to do anything but you could say. I don't know, maybe the background colour changes or customizing?
+
+\noindent \textbf{Nehan Munir}
+
+OK, let me give an example. That's a lot of coding this. This is for the coders. Would you see it? Would you see any scalability problems, something like that? You understand what I'm saying? Like because there's a lot of users playing it like give me something like that.
+
+\noindent \textbf{User}
+
+Well, yeah, there's going to be a lot of scalability issues. How large? Give me something else. How large? Apart from scalability? Yeah, because I'm just putting it just seems very, very annoying. What part is genuinely very annoying? All of it. Coding the cube coding. Well, Are you using ray tracing for the 3D model? You don't know what ray tracing is? No, I don't. OK in part.
+
+\noindent \textbf{Nehan Munir}
+
+It just play game and then you convert it to web assembly. So this is play game, right? You know what play game is? So it's like 300 lines of code. Which of it was?
+
+\noindent \textbf{User}
+
+AI generated. I didn't write this code. I wouldn't even blame you for everything with that AI generated. This doesn't seem like interesting coding, it just seems like a lot.
+
+\noindent \textbf{Nehan Munir}
+
+In particular, what issues do you foresee with the alternative number base? So the LLM rapper that I told you about?
+
+\noindent \textbf{User}
+
+What is? Are you making the alum or are you? Is it an API?
+
+\noindent \textbf{Nehan Munir}
+
+Use API to generate a queue. Unless you know a better way to do it, I don't know.
+
+\noindent \textbf{User}
+
+How do you generate the exactly? What AI are you using? Are you using ChatGPT or are you creating your own AI? I don't know, just an AI agent. Imagine it's a black box. So you generate black box for who?
+
+\noindent \textbf{Nehan Munir}
+
+For everyone or for you? You don't know anything, right? OK, sure. But technically we don't know anything either because this didn't doesn't exist yet. We don't know what we're gonna use. So it's a black box. You have a verifier program that you write your own yourself that verifies that we wrote it. So there's a 12 by 12 dozen old number based thing that verifies that this qubit is legit. Then let's say they have an LM wrapper that uses that we like train based on like. Umm. Our octal stuff like this mean stuff that we're coding plus like, OK.
+
+\noindent \textbf{User}
+
+So it verifies. Well, what are you asking again?
+
+\noindent \textbf{Nehan Munir}
+
+So do you see any problems with this? Like if you want your own number base. Like let's say that you want something messed up like a 5 by 5 by 5 hexadecimal cube.
+
+\noindent \textbf{User}
+
+The problem I see is you guys failing to properly verify it. And then? Assuming everything's correct, I don't see any issues. It does what I asked.
+
+\noindent \textbf{Nehan Munir}
+
+You think that the trained LLM rapper would not fail in teaching you how to actually solve the cube that you made? Oh, that, yeah. Because there's two AI aspects to it. One is the generating cube. Then you verify it using your own code, right? We like verify. Our team verifies it with our own code. Then we like training an LLM based on like the cube that you made, plus our octal stuff that we wrote individually. The AI is going to generate very different strategies, right? Some of these strategies could be extremely complicated.
+
+\noindent \textbf{User}
+
+Like the one you showed for 8 by 8, that seems fine. But maybe the next maybe for like a 13 by 13 you have to do some weird stuff with like triangles or. Something like that. That makes it so much harder. How do you even? That was a good response, thank you. How do you even code?
+
+\noindent \textbf{Nehan Munir}
+
+How do you even communicate that your solution like the solution that I'm thinking of? Just thinking about your question for what they just said, what you do is that you don't show any tips and tricks to like solving an additional whole row. You just fill in like 90\% of the queue. And then all the person has to do was like simple sudoku math because how does sudoku different sudoku levels work, huh?
+
+\noindent \textbf{Nehan Munir}
+
+Because they're different difficult fields. Different difficulties of local levels, right? So first of all, it's like minesweeper, you have like most of the stuff like filled out, right? And then later on like less of the cube gets filled out more and more and more. OK, these are like tips, but imagine First off you start off with like in order to make it easier for everyone, you start off with something like this and then you go to the more sponsor queue. Especially for those weird number bases.
+
+\noindent \textbf{User}
+
+Yeah, but for the weird number bases, they're going to be hard anyways, even if 90\% of it. Like if you do 99\% of it then there's only like 3 numbers that can easily be calculated. But if you want to implement like an interesting strategy then it's going to be complicated no matter what.
+
+\noindent \textbf{Nehan Munir}
+
+OK, thank you for interview. Uh, this is. A user that is not interested in the game at all. That's the premise.
 
 \addcontentsline{toc}{section}{References}
 \bibliographystyle {plainnat}
