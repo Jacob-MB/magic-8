@@ -29,22 +29,36 @@
 
 \maketitle
 
+\newpage
+
+\tableofcontents
+
+\newpage
+
 \begin{table}[hp]
 \caption{Revision History} \label{TblRevisionHistory}
 \begin{tabularx}{\textwidth}{llX}
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-DATE & Name(s) & Description \\
+November 11, 2026 & Jacob Brodersen & Added initial draft of methodology, introductory explanation, and survey questions\\
+November 13, 2026 & Jacob Brodersen & Updated survey question to reference the correct number base\\
+November 15, 2026 & Jacob Brodersen & Updated format and structure of report; added empathy map source and example magic cube figures\\
+November 16, 2026 & Jacob Brodersen & Added analyses, empathy maps, key takeaways, and transcripts for four interviews (Stakeholder A (Client), Stakeholder B, User A, and User B)\\
+November 16, 2026 & Jacob Brodersen & Revised analyses for consistency and fixed typos\\
+November 16, 2026 & Joshua Engel & Included User C analysis\\
+November 16, 2026 & Amos Edeaghe & Included User D analysis\\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\newpage
 
 \section{Methodology}
 
 The interviews to be conducted will be semi-structured. The first part of the interview will involve the interviewer(s) explaining the application to the interviewee (see Introductory Explanation). Next, the interviewer(s) will ask prepared, open-ended questions (see Survey Questions) as well as follow-up questions guided by the evolving conversation. Once all survey questions have been posed and discussed, the interviewee will be asked to share any final comments or concerns. After the interviewee responds with their potential comments or concerns, the interview will be concluded.
 
-Additionally, the interviewer(s) will be filling in an empathy map while completing the interview to ensure that the conversation fully covers the interviewee's stance. This empathy map has four sections (\cite{EmpathyMap}):
+Additionally, the interviewer(s) will be filling in an empathy map while completing the interview to ensure that the conversation fully covers the interviewee's stance. This empathy map has four sections \citep{EmpathyMap}:
 
 \begin{itemize}
     \item Say: What they say in response to questions or volunteer.
@@ -55,7 +69,7 @@ Additionally, the interviewer(s) will be filling in an empathy map while complet
 
 \section{Introductory Explanation}
 
-The application under discussion today is a web-based game. We will begin with an explanation of the game and then move on to some open-ended survey questions. This game is based on the mathematical properties of magic cubes. For some background, a most perfect magic cube is a cube where each voxel's value is a distinct number from 1 to n\textasciicircum{}3 and all rows, columns, pillars, 2-dimentional diagonals, 3- dimensional diagonals (triagonals), and broken space diagonals in the cube sum to the same number, also called the magic constant (show example magic cube). The order-eight cube is the smallest order most perfect magic cube. Using octal within this order-8 magic cube showcases the magic properties of the cube with the mentioned lines summing to 4004, half lines summing to 2002, and the complementary numbers (+4 4 4 for the x y z coordinates from a given voxel) summing to 1001 (all in octal).
+The application under discussion today is a web-based game. We will begin with an explanation of the game and then move on to some open-ended survey questions. This game is based on the mathematical properties of magic cubes. For some background, a most perfect magic cube is a cube where each voxel's value is a distinct number from 1 to n\textasciicircum{}3 and all rows, columns, pillars, 2-dimensional diagonals, 3-dimensional diagonals (triagonals), and broken space diagonals in the cube sum to the same number, also called the magic constant (see Figures~\ref{fig:MagicCube}--\ref{fig:MagicCubeSliceWithNumbers}). The order-eight cube is the smallest order most perfect magic cube. Using octal within this order-8 magic cube showcases the magic properties of the cube with the mentioned lines summing to 4004, half lines summing to 2002, and the complementary numbers (+4 4 4 for the x y z coordinates from a given voxel) summing to 1001 (all in octal).
 
 It is in this context that we propose an octal-base puzzle game to provide a fun and engaging means of learning and utilizing the octal number base. In this proposed game, players start with one voxel (number) in a most perfect magic cube visible with all other voxels hidden. The player must then complete a series of tasks involving finding the voxels associated with the prescribed lines adding up to the magic constant. For example, a task could be to find the diagonal that passes through the starting voxel within its XY plane, going from the bottom to the top of the cube (relative to the player's view). Each round of the game will involve eight tasks of increasing difficulty for the player to complete. This game involves a lot of addition and subtraction which can help teach the player octal arithmetic.
 
@@ -120,19 +134,41 @@ It is in this context that we propose an octal-base puzzle game to provide a fun
 
 \subsection{Stakeholder A (Client)}
 
-This stakeholder has a stake in the project as the client who originally proposed the recreational mathematics game centered around magic cubes. The client already had deep knowledge of the game concept and our current progress on the project. Furthermore, many of the survey questions have already been discussed with the client. To address this interviewees unique knowledge and viewpoint, the introductory explanation was removed and some of the survey questions were skipped or modified.
+This interviewee is a stakeholder as the client who originally proposed the recreational mathematics game centered around magic cubes. The client already had deep knowledge of the game concept and our current progress on the project. Furthermore, many of the survey questions have already been discussed with the client. To address this interviewee's unique knowledge and viewpoint, the introductory explanation was removed and some of the survey questions were skipped or modified. Instead, the interview began with a demonstration of the current proof of concept visualization, and the client was given the opportunity to ask their own questions about the project before the survey questions were discussed.
+
+This interview took place on November 12, 2026.
 
 \subsection{Stakeholder B}
 
-This stakeholder has a stake in terms of being an authority figure in the secondary education system that could potentially use this application as a teaching tool.
+This interviewee is a stakeholder in terms of being a manager in the secondary education system that could potentially use this application as a teaching tool. They work as an instructional leader, supporting educators in engaging students with new concepts, including in destreamed grade 9 mathematics classrooms. This interviewee represents the secondary stakeholder group of high-school educators, who would not play the game directly but may prescribe it to students.
+
+This interview took place on November 15, 2026.
 
 \subsection{User A}
 
-This user fits the characteristics of a person who enjoys online games and recreational mathematics.
+This interviewee fits the characteristics of a user who enjoys online games and recreational mathematics. They describe themselves as a ``numbers person'' who plays number games such as Sudoku, and they have some familiarity with alternative number bases through computing and software. This interviewee represents the primary user group of recreational mathematics players.
+
+This interview took place on November 15, 2026.
 
 \subsection{User B}
 
-This user fits the characteristics of a person who would utilize the game for the purpose of learning alternative number bases.
+This interviewee fits the characteristics of a person who would utilize the game for the purpose of learning alternative number bases. They are currently a high-school student and regularly play video games, often with friends. This interviewee represents the primary user group of high-school students learning the octal number base.
+
+This interview took place on November 15, 2026.
+
+\subsection{User C}
+
+This interviewee fits the characteristics of a person who would utilize the game for the purpose of learning alternative number bases. They are a young adult who is interested in learning new mathematical concepts and regularly play online games. This interviewee represents the user group of people who are interested in learning alternative number bases and recreational mathematics but are currently lacking in knowledge.
+
+This interview took place on November 16, 2026.
+
+\subsection{User D}
+
+This interviewee fits the characteristics of a user who enjoys puzzle games and statistics, with a high interest in social and competitive gaming experiences and little exposure to alternative number bases.
+They enjoy playing games with friends and comparing their strategies and results with others.
+This interviewee represents the primary user group of recreational mathematics players.
+
+This interview took place on November 12, 2026.
 
 \subsection{User E}
 
@@ -152,11 +188,11 @@ Survey question 3 was not asked directly; however, during question 6, the client
 
 For survey question 4, this was discussed earlier.
 
-Surveys question 5 was skipped.
+Survey question 5 was skipped.
 
-For survey question 6, when discussing how to engage the user, the client mentioned "bells and whistles"; in other words, sounds and animations to make the game more exciting. The client mentioned that any classic tactics applied to video games would likely work in this game as well. The client also mentioned that a tutorial video could help excite users and improve adoption of the game when they see what the game is about and what they can do.
+For survey question 6, when discussing how to engage the user, the client mentioned ``bells and whistles''; in other words, sounds and animations to make the game more exciting. The client mentioned that any classic tactics applied to video games would likely work in this game as well. The client also mentioned that a tutorial video could help excite users and improve adoption of the game when they see what the game is about and what they can do.
 
-The client was asked if it would make sense to have the number base be different than the order of the magic cube. To this the client said it would likely not be useful because it would not showcase the magic properties very well. Although, they did find some merit in the idea of a more difficult game mode where potentially the numbers do not work well in terms of the magic properties making the game concept a little more confusing.
+The client was asked if it would make sense to have the number base be different than the order of the magic cube. To this the client said it would likely not be useful because it would not showcase the magic properties very well. However, they did find some merit in the idea of a more difficult game mode where potentially the numbers do not work well in terms of the magic properties making the game concept a little more confusing.
 
 For survey question 7, the client was unsure of competitive engagement, noting that the game is relatively simple and does not have traditional levels. However, the client did not seem opposed to our current competitive components of the game (leaderboards, daily challenges, etc.). The client mentioned that we could experiment with the round format as well to switch up the format (e.g., add more tasks to a round).
 
@@ -186,7 +222,7 @@ Say &
   \item Some of the tasks intend to fix the user's view of the cube (i.e., view should be fixed on a certain plane)
   \item The game must be fun before worrying about the teaching value
   \item Although the current scope of the game focuses around addition and subtraction, it could easily be extended to multiplication and division (but these operations are not intrinsic to the cube)
-  \item "Bells and whistles" (i.e., sounds and animations) will engage the user
+  \item ``Bells and whistles'' (i.e., sounds and animations) will engage the user
   \item Classic tactics applied to video games would be useful in this game for keeping the users engaged
   \item Mismatching number base and cube order would likely not be useful
   \item The team could experiment with the round format as well to switch up the format (e.g., add more tasks to a round)
@@ -206,7 +242,7 @@ Think &
 Do &
 \begin{empathylist}
   \item Listed three methods of how they think users could handle lines split across the cube's boundaries: moving planes/cubes to continue lines across edges, working it out algebraically, and visually/mentally jumping across to the cut plane/cube
-  \item Described following a triagonal spatially, but needing to "flip your thinking" when moving across a boundary
+  \item Described following a triagonal spatially, but needing to ``flip your thinking'' when moving across a boundary
   \item When completing their designed tasks, the client fixes the plane to obtain one set of slices (e.g., XY) that they can view for the round
 \end{empathylist}\\
 \midrule
@@ -223,11 +259,11 @@ Key Takeaways:
 
 \begin{itemize}
     \item Try multiple view methods for the gameplay during user testing (e.g., fixed view of slices or fully navigable 3D space)
-    \item When focusing view on individual slices, leave skeleton of rest of cube insteading of making it invisible
-    \item Esnure that the game is fun before worrying about educational value
+    \item When focusing view on individual slices, leave a skeleton of the rest of the cube instead of making it invisible
+    \item Ensure that the game is fun before worrying about educational value
     \item Look into extending to different game modes that include multiplication and division
     \item Create a tutorial video of some sort to excite potential users and show what the game is about
-    \item Look into features that existing video games use to excite players ("bells and whistles")
+    \item Look into features that existing video games use to excite players (``bells and whistles'')
     \item Keep the number base matched to the cube order to showcase the magic properties; consider a separate, more difficult mode using number bases that do not showcase the magic properties
     \item Experiment with round format (i.e., difficulty progression, number of tasks)
     \item Focus particularly on ensuring the split triagonals and navigation of spatial aspects of the game are intuitive
@@ -236,25 +272,25 @@ Key Takeaways:
 
 \subsection{Stakeholder B}
 
-For survey question 1, Stakeholder B expressed that they liked the visual nature of the game, stating that this will allow an entry points for learners at different levels of ability. Additionally, they found the steps of the game to be laid out clearly, allowing the user to know what is expected from them when playing. They thought that the game sounded fun and would be an engaging way for students to learn and grow. Furthermore, they liked the idea of starting with one number visible and progressing from there.
+For survey question 1, Stakeholder B expressed that they liked the visual nature of the game, stating that this will allow entry points for learners at different levels of ability. Additionally, they found the steps of the game to be laid out clearly, allowing the user to know what is expected from them when playing. They thought that the game sounded fun and would be an engaging way for students to learn and grow. Furthermore, they liked the idea of starting with one number visible and progressing from there.
 
-For survey question 2, Stakeholder B explained that the progression aspect of starting with one visible number and expanding from there will allow players to think critically about the relationship between the numbers they identify and how that contributes to the mathematical properties of the magic cube. They expressed that research into gamification of math learning is important to consider in order to meet students "where they're at" and find ways to engage them in their learning. Stakeholder B stated that individualized and responsive math learning can be achieved through a game like this. Stakeholder B stressed that the game should not assume a starting point in terms of knowledge for the users; instead, a variety of entry points should be offered. Additionally, they said that making connection between what they are learning and how it can be used in real life settings would be a good addition.
+For survey question 2, Stakeholder B explained that the progression aspect of starting with one visible number and expanding from there will allow players to think critically about the relationship between the numbers they identify and how that contributes to the mathematical properties of the magic cube. They expressed that research into gamification of math learning is important to consider in order to meet students ``where they're at'' and find ways to engage them in their learning. Stakeholder B stated that individualized and responsive math learning can be achieved through a game like this. Stakeholder B stressed that the game should not assume a starting point in terms of knowledge for the users; instead, a variety of entry points should be offered. Additionally, they said that making connections between what they are learning and how it can be used in real life settings would be a good addition.
 
-For survey question 3, the stakeholder said that regardless of the format/structure of teaching the users how to play, it must be ensured that there are clear instructions available to the user. Furthermore, Stakeholder B stated that these instructions should be accessible through different mediums; written instructions, verbal instructions, visual instructions. Within these instructions, it must be clear to the user where to start, where to go next, and how to enrich their learning if they require more complex opportunities. Finally, the stakeholder said that explaining the big picture (what is octal, where it is used, how this game can be used to build this skill) would be useful.
+For survey question 3, the stakeholder said that regardless of the format/structure of teaching the users how to play, it must be ensured that there are clear instructions available to the user. Furthermore, Stakeholder B stated that these instructions should be accessible through different mediums: written instructions, verbal instructions, visual instructions. Within these instructions, it must be clear to the user where to start, where to go next, and how to enrich their learning if they require more complex opportunities. Finally, the stakeholder said that explaining the big picture (what is octal, where it is used, how this game can be used to build this skill) would be useful.
 
-For survey question 4, Stakeholder B expressed that they liked the full 3D model for showing the game space. They also found that being able to focus in on one plane was useful allowing them to go "from a macro view to a micro view". They stated that its important to see the big picture of the game as well as allow the user to zoom in on the particular section they need to focus on (it is inferred here that the stakeholder does not want user's to get overwhelmed by only having a macro view). The stakeholder also stated that they like the colours associated with the different planes shown in the example cubes. Finally, the stakeholder noted that the example images already appeared considerate of contrast, font, and colour for students with visual needs. In terms of additional visual cues, the stakeholder suggested hints when a user gets stuck on a certain step as well as some sort of progress indicator for how far the user has progressed through a task and round. The stakeholder also said that instant feedback is extremely important to ensure that bad habits are not reinforced.
+For survey question 4, Stakeholder B expressed that they liked the full 3D model for showing the game space. They also found that being able to focus in on one plane was useful, allowing them to go ``from a macro view to a micro view''. They stated that it's important to see the big picture of the game as well as allow the user to zoom in on the particular section they need to focus on (it is inferred here that the stakeholder does not want users to get overwhelmed by only having a macro view). The stakeholder also stated that they like the colours associated with the different planes shown in the example cubes. Finally, the stakeholder noted that the example images already appeared considerate of contrast, font, and colour for students with visual needs. In terms of additional visual cues, the stakeholder suggested hints when a user gets stuck on a certain step as well as some sort of progress indicator for how far the user has progressed through a task and round. The stakeholder also said that instant feedback is extremely important to ensure that bad habits are not reinforced.
 
-For survey question 5, Stakeholder B expressed satisfaction with the eight task round format, noting that it allows learners to be able to experience success at one level and then to challenge themselves with the difficulty progression. The stakeholder stressed that it is very important the the first level / entry level is one that every person who tries the game can be successful at. This could be done through additional hints or an example they can follow along with. This ensures that the users don't get frustrated or disengage, while the later levels still ensure that more advanced users have ways to challenge themselves.
+For survey question 5, Stakeholder B expressed satisfaction with the eight-task round format, noting that it allows learners to be able to experience success at one level and then to challenge themselves with the difficulty progression. The stakeholder stressed that it is very important that the first level / entry level is one that every person who tries the game can be successful at. This could be done through additional hints or an example they can follow along with. This ensures that the users don't get frustrated or disengage, while the later levels still ensure that more advanced users have ways to challenge themselves.
 
-For survey question 6, Stakeholder B mentioned stickers or virtual rewards as ways to keep a user coming back for more gameplay sessions. They also expressed interest in our leaderboard idea and the idea of players being able to see how they are doing in relation to others. The stakeholder also mentioned a daily challenge or weekly challenge that users could work towards. The stakeholder also mentioned using sound cues to reinforce correct and incorrect actions, or even to indicate that the player is missing something before moving on (seperate from being correct or incorrect). They also stated that graphics will be important for user engagement.
+For survey question 6, Stakeholder B mentioned stickers or virtual rewards as ways to keep a user coming back for more gameplay sessions. They also expressed interest in our leaderboard idea and the idea of players being able to see how they are doing in relation to others. The stakeholder also mentioned a daily challenge or weekly challenge that users could work towards. The stakeholder also mentioned using sound cues to reinforce correct and incorrect actions, or even to indicate that the player is missing something before moving on (separate from being correct or incorrect). They also stated that graphics will be important for user engagement.
 
-For survey question 7, further reiterated that a sense of compitition through the leaderboards and daily rounds will help to improve user engagement. They mentioned that this can be done in two ways and that both are important. First, individual leaderboard / progress tracking. The stakeholder stated that this could also be useful in an educational setting where teachers can monitor a students progress. Second, the leaderboard that shows how a user is doing in relation to others. The stakeholder said that it could be useful to have both global leaderboards, but also potentially classroom leaderboards (this is also a privacy point to ensure student names / usernames are not public). The stakeholder stated that useful statistics for players could be how long a student has played the game, how many attempts and how many levels, what their progress is in terms of skill (what difficulty can they get to), hints used, and did their progress take place in one session or multiple sessions. For other features, the stakeholder stressed accessibility features like text to speech, assistive features through Microsoft or Google, and speech or written description to game actions.
+For survey question 7, Stakeholder B further reiterated that a sense of competition through the leaderboards and daily rounds will help to improve user engagement. They mentioned that this can be done in two ways and that both are important. First, individual leaderboard / progress tracking. The stakeholder stated that this could also be useful in an educational setting where teachers can monitor a student's progress. Second, the leaderboard that shows how a user is doing in relation to others. The stakeholder said that it could be useful to have both global leaderboards, but also potentially classroom leaderboards (this is also a privacy point to ensure student names / usernames are not public). The stakeholder stated that useful statistics for players could be how long a student has played the game, how many attempts and how many levels, what their progress is in terms of skill (what difficulty can they get to), hints used, and did their progress take place in one session or multiple sessions. For other features, the stakeholder stressed accessibility features like text to speech, assistive features through Microsoft or Google, and speech or written description to game actions.
 
-For survey question 8, the stakeholder stated that it is important for students to always have a next level to work towards. Therefore, these additional number bases and cube orders will be useful for more advanced students so that they do not become bored and disengaged. The stakeholder related this idea to grade 9 math and a "destreamed classroom space" (students of all skill levels are studying a common grade 9 program with the goal of providing equitable access to grade 10 courses). In terms of how to implement these additional features, the stakeholder suggested either allowing students to enter at a chosen challenge level or requiring them to complete earlier levels first, ideally giving students the choice between the two.
+For survey question 8, the stakeholder stated that it is important for students to always have a next level to work towards. Therefore, these additional number bases and cube orders will be useful for more advanced students so that they do not become bored and disengaged. The stakeholder related this idea to grade 9 math and a ``destreamed classroom space'' (students of all skill levels are studying a common grade 9 program with the goal of providing equitable access to grade 10 courses). In terms of how to implement these additional features, the stakeholder suggested either allowing students to enter at a chosen challenge level or requiring them to complete earlier levels first, ideally giving students the choice between the two.
 
 For survey question 9, the stakeholder stressed again ensuring accessibility for the game.
 
-For survey question 10, Stakeholder B a potential roadblock of ensuring the game is compatible with platforms that the school is using. They stated that their board uses a Microsoft platform and other school boards use Google platforms. Furthermore, the devices students have access to differ. For example, Stakeholder B's students have access to both iPads and laptops. The stakeholder also mentioned that cost of the platform could be a barrier for users; they stressed that the application being free would be very beneficial, noting that schools already make use of free math resources (e.g., from the University of Waterloo). The stakeholder also specified that they currently do not do any alternative number base arithmetic in their schools. Therefore, any level of education on this front would only be a positive for students.
+For survey question 10, Stakeholder B identified a potential roadblock of ensuring the game is compatible with platforms that the school is using. They stated that their board uses a Microsoft platform and other school boards use Google platforms. Furthermore, the devices students have access to differ. For example, Stakeholder B's students have access to both iPads and laptops. The stakeholder also mentioned that cost of the platform could be a barrier for users; they stressed that the application being free would be very beneficial, noting that schools already make use of free math resources (e.g., from the University of Waterloo). The stakeholder also specified that they currently do not do any alternative number base arithmetic in their schools. Therefore, any level of education on this front would only be a positive for students.
 
 The empathy map for this interview is shown in Table~\ref{tab:StakeBEmpathyMap}.
 
@@ -340,9 +376,9 @@ Before the survey questions, User A asked about the number of possible arrangeme
 
 For survey question 1, User A expressed interest in the game concept, comparing the game to Sudoku. They found the idea of using the octal numbering system interesting. The potential user said that it looks to be applicable to experienced mathematical users as well as users with less mathematics knowledge. User A explained that they see value for both learning and recreational use. They expressed that they think the game would be fun as a numbers person themselves.
 
-For survey question 2, User A specified that they thought the teaching aspect of this game goes beyond octal arithmetic; they believed that it can help users to understand the number system as a whole as well as geometry. User A also expressed that the application should have various supports to make it easy for students to learn the basics of octal arithmetic in order to play the game, since only a small subset of teachers will understand octal. They also said that the visual aspect will be a huge impact on the educational aspect (making sure it is intuitive). They also mentioned including some sort of octal calculator to potentially aid users who are still learning the basics, but still want to play the game itself.
+For survey question 2, User A specified that they thought the teaching aspect of this game goes beyond octal arithmetic; they believed that it can help users to understand the number system as a whole as well as geometry. User A also expressed that the application should have various supports to make it easy for students to learn the basics of octal arithmetic in order to play the game, since only a small subset of teachers will understand octal. They also said that the visual aspect will have a huge impact on the educational aspect (making sure it is intuitive). They also mentioned including some sort of octal calculator to potentially aid users who are still learning the basics, but still want to play the game itself.
 
-For survey question 3, User A noted that a stepwise approach to teaching users about the game would be beneficial. Furthermore, they said that starting with a signle plane or square in 2D could be useful to introduce the users to the concept so that they don't get overwhelmed. User A also stated that there should be multiple forms of media to teach the users (user manual, interactive tutorial, video). They again brought up the concept of segmenting the cube to start so new players do not get confused.
+For survey question 3, User A noted that a stepwise approach to teaching users about the game would be beneficial. Furthermore, they said that starting with a single plane or square in 2D could be useful to introduce the users to the concept so that they don't get overwhelmed. User A also stated that there should be multiple forms of media to teach the users (user manual, interactive tutorial, video). They again brought up the concept of segmenting the cube to start so new players do not get confused.
 
 For survey question 4, User A mentioned colouring the cubes to focus the user on a specific plane or area of the solution, allowing the user to zoom in and out, labels for the rows/columns. User A mentioned that there should be a combination of macro and micro views as well to allow users to segment and break out layers, columns, and diagonals (including broken diagonals). They again brought up the idea of an in-app octal calculator and allowing users to visualize sums of selected cubes or lines in real-time.
 
@@ -350,13 +386,13 @@ For survey question 5, User A expressed satisfaction with the progressive challe
 
 For survey question 6, User A said that breaking the tasks into reasonable chunks, save points and natural places to pause the game, reward systems, progress indicators, and clear indicators of next steps are all methods to help keep users engaged for multiple play sessions. User A also noted that the methods may change depending on what demographic the game is trying to target.
 
-For survey question 7, User A noted that ranking the leaderboards based on time or number of mistakes are reasonable measures. They added that the leaderboards could be tailored to focus on a specifc aspect of the game play that the person is most interested in (e.g., accuracy for students and speed for more experienced users). User A mentioned using both global leaderboards as well as classroom leaderboards or friend leaderboards. Other statistics for ranking User A mentioned were attempts, attempts vs. success (success rate), average time or accuracy, overall best score, cumulative score over all play time, and cumulative time spent playing.
+For survey question 7, User A noted that time and number of mistakes are reasonable measures for ranking the leaderboards. They added that the leaderboards could be tailored to focus on a specific aspect of the game play that the person is most interested in (e.g., accuracy for students and speed for more experienced users). User A mentioned using both global leaderboards as well as classroom leaderboards or friend leaderboards. Other statistics for ranking User A mentioned were attempts, attempts vs. success (success rate), average time or accuracy, overall best score, cumulative score over all play time, and cumulative time spent playing.
 
 For survey question 8, User A noted that they did not think expanding the game to other number bases and cube orders would be confusing for users. They noted that it could even be useful to start at a smaller dimensionality. User A stated that introducing alternative number bases and cube orders brings more longevity to the game. They mentioned that these different ways of playing would be fine as simply alternate game modes, but it could also be a progression where you have to unlock more difficult game modes through completing the easier ones.
 
-For survey question 9, User A reiterated the importance of gameplay and its accessibility to new learners in terms of usability and intuitiveness. Secondly, User A mentioned that for the educational side, the application must have materials so that users can learm how to play the game and understand the tasks. User A mentioned doing this through hints, additional computational capabilities (e.g., octal calculator), or something that allows users to set up and work through algebraic equations. Finally, User A stressed that the application should still not be too complex; the application shouldn't have so many features that it becomes overwhelming.
+For survey question 9, User A reiterated the importance of gameplay and its accessibility to new learners in terms of usability and intuitiveness. Secondly, User A mentioned that for the educational side, the application must have materials so that users can learn how to play the game and understand the tasks. User A mentioned doing this through hints, additional computational capabilities (e.g., octal calculator), or something that allows users to set up and work through algebraic equations. Finally, User A stressed that the application should still not be too complex; the application shouldn't have so many features that it becomes overwhelming.
 
-For survey question 10, User A noted that a big challenge for users could be the visualization aspect, noting that allowiing users ample navigation (e.g., zooming in/out, manipulating the cube, selecting slices/columns/rows/diagonals) will mitigate this. User A noted that even if the game does not have any specifc educational help, users could still use outside resources, but it may be cumbersome for them. User A also noted that users may have difficulty leaving and coming back to a task, so there must be clear instructions for what the users next steps are. User A also mentioned that the initial learning curve for the alternative number base may be steep. They also mentioned that this game could help users more generally understand where the base 10 system comes from and understanding the fundementals of arithemtic.
+For survey question 10, User A noted that a big challenge for users could be the visualization aspect, noting that allowing users ample navigation (e.g., zooming in/out, manipulating the cube, selecting slices/columns/rows/diagonals) will mitigate this. User A noted that even if the game does not have any specific educational help, users could still use outside resources, but it may be cumbersome for them. User A also noted that users may have difficulty leaving and coming back to a task, so there must be clear instructions for what the user's next steps are. User A also mentioned that the initial learning curve for the alternative number base may be steep. They also mentioned that this game could help users more generally understand where the base 10 system comes from and understand the fundamentals of arithmetic.
 
 The empathy map for this interview is shown in Table~\ref{tab:UserAEmpathyMap}.
 
@@ -375,7 +411,7 @@ The empathy map for this interview is shown in Table~\ref{tab:UserAEmpathyMap}.
 \endlastfoot
 Say &
 \begin{empathylist}
-  \item The game is interesting and similar to Sudoku, but octal adds an extra level of challenge; as a "numbers person", they would find it fun
+  \item The game is interesting and similar to Sudoku, but octal adds an extra level of challenge; as a ``numbers person'', they would find it fun
   \item The game's educational value goes beyond octal arithmetic to place value, algebra, and geometry
   \item Only a small subset of high school teachers will understand octal, so the game must include its own learning supports
   \item Suggested an in-game octal calculator and real-time sums of selected voxels/lines so players do not need to leave the game when still learning
@@ -384,7 +420,7 @@ Say &
   \item Viewing an 8x8x8 cube will be daunting; suggested colouring, zooming, labelling lines, and isolating layers, rows, columns, and diagonals (including broken diagonals)
   \item Eight tasks per round is a good amount: enough substance without being overwhelming
   \item Leaderboards should be flexible: tailored rankings (e.g., accuracy vs. speed) and global, classroom, and friend leaderboards
-  \item Other number bases and cube orders would give the game longevity, avoiding the repetitiveness
+  \item Other number bases and cube orders would give the game longevity, avoiding the repetitiveness some people find in Sudoku
   \item Find balance between the number of additional features and the added confusion extra features will bring
   \item Visualization and navigation will be the biggest challenge for users
 \end{empathylist} \\
@@ -392,7 +428,7 @@ Say &
 Think &
 \begin{empathylist}
   \item Initially understood the game as solving the entire 512-voxel cube (e.g., asked about the number of possible arrangements, worried that completing 8 voxels out of 512 would not feel like progress, and suggested save points), suggesting the introductory explanation did not make clear that a round consists of eight self-contained tasks
-  \item Was unsure of the game's target audience (asked whether it was aimed at high school or university, and what leaderboards would rank on), so frequently qualified answers with "it depends on the demographic"
+  \item Was unsure of the game's target audience (asked whether it was aimed at high school or university, and what leaderboards would rank on), so frequently qualified answers with ``it depends on the demographic''
   \item Initially interpreted the question about challenges as a technical one (rendering cost, running on phones), indicating a software/engineering perspective
   \item Understands the game primarily through comparison to Sudoku
   \item Believes users with programming or computing backgrounds will have less trouble with alternative number bases
@@ -444,21 +480,21 @@ For survey question 1, User B expressed that they see value in this game from an
 
 For survey question 2, User B mentioned that difficulty progression is a useful teaching skill, starting with simple tasks and moving on from there.
 
-For survey question 3, User B said that they thought an interactive tutorial would be the best option because they can get distracted easily, especially when simply reading something. They said that the interactive tutorial would given them a chance to be more engaged in the learning process.
+For survey question 3, User B said that they thought an interactive tutorial would be the best option because they can get distracted easily, especially when simply reading something. They said that the interactive tutorial would give them a chance to be more engaged in the learning process.
 
-For survey question 4, User B stated that they would prefer a fully navigable 3D space over a fixed 2D space so that they could look ahead and understand the problem space for themselves. User B also mentioned progress bars / indicators as well as indicators of next steps and/or hints as visual cues they would like to see in the game.
+For survey question 4, User B stated that they would prefer a fully navigable 3D space over fixed view angles so that they could look ahead and understand the problem space for themselves. User B also mentioned progress bars / indicators as well as indicators of next steps and/or hints as visual cues they would like to see in the game.
 
-For survey question 5, User B said they liked the idea of the round format, but they also mentioned another method; rather than linearly moving through the tasks, there could be an option to choose a specifc task or a mode where you could go head-to-head against another player.
+For survey question 5, User B said they liked the idea of the round format, but they also mentioned another method: rather than linearly moving through the tasks, there could be an option to choose a specific task or a mode where you could go head-to-head against another player.
 
-For survey question 6, User B mentioned that most traditional games have stories to follow, but that they think it would not be applicable here. Instead, User B mentioned rewards-based systems where the reward size is proportional to the difficulty. User B also mentioned a game mode that would allow them to play alongside friends / other players.
+For survey question 6, User B mentioned that most traditional games have stories to follow, but that they think it would not be applicable here. Instead, User B mentioned rewards-based systems where rewards become bigger or more desirable as the user progresses. User B also mentioned a game mode that would allow them to play alongside friends / other players.
 
-For survey question 7, User B expressed interest in the competitive leaderboards and daily challenges. They said that people tend to be drawn to getting a high score. Specifically, User B mentioned having a display for the best players in the world so that less experienced players have something to work towards. For ranking users, User B mentioned splitting leaderboards by different game modes or even country. In terms of statistics, User B mentioned that penalizing for mistakes rather than praising for achievements would decrease engagement. They mentioned that they would like it to be based off of maximum points rather than a negative attribute like number of mistakes.
+For survey question 7, User B expressed interest in the competitive leaderboards and daily challenges. They said that people tend to be drawn to getting a high score. Specifically, User B mentioned having a display for the best players in the world so that less experienced players have something to work towards. For ranking users, User B mentioned splitting leaderboards by different game modes or even country. In terms of statistics, User B mentioned that penalizing for mistakes or time taken rather than praising for achievements would decrease engagement, especially for new players. They mentioned that they would like it to be based off of maximum points rather than a negative attribute like number of mistakes.
 
-For survey question 8, User B said that they liked the idea of different number bases and cube orders, noting that some sort of progression to get to more difficult cubes / number bases (e.g., unlockable maps or levels for the game). They reiterated the idea of different leaderboards for different game modes.
+For survey question 8, User B said that they liked the idea of different number bases and cube orders, noting that there should be some sort of progression to reach more difficult cubes / number bases (e.g., unlockable maps or levels for the game). They reiterated the idea of different leaderboards for different game modes.
 
 For survey question 9, User B mentioned a head-to-head game mode, but warned that the skill matching between opponents should be fair to ensure that players do not get discouraged from losing to someone much more experienced than them. They also mentioned a team vs. team mode. User B also reiterated that this idea of discouragement does not apply to seeing high scores on leaderboards, which User B thought could actually motivate players.
 
-For survey question 10, User B reiterated that the game should ensure to include tools that new players can use to lessen the learning curve. Specifically, User B mentioned that there should be different tutorials for different cube orders and number bases. However, they made clear that these additional game modes will still be necessary to include so that the game does not get dull/boring.
+For survey question 10, User B reiterated that the game should include tools that new players can use to lessen the learning curve. Specifically, User B mentioned that there should be different tutorials for different cube orders and number bases. They also warned that a steep learning curve followed by the game becoming dull once mastered could cause players to burn out.
 
 The empathy map for this interview is shown in Table~\ref{tab:UserBEmpathyMap}.
 
@@ -477,7 +513,7 @@ The empathy map for this interview is shown in Table~\ref{tab:UserBEmpathyMap}.
 \endlastfoot
 Say &
 \begin{empathylist}
-  \item The game seems more geared towards teaching octal arithmetic, but could be fun if given "the proper stage"
+  \item The game seems more geared towards teaching octal arithmetic, but could be fun if given ``the proper stage''
   \item A rewards-based system or leaderboards where players compare scores would make it a game they would personally play and enjoy
   \item Tasks should start simple and get harder as players improve at octal arithmetic
   \item An interactive tutorial would be best, since reading a document or watching someone else play is less engaging
@@ -488,6 +524,7 @@ Say &
   \item Leaderboards should display the top players and be split by game mode and potentially by country, as well as globally
   \item Scoring should reward points gained rather than penalize mistakes or time taken, especially for newer players
   \item Other number bases and cube orders could be unlockable maps or levels, each with its own leaderboard and tutorial
+  \item Suggested a cooperative mode to play alongside friends
   \item Head-to-head or team modes should match players of similar skill levels
 \end{empathylist} \\
 \midrule
@@ -526,15 +563,271 @@ Key Takeaways:
   \item Offer a fully navigable 3D space so players can look ahead and understand the problem space themselves
   \item Include progress bars/indicators, indicators of next steps, and hints as visual cues
   \item Consider letting players choose a specific task instead of always moving through a round linearly
-  \item Use a rewards-based system where the size of the reward is proportional to the difficulty of the task
+  \item Use a rewards-based system where rewards become bigger or more desirable as the player progresses
   \item Score players positively (e.g., points earned) rather than penalizing them (e.g., number of mistakes)
   \item Display the top players globally so less experienced players have something to work towards, and split leaderboards by game mode and potentially region
-  \item Make other number bases and cube orders unlockable through progression (e.g., unlockable levels/maps) so the game does not become dull
+  \item Make other number bases and cube orders unlockable through progression (e.g., unlockable levels/maps) so the game does not become dull, and keep later levels challenging to avoid burnout
   \item Explore multiplayer modes (cooperative, head-to-head, team vs. team), with fair skill-based matchmaking so players are not discouraged
 \end{itemize}
 
-\subsection{User E}
+\subsection{User C}
 
+For survey question 1, User C expressed interest in the concept, particularly
+the problem-solving aspect of the game. They compared the experience to other
+puzzle games, such as Sudoku and crosswords, and believed that the concept
+could be an enjoyable experience if implemented correctly with proper instructional design.
+
+For survey question 2, User C believed that the game could be an effective
+learning tool for introducing octal arithmetic. Although they were unfamiliar
+with the number system, they felt that players would gradually learn how to
+use it through completing the game's tasks. They also noted that a game could
+be an effective way to introduce a relatively unfamiliar mathematical topic.
+
+For survey question 3, User C suggested that an interactive, hands-on tutorial
+would be preferable to relying on a traditional user manual. They believed
+that the early tasks could introduce the concepts over time, provided that
+they were simple enough to act in place of a tutorial. They also recommended keeping
+written explanations relatively short, and supplementing them with visual examples where appropriate.
+
+For survey question 4, User C supported having a 2D display alongside the
+3D cube visualization. They believed it would work well to indicate the currently selected slice or
+plane, potentially in a corner of the screen. This should help players maintain their understanding 
+of their position while interacting with the 3D visualization.
+
+For survey question 5, User C did not consider the current eight-task format
+to be a problem. However, they suggested that additional tasks could be
+introduced if they offered new challenges or built upon concepts introduced
+earlier. They felt that increasing the difficulty of existing
+mechanics could provide good variety without necessarily changing the
+fundamental gameplay.
+
+For survey question 6, User C believed that the educational aspect of the game,
+particularly its use of octal, would be a strong reason for players to return.
+They found the unfamiliar number system interesting and felt that it gave the
+game a distinctive quality beyond simply being another puzzle game.
+
+For survey question 7, User C was less interested in expanding the game to
+decimal, as they felt that the unfamiliarity of octal was an important part 
+of what made the game interesting. However, they acknowledged that other number 
+systems could provide opportunities for additional mechanics that could introduce
+different challenges.
+
+For survey question 8, User C supported the idea of a daily challenge where
+players would work with the same cube and tasks. They believed this would
+provide a good reason for players to return regularly. However, they raised
+concerns about the time required to complete the daily challenge, 
+especially for less experienced players.
+
+For survey question 9, User C did not identify any additional features beyond
+those already discussed. They felt that the existing concept was interesting
+and that the daily challenge and educational aspects provided sufficient
+motivation to engage with the game.
+
+For survey question 10, User C identified the tutorial and learning experience
+as the most significant potential challenge. They emphasized the importance
+of finding a balance between providing enough information for players to
+understand the concepts without overwhelming them with potentially unfamiliar knowledge. 
+
+The empathy map for this interview is shown in Table~\ref{tab:UserCEmpathyMap}.
+
+\begin{tabularx}{\textwidth}{l Y}
+\caption{User C Empathy Map} \label{tab:UserCEmpathyMap}\\
+\toprule
+\textbf{Quadrant} & \textbf{Observations}\\
+\midrule
+\endfirsthead
+\multicolumn{2}{l}{\small\textit{Table~\ref{tab:UserCEmpathyMap} continued}}\\
+\toprule
+\textbf{Quadrant} & \textbf{Observations}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Say &
+\begin{empathylist}
+  \item The problem-solving aspect of the game sounds interesting and enjoyable.
+  \item An interactive tutorial would be preferable to relying entirely on a user manual.
+  \item A supplemental 2D display could help players understand their position within the 3D cube.
+  \item The octal number system is an important part of what makes the game interesting.
+  \item The daily challenge should avoid requiring players to spend too much time completing it.
+\end{empathylist} \\
+\midrule
+Think &
+\begin{empathylist}
+  \item The game could introduce players to an unfamiliar number system through practical problem-solving.
+  \item Early tasks could serve as a tutorial if the concepts are introduced gradually.
+  \item Additional tasks could provide more variety by building upon existing mechanics.
+  \item The unfamiliarity of octal gives the game a distinctive quality that may be lost with more familiar number systems.
+  \item The tutorial must balance providing guidance without overwhelming players.
+\end{empathylist} \\
+\midrule
+Do &
+\begin{empathylist}
+  \item Compared the game concept to familiar puzzle games such as Sudoku and crosswords.
+  \item Asked clarifying questions about the cube, its visualization, and the daily challenge.
+  \item Considered how a supplemental 2D display could help players navigate the 3D cube.
+  \item Suggested alternative daily challenge formats, including timed challenges and progression-based scoring.
+\end{empathylist}\\
+\midrule
+Feel &
+\begin{empathylist}
+  \item Interested in the problem-solving and puzzle aspects of the game.
+  \item Curious about the unfamiliar octal number system.
+  \item Positive about the educational potential of the game.
+  \item Interested in returning to the game to practice and improve their understanding.
+  \item Potentially discouraged if the tutorial is confusing, overly lengthy, or too restrictive.
+\end{empathylist} \\
+\end{tabularx}
+
+Key Takeaways:
+
+\begin{itemize}
+  \item The educational aspect of the game is an important source of
+  engagement. User C was particularly interested in learning and practicing
+  octal arithmetic through gameplay, suggesting that the educational
+  component should remain central to the game.
+
+  \item The tutorial should use a gradual, interactive approach rather than
+  relying on lengthy written explanations. Early tasks should give
+  short explanations and visual examples when necessary.
+
+  \item The 3D visuals should be supplemented with a 2D reference display.
+  This could indicate the player's current slice or plane and use labels to
+  help players maintain their orientation while interacting with the 3D visuals.
+
+  \item The existing eight-task structure provides a reasonable progression,
+  but additional tasks could be considered if they introduce meaningful
+  variations or build upon previously learned mechanics.
+
+  \item The use of octal is a distinguishing feature of the game and should
+  be preserved as a central part of its identity. Expanding to more familiar
+  number systems may be less engaging unless additional mechanics are
+  introduced.
+
+  \item A daily challenge could encourage players to return regularly.
+  However, its format should account for differences in player experience
+  and the time required to complete tasks. A timed mode that rewards
+  completing as many tasks as possible within a set period could provide
+  a more accessible alternative to requiring completion of the entire
+  challenge.
+\end{itemize}
+
+\subsection{User D}
+
+For survey question 1, User D expressed interest in the game concept, comparing it to a 3D Sudoku. They noted their enjoyment
+of good puzzles and found the idea of working in an alternative number base would be an interesting layer of challenge due to limited familiarity
+with number bases outside of decimal. They found the overall game idea as something that could be potentially fun.
+
+For survey question 2, User D expressed confidence that the game would be helpful in teaching octal arithmetic.
+Though they lacked prior experience they expressed that constant engagement with the base 8 operations would help improve intuitive understanding of the base.
+User D suggested expanding the operations to include multiplication and division operation along with the task changes to make the game more engaging.
+
+For question 3, User D suggested a stepwise approach to teaching users. They propose starting with a smaller cube to understand the cubic geometry before transitioning to an 8x8x8 cube.
+They expressed some worry over how much information the player would have to keep track of at any moment considering the 512 voxels.
+
+For survey question 4, User D referenced their experience with MRI scans to suggest an expansive fixed view that would use multiple panes each representing an axis with axes colour coded for
+clarity. They suggested against a free rotation mode expressing concern that it would be overwhelming for a player.
+
+For question 5, User D did not express any concerns with the current proposed round structure.
+
+For survey question 6, User D suggested a focus on the social aspects to motivate continuous play.
+They mentioned that what usually keeps them engaged in a game is knowing that other people are playing and being able to
+share strategies with friends. They also mentioned that statistics tracking, such as efficiency and speed, would appeal to
+recreational math enthusiasts as through the ability to feel improvement over time.
+
+For question 7, User D was very interested in the inclusion of a competitive leaderboard feature, stating that competing amongst friends would improve enjoyment.
+They suggested including time, score, and error rate statistics for comparing users on the leaderboard. They also suggested differentiating between puzzles you solve quickly and
+those you solve perfectly by varying the difficulty of the daily tasks each week. Another suggestion was using a percentile ranking system in combination with the leaderboard to allow users who
+didn't make the leaderboard to compare amongst themselves.
+
+For survey question 8, the user was interested in the expansion into other bases.
+They mentioned that different sizes could serve different purposes with some focusing on fulfillment through complexity and others speed. They also
+suggested that any player willing to take on larger cubes or other cubes will not be phased by the additional rules or constraints.
+
+For survey question 9 the user did not have additional features to suggest but expressed interest in playing the game when it came out with the intention of speedrunning some rounds.
+
+For survey question 10, User D identified the visualization and display of information as the primary challenge for the game, noting that the success of the game
+will be highly dependent on users being able to understand and navigate the 3D space. They considered browser based play appropriate as the criticality of information communication would deter them from playing on mobile.
+
+The empathy map for this interview is shown in Table~\ref{tab:UserDEmpathyMap}.
+
+\begin{tabularx}{\textwidth}{l Y}
+\caption{User D Empathy Map} \label{tab:UserDEmpathyMap}\\
+\toprule
+\textbf{Quadrant} & \textbf{Observations}\\
+\midrule
+\endfirsthead
+\multicolumn{2}{l}{\small\textit{Table~\ref{tab:UserDEmpathyMap} continued}}\\
+\toprule
+\textbf{Quadrant} & \textbf{Observations}\\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Say &
+\begin{empathylist}
+  \item The game sounds interesting and fun; it is like 3D Sudoku
+  \item Has never done math outside of base 10 and is curious about how to wrap their head around base 8
+  \item A game requiring constant engagement with base 8 would help players develop an intuitive understanding of the number system
+  \item Adding multiplication and division could help players develop more flexibility with the number base
+  \item Suggested starting with a smaller cube (e.g., 2x2x2) and a 2D magic square (e.g., 3x3) in a tutorial mode before progressing to the full 8x8x8 cube
+  \item Drew on MRI visualization experience to suggest a structured multi-pane view with colour-coded axes
+  \item What keeps them engaged is knowing other people are playing and being able to discuss solutions with friends
+  \item Statistics tracking (efficiency, accuracy) would appeal to recreational math enthusiasts
+  \item Suggested an error rate or "KDR" statistic to show accuracy
+  \item Suggested a percentile ranking system to show where players fall on a distribution curve
+  \item Different cube sizes could serve different purposes: smaller cubes for speed, larger cubes for complexity
+  \item Visualization and UI design will be the primary challenge for the game
+  \item Would not want to play this game on mobile; browser is appropriate
+\end{empathylist} \\
+\midrule
+Think &
+\begin{empathylist}
+  \item Views the game primarily through the lens of a puzzle enthusiast who enjoys social and competitive elements
+  \item Believes that social interaction and community are key motivators for continued engagement
+  \item Sees value in both the educational and recreational aspects of the game
+  \item Thinks that structured navigation (rather than free rotation) would be less overwhelming for users
+  \item Understands the challenge of visualizing complex 3D spaces from their experience with MRI software
+  \item Believes that players interested in advanced content (e.g., 16x16x16 cubes) will not be deterred by complexity
+\end{empathylist} \\
+\midrule
+Do &
+\begin{empathylist}
+  \item Plays puzzle games and enjoys discussing them with friends (e.g., crosswords)
+  \item Has experience with MRI visualization software and understands structured multi-pane viewing
+  \item Enjoys games with competitive and social elements
+  \item Would be interested in trying the game in beta and potentially speedrunning it
+  \item Uses statistics and performance metrics to track improvement
+\end{empathylist}\\
+\midrule
+Feel &
+\begin{empathylist}
+  \item Interested and engaged by the concept; curious about the base 8 aspect
+  \item Motivated by social interaction and friendly competition
+  \item Concerned that the visualization and UI could be overwhelming if not designed carefully
+  \item Values flexibility in game modes (speed vs. complexity) to cater to different player preferences
+  \item Would be frustrated by a confusing or overwhelming interface
+  \item Enthusiastic about the potential for community engagement and competition
+\end{empathylist} \\
+\end{tabularx}
+
+Key Takeaways:
+
+\begin{itemize}
+\item Provide a stepwise tutorial that starts with a smaller cube (e.g., 2x2x2) and/or a 2D magic square (e.g., 3x3) before progressing to the full 8x8x8 cube
+\item Consider adding multiplication and division tasks (or varying operations between tasks) to help players develop flexibility with the number base
+\item Use a structured multi-pane visualization approach (inspired by MRI software) with colour-coded axes (X, Y, Z) rather than fully free-rotation
+\item Automatically calculate and display values as users progress, with correct answers revealing voxels and incorrect answers resulting in point deductions
+\item Incorporate social features that allow players to compare solutions and strategies with friends
+\item Include statistics tracking such as time, score, error rate/accuracy, and percentile ranking
+\item Consider a percentile ranking system to show players where they fall on a distribution curve, even if they are not in the top rankings
+\item Offer different cube sizes for different purposes: smaller cubes for speed-focused play and larger cubes for complexity-focused play
+\item Focus on UI and design to ensure that the complex 3D space and large number of values are communicated efficiently
+\item Keep the game browser-based; do not prioritize mobile compatibility
+\item Consider adding a speedrunning feature for players who enjoy time-based challenges
+\end{itemize}
+
+\subsection{User E}
 
 For question 1, User E doesn't seem to be interested in the game at all and struggles to find ways to make the game seem more interesting to his age demographic (high schooler plus early university). He does feel like doing an octal magic cube online instead of a base-10 magic square (shown to him as an example of the properties of a magic cube) doesn't really add anything interesting to the original magic square concept, but he was interested in the different strategies people can use to solve a paritially-filled cube (like how complements work). After learning about the strategies someone can use, he thought that it become repetitveness as he will need to follow the same steps all the time, compared to other daily games that have a sense of randomness to each daily challenge. The interviewer wasn't able to conince him that the game would be seen as anything other than practise for tests.
 
@@ -624,11 +917,11 @@ Key Takeaways:
   \item Not really interested in different number bases and cube sizes if it requires utilizing non-deterministic code.
 \end{itemize}
 
-\section*{Appendix - Interview Transcripts}
+\section{Interview Transcripts}
 
-This section includes the transcripts from the conducted interviews. Note that the raw transcripts are auto-generated so there may be some incorrect sentences throughout. Additionally, some sections of the transcript have been removed for anonymity reasons or because it is unrelated to the interview at hand.
+This section includes the transcripts from the conducted interviews. Note that the raw transcripts are auto-generated so there may be some incorrect sentences throughout. Additionally, some sections of the transcript have been removed for anonymity reasons or because they were unrelated to the interview at hand.
 
-\subsection*{Stakeholder A (Client)}
+\subsection{Stakeholder A (Client)}
 
 Okay.
 Yeah, okay, so go ahead. And so I've just been starting to work on some of the POC code.
@@ -806,13 +1099,6 @@ No, it's a bit, it's a bit difficult because...
 You gave us all the ideas in the 1st place, so you've already come up with the basis for them, I think. Yes, but that's only what interests me. Your task is obviously to go beyond that. Five different individuals may have different sense of ideas. Got it. But you also are intending to talk to other people, and I'm curious if they...
 And maybe if they know something of what you're doing, they'll come up with ideas. I'm not a video game expert at all. I have a friend who creates and watch and ask questions, but
 How this would fit into the world of people and different from me, I don't know if I can leave that most entirely. And you may come up with some really interesting things that way. Yeah. We have, I think, what, like five or six other people we're interviewing for it. So. Yeah, they have.
-Thank you.
-We'll explain it to them, I hope.
-All of them are for me, at least, are family and friends, so I'll force them to do it.
-Um, what that you're doing?
-Well...
-I think one of the people, I have different user groups, so I'm doing one who's like supposed to be looking at it from their perspective of like just someone who enjoys recreational mathematics. I know someone who's like a vice principal in the HWDSB school board, so I'm looking at it from like the education side there.
-And then similarly, I know someone who's in grade 12 right now. So I'm doing that from like the student or learner perspective.
 
 [Off-topic discussion]
 
@@ -838,7 +1124,7 @@ there. If you want to continue the line past the border where you are, you're mo
 But those are harder to visualize, yeah.
 OK, so that's it for the survey questions.
 
-\subsection*{Stakeholder B}
+\subsection{Stakeholder B}
 
 \noindent \textbf{Jacob Brodersen}   2:52
 Hello, how are you today?
@@ -1068,7 +1354,7 @@ Thank you, and thank you for the opportunity.
 \noindent \textbf{Jacob Brodersen}   29:22
 Okay, I'll talk to you later.
 
-\subsection*{User A}
+\subsection{User A}
 
 \noindent \textbf{Jacob Brodersen}   2:50
 Hi, how are you today?
@@ -1391,7 +1677,7 @@ See you.
 \noindent \textbf{Jacob Brodersen}   36:12
 Bye.
 
-\subsection*{User B}
+\subsection{User B}
 
 \noindent \textbf{Jacob Brodersen}   1:14
 Hello, how are you today?
@@ -1609,6 +1895,477 @@ No problem, thank you.
 
 \noindent \textbf{Jacob Brodersen}   24:16
 Okay, goodbye.
+
+\subsection{User C}
+
+So then we should now be recording. Alright. So to start, I'm just going to give a bit of an
+explanation as to what the actual project is and what we're planning on doing.
+So you have a bit of a ground to work off of when answering questions. So, we are planning on
+designing what's inevitably going to end up being a web-based game. So something that you can
+just go onto a browser and play without having to download anything yourself.
+
+So the idea behind it, it's based off of the mathematical properties of something called a magic
+cube, which is a bit of a complex system. But the most perfect magic cube, which is what we're
+going to be using, is where each voxel, so each line on any axis, the value is a distinct number
+from 1 to whatever n cubed. So however many, the thing is long, wide, tall, that cubed, because
+that's how many values there are.
+
+So every single point on the cube is a unique value. And every row, column, pillar, diagonals, and
+triagonals, so like going from one corner, like x, y, z, 0, 0, 0, to x, y, z, 8, 8, 8. They all sum to the
+same number. So the top row and column somewhere, even though everything is its own unique
+number, they all sum together to be the same number, which is the magic constant.
+
+That's why they're called magic cubes. In our game, we're going to be planning on using an order
+8 cube, so 8 by 8 by 8, which is the smallest found perfect magic cube. And for this, we're going
+to be using octal, which is a separate number base from decimal, which is what we normally use,
+where we go from 0 to 9, octal is 0 to 7, and then 8 is represented by 10, and so on and so forth.
+In this type of cube, every line sums to 4004, which is not technically 4004 in decimal, but that is
+how the number is represented in octal, half of which is 2002, 1001 being a quarter, so on and so
+forth. And so in this system, we're planning on making a puzzle-based game to keep with the 8
+theme, with octal and an 8 by 8 by 8 cube, 8 tasks with an increasing difficulty as we go through
+them that are based off of... So am I going to be tackling like... Sorry? Sorry about that. No, go
+ahead.
+
+Will I be tackling one face of the cube at a time and working my way through it, something like
+that? So it's actually going to be somewhat more simple than that. It's more just finding parts of
+these lines, diagonals, complements, things like that as you go through. So instead of actually
+having to build it up from scratch, because that is an incredibly arduous task and would take a
+very long amount of time for any player, it's more... So each task increases in difficulty.
+So the first task, the plan is to find the complement number. So you'll be given one of the lines of
+the cube that you are going to be told to work on, and it'll show you a particular number, let's say
+576, in one spot on that line. With the properties of a magic cube, the complement to that number
+is always going to be on that line.
+
+It's always going to be 4004 minus whatever that number is, because every line sums up to that
+4004. And it will be in a particular spot on that line based on how magic cubes function. So you'll
+be tasked to find where it should go and input the correct number.
+
+And as long as you do that, then you've passed the task and you move on to the next task, each
+of which is scored with a base value multiplied by the amount of time it took you to complete the
+task. And that's pretty much the base idea of the game, starting with the complement and then
+getting harder with having to complete half a line, and then a full line, and then having to
+complete a diagonal, and then a triagonal, and then broken diagonals, where instead of actually
+showing the full diagonal, it'll be partially on one plane, and it'll move on to other planes, so it's
+harder to visualize. But that is the base idea of what the game is.
+
+And I'm just going to be in this interview, or survey today, just asking a few questions about what
+you think of our current ideas, and I will try my best to explain anything that you would like
+throughout the process. I see, I see. So, so far, yeah, so that does sound, I think it sounds cool,
+personally.
+
+So, my question, I do have a question for you that, how approachable is it for someone who
+doesn't understand how magic cubes work? Will it be explained in the, will there be an
+explanation? Or is it pretty, like, self-explanatory whenever you get to doing it? I would say it's not
+the most self-explanatory thing, even us who have been working in mathematics courses for quite
+a few years now had to do a good bit of research to fully understand what is happening in these
+cubes. But the plan is with the game to have an interactive tutorial on how to complete these
+steps, so that you can go through and learn the properties and how to find them and identify them
+within the cube. I see, yes, so you will learn how to, how to approach them by, like, is your target
+audience for mathematicians or people that already understand it, or, like, you are trying to reach
+people that might not, if they're just curious about it, they should still be able to figure it out.
+
+Yeah, the initial target audience was for people who are already quite interested in mathematics,
+so even if they don't have a knowledge of magic cubes in particular, they'll have knowledge of
+similar systems. But we are trying to expand that to a broader audience by input, like having
+these tutorials or these hints that will pop up and help guide you through the process. Yeah, that
+does sound good.
+
+You said it was a puzzle game? Yeah, so I'd say the closest thing I can compare it to is
+something like Sudoku, not that you're doing the same things, but it's just you're playing against
+yourself, and we will get into this a little bit later, but we do plan to integrate an account and, like,
+daily challenges where everybody gets the same cube and the same challenges, so then it's
+really just a time trial of who can understand and complete all of the tasks the fastest. Yeah, it's
+reminded me of, Sudoku is a good one. It's also reminded me of Crossword, I guess, as well, but
+that is a bit different, but in a similar idea where you'd use your answers to try to find the next
+ones.
+
+Do I have the concept, like, in the right area? That's what it sounds like to me, and I think, yeah,
+so I haven't heard about one of these cubes before, but I'd be interested to try to solve them. I
+think you've sold it to me here today. That sounds good.
+
+So, to get on to the actual survey questions, which feel free to ask any follow-ups, I think the first
+one we've kind of already talked about here in this little conversation, the first question is just
+what's your first impression of the concept and what you think of it, but I think we've kind of
+already covered that, so I don't think there's any issues there. Because I like the problem-solving
+stuff. Problem-solving sounds like, yeah, just puzzles.
+
+It's interesting to me, so whatever it is, although I don't have a, I have a visual, you know, I'm just
+imagining the cube. I'm not really sure what else it would be, but, yeah, you know. Yeah.
+
+Would you say there was more, anything more that you'd like me to... Yeah, not really on the
+concept side of things, because I think we've kind of covered that and got your thoughts, but the
+next question is just do you think, so part of the game will be, for example, with complements, the
+solution to that answer will be 4004 in octal minus some value also in octal, so it will help, or
+we're hoping it will help teach like operations in this separate number base, because, for
+example, 10 minus 7 in octal is 1, whereas you'd expect it to be 3 in decimal, because 10 is what,
+8 is in decimal? Yeah, I see. So it would be a similar system in our game, where 4004 minus
+whatever won't be what it would in decimal, it'll be a different system that you'll have to learn how
+to manipulate and use. Yeah, exactly.
+
+So what are your thoughts on, like do you think that's a good way to try and get people into that
+and get them educated on it, like do you think it's a good starting point? Into the 8 number
+system, the octal system? Yeah. Yeah, I'm not familiar with it myself at all, but I'm trying to
+imagine playing through that. If I was, you know, so a web browser game, there are things that
+you come across, and if I was interested in it, and I clicked on it, learned the tutorial, I'm sure that
+after, if I continue to play it, I would learn about the 8 number system just because you'd have to,
+by the basis of the game.
+
+It'd be interesting because it's a bit of a play on numbers that people don't really normally have, I
+guess, because it's just like unfamiliar, and I don't know how else you would learn about, I don't
+know, I've never even really heard about this system, I'm assuming, so there's not really any
+other way, aside from a game, I think, to portray it best, so yeah, I do think that there is a good
+approach to it. Alright, let's get to here. So, to follow up on what you were mentioning.
+Did I get picked up? Oh, yeah, no, you're good. But I was just going to say, to follow up on what
+we were talking about with getting user groups that aren't already mathematicians, I was just
+hoping to get your thoughts on what do you think some of the best ways to teach and to help
+people understand the topics of the game and the concepts behind it are, what do you think
+would be a good way to get this tutorial across, do you think having a set of levels would be a
+better idea, or something similar to just a user's manual, or like somewhere in between? I'm trying
+to think about that. I think, yeah, I think of levels, I think it being interactable, it just depends,
+honestly.
+
+I think maybe you'd have to get hands-on with it to truly tell how, I guess, difficult it is to grasp,
+because sometimes, I think if it's not too, if it's one of those things where you can make the early
+levels easy enough that it could serve as its own tutorial as long as there was an explanation.
+Does that make sense? I think if that was the way it could go, unless it's too difficult for that, or
+too, I guess, like abstract for that, to where it would be hard for someone to, even if they read just
+a few lines, I think any more than if you have to write, let's say, if it's probably more than a
+paragraph or two that you'd have to write to explain it, then it might be best served as otherwise,
+but if you can condense it into two paragraphs, with maybe a visual picture as a pop-up when you
+first open it, and then have the start of the game be rather simple, to where you can just get a feel
+for it and it slowly introduces to you each section, I think that'd be the best way to do it, because it
+would serve as its own tutorial, and yeah, that's what I think about it. Alright, yeah.
+That is, I think, what our initial thoughts were, but I was just wondering what... Like any other
+ideas? Yeah. I like my idea too. I mean, that's a good thing.
+
+It means we're on the right track to what other people might agree with. So, this might be a little
+bit harder to truly get your opinion of, because you might not be able to visualize it all that well,
+but the next question is, what method or structure do you think would be the most effective to
+visualize the game space? Which is kind of hard, being that you might not truly know what we're
+trying to visualize in the first place, but the main idea behind the game is using these cubes, but
+more importantly than the cube itself is being able to access every plane of the cube, so being
+able to see every slice of it in every direction. So, our current plan for display is to have a full 3D
+cube on the screen that you can interact with, and then by choosing certain sections of it, you can
+kind of cut away at it.
+
+Become isolated. Yeah. That's our current plan, but do you think it would be a better idea to have
+a separate just 2D display that you can just, if you didn't enjoy the 3D visualization, you could just
+go to this 2D method and just look at a plane that way, or do you think that might be confusing to
+try and understand how the cube goes together if you can only see a 2D slice at a time? Yeah, I
+think that that would be confusing on its own, but however, for maybe in the same way as the 3D,
+if someone is to, not that I'd say they might disorient themselves with rotation, but it is possible, I
+think maybe like in the bottom right, maybe just a display, a 2D display of maybe like which slice
+you're at or something like that.
+
+Are they going to be like lettered, like the layers, so you know which layer you're on or anything
+like that? Or will it be kind of more when you see the 3D, you'll kind of just know where you are?
+Because I do think if you have a 2D display, maybe small, off to the side, kind of as like in one of
+the corners of the screen, so it's just there as almost like a map, and there's like letters
+corresponding to each slice of the cube, so that it's, you know, people then would know, okay,
+this is where I'm at, and yeah, so such. But I don't think that a 2D display on its own would be,
+necessarily would make it easier, but it's hard to say, of course. I think I do understand what
+you're guys can do.
+
+So that'd be my answer. Sounds good. So the next question that we've got for everybody is just
+what do you think of the current round format that we have, where we've got these eight rounds
+with each one becoming slightly more difficult as they go along, but every time that you play the
+game, it will be the same eight rounds, they will just happen with a different cube, so they'll have
+different numbers, so you'll have to be in a different part of the cube, and working with different
+numbers that you're adding and subtracting in this octal base, but it's still the same eight tasks
+every time, and it's just each time you're getting slightly more difficult as you go along the eight,
+so I was just wondering what you think of that as a concept, just in general.
+
+What are those tasks exactly? 
+
+So, yeah, I'm not, I don't have it pulled up right now what they
+exactly are, but I can give you the... Well, more so what I'm asking, I think this will be a better
+question. Okay. I'm more interested in, like, is there, do you think there's ways that you could do
+more than eight, or is that about how much it makes sense? I don't think it's a bad, I don't think it's
+bad necessarily, no, I don't, but if possible to do more than eight, maybe ones that are just not
+doable earlier on, but that might become doable, like pinpointing it between two of these ones,
+which might be harder to do beforehand, if you kind of get what I'm getting at.
+
+I think so. If those later, like, because I'm not sure, to be honest, it's not, I'm not sure without
+knowing exactly how it would play out, although it's reminded me similarly of, at its core, it's just
+game design where a lot of things will build off the same basis and get harder. A lot of puzzles, I
+think, do similar things, where you'll play and slowly it might become more confined, or the blocks
+might become harder to move around, but it usually doesn't change the concept of anything.
+It's all about the problem solving, so I don't think that, no, that that would be too redundant. It is
+hard to say that without playing it. Yeah, that is fair.
+
+A bit more on the game side than on the mathematics or the structure side of it. What are some
+features or formatting or whatever with the game that would entice you to continue playing it
+multiple times? Like, you've done it once, you've already kind of got the experience of going
+through the eight steps, what do you think we could add to make you come back again the next
+day or whatever else to try it again? I think the game, I think the concept recruits itself, because
+my main, I guess, brain stimulant aside from it being a puzzle game, which are always fun to
+enjoy, but I think the best offering from this game that it gives is that it does teach, I guess, and it
+works in its own number system, which is interesting in its own right. And I think that is not
+something I've seen elsewhere, so that'd be what, if I wanted to, you know, kind of just feel like I
+was working with numbers, but also a bit of an abstract feel.
+
+I think the fact that it's in octal is already what makes it what it is. Now, does this magic cube
+concept only work in the octal system? It doesn't work with tens or? No, it does also work in
+decimal and a few others, including, like, dozenal is another one that it can work in. And that is
+actually one of the upcoming questions, is if we get a good enough ground on this octal base, we
+are debating possibly also creating, like, a family of games or multiple rule sets within the game
+to also work for, like, a dozenal or a decimal system as well as this original octal one.
+
+So, being that we're kind of already there, I guess I will ask, what do you think of that? Do you
+think that's a good idea, like, trying to, it'll be a very similar game with similar tasks, but each task
+will have to function slightly differently because the arithmetic of addition and subtraction in these
+different number bases will function. Yeah, it's more traditional, or at least it is for decimal, since
+it's in same bases. But, I mean, honestly, no, I think that's less interesting just on its own,
+because it being bases out of eight is what's cool about that.
+
+I think if you work with decimals or other ways, which are more commonly used numbers, like
+number systems, I'm not sure what the other one that you said was, but decimals I'll just work
+with for now because they're everywhere. I think that maybe it'll be easier to come up with, to add
+something to it. I think if you're able to add something to it, to whatever that means, it'd have to
+be, you know, that's a creative idea that you have to come up with, that you always have to come
+up with on your own.
+
+But I think because something to kind of give it some spice on its own, I don't think that a decimal
+version of this game will be as interesting, because a lot of the interest for me is coming from just
+the abstractness of it. And decimals adding up in the same way that they would be might not be
+as interesting, but that's how I view it at first. However, because it's the same traditional numbers
+it's more used to, it might be easier to come up with equations or something that you could throw
+in the mix that'll help, that'll like, you know, basically add that flavor to it, if that makes sense.
+Yeah, I think it does. I think that makes sense. Yeah, I think maybe, so the other number base is
+decimal, which is the same as octal, but the other way, so it's 12, so you can count up to... Yeah,
+that would be interesting.
+
+I think that that would be interesting as well. That's good to know. For the same reasons.
+So, to come back on something I quickly mentioned earlier, we are planning on adding, like, a
+competitive aspect to the game, so... Like a speedrun type thing? In a way, but it's more, it'll be
+kind of like a wordle or whatever, where everybody, when they get on the game, will have the
+same exact cube, so all the numbers will be in the same place. I see, I see. So everybody will be
+working from the same starting point, so whoever is able to, it will end up being a speedrun of
+sorts, because whoever is able to finish it fastest will have the highest scores.
+The daily cube, as such. Yeah, that kind of idea. Yeah, I think that that's probably the best way to
+have people return to it.
+
+You were asking me that question, I didn't think of that, but that would definitely generate traffic. If
+it's interesting, and I learn how to, once I learn how to do it, that's the thing, I feel like you might
+have to learn it at first. It's more of a niche audience or something like wordle, but having it be like
+that, people that care about it will return to it, because daily games are everywhere.
+Krillian, if you've been keeping up with that, and the opposite to Krillian, and obviously wordle
+itself and everything is fine. People used to do Deadly Sudoku in the newspaper, so that's a
+similar audience for that, it would be similar. Although I don't know how long it would take to
+complete one, maybe a side would have to be, maybe you should just, I'm not too sure, actually.
+It's a good idea, I just don't know how long it would take to complete one, especially for someone
+that's not as experienced, maybe. But that's something that y'all would have to give thought to, if
+it's possible to do it in a smaller format, or maybe, you know what I mean? Because if you make it
+too easy, then the people that are good at it might not be as interested to necessarily run it
+through, day after day. Or maybe it could be like a levels thing, where you give them a timer, let's
+say.
+
+Maybe you give them three minutes, and you have the daily cube set up, and you can see how
+far, how many squares you can fill in. Because that way, you can keep difficulty as it goes later
+on. If you can beat it faster than three minutes, or five minutes, or however long you want to set
+the timer for, then that could be basically your competition aspect of it.
+
+But then also, it doesn't lock people into feeling like they've got to stay there for 15 minutes, or 20
+minutes, or however long that they would stay there for, or longer. Again, if those numbers sound
+already too small, then you know what I mean. But you get what I'm saying, basically.
+
+Yeah, that does make sense. That's some good input. You could have a score of levels, or a
+score of, like, oh, I got 20 today, or I got 10 today.
+
+All right, so I think we're mostly finished up now. The only questions I really have left are, after
+what we've talked about, outside of what I've spoken for features, like having those daily levels or
+whatever else, are there any additional features that you really think would be interesting to you
+in the game, outside of what it already encompasses? Or do you think it's kind of already got a
+good grip on what it's trying to do? No, nothing that scratches my head. Nothing that I can think
+of.
+
+What I just mentioned, I think, was what I have mentioned before is what has come to me. I can't
+really think of anything else, necessarily. Would you plan on doing this on your own, as this
+website on its own? Or will it be among websites on, like, will it be a Wordle.thing, so you'll search
+it up on its own URL, whatever the name of it would be, like magiccube.com? Or would it be
+something where you're going to find it on, like, CoolMavGames? I believe the current plan,
+because we are working under a supervisor, and he has mentioned that he plans to upload it to a
+website that these sorts of games are on.
+
+Yeah, so it will actually be online. But I don't think it will be a standalone website. It will just be an
+option among multiple different recreational mathematics games on a website that he's going to
+upload it to.
+
+I think that, at least, it's where it should be. It's in a place where it will, I guess, feel home, like feel
+like you'd go to that website to find it. So, yeah, that's good.
+That's good. But I have nothing else to add, I don't think. All right, and then just... That was cool,
+overall.
+
+That's my, I guess, you know, overarching take on it. It is interesting. I mean, yeah, that's good to
+hear.
+
+It's good to hear that it's... It's definitely good to hear that it's interesting to people that don't
+already have a ton of experience in this sort of thing. And then, yeah, just last question is just, are
+there any big challenges that you think would pop up in this? Is there any big issues that you
+think might turn you off the game when you're playing it if it were to occur? The way that you
+incorporate the learning and the tutorial, basically like what I was saying, it is easier said than
+done. That would probably be hard to do.
+
+You'd have to give that some good thought, definitely, because if you look at some of the games
+that, you know, outside of not just puzzle games, anything really, stuff where it doesn't convey its
+own concept well, it's hard for people to learn those things without having other people to play
+them with as well, because at least then you can work it out together. But a puzzle game where
+you're playing against yourself, if it's maybe too confusing, not enough information, or on the flip
+side, maybe too redundant, too much, not letting you kind of get your hands dirty, you have to
+find the sweet spot on that. And everybody will kind of range differently on how much they're
+willing to put up with, too.
+
+That's what's hard about it, too. So that's why I'm saying I think that that would be probably the
+hardest thing to do. As well as, I think, I don't think the daily format would be as hard to
+incorporate, but, yeah, I don't think the daily format would be as hard to incorporate, but there will
+probably be some challenges there, too, which is how you decide to basically present it, as I was
+saying before, either with timers or the difficulty of it to make it, you know what I mean?
+
+\subsection{User D}
+
+A testing, testing.
+A transcript working.
+Uh, so...
+Guess I can start by...
+explaining the game. So for the Magic A team, we're working on a web-based game that's based on the mathematical properties of magic cubes. So it's going to use a most perfect magic cube, which is a cube where adding up all the cells.
+in a row, diagonal, or triagonals, any solid pattern that you can find through the cube gives you the same number.
+It's going to be an 8 by 8 by 8 to form like the magic cube for an octo-based cube. So all the math is going to be done in base 8.
+Um...
+Yeah, the order 8 cube is the smallest order, most perfect magic cube. And in the context, we propose an octo-based puzzle solving game to provide a fun and engaging means of learning and utilizing the octo number base. In the game, you as a player would start with one voxel, so like a single cell.
+of the most perfect cube visible with all the others hidden, and then you must complete a set of eight tasks of increasing difficulty that will help you navigate through the cube. After you do each task, like as a confirmation, there will be an addition or subtraction question in base 8, and then completing it will complete like.
+That task and you can get your score for that.
+What are your first impressions of the game concept? Base 8 sounds, well, I've never really done math in any kind of way outside of base 10. Yeah, so very curious to know how.
+wrapping my head around that goes.
+That's like my first, the first thing that I'm playing around with in my brain is like, what does it look like to do math at a different base? Yeah. One of the reasons we developed it is because our supervisor noticed that in Canada they don't really teach a lot of base A.
+or number basis besides decimal. So just thought it would be something like fun to help learn a base or just interact with it.
+Um...
+Speaking of which, does it sound fun? Does it sound interesting? Yeah, it sounds interesting for sure. Ivan, I enjoy a good puzzle and it seems like a very...
+funky little puzzle. It's 3D Sudoku by the sounds of it, somewhat. Yeah, Sudoku was one of the inspirations for it. Nice. Okay. Yeah, and that's fun. So, yeah, very curious. Yeah. Do you think this game would be helpful in teaching users about...
+Octo arithmetic. Totally, yeah, I mean...
+I have no...
+Like background in, like, like I haven't really been exposed to any of that stuff, but I think a game like this where you're having to constantly...
+like just hammer yourself into that base 8 way of thinking. I feel like it would be really helpful to just kind of get your brain, like figure out what that mindset feels like. Yeah.
+So currently for some additional features we have like a tutorial or like a thought of adding more operations besides addition or subtraction. Do you think there any of those features would help in making it like more educational or do you have like a different view of what could make it educational?
+Um...
+Adding, adding other operations, would that mean that, like, instead of all the numbers adding to the same, like all the columns and rows adding to the same number, you'd like multiply? Yeah, so we'd throw in like some multiplication question, we'd have to like restructure some of the tasks.
+But it'd be restructured so that you do multiplication or division to get you like the different numbers. Or it might break down the like an addition problem into a multiplication problem if it's like a certain number of additions. Yeah.
+Yeah, I think you can maybe.
+Something to like iterate on to like create more versions of the puzzle is like.
+Instead of it just, yeah, blindly being the same operation throughout the whole cube, it's like...
+kind of got a bed mess it a little bit where it's like, you know, in every row, you always have to multiply the first number by the second number and then subtract the third number and then add the 4% price. I don't know. That might be a lot of work to find solutions. Like that might be tricky to work back from, but like something like that.
+but also then help to get you flexible and comfortable in that space. So like each time you move through, move through and like do a task, you'd get a different type of operation that you'd have to perform. Yeah, so like you're not just, okay. Yeah, like if you wanted to like kind of.
+step it up in level. Is it kind of a one task, like a one and done task? So there are like 8 tasks of different like difficulties. Okay. Like some of the tasks involve like finding a number as complement. So you need to understand kind of a coordinate or like algebraic.
+like means of navigating the cube and then you'd have to like add to confirm that it is a complement. Like for some, it'd be triangles, which are like any line that runs through all three dimensions of the cube and connects a vertice. So you'd have to make sure that like all the...
+numbers and tracking all like add up to the correct value at the end. Awesome. Okay. Yeah, I guess this being in 3D adds a bunch of more complexity to it. Which is cool.
+What? Yeah, I'm curious to know how you visualize.
+the cube. I do have, well, I don't have it running right now, but I could show you later a visualization we have, like a simple visualization of the cube.
+Khan.
+So question three, what strategies or approaches do you think will be best to help teach users about how to play the game?
+Yeah, so there's like...
+The basic, like, how do you navigate, like, just controls, but then there's also like the conceptual, like, what is base 8? How does this work? Like, is there a way to start with...
+a smaller cube and then like in the tutorial start with like a two by two by two.
+And then get the feel for that, like in like a tutorial mode, like, you know, start like maybe get the cubes progressively bigger and then go full blast 58 by 8 or something. We could consider it.
+Or our idea of the tutorial was kind of a tutorial on addition in base 8, subtraction in base 8, and then like our quick run through of like a round, but it might it might be valuable to start with maybe a very simple small order cube, just so that.
+they have like some idea of navigating it. Yeah. Or maybe like a two-dimensional like magic square. Yeah. So just, okay. Yeah, let's start, yeah, start with this ghost square and maybe like a three by three so you can just like introduce the idea of those triangles, you know, and like how those, like what does it look like at that level? Because I think.
+Like once you get to an 8 by 8 cube, you're then keeping like...
+Five 100 numbers, like how many hundreds of numbers? I believe it is 518. Yeah, yeah. So you're keeping a lot of numbers in your brain, right? Or like just trying to orient yourself with a lot of different numbers. I think maybe starting small and then will give you room to kind of build up to the grand finale of...
+The 8 by 8 there.
+What structure would you think would be most effective for visualizing like the game space?
+Like some options would be like a fully navigable 3D space. Like you have the cube, you can rotate through it, move through the slices. Or would you think it's better to start with like a fixed angle view where they have like in a certain plate so they don't get too overwhelmed? So my immediate thought is so I do MRI now.
+Yeah, and so that's all about visualizing 3D volumes, and what they do there is you can either...
+Like you have 4 panes and then you like select which which pane is your main pane. So it's across each of the axes, like X, Y, Z, and then you have a surface view. And like.
+Hard.
+what you can do or like if it's not a surface view, then it's a view that shows the point of the intersection of your four planes or of your three planes. Like,
+Yeah, I wish I could have that software on my laptop to show you what I'm talking about, but like taking some pointers from...
+Like, yeah, FSL eyes or something might be that might be a helpful place to start because it's a intuitive way to split between orientations without getting like overwhelmed with like exclusively like free free rotation free like like everything is you can go into like an everything is possible mode.
+But getting to kind of scrub through the layers slice by slice.
+And then like with that is the idea that.
+The.
+The values would be automatically calculated, and or like, is it up to the up to the player to do those calculations? So, the cube would have, although not all of them would be visible, all the values for the cube will be there, so like getting the math right or solving the task would like reveal.
+the cubes you find. So when you're moving through, you're kind of moving through faces to fill it in. Like, oh, I think maybe the selected voxel, like the cell I have to finish and find for like the complement is in another layer. So you move through the layer and then you do the addition, like you get it right.
+And then that cube is like that square is revealed. Or like you get it wrong and you get like points deducted. Okay.
+So, yeah, yeah, like what they do is then they send each access to like a color, so it's like, yeah, scrubbing through the blue, like X is blue, Y is red, green is set, that kind of thing, and then that also the guys are filling it in and stuff, I think, because I'm assuming.
+Like one of the fun things that you're able to do is you're able to do math coming at it from any of those three angles, right? So being able to flip between the three, which would be really helpful, right? So.
+Um...
+And then being able to see, yeah.
+the values that you've already unlocked as you scrub through. Yeah, I think.
+Yeah, maybe poke around some like MRI visualizations, because they have a very similar problem with like, how do we visualize this really dense and complicated 3D volume in a way that is sane, that is like remotely personable.
+Mm.
+What do you think of the current round format? So like going, you start with one task and you have to complete all eight tasks in a round, like of increasing difficulty. Um, either timed or what do you mean by round? Like, so like a round as we defined it, you get your starting.
+So, you're given the first task, which is probably like to find the complement. You solve it. That's the first task done. You get your score for that. And then you get the next task that's slightly harder. And then once you've completed all eight of the fixed tasks, well, fixed in reference to your starting position.
+you'd have completed a round and then you get your final score. Then there's no time limit, but your score is time-based. So like you get a higher score the more time you take. And then like we don't have it fully worked out, but theoretically there's a base minimum score you could get for a task.
+I feel like you didn't complete it fast enough.
+I think that makes sense. So how many rounds would there be?
+Neurons are kind of be based.
+So we haven't defined how to do the rounds in terms of how many, like, do we want to do for each plane on the cube? Mixing up the starting cell, would that be a round? Or whether we want to use, like, nearly generated cubes, because...
+We have, or we have access to possibly 300 rotated variations of the same queue that could also be like used for a round. OK, yeah, so you can.
+You can mix and match there, OK?
+Arounds.
+Makes sense. Who is your kind of target audience for this? So we have two main, like people who are just interested in recreational math and like might be interested in magic cubes as well. And then like secondary school math or like math based teachers.
+who may understand like number bases or who wants to integrate number bases into a curriculum, like this could be used as an interactive way to get students interested in it or work through problems for it.
+Yeah.
+Men.
+Would there be any features or like formatting or structures that would motivate you to continue playing the game like past a few rounds like over a long period of time?
+Um...
+Think something.
+Like.
+that I would usually get me playing a game is if other people end up playing the game. If I can like, oh, did you solve this one? Did you get this one? Like, with, you know, the crosswords, I like talking to Mel about doing the crossword. And that keeps me engaged with doing the New York Times crossword. It's because it's like, oh, like, here's this problem. How did you solve it? Here's how I solved it.
+So...
+Something, something bringing in some kind of social aspect could be helpful.
+Yeah.
+Yeah.
+I think.
+Yeah, some way to like get better at it, like whether that's like, you know, procedurally generating new cubes or whatever, like, I guess there's some way for me to improve my time, like I am a sucker for, I feel like anyone who's playing this as a recreational math lover is going to love whatever statistics you can throw up on like their.
+their efficiency or their accuracy.
+Okay, so some way to keep a record of like all your past improvements. Yeah, I think. Yeah, like something, something to show that you're getting better at it or that you're not, you know, like I know.
+It's kind of related to the next question. So the game is planned to have a competitive leaderboard where you can post your high score daily for like everyone to get a daily fixed round that will count towards the leaderboard. Besides like any round they want to play on themselves. Do you think that would be improving enjoyment?
+Yeah, for sure. Being able to compete with friends. Yeah, looks like so.
+Yeah.
+And then how much information would you like to see on a leaderboard?
+So with the tasks, what kind of statistics would you be able to, if you get time? Yeah, for sure. You'd get time, you'd get score based on like how fast you did it, and more difficult tasks, more difficult tasks would have like more points. Yeah. And like solving those faster might be worth more.
+Yeah, then, no.
+I was going to say, like, is there a way to get an error rate? Like a statistic that I always find really funny is whenever I play some kind of like team shooter with some friends and then you look like accuracy. Oh, you know, like the friend who like has, you know, a bunch of kills, but it's because their accuracy is like 3%, they're just going insane.
+Like, like some way to quantify how efficiently someone's solving the puzzle, like how many errors they made, or like, yeah, incorrect keystrokes, like whatever, you know, and then you know people can be like trying to solve it as perfectly as possible, versus like, like when I'm doing that, when I get to the end of like...
+A crossword, or like I said, like something, some kind of puzzle like that, and there's like the last couple squares in there, and I, I'm just like spamming them until I get the all queen, you know, and something that shows like, yeah, he did complete it pretty fast, but that's just 'cause he was mashing numbers, like, at the end, you know, something.
+Something logging like incorrect numbers or something, so an error log as well, yeah, yeah, and just, just to use to like be like, this is this is the proportion of the numbers that you entered that were correct. It's like a KD ratio, yeah, get a KDR for.
+That.
+Just based on your experience with puzzles, are there any other online like competitive sections or game modes or like features you'd want integrated?
+Something that I, have you ever played Krillian? Krillian, no. Okay. It's, I was just introduced to it in Huddle last night. And what it, the game itself is relevant, but afterwards it shows you where on the like percentile curve or where on the like distribution you fall.
+So, it's like you perform better than seventy-four percent of people, or whatever, or OK, or maybe you get 30 for thirty-six for twenty-six percent of people were better than you at this task, you know, whichever way you wanna phrase it, like something, even if...
+Ah.
+You know, you don't have the, like, in addition to the leaderboard, like, for the people that aren't in the top, I mean, this is maybe going beyond the scope that the project is, no, like, but like the number who you have the number of users that you're expecting, but like something like here, yeah, here's where you place it, even if you're not in the leaderboard.
+Like, among the masses, you were thirty-sixth percentile, like, OK, you know.
+can be a way to still rank someone without needing to tell them they're like 957,000, you know.
+Yeah, you were better than 13% of people, exactly.
+Okay.
+So in the future, we plan to add some other sizes of magic cubes, like 12 by 12 by 12, 16 by 16 by 16.
+Due to the nature of like magic cubes, like cubes in general, not all of them would be magic, so they would have different rule sets. Do you think that would be like 10 different properties? Do you think that would be more confusing or would it like increase user engagement? Or just how would you like to see it implemented?
+Yeah, so that I'm kind of drawn to, like, how crosswords do, so, like, you can go another avenue you can take is, like, make the cube small and focus on speed, be like, how fast can you, like, like, it's just like, here's a 5 by 5 cube.
+It's way faster, but, but then it's just like, can you get this done in under 3 minutes or like, okay, like you can go versus like when you go big and then it's like it, it scratches a different itch, you know, like with with you know the mini or like the crossword mini where it's like 6 by 6 grade or whatever, it's like I'm just...
+chugging through that because the clues aren't very hard, it's just how fast can you do it versus like a big, like full-size crossword. There's, I don't care nearly as much about my time because the puzzle's harder and so I'm like playing with it thinking about it and like I think.
+There are gonna be people that are like, yeah, give me more, give me more, on the big, on the big, on the chunky, and like.
+If someone is, if someone is remotely interested in a 16 by 16 cube, I don't think a little bit of weirdness is going to phase them. Like, like if somebody's like, yeah, I want the 8 by 8 by 8 cube was fine, but give me eight more of those. You know, like, like that person is going to be unfazed.
+by whatever little technicalities have to go along with it. Okay.
+So overall, like those are most of the features we have planned. Are there any additional features that you would like to see?
+Nothing off the top of my head.
+Yeah, let me know when the final product is. It's in beta or whatever. I'd be curious to try to.
+Speed running, yeah, exactly, like you get a speed running.
+K.
+Yeah, because I think I think there are two, like some people like going for trying to do something as fast as they can, and some people like trying to do something as hard as they can like get to, you know, like something that like the New York Times crossword does is the early puzzles early in the week are easy, and then they get harder throughout the week.
+So, that's like, I on Monday, like when I'm solving the Monday crossword, I'm just trying to do it as fast as I can, 'cause on the it's just slow power through versus on the end, it's like I'm pumped if I can finish it. I don't care about my time, it's just so hard, and like just wrestling with that puzzle is the fun part. Yeah, so like, yeah.
+A variety of complexities is also like probably welcome, and I think we'll give different users what they're looking for.
+And then a roundup question: Do you foresee any challenges with the game idea?
+Or...
+Um...
+I don't know how you're going to display it, but I think a lot of the...
+Success of this game is going to rely on somebody coming to it and being able to understand, like, yeah, like a lot of visual interest, right? Well, there, there's a lot of information that needs to be conveyed efficiently with like scrubbing through, like, like as you're like, you know, scrubbing your way through slices and then you're switching and going through, like, there's just so many numbers that somebody's gonna have to keep.
+keep track of.
+How you visually communicate that information I think will be really important.
+Yeah. So your UI and design there will be. Is this mobile or browser? Uh, it's like strictly browser. Yeah, okay. This is a game I would want to play online.
+Because I don't, I, I don't think it'd be very fun navigating on that.
+Yeah.
+So those are all the questions I had planned. Do you have like any closing questions you're interested in or? No, sounds very cool. I'm excited to see the product. Okay.
+So, thank you for participating.
 
 \newpage
 
@@ -2419,6 +3176,7 @@ Yeah, but for the weird number bases, they're going to be hard anyways, even if 
 OK, thank you for interview. Uh, this is. A user that is not interested in the game at all. That's the premise.
 
 
+\addcontentsline{toc}{section}{References}
 \bibliographystyle {plainnat}
 \bibliography{../../refs/References}
 
