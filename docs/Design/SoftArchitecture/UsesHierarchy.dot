@@ -33,17 +33,18 @@ digraph UsesHierarchy {
     NBT [label = "M18\nNumber Base Translation"];
 
     // Modules that use no other module sit on the bottom row
-    { rank = sink; VH; CR; R; NBT; UDM; }
+    { rank = sink; VH; R; NBT; UDM; }
 
     // User Interface is the only point of contact with the user, so it sits at the top
-    UI  -> { N RE VH };
+    UI  -> { N RE NBT VH };
     N   -> { RC T DC UM L SE UDM };
     T   -> { RC R };
     DC  -> { RG L UDM };
-    RC  -> { RG TG SC GDM CR NBT UDM };
+    RC  -> { RG TG SC GDM CR R UDM };
     RG  -> { TG R CR UDM };
     RE  -> { CR NBT SE };
-    TG  -> { CR R };
+    TG  -> R;
+    CR  -> R;
     SC  -> R;
     GDM -> CR;
     UM  -> UDM;

@@ -167,7 +167,7 @@ change.
 \begin{description}
 \item [\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific hardware and browser environment on which the software is running.
 \item [\refstepcounter{acnum} \actheacnum \label{acUI}:] How user input is received and translated into commands, and how the application state is presented to the user.
-\item [\refstepcounter{acnum} \actheacnum \label{acCR}:] The data structure and algorithms used to represent and manipulate the magic cube.
+\item [\refstepcounter{acnum} \actheacnum \label{acCR}:] The data structure used to store the numbers of the magic cube and look them up by cell.
 \item [\refstepcounter{acnum} \actheacnum \label{acN}:] The screens and menus in the application and the transitions/structure between them.
 \item [\refstepcounter{acnum} \actheacnum \label{acRC}:] The sequence of steps within a round and within each task.
 \item [\refstepcounter{acnum} \actheacnum \label{acR}:] The rules of a round including the number and sequence of tasks, the cube order, and the valid line types for the tasks.
@@ -459,7 +459,7 @@ to be implemented.
 \subsubsection{Cube Representation Module (\mref{mCR})}
 
 \begin{description}
-\item[Secrets:] The internal data structure used to represent the cube in a given state (i.e., game space).
+\item[Secrets:] The data structure used to store the numbers of the magic cube and look them up by cell.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -477,7 +477,7 @@ to be implemented.
 \subsubsection{Round Generation Module (\mref{mRG})}
 
 \begin{description}
-\item[Secrets:] Algorithm to compose a round (i.e., number of tasks, difficulty progression, etc.).
+\item[Secrets:] The algorithms used to choose a round's plane, orientation, starter, and the line type for each task, consistent with the ruleset.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -656,8 +656,8 @@ because they use modules from the lower levels.
 
 An arrow from module A to module B means that A uses B. Only direct uses are
 shown; since the relation is transitive, indirect uses follow from the arrows.
-The modules on the bottom row (\mref{mVH}, \mref{mCR}, \mref{mR}, \mref{mNBT},
-and \mref{mUDM}) use no other module. \mref{mUI} sits at the top because it is
+The modules on the bottom row (\mref{mVH}, \mref{mR}, \mref{mNBT}, and
+\mref{mUDM}) use no other module. \mref{mUI} sits at the top because it is
 the only point of contact with the user: it reads input through \mref{mVH},
 passes the resulting commands to \mref{mN}, obtains the 2D view of the current
 state from \mref{mRE}, and displays it through \mref{mVH}. No other module uses
