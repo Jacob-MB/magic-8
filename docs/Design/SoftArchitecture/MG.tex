@@ -397,7 +397,7 @@ to be implemented.
 \subsubsection{User Management Module (\mref{mUM})}
 
 \begin{description}
-\item[Secrets:] The algorithms used to authenticate users and manage user accounts (e.g., create/delete account, login/logout, password reset, etc.), and to compute a user's personal statistics (e.g., completed rounds, highest and average score, fastest round time) from their recorded round results.
+\item[Secrets:] The algorithms used to authenticate users and manage user accounts (e.g., create/delete account, login/logout, password reset, etc.), to keep track of the current user's session (logged in or playing as a guest), and to compute a user's personal statistics (e.g., completed rounds, highest and average score, fastest round time) from their recorded round results.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -424,7 +424,7 @@ to be implemented.
 \subsubsection{Tutorial Module (\mref{mT})}
 
 \begin{description}
-\item[Secrets:] Algorithms to structure, sequence, and present (in a virtual sense, not an external output sense) tutorial content.
+\item[Secrets:] The content and order of the tutorial's steps, and the fixed round they are played on. Tutorial rounds are marked so they are not recorded.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -455,7 +455,7 @@ to be implemented.
 \subsubsection{Cube Representation Module (\mref{mCR})}
 
 \begin{description}
-\item[Secrets:] The data structure used to store the numbers of the magic cube and look them up by cell.
+\item[Secrets:] The data structure used to store the numbers of the magic cube and look them up by cell. The cube size is given as a parameter (taken from the ruleset by the caller).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -482,7 +482,7 @@ to be implemented.
 \subsubsection{Line Geometry Module (\mref{mTG})}
 
 \begin{description}
-\item[Secrets:] The algorithms used to compute the cells of a line in the cube from a starter and a line type, including wrapping for split lines, whether a line is continuous, and the order in which the line is traced.
+\item[Secrets:] The algorithms used to compute the cells of a line in the cube from a starter and a line type, including wrapping for split lines, whether a line is continuous, and the order in which the line is traced. The cube size is given as a parameter (taken from the ruleset by the caller).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -491,7 +491,7 @@ to be implemented.
 \subsubsection{User Data Management Module (\mref{mUDM})}
 
 \begin{description}
-\item[Secrets:] The data structure and algorithms to save, modify, delete, and load user data, including account records, settings, used starters, and recorded round results (the source of personal statistics and leaderboard rankings).
+\item[Secrets:] The data structure and algorithms to save, modify, delete, and load user data, including account records, settings, used starters, and recorded round results (the source of personal statistics and leaderboard rankings). Data is saved for the current user set by \mref{mUM}; a guest's data is kept only on the device.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
