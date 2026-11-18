@@ -361,8 +361,8 @@ data that the account owns.
 \subsubsection{User Interface Module (\mref{mUI})}
 
 \begin{description}
-\item[Secrets:] The mapping from user input to commands, and the presentation of the application state to the user, including the drawing of every screen. The projections and calculations for the game space are done by \mref{mRE}.
-\item[Services:]
+\item[Secrets:] The mapping from user input to commands, and the presentation of the application state to the user, including the drawing of every screen.
+\item[Services:] Reads device input and converts it into commands for \mref{mN}, converting typed answers from the display base with \mref{mNBT}. Draws each screen from the content provided by \mref{mN} and, for the game space, from the view produced by \mref{mRE}.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -370,8 +370,8 @@ data that the account owns.
 \subsubsection{Rendering Module (\mref{mRE})}
 
 \begin{description}
-\item[Secrets:] The algorithms to translate the 3D space and game state into a 2D view, including layer isolation and highlighting. The module produces the view but does not display it.
-\item[Services:]
+\item[Secrets:] The algorithms to translate the 3D space and game state into a 2D view, including layer isolation and highlighting.
+\item[Services:] Produces the 2D view of the game space from the round state read from \mref{mRC}, for \mref{mUI} to display. It does not display the view itself.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -380,7 +380,7 @@ data that the account owns.
 
 \begin{description}
 \item[Secrets:] The structure of the application's screens and menus (including the settings screen) and the transitions between them, including those into and out of a game round.
-\item[Services:]
+\item[Services:] Tracks the current screen, carries out the commands passed in from \mref{mUI}, and provides the content of the current screen to \mref{mUI}.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -388,8 +388,8 @@ data that the account owns.
 \subsubsection{Round Control Module (\mref{mRC})}
 
 \begin{description}
-\item[Secrets:] The state and progression of a round and the tasks within it, including the selected cell, the player's answers, and the recording of the result unless the round is marked as a tutorial round.
-\item[Services:]
+\item[Secrets:] The state and progression of a round and the tasks within it (e.g., the selected cell and the player's answers).
+\item[Services:] Plays a round given its plane, orientation, starter, and line types; carries out the player's actions and checks them against the ruleset; provides snapshots to \mref{mGDM} for autosave and resume; and records the result through \mref{mUDM} unless the round is marked as a tutorial round. Its read-only access programs provide the round state to \mref{mRE}.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -416,7 +416,7 @@ data that the account owns.
 
 \begin{description}
 \item[Secrets:] The algorithms used to authenticate users and manage user accounts (e.g., create/delete account, login/logout, password reset), to keep track of the current user's session (logged in or playing as a guest), and to compute a user's personal statistics (e.g., completed rounds, highest and average score, fastest round time) from their recorded round results.
-\item[Services:]
+\item[Services:] Carries out account actions, and on login or logout sets the current user (or guest) in \mref{mUDM}. Computes personal statistics from the results read from \mref{mUDM} when they are viewed.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -442,8 +442,8 @@ data that the account owns.
 \subsubsection{Tutorial Module (\mref{mT})}
 
 \begin{description}
-\item[Secrets:] The content and order of the tutorial's steps, and the fixed round they are played on. Tutorial rounds are marked so they are not recorded.
-\item[Services:]
+\item[Secrets:] The content and order of the tutorial's steps, and the fixed round they are played on.
+\item[Services:] Plays the fixed round through \mref{mRC}, marked as a tutorial round so its result is not recorded, and provides the instruction for the step the player has reached.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -473,8 +473,8 @@ data that the account owns.
 \subsubsection{Cube Representation Module (\mref{mCR})}
 
 \begin{description}
-\item[Secrets:] The data structure used to store the numbers of the magic cube and look them up by cell. The cube size is given as a parameter (taken from the ruleset by the caller).
-\item[Services:]
+\item[Secrets:] The data structure used to store the numbers of the magic cube and look them up by cell.
+\item[Services:] Builds a cube of a given size from its numbers, checks that each number appears exactly once, and returns the number in a given cell. The cube size is passed in by the caller, so this module does not use \mref{mR}.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -500,8 +500,8 @@ data that the account owns.
 \subsubsection{Line Geometry Module (\mref{mTG})}
 
 \begin{description}
-\item[Secrets:] The algorithms used to compute the cells of a line in the cube from a starter and a line type, including wrapping for split lines, whether a line is continuous, and the order in which the line is traced. The cube size is given as a parameter (taken from the ruleset by the caller).
-\item[Services:]
+\item[Secrets:] The algorithms used to compute the cells of a line in the cube from a starter and a line type, including wrapping for split lines, whether a line is continuous, and the order in which the line is traced.
+\item[Services:] Given a cube size, a starter cell, and a line type, returns the line's other cells in the order they are traced, and whether the line is continuous or split. The cube size is passed in by the caller, so this module does not use \mref{mR}.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -509,8 +509,8 @@ data that the account owns.
 \subsubsection{User Data Management Module (\mref{mUDM})}
 
 \begin{description}
-\item[Secrets:] The data structure and algorithms to save, modify, delete, and load user data, including account records, settings, used starters, and recorded round results (the source of personal statistics and leaderboard rankings). Data is saved for the current user set by \mref{mUM}; a guest's data is kept only on the device.
-\item[Services:]
+\item[Secrets:] The data structure and algorithms to save, modify, delete, and load user data, including account records, settings, used starters, and recorded round results (the source of personal statistics and leaderboard rankings).
+\item[Services:] Saves and loads data for the current user set by \mref{mUM}. A guest's data is kept only on the device; a logged-in user's data is kept on the server through \mref{mSCM}.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
