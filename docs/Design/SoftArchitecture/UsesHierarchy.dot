@@ -32,6 +32,7 @@ digraph UsesHierarchy {
     UDM [label = "M17\nUser Data Management"];
     NBT [label = "M18\nNumber Base Translation"];
     SCM [label = "M19\nServer Communication"];
+    DCM [label = "M20\nOnline Daily Challenge Manager"];
 
     // Modules that use no other module sit on the bottom row
     { rank = sink; VH; R; NBT; SCM; }
@@ -40,7 +41,9 @@ digraph UsesHierarchy {
     UI  -> { N RE NBT VH };
     N   -> { RC T DC UM L SE };
     T   -> { RC R };
-    DC  -> { RG UDM };
+    DC  -> { RC R SCM };
+    // Runs on the online server; Daily Challenge reaches its round only through Server Communication
+    DCM -> { RG R };
     RC  -> { RG TG SC GDM CR R UDM };
     RG  -> { TG R };
     // Rendering reads the state it draws from Round Control's read-only access programs

@@ -179,11 +179,12 @@ change.
 \item [\refstepcounter{acnum} \actheacnum \label{acRE}:] The algorithms and techniques used to render the 3D space and game state.
 \item [\refstepcounter{acnum} \actheacnum \label{acAA}:] How user accounts are authenticated and managed.
 \item [\refstepcounter{acnum} \actheacnum \label{acL}:] The structure and types of leaderboards presented.
-\item [\refstepcounter{acnum} \actheacnum \label{acDC}:] How the daily challenges are created and run.
+\item [\refstepcounter{acnum} \actheacnum \label{acDC}:] How the daily challenge is obtained and played on the user's device.
 \item [\refstepcounter{acnum} \actheacnum \label{acT}:] The content and state flow of the tutorial.
 \item [\refstepcounter{acnum} \actheacnum \label{acSE}:] The application settings available.
 \item [\refstepcounter{acnum} \actheacnum \label{acNB}:] The number base in which values are shown to and entered by the user.
 \item [\refstepcounter{acnum} \actheacnum \label{acSCM}:] How the application communicates with the online server (e.g., the server provider, its interface, and the network protocol).
+\item [\refstepcounter{acnum} \actheacnum \label{acDCM}:] How the daily round is created, scheduled, and stored on the online server so that every user receives the same round.
 \end{description}
 
 These anticipated changes include the likely changes listed in the SRS: LC2
@@ -191,7 +192,7 @@ These anticipated changes include the likely changes listed in the SRS: LC2
 bases and cube orders) by \acref{acR} and \acref{acNB}; LC4 (new game modes and
 rulesets) by \acref{acR} and \acref{acRG}; LC5 (the scoring mechanism) by
 \acref{acS}; LC6 (how often the game is saved) by \acref{acGD}; LC7 (the 3D
-visualization) by \acref{acRE}; and LC8 (the daily challenge) by \acref{acDC}.
+visualization) by \acref{acRE}; and LC8 (the daily challenge) by \acref{acDC} and \acref{acDCM}.
 LC1 (the 100\,ms response targets) has no corresponding anticipated change,
 because it changes a performance target that the design must meet rather than
 a design decision hidden by a module.
@@ -246,6 +247,7 @@ actually be implemented.
 \item [\refstepcounter{mnum} \mthemnum \label{mUDM}:] User Data Management Module
 \item [\refstepcounter{mnum} \mthemnum \label{mNBT}:] Number Base Translation Module
 \item [\refstepcounter{mnum} \mthemnum \label{mSCM}:] Server Communication Module
+\item [\refstepcounter{mnum} \mthemnum \label{mDCM}:] Online Daily Challenge Manager Module
 \end{description}
 
 
@@ -274,7 +276,7 @@ Hardware-Hiding Module
 & Settings Module\\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Software Decision Module}
+\multirow{8}{0.3\textwidth}{Software Decision Module}
 & Cube Representation Module\\
 & Game Data Management Module\\
 & Round Generation Module\\
@@ -282,6 +284,7 @@ Hardware-Hiding Module
 & User Data Management Module\\
 & Number Base Translation Module\\
 & Server Communication Module\\
+& Online Daily Challenge Manager Module\\
 \bottomrule
 
 \end{tabular}
@@ -433,8 +436,8 @@ data that the account owns.
 \subsubsection{Daily Challenge Module (\mref{mDC})}
 
 \begin{description}
-\item[Secrets:] The algorithms used to create, schedule, and manage daily challenges.
-\item[Services:]
+\item[Secrets:] How the day's round is obtained from the online server and played on the user's device.
+\item[Services:] Fetches the day's round from \mref{mDCM} through \mref{mSCM} and plays it through \mref{mRC}, marked as a daily challenge round so its result is recorded for that day's leaderboard.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -529,6 +532,15 @@ data that the account owns.
 \begin{description}
 \item[Secrets:] The protocol and interface used to exchange data with the online server, including the server's request formats, secure transport, and the handling of failed requests.
 \item[Services:]
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsubsection{Online Daily Challenge Manager Module (\mref{mDCM})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to create, schedule, and store the daily round on the online server so that every user receives the same round.
+\item[Services:] Creates one round each day using \mref{mRG} and the daily challenge ruleset from \mref{mR}, and serves that round to every client that requests it. Runs on the online server, not on the user's device.
 \item[Implemented By:]
 \item[Type of Module:]
 \end{description}
@@ -665,6 +677,7 @@ requirements and between the modules and the anticipated changes.
 \acref{acSE} & \mref{mSE}\\
 \acref{acNB} & \mref{mNBT}\\
 \acref{acSCM} & \mref{mSCM}\\
+\acref{acDCM} & \mref{mDCM}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -696,9 +709,12 @@ for the game space, the projected view produced by \mref{mRE}. No other module u
 can be tested without launching the user interface or rendering the cube
 (\nfrref{NFR_7}, \nfrref{NFR_8}).
 
-Every Software Decision module is used by at least one Behaviour-Hiding module,
-except \mref{mSCM}. It is used only by \mref{mUDM}, so that no other module
-depends on whether user data is kept on the device or on the online server.
+Every Software Decision module is used by at least one other module, except
+\mref{mDCM}. It runs on the online server rather than on the user's device, and
+\mref{mDC} reaches the round it serves only through \mref{mSCM}, so no module on
+the device depends on how the daily round is created. \mref{mSCM} is used only
+by \mref{mUDM} and \mref{mDC}, so that no other module depends on how the
+application communicates with the online server.
 
 \begin{figure}[H]
 \centering
