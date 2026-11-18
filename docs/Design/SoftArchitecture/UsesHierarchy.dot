@@ -1,7 +1,7 @@
 // Uses hierarchy for the Magic 8 Module Guide (MG.tex, Figure "Use hierarchy among modules").
 // An arrow A -> B means module A uses module B.
 // Regenerate the figure with:
-//   dot -Tpng -Gdpi=200 UsesHierarchy.dot -o UsesHierarchy.png
+//   dot -Tpdf UsesHierarchy.dot -o UsesHierarchy.pdf
 
 digraph UsesHierarchy {
     rankdir = TB;

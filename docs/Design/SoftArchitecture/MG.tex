@@ -186,6 +186,16 @@ change.
 \item [\refstepcounter{acnum} \actheacnum \label{acSCM}:] How the application communicates with the online server (e.g., the server provider, its interface, and the network protocol).
 \end{description}
 
+These anticipated changes include the likely changes listed in the SRS: LC2
+(the contrast standard) is covered by \acref{acUI}; LC3 (additional number
+bases and cube orders) by \acref{acR} and \acref{acNB}; LC4 (new game modes and
+rulesets) by \acref{acR} and \acref{acRG}; LC5 (the scoring mechanism) by
+\acref{acS}; LC6 (how often the game is saved) by \acref{acGD}; LC7 (the 3D
+visualization) by \acref{acRE}; and LC8 (the daily challenge) by \acref{acDC}.
+LC1 (the 100\,ms response targets) has no corresponding anticipated change,
+because it changes a performance target that the design must meet rather than
+a design decision hidden by a module.
+
 \wss{Anticipated changes relate to changes that would be made in requirements,
 design or implementation choices.  They are not related to changes that are made
 at run-time, like the values of parameters.}
@@ -308,6 +318,14 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash
 (\emph{--}) is shown, this means that the module is not a leaf and will not have
 to be implemented.
 
+Each module hides one secret, with two deliberate exceptions. \mref{mUI}
+hides both the mapping from input to commands and the presentation of the
+application state, because both depend on the same device library and screen
+layout and are expected to change together. \mref{mUM} hides both the
+management of accounts and the computation of personal statistics, because
+statistics exist only for an account and are computed from the same recorded
+data that the account owns.
+
 \subsection{Hardware Hiding Modules}
 
 \begin{description}
@@ -343,7 +361,7 @@ to be implemented.
 \subsubsection{User Interface Module (\mref{mUI})}
 
 \begin{description}
-\item[Secrets:] How user input is received and translated into commands, and how the application state is presented to the user, including drawing every screen. The projections and calculations for the game space are done by \mref{mRE}.
+\item[Secrets:] The mapping from user input to commands, and the presentation of the application state to the user, including the drawing of every screen. The projections and calculations for the game space are done by \mref{mRE}.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -361,7 +379,7 @@ to be implemented.
 \subsubsection{Navigation Module (\mref{mN})}
 
 \begin{description}
-\item[Secrets:] Logic to navigate the user through the application, including all menus, the settings screen, and the transitions into and out of a game round.
+\item[Secrets:] The structure of the application's screens and menus (including the settings screen) and the transitions between them, including those into and out of a game round.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -370,7 +388,7 @@ to be implemented.
 \subsubsection{Round Control Module (\mref{mRC})}
 
 \begin{description}
-\item[Secrets:] Logic to progress the user through a round and the tasks within it, including the selected cell, the player's answers, and recording the result unless the round is marked as a tutorial round.
+\item[Secrets:] The state and progression of a round and the tasks within it, including the selected cell, the player's answers, and the recording of the result unless the round is marked as a tutorial round.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -433,7 +451,7 @@ to be implemented.
 \subsubsection{Settings Module (\mref{mSE})}
 
 \begin{description}
-\item[Secrets:] Algorithms to access and modify base settings of the application (e.g., turning off animations and configuring the play-time reminder).
+\item[Secrets:] The application's settings and the algorithms to access and modify them (e.g., turning off animations and configuring the play-time reminder).
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -500,7 +518,7 @@ to be implemented.
 \subsubsection{Number Base Translation Module (\mref{mNBT})}
 
 \begin{description}
-\item[Secrets:] Algorithms to convert between the decimal-base values used in gameplay logic and their external user representation in the given number base.
+\item[Secrets:] The algorithms to convert between the decimal-base values used in gameplay logic and their external user representation in the given number base.
 \item[Services:]
 \item[Implemented By:]
 \item[Type of Module:]
@@ -678,9 +696,13 @@ for the game space, the projected view produced by \mref{mRE}. No other module u
 can be tested without launching the user interface or rendering the cube
 (\nfrref{NFR_7}, \nfrref{NFR_8}).
 
+Every Software Decision module is used by at least one Behaviour-Hiding module,
+except \mref{mSCM}. It is used only by \mref{mUDM}, so that no other module
+depends on whether user data is kept on the device or on the online server.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{UsesHierarchy.png}
+\includegraphics[width=\textwidth]{UsesHierarchy.pdf}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
