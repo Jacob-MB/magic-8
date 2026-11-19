@@ -84,7 +84,7 @@ This section records information for easy reference.
   SRS & Software Requirements Specification\\
   \progname & Explanation of program name\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
+  % \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -199,9 +199,9 @@ LC1 (the 100\,ms response targets) has no corresponding anticipated change,
 because it changes a performance target that the design must meet rather than
 a design decision hidden by a module.
 
-\wss{Anticipated changes relate to changes that would be made in requirements,
-design or implementation choices.  They are not related to changes that are made
-at run-time, like the values of parameters.}
+% \wss{Anticipated changes relate to changes that would be made in requirements,
+% design or implementation choices.  They are not related to changes that are made
+% at run-time, like the values of parameters.}
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
@@ -300,12 +300,23 @@ The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
 between requirements and modules is listed in Table~\ref{TblRT}.
 
-\wss{The intention of this section is to document decisions that are made
-  ``between'' the requirements and the design.  To satisfy some requirements,
-  design decisions need to be made.  Rather than make these decisions implicit,
-  they are explicitly recorded here.  For instance, if a program has security
-  requirements, a specific design decision may be made to satisfy those
-  requirements with a password.}
+\rref{FR_LeaderboardIntegrity} is met by the authentication and access rules
+of the hosted backend, reached through \mref{mUDM} and \mref{mSCM}. Only a
+logged-in user can write records, a user can write only their own records,
+and records with impossible values (e.g., a score above the maximum or a
+negative time) are rejected. The backend does not include any additional security measures to protect against leaderboard manipulation.
+This matches the deferred status of safety requirement SR10 in the Hazard
+Analysis, which states that general rules for modifying the leaderboards will
+be set up during the capstone, but that stopping malicious users from
+modifying competitive statistics and leaderboard results is not immediately
+critical.
+
+% \wss{The intention of this section is to document decisions that are made
+%   ``between'' the requirements and the design.  To satisfy some requirements,
+%   design decisions need to be made.  Rather than make these decisions implicit,
+%   they are explicitly recorded here.  For instance, if a program has security
+%   requirements, a specific design decision may be made to satisfy those
+%   requirements with a password.}
 
 \section{Module Decomposition} \label{SecMD}
 
@@ -718,6 +729,13 @@ the device depends on how the daily round is created. \mref{mSCM} is used only
 by \mref{mUDM} and \mref{mDC}, so that no other module depends on how the
 application communicates with the online server.
 
+The online server is a hosted backend that provides user authentication, data
+storage, and access rules on its own, without code written for this project.
+It is hidden behind \mref{mSCM}, in the same way that the browser and device
+are hidden behind \mref{mVH}. The only module that runs on the backend is
+\mref{mDCM}, which is implemented as a scheduled function there. Every other
+module runs on the user's device.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{UsesHierarchy.pdf}
@@ -729,63 +747,63 @@ application communicates with the online server.
 
 \section{User Interfaces}
 
-\wss{Design of user interface for software and hardware.  Attach an appendix if
-needed. Drawings, Sketches, Figma}
+% \wss{Design of user interface for software and hardware.  Attach an appendix if
+% needed. Drawings, Sketches, Figma}
 
 \section{Design of Communication Protocols}
 
-\wss{If there is communication between hardware and software, it may be necessary 
-to explain the design of the communication protocol.  This section should be filled 
-in with NA if it is not appropriate for a given project.}
+% \wss{If there is communication between hardware and software, it may be necessary 
+% to explain the design of the communication protocol.  This section should be filled 
+% in with NA if it is not appropriate for a given project.}
 
 \section{Database Design}
 
-\wss{If a database is a significant component of the project, the database
-design should be summarized here.  This section should be filled in with NA if
-it is not appropriate for a given project.}
+% \wss{If a database is a significant component of the project, the database
+% design should be summarized here.  This section should be filled in with NA if
+% it is not appropriate for a given project.}
 
 \section{Timeline}
 
-\wss{Schedule of tasks and who is responsible}
+% \wss{Schedule of tasks and who is responsible}
 
-\wss{You can point to GitHub if this information is included there}
+% \wss{You can point to GitHub if this information is included there}
 
 \section{Generative AI Use Disclosure}
 
-\wss{ChatGPT (version 5) was used to brainstorm ideas for the template for this disclose section.}
+% \wss{ChatGPT (version 5) was used to brainstorm ideas for the template for this disclose section.}
 
 \subsection{AI Tools Used}
 
-\wss{Give the name of the AI tool(s) used and the version.}
+% \wss{Give the name of the AI tool(s) used and the version.}
 
 Microsoft Copilot version 155.0 and Claude Opus version 5.5 were used in support of completing this document.
 
 \subsection{How and Where Used}
 
-\wss{Explain what the tool(s) were used for.  Examples include: brainstorming,
-explaining a technical concept, reviewing the document, generating or modifying
-text, generating or modifying diagrams, identifying errors or omissions or
-inconsistencies.}
+% \wss{Explain what the tool(s) were used for.  Examples include: brainstorming,
+% explaining a technical concept, reviewing the document, generating or modifying
+% text, generating or modifying diagrams, identifying errors or omissions or
+% inconsistencies.}
 
-\wss{For each of the uses, identify which parts of the document were affected.}
+% \wss{For each of the uses, identify which parts of the document were affected.}
 
-\wss{You do not need to report every interaction, but you should disclose the 
-uses that materially contributed to your work}
+% \wss{You do not need to report every interaction, but you should disclose the 
+% uses that materially contributed to your work}
 
 Generative AI was useful in reading the assignment description, previous work, and our iterations of the document to provide recommendations (especially related to consistency with the SRS). For example, after writing the first draft of the ACs, UCs, and modules as well as the ideas for the secrets, Generative AI was used to identify potential ambiguities or suggest additional content (e.g., suggesting new modules and ACs that aligned with the SRS requirements). Generative AI was also useful in developing how the modules interacted with each other and in particular, how they use each other (for the Use Hierarchy); Generative AI was used to suggest potential design options which were then reviewed and refined until a suitable design was created. Generative AI was also used to create the Uses Hierarchy .dot file. Additionally, based upon the descriptions for the modules, Generative AI was used to create the traceability table between ACs and Modules. Finally, Generative AI was useful in drafting some important clarification paragraphs such as the AC to SRS LC explanation and the additional explanation for the Uses Hierarchy.
 
 \subsection{Verification of AI-Generated Content}
 
-\wss{\begin{itemize}
-    \item Describe how the team checked AI-generated or AI-assisted material
-    before including it in the document.
-    \item In particular, verify factual claims, technical assertions,
-    requirements, calculations, references, and other information for which an
-    AI system may produce incorrect or fabricated results.
-    \item \textbf{The team is responsible for the accuracy, completeness,
-consistency, and appropriateness of the submitted document, regardless of
-whether material was generated by a human or an AI system.}
-\end{itemize}}
+% \wss{\begin{itemize}
+%     \item Describe how the team checked AI-generated or AI-assisted material
+%     before including it in the document.
+%     \item In particular, verify factual claims, technical assertions,
+%     requirements, calculations, references, and other information for which an
+%     AI system may produce incorrect or fabricated results.
+%     \item \textbf{The team is responsible for the accuracy, completeness,
+% consistency, and appropriateness of the submitted document, regardless of
+% whether material was generated by a human or an AI system.}
+% \end{itemize}}
 
 The suggestions provided by Microsoft Copilot and Claude were not blindly implemented. Instead, to ensure the content was reasonable/quality and fit the tone and intent of our document, the suggestions/revisions were reviewed by a team member and then edited as required before being added. In particular, all design suggestions (e.g., the Uses Hierarchy) by Generative AI were carefully reviewed and refined by the team. References to requirements or other documents were manually reviewed to ensure accuracy and completeness.
 
