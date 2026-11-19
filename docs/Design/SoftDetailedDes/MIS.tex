@@ -57,7 +57,7 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
+Nov. 18, 2026 & 1.0 & Added Syntax for MIS\\
 Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
@@ -1258,4 +1258,13 @@ graduate attribute of Problem Analysis and Design.
 
 \end{enumerate}
 
+Team Answers:
+\begin {enumerate}
+  \item So far, only writing the syntax, it was fairly easy to base it on the PoC the team started working on. There had to be some decomposing of the strict modules the team has made for the PoC, but it was easily done alongside projecting how future modules will be written.
+  \item Some pain points were linking the modules together, but this was solved by looking at the use hieracrchy in the module guide. It is still difficult to discern what arguments and parameters are shared between each module and their specific types. In order to solve this, the modules are seen as abstract as possible and the arguments are seen as objects.
+  \item After speaking with the stakeholder, it helped the team finalize the extra stuff they want in their project, such as adding daily challenges and tutorials. These will require additional modules, which are initialized in the syntax section of the MIS and in the MG. The initial ideas came from the supervisor, which was used as the root for the SRS, which was used to develop the MG and MIS.
+  \item The requirements document and initial PoC was used as the starting point to brainstorm the modules in the Module Guide. The MIS was then written based on MG.
+  \item Some limitations are due to having the project based on a browser, which can result in problems if saving to a browser cache and showcasing the 3D visualization. It is possible to run out of the browser cache if multiple tabs are open and we are still unaware of how much data is being stored in the first place. In a perfect world, the virtual environment will contain infinite cache or RAM, allowing the project to run while the user is using something else. This will allow the team to not worry about storing data in a browser cache or a database \textbf{efficiently}.
+  \item The team considered making the program an application, which can be used as an .exe. The benefits of this would be that the team will not have to struggle to store the intricacies of keeping exactly where the user stopped playing on a browser (an application will allow the team to store /textbf{all} data locally). However, a benefit is making sure the project is portable and accessible to all users, which would be the easiest if the game was on a website (allowing younger/tech-illiterate users to play it). We chose this solution because the supervisor wanted to showcase the project on a website.
+\end{enumerate}
 \end{document}
