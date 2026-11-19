@@ -1080,6 +1080,103 @@ check\_base & base: $\mathbb{Z}$ & Boolean & BaseNotSupportedError \\
 \end{tabular}
 \end{center}
 
+
+\newpage
+
+\section{Server Communication Module} \mref{mSCM} 
+
+
+\begin{description}
+\item[Secrets:] The protocol and interface used to exchange data with the online server, including the server's request formats, secure transport, and the handling of failed requests.
+\end{description}
+
+\subsection{Module}
+
+server\_cm
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+ping\_server & server\_info: Server Object & active: Boolean & DatabaseNotFoundError, DatabaseNotActiveError \\
+encrypt\_data & user\_information: Object, key: String & encrypted\_user\_information: bytes & EncryptionError \\
+decrypt\_data & encrypted\_user\_information: bytes, key: String & user\_information: Server Object (like JSON) & DecryptionError \\
+add\_to\_server & server\_info: Server Object, data: Object & confirmation: Server Object & DatabaseNotFoundError, DatabaseNotActiveError, WrongSchemaError \\ 
+read\_db & query: SQL query, server\_info: Server Object  & returned\_data: bytes & DatabaseNotFoundError, DatabaseNotActiveError, WrongQueryError \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Online Daily Challenge Manager Module} \mref{mDCM} 
+
+
+\begin{description}
+\item[Secrets:] The algorithms used to create, schedule, and store the daily round on the online server so that every user receives the same round.
+\item[Services:] Creates one round each day using \mref{mRG} and the daily challenge ruleset from \mref{mR}, and serves that round to every client that requests it. Runs on the online server, not on the user's device.
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsection{Module}
+
+odcm
+
+\subsection{Uses}
+
+Round Generation Module {\mref{mRG}}
+Ruleset Module {\mref{mR}}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+create\_dc & rules: Ruleset Object & daily\_challenge: DailyChallenge Object, starter: Cube, level: $\mathbb{Z}$, 3D Coordinates List & InvalidRulesError \\
+start\_dc & daily\_challenge: DailyChallenge Object, starter: Cube, level: $\mathbb{Z}$, 3D Coordinates List, dc\_server\_connectrion: Server Object & - & DatabaseNotAvailable, CheatingDetectedError \\
+\hline
+\end{tabular}
+\end{center}
+
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
 
