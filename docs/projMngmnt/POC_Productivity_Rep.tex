@@ -36,6 +36,48 @@ the report.}
 
 \wss{What will you be demonstrating}
 
+The feasibility risks associated with this project lie in three areas:
+
+\begin{itemize}
+  \item \textbf{3D visualization (primary risk).} The team has limited experience
+  with 3D graphics, and we plan to implement the projection calculations ourselves
+  rather than rely on a pre-built renderer. It is therefore uncertain whether we
+  can correctly project the magic cube onto the screen and keep that projection
+  accurate and readable as the viewpoint changes (e.g., rotation and zoom
+  requested through the user interface).
+  \item \textbf{Basic gameplay (primary risk).} The eight tasks are the core of the
+  project. If the game logic cannot correctly present each task and evaluate the
+  user's answers, the project cannot move forward.
+  \item \textbf{WebAssembly conversion (secondary risk).} We intend to convert our
+  Python application to WebAssembly using pygbag. Established tools exist for
+  this, so the risk is smaller, but we still need to confirm that our application
+  (including the 3D projection) works correctly once converted.
+\end{itemize}
+
+Our demonstration will consist of a minimal version of the game in which a single
+fixed round of the eight prescribed tasks can be completed from start to finish.
+The tasks will be hardcoded, so the numbers presented to the user are always the
+same. This lets us exercise the game logic without implementing randomized round
+generation. The demonstration addresses both primary risks: the user will
+navigate the 3D cube and complete each task. To address the secondary risk, the
+demonstration will run in a web browser as a WebAssembly build served from a
+local test server.
+
+The demonstration will be considered successful if the cube is projected
+correctly and updates as the user changes the view through the interface, if all
+eight tasks can be completed without errors in the underlying game logic, and if
+all of the above runs as a WebAssembly build in the browser.
+
+If the 3D visualization proves infeasible, the team will evaluate moving to a
+static or 2D representation of the cube. If the core gameplay proves infeasible,
+a significant reassessment of the project scope would be required. If the
+WebAssembly conversion proves unreliable, the team will evaluate alternative
+conversion tools or moving the frontend to JavaScript.
+
+Lower-risk features are intentionally left out of the demonstration, including
+randomized task generation, scoring, user accounts, deploying the application
+online, and competitive features (daily challenges, leaderboards).
+
 \section{Team Meeting Attendance}
 
 \wss{For each team member how many team meetings have they attended over the
