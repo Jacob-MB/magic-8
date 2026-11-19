@@ -1,0 +1,55 @@
+// Uses hierarchy for the Magic 8 Module Guide (MG.tex, Figure "Use hierarchy among modules").
+// An arrow A -> B means module A uses module B.
+// Regenerate the figure with:
+//   dot -Tpdf UsesHierarchy.dot -o UsesHierarchy.pdf
+
+digraph UsesHierarchy {
+    rankdir = TB;
+    node [shape = box, style = rounded, fontname = "Helvetica", fontsize = 11];
+    edge [arrowsize = 0.7];
+
+    // Hardware-hiding modules
+    VH  [label = "M1\nVirtual Hardware"];
+
+    // Behaviour-hiding modules
+    UI  [label = "M2\nUser Interface"];
+    RE  [label = "M3\nRendering"];
+    N   [label = "M4\nNavigation"];
+    RC  [label = "M5\nRound Control"];
+    R   [label = "M6\nRuleset"];
+    SC  [label = "M7\nScoring"];
+    UM  [label = "M8\nUser Management"];
+    L   [label = "M9\nLeaderboard"];
+    DC  [label = "M10\nDaily Challenge"];
+    T   [label = "M11\nTutorial"];
+    SE  [label = "M12\nSettings"];
+
+    // Software decision modules
+    CR  [label = "M13\nCube Representation"];
+    GDM [label = "M14\nGame Data Management"];
+    RG  [label = "M15\nRound Generation"];
+    TG  [label = "M16\nLine Geometry"];
+    UDM [label = "M17\nUser Data Management"];
+    NBT [label = "M18\nNumber Base Translation"];
+    SCM [label = "M19\nServer Communication"];
+    DCM [label = "M20\nOnline Daily Challenge Manager"];
+
+    // Modules that use no other module sit on the bottom row
+    { rank = sink; VH; R; NBT; SCM; }
+
+    // User Interface is the only point of contact with the user, so it sits at the top
+    UI  -> { N RE NBT VH };
+    N   -> { RC T DC UM L SE };
+    T   -> { RC R };
+    DC  -> { RC R SCM };
+    // Runs on the online server; Daily Challenge reaches its round only through Server Communication
+    DCM -> { RG R };
+    RC  -> { RG TG SC GDM CR R UDM };
+    RG  -> { TG R };
+    // Rendering reads the state it draws from Round Control's read-only access programs
+    RE  -> { RC NBT SE };
+    UM  -> { UDM };
+    L   -> UDM;
+    SE  -> UDM;
+    UDM -> SCM;
+}
