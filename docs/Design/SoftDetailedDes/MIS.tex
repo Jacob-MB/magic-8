@@ -36,6 +36,10 @@ urlcolor=cyan          % color of external links
 \input{../../Comments.text}
 \input{../../Common.text}
 
+\newcounter{mnum}
+\newcommand{\mthemnum}{M\themnum}
+\newcommand{\mref}[1]{M\ref{#1}}
+
 \begin{document}
 
 \title{Module Interface Specification for \progname{}}
@@ -53,7 +57,7 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
+Nov. 18, 2026 & 1.0 & Added Syntax for MIS\\
 Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
@@ -77,16 +81,18 @@ See SRS Documentation at \wss{give url}
 \section{Introduction}
 
 The following document details the Module Interface Specifications for
-\wss{Fill in your project name and description}
+Magic-8, a free-to-play, web-based 3D puzzle game built around an
+8x8x8 magic cube. It states the purpose, users, and project goals: to provide an engaging,
+navigable magic cube experience in which players complete tasks to practice addition and
+subtraction in base 8, supported by an introductory tutorial, guided hints, online competitive
+features, and task-based problem solving.
 
 Complementary documents include the System Requirement Specifications
 and Module Guide.  The full documentation and implementation can be
-found at \url{...}.  \wss{provide the url for your repo}
+found at \url{https://github.com/Jacob-MB/magic-8}.
 
 \section{Notation}
 
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
 
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
@@ -131,21 +137,33 @@ The following table is taken directly from the Module Guide document for this pr
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding} & ~ \\
+Hardware-Hiding Module
+&\refstepcounter{mnum} \mthemnum \label{mVH}: Virtual Hardware Module\\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
+\multirow{11}{0.3\textwidth}{Behaviour-Hiding Module}
+&\refstepcounter{mnum} \mthemnum \label{mUI}: User Interface Module\\
+&\refstepcounter{mnum} \mthemnum \label{mRE}: Rendering Module\\
+&\refstepcounter{mnum} \mthemnum \label{mN}: Navigation Module\\
+&\refstepcounter{mnum} \mthemnum \label{mRC}: Round Control Module\\
+&\refstepcounter{mnum} \mthemnum \label{mR}: Ruleset Module\\
+&\refstepcounter{mnum} \mthemnum \label{mSC}: Scoring Module\\
+&\refstepcounter{mnum} \mthemnum \label{mUM}: User Management Module\\
+&\refstepcounter{mnum} \mthemnum \label{mL}: Leaderboard Module\\
+&\refstepcounter{mnum} \mthemnum \label{mDC}: Daily Challenge Module\\
+&\refstepcounter{mnum} \mthemnum \label{mT}: Tutorial Module\\
+&\refstepcounter{mnum} \mthemnum \label{mSE}: Settings Module\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
+\multirow{8}{0.3\textwidth}{Software Decision Module}
+&\refstepcounter{mnum} \mthemnum \label{mCR}: Cube Representation Module\\
+&\refstepcounter{mnum} \mthemnum \label{mGDM}: Game Data Management Module\\
+&\refstepcounter{mnum} \mthemnum \label{mRG}: Round Generation Module\\
+&\refstepcounter{mnum} \mthemnum \label{mTG}: Line Geometry Module\\
+&\refstepcounter{mnum} \mthemnum \label{mUDM}: User Data Management Module\\
+&\refstepcounter{mnum} \mthemnum \label{mNBT}: Number Base Translation Module\\
+&\refstepcounter{mnum} \mthemnum \label{mSCM}: Server Communication Module\\
+&\refstepcounter{mnum} \mthemnum \label{mDCM}: Online Daily Challenge Manager Module\\
 \bottomrule
 
 \end{tabular}
@@ -153,26 +171,52 @@ The following table is taken directly from the Module Guide document for this pr
 \label{TblMH}
 \end{table}
 
+
 \newpage
 ~\newpage
 
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
-  cross-referencing}
+\section{MIS of Virtual Hardware Module} \mref{mVH} 
 
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\begin{description}
+\item[Secrets:] The interface to the input and output devices.
+\item[Services:]
+\item[Implemented By:] pygame-ce, pygbag, and the web browser
+\end{description}
 
 \subsection{Module}
 
-\wss{Short name for the module}
+vhm
 
 \subsection{Uses}
+
+User Interface Module \mref{mUI}
+
+Rendering Module \mref{mRE}
+
+Navigation Module \mref{mN}
+
+Round Control Module \mref{mRC}
+
+Ruleset Module \mref{mR}
+
+Scoring Module \mref{mSC}
+
+User Management Module \mref{mUM}
+
+Leaderboard Module \mref{mL}
+
+Daily Challenge Module \mref{mDC}
+
+Tutorial Module \mref{mT}
+
+Settings Module \mref{mSE}
 
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
+
+
 
 \subsubsection{Exported Access Programs}
 
@@ -181,53 +225,957 @@ The following table is taken directly from the Module Guide document for this pr
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+main & - & - & - \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{Semantics}
+\newpage
 
-\subsubsection{State Variables}
+\section{MIS of User Interface Module} \mref{mUI} 
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+\begin{description}
+\item[Secrets:] The mapping from user input to commands, and the presentation of the application state to the user, including the drawing of every screen.
+\item[Services:] Reads device input and converts it into commands for \mref{mN}, converting typed answers from the display base with \mref{mNBT}. Draws each screen from the content provided by \mref{mN} and, for the game space, from the view produced by \mref{mRE}.
+\end{description}
 
-\subsubsection{Environment Variables}
+\subsection{Module}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+ui
 
-\subsubsection{Assumptions}
+\subsection{Uses}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+Rendering Module \mref{mRE}
 
-\subsubsection{Access Routine Semantics}
+Navigation Module \mref{mN}
 
-\noindent \wss{accessProg}():
-\begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
-\end{itemize}
+Number Base Translation Module \mref{mNBT}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
 
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\subsection{Syntax}
 
-\subsubsection{Local Functions}
+\subsubsection{Exported Constants}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+load\_components & list & - & EmptyList, ComponentSyntaxError \\
+verify\_components & Component Object & boolean & ValidationError, StateError, DependencyError, CacheError   \\
+load\_component\_map & Coordinate\_Map\_List & - & EmptyList, MapSyntaxError \\
+verify\_map & Coordinate Object & boolean & ValidationError, DependencyError, SizeError, CoordinateError \\
+
+\hline
+\end{tabular}
+\end{center}
 
 \newpage
+
+\section{MIS of Rendering Module} \mref{mRE} 
+
+\begin{description}
+\item[Secrets:] The algorithms to translate the 3D space and game state into a 2D view, including layer isolation and highlighting.
+\item[Services:] Produces the 2D view of the game space from the round state read from \mref{mRC}, for \mref{mUI} to display. It does not display the view itself.
+\end{description}
+
+\subsection{Module}
+
+re
+
+\subsection{Uses}
+
+Round Control Module \mref{mRC}
+
+User Interface Module \mref{mUI}
+
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+space\_into\_2D & 3D Coordinates List & 2D Coordinates List & ConversionError, MissingCoordinateError \\
+extract\_highlighted\_squares & Cell Array & Selection Array &  PointerOutOfBoundsError, TooManySelectionsError \\
+layer\_highlights & $\mathbb{Z}$ & $\mathbb{Z}$ & ImpededLayerError \\
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Navigation Module} \mref{mN} 
+
+\begin{description}
+\item[Secrets:] The structure of the application's screens and menus (including the settings screen) and the transitions between them, including those into and out of a game round.
+\item[Services:] Tracks the current screen, carries out the commands passed in from \mref{mUI}, and provides the content of the current screen to \mref{mUI}.
+\end{description}
+
+\subsection{Module}
+
+nav
+
+\subsection{Uses}
+
+User Interface Module \mref{mUI}
+
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+restart & - & - & CacheOverloadError \\
+to\_tutorial & current\_screen\: $\mathbb{Z}$ & Screen\_Object &  PreviousScreenSaveError, CacheError \\
+to\_game & current\_screen\: $\mathbb{Z}$ & Screen\_Object &  PreviousScreenSaveError, CacheError  \\
+to\_user\_info & current\_screen\: $\mathbb{Z}$ & Screen\_Object &  PreviousScreenSaveError, CacheError, UserNotLoadedError \\
+to\_leaderboard & current\_screen\: $\mathbb{Z}$ & Screen\_Object &  PreviousScreenSaveError, CacheError, DatabaseError \\
+quit & - & - & - \\
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Round Control Module} \mref{mRC} 
+
+\begin{description}
+\item[Secrets:] The state and progression of a round and the tasks within it (e.g., the selected cell and the player's answers).
+\item[Services:] Plays a round given its plane, orientation, starter, and line types; carries out the player's actions and checks them against the ruleset; provides snapshots to \mref{mGDM} for autosave and resume; and records the result through \mref{mUDM} unless the round is marked as a tutorial round. Its read-only access programs provide the round state to \mref{mRE}.
+\end{description}
+
+\subsection{Module}
+
+rc
+
+\subsection{Uses}
+
+ Game Data Management Module \mref{mGDM}
+
+ User Data Management Module \mref{mUDM}
+
+ Rendering Module \mref{mRE}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+start\_round & plane: \{$\mathbb{Z}$, $\mathbb{Z}$\}, orientation: $\mathbb{Z}$, starter: Cube, level: $\mathbb{Z}$ & 3D Coordinates List & MissingInfoError, ConversionError, ListOutOfBoundsError \\
+detect\_input & User Input Object & - & StateError, SaveError \\
+verify\_action & - & Boolean & StateError \\
+appply\_action & User Input Object & Data List, Score List, 3D Coordinates List & DatabaseError, TutorialRoundError, RenderError \\
+
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Ruleset Module} \mref{mR} 
+
+\begin{description}
+\item[Secrets:] The rules of a gameplay round including the number and sequence of tasks, cube order, number-base, additional number counts for each task, valid line-types (e.g., complement, diagonal), and which scoring scheme applies.
+\end{description}
+
+\subsection{Module}
+
+ruleset
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+COMPLEMENT & 1 \\
+HALF\_ORTHOGONAL\_X & 2 \\
+HALF\_ORTHOGONAL\_Y & 3 \\
+HALF\_ORTHOGONAL\_Z & 4 \\
+ORTHOGONAL\_X & 5 \\
+ORTHOGONAL\_Y & 6 \\
+ORTHOGONAL\_Z & 7 \\
+DIAGONAL\_XY\_SAME & 8 \\
+DIAGONAL\_XY\_DIFF & 9 \\
+DIAGONAL\_XZ\_SAME & 10 \\
+DIAGONAL\_XZ\_DIFF & 11 \\
+DIAGONAL\_YZ\_SAME & 12 \\
+DIAGONAL\_YZ\_DIFF & 13 \\
+TRIAGONAL\_XYZ\_SAME & 14 \\
+TRIAGONAL\_XY\_SAME\_Z\_DIFF & 15 \\
+TRIAGONAL\_XZ\_SAME\_Y\_DIFF & 16 \\
+TRIAGONAL\_YZ\_SAME\_X\_DIFF & 17 \\
+number\_base&8 \\
+tasks\_per\_round&8 \\
+complement\_sum&0o1001 \\
+half\_line\_sum&0o2002 \\
+full\_line\_sum&0o4004 \\
+half\_line\_extra\_counts&range(1, 3) \\
+full\_line\_extra\_counts&range(1, 6) \\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+line\_sum & task\_type: TaskType & magic \_ sum: $\mathbb{Z}$ & MissingTypeError, DatabaseMissingCubeTypeError \\
+has\_addition\_step & task\_type: TaskType & Boolean & MissingTypeError, DatabaseMissingStepError \\
+allowed\_extra\_count & task\_type: TaskType & extra\_nums: List & MissingTypeError, DatabaseMissingListError, OutOfBoundsExtraNumsError \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Scoring Module} \mref{mSC} 
+
+\begin{description}
+\item[Secrets:] The available scoring schemes, and the algorithms each uses to calculate task/round scores and performance metrics.
+\end{description}
+
+\subsection{Module}
+
+score
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+DECIMAL\_SCORE\_ADDITION & 10 \\
+OCTAL\_SCORE\_ADDITION & 14 \\
+DECIMAL\_TIME\_MULT & 1350 \\
+OCTAL\_TIME\_MULT & 2506 \\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+spawn\_stopwatch & - & - & APINotAvailableError, StopwatchAlreadySpawnedError \\
+get\_time & - & time: $\mathbb{R}$ & APINotAvailableError, RestartError \\
+add\_to\_score & task\_base: char & - & AdditionError, PreviousAdditionBaseDifferentError, TimeError \\
+get\_final\_score & - & final\_score: $\mathbb{N}$ & TimeError, MissingScoringModuleError, DifferentBaseError \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{User Management Module} \mref{mUM} 
+
+\begin{description}
+\item[Secrets:] The algorithms used to authenticate users and manage user accounts (e.g., create/delete account, login/logout, password reset), to keep track of the current user's session (logged in or playing as a guest), and to compute a user's personal statistics (e.g., completed rounds, highest and average score, fastest round time) from their recorded round results.
+\item[Services:] Carries out account actions, and on login or logout sets the current user (or guest) in \mref{mUDM}. Computes personal statistics from the results read from \mref{mUDM} when they are viewed.
+\end{description}
+
+\subsection{Module}
+
+user\_management
+
+\subsection{Uses}
+
+User Data Management Module \mref{mUDM}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+login & username: string, password: string & user\_info: list & UserDatabaseNotAvailable, IncorrectInformationError \\
+logout & - & Boolean & - \\
+create\_account & username: string, password: string, confirm\_password: string & Boolean & UsernameTakenError, PasswordDoesntMatchError, UserDatabaseNotAvailable \\
+delete\_account & - & - & UserDatabaseNotAvailable \\
+password\_reset & password: string, confirm\_password: string & Boolean & PasswordDoesntMatchError, UserDatabaseNotAvailable \\
+user\_progress\_cache & task\_information: Object & - & CacheFullError, IncorrectInformationError \\
+storage\_conversion & final\_information : cache Object & user\_game\_data: arr & ConversionError, CacheEmptyError, UserDatabaseNotAvailable\\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Leaderboard Module} \mref{mL} 
+
+\begin{description}
+\item[Secrets:] The data structure and algorithms used to select and rank recorded round results into leaderboards (e.g., by scoring base, score or time, all-time or daily challenge).
+\end{description}
+
+\subsection{Module}
+
+user\_management
+
+\subsection{Uses}
+
+User Data Management Module \mref{mUDM}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+get\_leaderboards & - & leaderboards: list of Leaderboard Objects & DailyChallengeDatabaseNotAvailable \\
+get\_leaderboard & leaderboards: list of Leaderboard Objects & Leaderboard Object & SeperationError \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Daily Challenge Module} \mref{mDC} 
+
+
+\begin{description}
+\item[Secrets:] How the day's round is obtained from the online server and played on the user's device.
+\item[Services:] Fetches the day's round from \mref{mDCM} through \mref{mSCM} and plays it through \mref{mRC}, marked as a daily challenge round so its result is recorded for that day's leaderboard.
+\end{description}
+
+\subsection{Module}
+
+daily\_challenge
+
+\subsection{Uses}
+
+Online Daily Challenge Manager Module (\mref{mDCM})
+
+Server Communication Module (\mref{mSCM})
+
+Round Control Module (\mref{mRC})
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+get\_round & - & plane: \{$\mathbb{Z}$, $\mathbb{Z}$\}, orientation: $\mathbb{Z}$, starter: Cube, level: $\mathbb{Z}$ & DailyChallengeDatabaseNotAvailable, TypeError \\
+start\_round & plane: \{$\mathbb{Z}$, $\mathbb{Z}$\}, orientation: $\mathbb{Z}$, starter: Cube, level: $\mathbb{Z}$ & - & GameInformationError \\
+save\_round\_information & final\_score: $\mathbb{N}$ & - & GameNotFinishedError, DataNotSavedError, CheatingError \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Tutorial Module} \mref{mT} 
+
+
+\begin{description}
+\item[Secrets:] The content and order of the tutorial's steps, and the fixed round they are played on.
+\item[Services:] Plays the fixed round through \mref{mRC}, marked as a tutorial round so its result is not recorded, and provides the instruction for the step the player has reached.
+\end{description}
+
+\subsection{Module}
+
+tutorial
+
+\subsection{Uses}
+
+Round Control Module \mref{mRC}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+start\_magic\_cube & - & Navigation Object, 3D Coordinates List & TutorialNotLoadedError, NavigationUIError, MissingExamplesError \\
+start\_octal & - & Navigation Object, 3D Coordinates List & TutorialNotLoadedError, NavigationUIError, MissingExamplesError \\
+completion\_check & - & Boolean & UserDatabaseError \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Settings Module} \mref{mSE} 
+
+
+\begin{description}
+\item[Secrets:] The application's settings and the algorithms to access and modify them (e.g., turning off animations and configuring the play-time reminder).
+\end{description}
+
+\subsection{Module}
+
+settings
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+change\_settings & base: char, order: char  & Boolean & NoCubeFoundError \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Cube Representation Module} \mref{mCR} 
+
+
+\begin{description}
+\item[Secrets:] The data structure used to store the numbers of the magic cube and look them up by cell.
+\item[Services:] Builds a cube of a given size from its numbers, checks that each number appears exactly once, and returns the number in a given cell. The cube size is passed in by the caller, so this module does not use \mref{mR}.
+\end{description}
+
+\subsection{Module}
+
+cube\_rep
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+init & values: List of List of List of Cell Objects  & - & CubeBoundsError, InitializationError \\
+value\_at & cell: Coord Object  & value: $\mathbb{R}$ & CubeBoundsError, EmptyCellError \\
+check\_shape & values: List of List of List of Cell Objects & Boolean & IncorrectShapeError\\
+check\_numbers & - & Boolean & NumAppearsMoreThanOnceError, NotAllNumbersAppearErrpr\\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Game Data Management Module} \mref{mGDM} 
+
+
+\begin{description}
+\item[Secrets:] The algorithms to save, modify, delete, and load snapshots of the in-progress round, stored on the device for autosave and resume.
+\end{description}
+
+\subsection{Module}
+
+game\_data\_mgmt
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+save\_current\_round & game\_information: Round Control Object, plane: \{$\mathbb{Z}$, $\mathbb{Z}$\}, orientation: $\mathbb{Z}$, starter: Cube, level: $\mathbb{Z}$, 3D Coordinates List  & round\_cache: Cache Object & CacheFullError, IncorrectGameError \\
+remove\_session & - & - & UnableToDeleteError \\
+resume\_game & cache: Cache Object & game\_information: Round Control Object, plane: \{$\mathbb{Z}$, $\mathbb{Z}$\}, orientation: $\mathbb{Z}$, starter: Cube, level: $\mathbb{Z}$, 3D Coordinates List & CacheEmptyError \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Round Generation Module} \mref{mRG} 
+
+
+\begin{description}
+\item[Secrets:] The algorithms used to choose a round's plane, orientation, starter, and the line type for each task, consistent with the ruleset.
+\end{description}
+
+\subsection{Module}
+
+round\_generator
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+new\_round & rules: Ruleset Object, level: $\mathbb{Z}$, 3D Coordinates List  & - & RulesError, IncorrectGameError \\
+change\_plane & new\_plane: User Input Object & plane: \{$\mathbb{Z}$, $\mathbb{Z}$\} & IncorrectFormationError \\
+change\_orientation & new\_orientation: User Input Object & orientation: $\mathbb{Z}$ & IncorrectFormationError \\
+change\_starter & starter\_formation: string & starter: Cube & IncorrectFormationError \\
+change\_type & new\_type: char & 3D Coordinates List, rules: Ruleset Object & IncorrectFormationError \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Line Geometry Module} \mref{mTG} 
+
+
+\begin{description}
+\item[Secrets:] The algorithms used to compute the cells of a line in the cube from a starter and a line type, including wrapping for split lines, whether a line is continuous, and the order in which the line is traced.
+\item[Services:] Given a cube size, a starter cell, and a line type, returns the line's other cells in the order they are traced, and whether the line is continuous or split. The cube size is passed in by the caller, so this module does not use \mref{mR}.
+\end{description}
+
+\subsection{Module}
+
+line 
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+complement\_sum&0o1001 \\
+half\_line\_sum&0o2002 \\
+full\_line\_sum&0o4004 \\
+half\_line\_extra\_counts&range(1, 3) \\
+full\_line\_extra\_counts&range(1, 6) \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+find\_line & level: $\mathbb{Z}$, 3D Coordinates List, magic\_constant: $\mathbb{Z}$, rules: Ruleset Object  & Line: List of Cell Objects & LineCantBeFoundError \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{User Data Management Module} \mref{mUDM} 
+
+
+\begin{description}
+\item[Secrets:] The data structure and algorithms to save, modify, delete, and load user data, including account records, settings, used starters, and recorded round results (the source of personal statistics and leaderboard rankings).
+\item[Services:] Saves and loads data for the current user set by \mref{mUM}. A guest's data is kept only on the device; a logged-in user's data is kept on the server through \mref{mSCM}. Also loads the recorded round results of all users from the server, for \mref{mL} to rank.
+\end{description}
+
+\subsection{Module}
+
+user\_data\_mgmt 
+
+\subsection{Uses}
+
+User Management Module \mref{mUM}
+
+Server Communication Module \mref{mSCM}
+
+Leaderboard Module \mref{mL}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+save\_data & signed\_in\_user: Boolean  & confirmation: cache Object & UserDatabaseError, CacheFullError \\
+load\_data & signed\_in\_user: Boolean, user\_id: String  & previous\_game: cache Object, user\_info: Record & UserDatabaseError, NotSignedInError \\
+convert\_all\_data & all\_information: database Object & ranked\_information: List of Record & UserDatabaseError, ConversionError \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Number Base Translation Module} \mref{mNBT} 
+
+
+\begin{description}
+\item[Secrets:] The algorithms to convert between the decimal-base values used in gameplay logic and their external user representation in the given number base.
+\end{description}
+
+\subsection{Module}
+
+base\_translation
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+DIGITS & "0123456789ABCDEF" \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+to\_display & value: $\mathbb{Z}$, base: $\mathbb{Z}$ & string\_representation: String & ConversionError \\
+parse\_answer & text: String, base: $\mathbb{Z}$  & number: $\mathbb{Z}$ & ConversionError, EmptyStringError \\
+check\_base & base: $\mathbb{Z}$ & Boolean & BaseNotSupportedError \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Server Communication Module} \mref{mSCM} 
+
+
+\begin{description}
+\item[Secrets:] The protocol and interface used to exchange data with the online server, including the server's request formats, secure transport, and the handling of failed requests.
+\end{description}
+
+\subsection{Module}
+
+server\_cm
+
+\subsection{Uses}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+ping\_server & server\_info: Server Object & active: Boolean & DatabaseNotFoundError, DatabaseNotActiveError \\
+encrypt\_data & user\_information: Object, key: String & encrypted\_user\_information: bytes & EncryptionError \\
+decrypt\_data & encrypted\_user\_information: bytes, key: String & user\_information: Server Object (like JSON) & DecryptionError \\
+add\_to\_server & server\_info: Server Object, data: Object & confirmation: Server Object & DatabaseNotFoundError, DatabaseNotActiveError, WrongSchemaError \\ 
+read\_db & query: SQL query, server\_info: Server Object  & returned\_data: bytes & DatabaseNotFoundError, DatabaseNotActiveError, WrongQueryError \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\section{Online Daily Challenge Manager Module} \mref{mDCM} 
+
+
+\begin{description}
+\item[Secrets:] The algorithms used to create, schedule, and store the daily round on the online server so that every user receives the same round.
+\item[Services:] Creates one round each day using \mref{mRG} and the daily challenge ruleset from \mref{mR}, and serves that round to every client that requests it. Runs on the online server, not on the user's device.
+\item[Implemented By:]
+\item[Type of Module:]
+\end{description}
+
+\subsection{Module}
+
+odcm
+
+\subsection{Uses}
+
+Round Generation Module {\mref{mRG}}
+Ruleset Module {\mref{mR}}
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\begin{center}
+\begin{tabular}{p{10cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{Value}\\
+\hline
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+create\_dc & rules: Ruleset Object & daily\_challenge: DailyChallenge Object, starter: Cube, level: $\mathbb{Z}$, 3D Coordinates List & InvalidRulesError \\
+start\_dc & daily\_challenge: DailyChallenge Object, starter: Cube, level: $\mathbb{Z}$, 3D Coordinates List, dc\_server\_connectrion: Server Object & - & DatabaseNotAvailable, CheatingDetectedError \\
+\hline
+\end{tabular}
+\end{center}
 
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
@@ -310,4 +1258,13 @@ graduate attribute of Problem Analysis and Design.
 
 \end{enumerate}
 
+Team Answers:
+\begin {enumerate}
+  \item So far, only writing the syntax, it was fairly easy to base it on the PoC the team started working on. There had to be some decomposing of the strict modules the team has made for the PoC, but it was easily done alongside projecting how future modules will be written.
+  \item Some pain points were linking the modules together, but this was solved by looking at the use hieracrchy in the module guide. It is still difficult to discern what arguments and parameters are shared between each module and their specific types. In order to solve this, the modules are seen as abstract as possible and the arguments are seen as objects.
+  \item After speaking with the stakeholder, it helped the team finalize the extra stuff they want in their project, such as adding daily challenges and tutorials. These will require additional modules, which are initialized in the syntax section of the MIS and in the MG. The initial ideas came from the supervisor, which was used as the root for the SRS, which was used to develop the MG and MIS.
+  \item The requirements document and initial PoC was used as the starting point to brainstorm the modules in the Module Guide. The MIS was then written based on MG.
+  \item Some limitations are due to having the project based on a browser, which can result in problems if saving to a browser cache and showcasing the 3D visualization. It is possible to run out of the browser cache if multiple tabs are open and we are still unaware of how much data is being stored in the first place. In a perfect world, the virtual environment will contain infinite cache or RAM, allowing the project to run while the user is using something else. This will allow the team to not worry about storing data in a browser cache or a database \textbf{efficiently}.
+  \item The team considered making the program an application, which can be used as an .exe. The benefits of this would be that the team will not have to struggle to store the intricacies of keeping exactly where the user stopped playing on a browser (an application will allow the team to store /textbf{all} data locally). However, a benefit is making sure the project is portable and accessible to all users, which would be the easiest if the game was on a website (allowing younger/tech-illiterate users to play it). We chose this solution because the supervisor wanted to showcase the project on a website.
+\end{enumerate}
 \end{document}
