@@ -31,6 +31,7 @@ September 28, 2026 & Josh Engel & Added Team charter\\
 September 28, 2026 & Amos Edeaghe & Added Expected Technology and Coding Standard\\
 September 28, 2026 & Allen Tong & Added Copyright License and Use of AI\\
 September 28, 2026 & All members & Added individual reflections and chose roles\\
+November 19, 2026 & Jacob Brodersen & Aligned PoC plan and Expected Technology with the PoC demo plan\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -181,23 +182,26 @@ The Final Documentation will contain the Problem Statement, Development Plan, Pr
 
 \section{Proof of Concept Demonstration Plan}
 
-Two of the greatest risks currently identified for this project are the 3D visualization of the magic cube and the implementation of the base design of the game and its eight stages. The 3D visualization represents the largest risk that the POC will attempt to address. 
-This is because, for the game to function as currently envisioned, 3D visualization is a hard requirement; however, the group has little to no experience working with 3D visualization. The other risk to be addressed is the base logic of the game itself. 
+Two of the greatest risks currently identified for this project are the 3D visualization of the magic cube and the implementation of the base design of the game and its eight stages. The 3D visualization represents the largest risk that the POC will attempt to address.
+This is because, for the game to function as currently envisioned, 3D visualization is a hard requirement; however, the group has little to no experience working with 3D visualization, and we plan to implement the projection calculations ourselves rather than rely on a pre-built renderer. It is therefore uncertain whether we can correctly project the magic cube onto the screen and keep that projection accurate and readable as the viewpoint changes (e.g., rotation and zoom requested through the user interface). Because the cube is 8x8x8, the user must also be able to isolate a single layer and see which layer and cells are selected in order to reach and choose cells inside the cube. The other primary risk to be addressed is the base logic of the game itself.
 This has been identified as a risk because if the base functionality cannot be implemented, then any further development would be ineffective.
+A secondary risk is the conversion of our Python application to WebAssembly using pygbag. Established tools exist for this, so the risk is smaller, but we still need to confirm that our application (including the 3D projection) works correctly once converted.
 
-To address these risks, the POC will consist of a minimal version of the game in which we will be able to demonstrate a user moving through a 3D magic cube and completing the eight tasks outlined in the project description. 
-These tasks will be simplified and hardcoded versions of the final product, where the numbers provided to the user will always remain the same. This will allow us to test the functionality of the tasks without requiring the random elements of the game to be implemented. 
-The POC will be considered successful if the magic cube can be rendered and interacted with in 3D, and if the user can successfully complete all eight tasks without any critical issues with the underlying game logic.
+To address these risks, the POC will consist of a minimal version of the game in which we will be able to demonstrate a user rotating and zooming a 3D magic cube, selecting a single layer along any axis (with the other layers faded or hidden), stepping between layers and restoring the full cube, and completing a single fixed round of the eight tasks outlined in the project description, with the chosen layer and selected cells highlighted.
+These tasks will be simplified and hardcoded versions of the final product, where the numbers provided to the user will always remain the same. This will allow us to test the functionality of the tasks without requiring the random elements of the game to be implemented.
+To address the secondary risk, the POC will run in a web browser as a WebAssembly build served from a local test server.
+The POC will be considered successful if the magic cube is projected correctly and updates as the user changes the view through the interface, if the user can isolate and step through layers with the chosen layer and selected cells clearly highlighted, if the user can successfully complete all eight tasks without any errors in the underlying game logic, and if all of the above runs as a WebAssembly build in the browser.
+Lower-risk features are intentionally left out of the POC, including randomized round generation, scoring, tutorials, hints, settings, game saving, navigation between screens and menus, user accounts, deploying the application online, and competitive features (daily challenges, leaderboards).
 
 If the demo were to fail, the consequences for the project as a whole would depend on which risk caused the failure. If the implementation of the eight stages of the game were to fail, a significant discussion regarding the future of the project would be necessary. 
 This would indicate that the group is unable to deliver the fundamental functionality required by the project and may require a significant deviation from the original capstone plan. 
 If the 3D visualization were to fail, the group would instead need to evaluate the possibility of transitioning to a static or 2D version of the visuals rather than continuing with the current 3D plan.
+If the WebAssembly conversion were to prove unreliable, the group would evaluate alternative conversion tools or moving the frontend to JavaScript.
 
 \section{Expected Technology}
 
 Due to familiarity the team will likely use Python as the main language to build the project with consideration for JavaScript as for the web frontend.
- For current consideration on game implementation the team expects to use the following libraries: the pygame community edition pygame-ce library for implementing the game logic and functional loop, a 3D engine such as Panda3D or Harfang3D, if Panda3D provides issues, 
- for asset handling and 3D rendering, pygbag to convert the application into WebAssembly packages to allow the game to run efficiently as a webgame, and asyncio for asynchronous event handling to run logic on the browser between game frames with further libraries to be discussed as the project develops such as the possible use of NumPy or researching JavaScript libraries. 
+ For current consideration on game implementation the team expects to use the following libraries: the pygame community edition pygame-ce library for implementing the game logic and functional loop as well as drawing the 3D view, with the 3D projection calculations implemented by the team rather than relying on a pre-built 3D engine, pygbag to convert the application into WebAssembly packages to allow the game to run efficiently as a webgame, and asyncio for asynchronous event handling to run logic on the browser between game frames with further libraries to be discussed as the project develops such as the possible use of NumPy or researching JavaScript libraries. 
  The team also plans to make use of readily available assets for the game with agent design for the cube visuals or generating new cubes in different bases when pursuing our stretch goals that would make use of AI agents such as Claude. 
 
  For tools team members will use their preferred IDE with the most commonly used being Visual Studio Code, GitHub, GitHub projects and Git will be used for version control as laid out in the Workflow Plan. As continuous integration is planned we will make use GitHub Actions to run our testing, build and linting tools for each push, 
