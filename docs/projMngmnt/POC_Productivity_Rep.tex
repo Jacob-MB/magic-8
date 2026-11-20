@@ -36,6 +36,56 @@ the report.}
 
 \wss{What will you be demonstrating}
 
+The feasibility risks associated with this project lie in three areas:
+
+\begin{itemize}
+  \item \textbf{3D visualization (primary risk).} The team has limited experience
+  with 3D graphics, and we plan to implement the projection calculations ourselves
+  rather than rely on a pre-built renderer. It is therefore uncertain whether we
+  can correctly project the magic cube onto the screen and keep that projection
+  accurate and readable as the viewpoint changes (e.g., rotation and zoom
+  requested through the user interface). Because the cube is $8\times8\times8$,
+  the user must also be able to isolate a single layer and see which layer and
+  cells are selected in order to reach and choose cells inside the cube.
+  \item \textbf{Basic gameplay (primary risk).} The eight tasks are the core of the
+  project. If the game logic cannot correctly present each task and evaluate the
+  user's answers, the project cannot move forward.
+  \item \textbf{WebAssembly conversion (secondary risk).} We intend to convert our
+  Python application to WebAssembly using pygbag. Established tools exist for
+  this, so the risk is smaller, but we still need to confirm that our application
+  (including the 3D projection) works correctly once converted.
+\end{itemize}
+
+Our demonstration will consist of a minimal version of the game in which a single
+fixed round of the eight prescribed tasks can be completed from start to finish.
+The tasks will be hardcoded, so the numbers presented to the user are always the
+same. This lets us exercise/demonstrate the game logic without implementing randomized round
+generation. The demonstration addresses both primary risks: the user will
+navigate the 3D cube by rotating and zooming, select a single layer along any
+axis (with the other layers faded or hidden), step between layers and restore
+the full cube, and complete each task, with the chosen layer and selected cells
+highlighted. To address the secondary risk, the
+demonstration will run in a web browser as a WebAssembly build served from a
+local test server.
+
+The demonstration will be considered successful if the cube is projected
+correctly and updates as the user changes the view through the interface, if
+the user can isolate and step through layers with the chosen layer and selected
+cells clearly highlighted, if all
+eight tasks can be completed without errors in the underlying game logic, and if
+all of the above runs as a WebAssembly build in the browser.
+
+If the 3D visualization proves infeasible, the team will evaluate moving to a
+static or 2D representation of the cube. If the core gameplay proves infeasible,
+a significant reassessment of the project scope would be required. If the
+WebAssembly conversion proves unreliable, the team will evaluate alternative
+conversion tools or moving the frontend to JavaScript.
+
+Lower-risk features are intentionally left out of the demonstration, including
+randomized round generation, scoring, tutorials, hints, settings, game saving, navigation between screens and menus, user accounts, deploying
+the application online, and competitive features (daily challenges,
+leaderboards).
+
 \section{Team Meeting Attendance}
 
 \wss{For each team member how many team meetings have they attended over the
@@ -49,12 +99,12 @@ number of team meetings held by the team.}
 \toprule
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
-Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+Total & 11\\
+Jacob Brodersen & 11\\
+Joshua Engel & Num\\
+Nehan Munir & Num\\
+Amos Edeaghe & Num\\
+Allen Tong & Num\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -70,7 +120,7 @@ table should be the total number of supervisor and team meetings held by the
 team.  If there is no supervisor, there will usually be meetings with
 stakeholders (potential users) that can serve a similar purpose.}
 
-\noindent \textbf{Supervisor's Name: } [fill in this information]
+\noindent \textbf{Supervisor's Name: Dr. Paul Rapoport} [fill in this information]
 
 \begin{table}[H]
 \centering
@@ -78,12 +128,12 @@ stakeholders (potential users) that can serve a similar purpose.}
 \toprule
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
-Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+Total & 4\\
+Jacob Brodersen & 4\\
+Joshua Engel & Num\\
+Nehan Munir & Num\\
+Amos Edeaghe & Num\\
+Allen Tong & Num\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -103,18 +153,20 @@ table should be the total number of lectures held for the class during the perio
 \wss{NOTE: There will be approximately 13 lectures between the start of class
 and the POC demos}
 
+Note: The total includes the optional TRON lectures.
+
 \begin{table}[H]
 \centering
 \begin{tabular}{ll}
 \toprule
 \textbf{Student} & \textbf{Lectures}\\
 \midrule
-Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+Total & 13\\
+Jacob Brodersen & 13\\
+Joshua Engel & Num\\
+Nehan Munir & Num\\
+Amos Edeaghe & Num\\
+Allen Tong & Num\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -135,12 +187,12 @@ total number of discussion meetings scheduled by the TA with the team.}
 \toprule
 \textbf{Student} & \textbf{Meetings}\\
 \midrule
-Total & Num\\
-Name 1 & Num\\
-Name 2 & Num\\
-Name 3 & Num\\
-Name 4 & Num\\
-Name 5 & Num\\
+Total & 4\\
+Jacob Brodersen & 4\\
+Joshua Engel & Num\\
+Nehan Munir & Num\\
+Amos Edeaghe & Num\\
+Allen Tong & Num\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -165,6 +217,11 @@ information, these numbers will be interpreted with care.}
 team member.  This is a measure of how many contributions were made in branches,
 which may not be reflected in the commit counts for the main branch.}
 
+Note: In the Total row, a co-authored commit (and its additions and deletions)
+is counted once for each of its co-authors. Also, some authors are not team members
+(e.g., Claude and GitHub Actions), so the team members' rows will not sum to the
+Total row.
+
 \begin{table}[H]
 \centering
 \begin{tabular}{lllllll}
@@ -172,8 +229,8 @@ which may not be reflected in the commit counts for the main branch.}
 \textbf{Student} & \textbf{Commits} & \textbf{Percent} & \textbf{Lines Added} &
 \textbf{Lines Deleted} & \textbf{Pull Requests}\\
 \midrule
-Total & Num & 100\% & total added & total deleted & total PRs\\
-Name 1 & Num & \% & num & num & num\\
+Total & 310 & 100\% & 26142 & 6800 & 39\\
+Jacob Brodersen & 167 & 54\% & 16537 & 3187 & 16\\
 Name 2 & Num & \% & num & num & num\\
 Name 3 & Num & \% & num & num & num\\
 Name 4 & Num & \% & num & num & num\\
@@ -199,7 +256,7 @@ issues (C only)) over the time period of interest.}
 \toprule
 \textbf{Student} & \textbf{Authored (O+C)} & \textbf{Assigned (C only)}\\
 \midrule
-Name 1 & Num & Num \\
+Jacob Brodersen & 67 & 32 \\
 Name 2 & Num & Num \\
 Name 3 & Num & Num \\
 Name 4 & Num & Num \\
