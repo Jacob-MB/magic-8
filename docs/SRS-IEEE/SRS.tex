@@ -117,6 +117,7 @@ October 19, 2026 & Allen Tong & Added Sections 6, 7, 9 and updated sections 11, 
 October 19, 2026 & Amos Edeaghe & Added Sections 1, 10 and updated sections 11, 12, 13\\
 October 19, 2026 & Joshua Engel & Added Sections 2, 8 and updated sections 11, 12, 13\\
 October 19, 2026 & All Team Members & Added Reflection\\
+November 19, 2026 & Jacob Brodersen & Aligned Appendix B Phase 1 with the PoC demo plan and specified the 3D rendering approach in System Constraints\\
 \bottomrule
 \end{tabularx}
 
@@ -493,8 +494,9 @@ It will then be translated into webassembly code for execution in browser. This 
 translatable with the chosen tool into webassembly including anything used for the user interface of the application.
 
 The system shall also support online account functionality, requiring network communication with the selected 
-service for remote data operations. The specific service, supported web browsers, and rendering technologies 
-are yet to be established. This will happen as implementation decisions are finalized.
+service for remote data operations. The 3D game space will be drawn with pygame-ce, using projection calculations implemented
+by the team rather than a pre-built 3D engine. The specific service and supported web browsers are yet to be established.
+This will happen as implementation decisions are finalized.
 
 % ============================================================== 
 \section{Stakeholder Requirements}
@@ -2222,7 +2224,7 @@ organized around hedging the major risks of 3D visualization and the base game's
 
 \subsubsection{Phase 1: Proof of concept}
 
- Phase 1 is the POC, a hardcoded, minimal version of the game aimed at validating the two main risks. 
+ Phase 1 is the POC, a hardcoded, minimal version of the game in which a single fixed round of the eight tasks can be completed. It is aimed at validating the two main risks (3D visualization and core gameplay) and the secondary risk of converting the application to WebAssembly with pygbag.
  The requirements involved in this part are: 
   \begin{itemize}
   \item Round setup: FR1, FR2, FR3, FR4, FR5 
@@ -2231,8 +2233,11 @@ organized around hedging the major risks of 3D visualization and the base game's
   \item Task implementation: FR19, FR20, FR21, FR22; these are all checks that should be available even in a hardcoded version of tasks.
   \end{itemize}
 
-  \textbf{Success criteria:} The cube fully renders and can be navigated according to the 3D visualization requirements; the user must be able to complete
-  all 8 tasks without logic issues. If the 3D visualization fails, a transition to a different implementation method or 2D must be evaluated.
+  \textbf{Success criteria:} The cube is projected correctly and updates as the user changes the view through the interface; the user must be able to isolate and step through layers, with the chosen layer
+  and selected cells clearly highlighted; the user must be able to complete
+  all 8 tasks without errors in the underlying game logic; and all of the above must run as a WebAssembly build in the browser, served from a local test server.
+  If the 3D visualization fails, a transition to a static or 2D representation of the cube must be evaluated. If the core gameplay fails, a significant reassessment
+  of the project scope is required. If the WebAssembly conversion is unreliable, alternative conversion tools or moving the frontend to JavaScript must be evaluated.
 
 \subsubsection{Phase 2: Core game loop implementation}
 
