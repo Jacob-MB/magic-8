@@ -44,7 +44,9 @@ The feasibility risks associated with this project lie in three areas:
   rather than rely on a pre-built renderer. It is therefore uncertain whether we
   can correctly project the magic cube onto the screen and keep that projection
   accurate and readable as the viewpoint changes (e.g., rotation and zoom
-  requested through the user interface).
+  requested through the user interface). Because the cube is $8\times8\times8$,
+  the user must also be able to isolate a single layer and see which layer and
+  cells are selected in order to reach and choose cells inside the cube.
   \item \textbf{Basic gameplay (primary risk).} The eight tasks are the core of the
   project. If the game logic cannot correctly present each task and evaluate the
   user's answers, the project cannot move forward.
@@ -57,14 +59,19 @@ The feasibility risks associated with this project lie in three areas:
 Our demonstration will consist of a minimal version of the game in which a single
 fixed round of the eight prescribed tasks can be completed from start to finish.
 The tasks will be hardcoded, so the numbers presented to the user are always the
-same. This lets us exercise the game logic without implementing randomized round
+same. This lets us exercise/demonstrate the game logic without implementing randomized round
 generation. The demonstration addresses both primary risks: the user will
-navigate the 3D cube and complete each task. To address the secondary risk, the
+navigate the 3D cube by rotating and zooming, select a single layer along any
+axis (with the other layers faded or hidden), step between layers and restore
+the full cube, and complete each task, with the chosen layer and selected cells
+highlighted. To address the secondary risk, the
 demonstration will run in a web browser as a WebAssembly build served from a
 local test server.
 
 The demonstration will be considered successful if the cube is projected
-correctly and updates as the user changes the view through the interface, if all
+correctly and updates as the user changes the view through the interface, if
+the user can isolate and step through layers with the chosen layer and selected
+cells clearly highlighted, if all
 eight tasks can be completed without errors in the underlying game logic, and if
 all of the above runs as a WebAssembly build in the browser.
 
@@ -75,8 +82,9 @@ WebAssembly conversion proves unreliable, the team will evaluate alternative
 conversion tools or moving the frontend to JavaScript.
 
 Lower-risk features are intentionally left out of the demonstration, including
-randomized task generation, scoring, user accounts, deploying the application
-online, and competitive features (daily challenges, leaderboards).
+randomized round generation, scoring, tutorials, hints, settings, game saving, navigation between screens and menus, user accounts, deploying
+the application online, and competitive features (daily challenges,
+leaderboards).
 
 \section{Team Meeting Attendance}
 
@@ -208,6 +216,11 @@ information, these numbers will be interpreted with care.}
 \wss{The pull requests column counts the number of pull requests created by each
 team member.  This is a measure of how many contributions were made in branches,
 which may not be reflected in the commit counts for the main branch.}
+
+Note: In the Total row, a co-authored commit (and its additions and deletions)
+is counted once for each of its co-authors. Also, some authors are not team members
+(e.g., Claude and GitHub Actions), so the team members' rows will not sum to the
+Total row.
 
 \begin{table}[H]
 \centering
