@@ -1,0 +1,6 @@
+# Packages for running the Magic-8 PoC (see src/README.md).
+# Needs Python 3.10 or newer.
+# Versions are pinned so every team member builds the same web game:
+# pygbag's output changes between releases.
+pygame==2.6.1
+pygbag==0.9.3
