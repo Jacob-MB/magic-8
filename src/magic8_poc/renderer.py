@@ -26,6 +26,7 @@ HIDDEN_FILL = (120, 130, 150)
 LAYER_FILL = (150, 140, 110)
 STARTER_FILL = (235, 190, 60)
 CORRECT_FILL = (80, 180, 100)
+ADDITION_FILL = (70, 140, 200)
 INCORRECT_FILL = (200, 80, 80)
 FACE_EDGE_COLOUR = (25, 25, 25)
 CURSOR_COLOUR = (255, 230, 0)
@@ -193,6 +194,10 @@ class Renderer:
             return STARTER_FILL
         if cell in game_round.incorrect_cells:
             return INCORRECT_FILL
+        # The cells to add up, so the player can tell them apart from the
+        # rest of the found line.
+        if cell in game_round.addition_cells:
+            return ADDITION_FILL
         if cell in game_round.correct_cells:
             return CORRECT_FILL
         if layer_isolated:

@@ -13,7 +13,7 @@ Controls:
     Right mouse click              Select the cell under the mouse
     W A S D                        Move the cursor
     SPACE                          Select the cursor's cell
-    1 / 2 / 3                      Isolate a layer across x / y / z (again to show all)
+    X / Y / Z                      Isolate a layer across x / y / z (again to show all)
     Q / E                          Previous / next layer
     ENTER                          Start the next task, or submit an answer
 """
@@ -30,7 +30,7 @@ from magic8_poc.game_round import Phase, Round, SelectResult
 from magic8_poc.lines import Coord
 from magic8_poc.number_base import DIGITS, parse_answer, to_display
 from magic8_poc.renderer import RenderedFrame, Renderer, View
-from magic8_poc.ruleset import CUBE_SIZE, TaskType
+from magic8_poc.ruleset import CUBE_SIZE, HALF_LINE_TYPES, TaskType
 
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 750
@@ -45,6 +45,7 @@ HEADING_COLOUR = (255, 230, 0)
 SUCCESS_COLOUR = (120, 220, 130)
 ERROR_COLOUR = (255, 110, 110)
 HINT_COLOUR = (170, 170, 185)
+ANSWER_BOX_FILL = (50, 50, 65)
 
 AXIS_NAMES = "xyz"
 
@@ -79,7 +80,8 @@ CURSOR_KEYS = {
     pygame.K_d: (1, 0),
 }
 
-LAYER_KEYS = {pygame.K_1: 0, pygame.K_2: 1, pygame.K_3: 2}
+# Letters, not numbers, so they never clash with typing an answer.
+LAYER_KEYS = {pygame.K_x: 0, pygame.K_y: 1, pygame.K_z: 2}
 
 
 class GameUI:
@@ -95,7 +97,7 @@ class GameUI:
         self.renderer = Renderer(WINDOW_WIDTH, WINDOW_HEIGHT)
         self.text_font = pygame.font.Font(None, 26)
         self.heading_font = pygame.font.Font(None, 34)
-        self.sum_font = pygame.font.Font(None, 40)
+        self.answer_font = pygame.font.Font(None, 40)
 
         # Start looking at the continuous plane's layer through the starter,
         # since the starter may be inside the cube.
@@ -167,13 +169,22 @@ class GameUI:
             self.last_mouse_position = event.pos
 
         elif event.type == pygame.KEYDOWN:
-            if self.is_answering():
+            # While answering, only the answer keys go to the answer box.
+            # Every other key still moves the view, so the player can look
+            # around the cube for the numbers they need.
+            if self.is_answering() and self.is_answer_key(event):
                 self.handle_answer_key(event)
             else:
                 self.handle_command_key(event)
 
+    def is_answer_key(self, event) -> bool:
+        """Return True for Enter, Backspace, or a digit of the round's base."""
+        if event.key == pygame.K_RETURN or event.key == pygame.K_BACKSPACE:
+            return True
+        return bool(event.unicode) and event.unicode.upper() in DIGITS[:self.base]
+
     def handle_command_key(self, event) -> None:
-        """Keys used while the player is not typing an answer."""
+        """Keys that select cells, start tasks, and move the view."""
         if event.key == pygame.K_RETURN:
             self.start_next_task()
         elif event.key == pygame.K_SPACE:
@@ -193,7 +204,7 @@ class GameUI:
             self.submit_answer()
         elif event.key == pygame.K_BACKSPACE:
             self.answer_text = self.answer_text[:-1]
-        elif event.unicode and event.unicode.upper() in DIGITS[:self.base]:
+        else:
             self.answer_text += event.unicode.upper()
 
     def rotate_from_held_keys(self, keys) -> None:
@@ -391,7 +402,7 @@ class GameUI:
         self.draw_view_panel()
         self.draw_timer()
         if self.is_answering():
-            self.draw_arithmetic()
+            self.draw_answer_box()
         self.draw_controls()
 
     def draw_task_panel(self) -> None:
@@ -426,10 +437,8 @@ class GameUI:
 
             if phase is Phase.SELECTING:
                 self.draw_text("Select the cells with SPACE or right click.", (x, y), HINT_COLOUR)
-            elif phase is Phase.ADDING:
-                self.draw_text(f"Add the numbers in {self.base_name()}, then press ENTER.", (x, y), HINT_COLOUR)
-            elif phase is Phase.SUBTRACTING:
-                self.draw_text(f"Subtract in {self.base_name()}, then press ENTER.", (x, y), HINT_COLOUR)
+            elif phase is Phase.ADDING or phase is Phase.SUBTRACTING:
+                self.draw_text(f"Type your answer in {self.base_name()}, then press ENTER.", (x, y), HINT_COLOUR)
             elif phase is Phase.TASK_COMPLETE:
                 self.draw_text(f"Press ENTER to start task {game_round.task_number + 1}.", (x, y), HINT_COLOUR)
             elif phase is Phase.ROUND_COMPLETE:
@@ -462,44 +471,41 @@ class GameUI:
         self.draw_text_right(f"Time: {minutes:02d}:{seconds:02d}", WINDOW_WIDTH - 25, 20,
                              HEADING_COLOUR, self.heading_font)
 
-    def draw_arithmetic(self) -> None:
-        """Top right: the addition column or the subtraction, written as
-        the player would on paper, with the typed answer underneath."""
+    def answer_prompt(self) -> str:
+        """What the player should work out, in words only. The numbers to
+        add are shown in their cells, and the player must remember the magic
+        sum, so the prompt gives no numbers away."""
         game_round = self.round
-        right_x = WINDOW_WIDTH - 40
-        y = 70
-        line_height = 34
-
         if game_round.phase is Phase.ADDING:
-            numbers = game_round.addition_values
-            operator = "+"
-        else:
-            # Subtract the sum of the addition column from the magic sum. The
-            # complement task has no addition step, so it subtracts the
-            # starter alone.
-            if game_round.addition_values:
-                subtracted = sum(game_round.addition_values)
-            else:
-                subtracted = game_round.value_at(game_round.starter)
-            numbers = [game_round.subtraction_constant, subtracted]
-            operator = "-"
+            return "Add the numbers shown on the line"
 
-        for index, number in enumerate(numbers):
-            self.draw_text_right(self.show(number), right_x, y, font=self.sum_font)
-            if index > 0:
-                self.draw_text_right(operator, right_x - 110, y, font=self.sum_font)
-            y += line_height
+        task_type = game_round.current_task_type
+        if task_type is TaskType.COMPLEMENT:
+            return "Subtract the starter from the complement sum"
+        if task_type in HALF_LINE_TYPES:
+            return "Subtract your sum from the half-line sum"
+        return "Subtract your sum from the full-line sum"
 
-        pygame.draw.line(self.screen, TEXT_COLOUR, (right_x - 120, y), (right_x, y), 2)
-        y += 8
-        self.draw_text_right(self.answer_text + "_", right_x, y, HEADING_COLOUR, self.sum_font)
+    def draw_answer_box(self) -> None:
+        """Top right: one box with the prompt and the player's typed answer."""
+        box_width = 440
+        box_height = 100
+        box_x = WINDOW_WIDTH - box_width - 20
+        box_y = 60
+
+        box = pygame.Rect(box_x, box_y, box_width, box_height)
+        pygame.draw.rect(self.screen, ANSWER_BOX_FILL, box, border_radius=8)
+        pygame.draw.rect(self.screen, TEXT_COLOUR, box, 2, border_radius=8)
+
+        self.draw_text(self.answer_prompt(), (box_x + 15, box_y + 15))
+        self.draw_text(self.answer_text + "_", (box_x + 15, box_y + 50), HEADING_COLOUR, self.answer_font)
 
     def draw_controls(self) -> None:
         """Bottom right: a short reminder of the controls."""
         lines = [
             "Drag / arrows: rotate",
             "WASD: move cursor   SPACE: select",
-            "1 2 3: layer   Q / E: change layer",
+            "X Y Z: layer   Q / E: change layer",
             "ENTER: start task / submit",
         ]
         y = WINDOW_HEIGHT - 25 * len(lines) - 10
