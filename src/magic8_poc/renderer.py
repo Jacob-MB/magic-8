@@ -183,6 +183,20 @@ class Renderer:
         screen_y = int(self.centre_y - y * self.scale * factor)
         return (screen_x, screen_y)
 
+    def _faces_viewer(self, face_centre, normal, view: View) -> bool:
+        """Return True if a face with this centre and outward normal points
+        towards the viewer."""
+        centre_x, centre_y, centre_z = self._rotate(face_centre, view)
+        normal_x, normal_y, normal_z = self._rotate(normal, view)
+
+        # Line from the viewer to the face's centre.
+        sight_x = centre_x
+        sight_y = centre_y
+        sight_z = centre_z + self.distance
+
+        # The face is seen when its normal points back along that line.
+        return normal_x * sight_x + normal_y * sight_y + normal_z * sight_z < 0
+
     # ------------------------------------------------------------------
     # Drawing
     # ------------------------------------------------------------------
@@ -218,8 +232,14 @@ class Renderer:
                 if neighbour in visible_cells:
                     continue
 
-                # Skip faces pointing away from the viewer.
-                if self._rotate(normal, view)[2] >= 0:
+                # Skip faces pointing away from the viewer. With perspective,
+                # whether a face is seen depends on where it is, not just on
+                # its direction: compare the normal with the line from the
+                # viewer (at z = -distance) to the face's centre.
+                face_centre = (centre[0] + normal[0] * .5,
+                               centre[1] + normal[1] * .5,
+                               centre[2] + normal[2] * .5)
+                if not self._faces_viewer(face_centre, normal, view):
                     continue
 
                 vertices = []
