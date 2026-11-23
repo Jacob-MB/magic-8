@@ -7,7 +7,13 @@ Numbers are in octal, as the game shows them, with decimal in brackets. Cells ar
 
 Each task: press ENTER to start it, then select the cells (right click or SPACE). After the last cell, type each answer and press ENTER.
 
+Each picture shows the task once every cell is found, from the view that shows the line best. Rotate with a left drag or the arrow keys. Where a task needs several layers, there is one picture per layer, and the outlined cell in each is the one in that layer.
+
 ## Task 1: complement
+
+Best view: no single layer holds both cells, so step between layers z = 1 and z = 5 (press Z, then Q/E), looking at each from the front.
+
+![Task 1](poc_demo_answers/task1.png)
 
 Cells to select:
 
@@ -16,6 +22,10 @@ Cells to select:
 1. Subtract: 1001 − 542 = **237** (decimal 159)
 
 ## Task 2: half orthogonal x
+
+Best view: layer z = 1 on its own (press Z, then Q/E to reach 1), looking at it from the front.
+
+![Task 2](poc_demo_answers/task2.png)
 
 Cells to select:
 
@@ -27,6 +37,10 @@ Cells to select:
 2. Subtract: 2002 − 672 = **1110** (decimal 584)
 
 ## Task 3: orthogonal z (continuous)
+
+Best view: layer x = 2 on its own (press X, then Q/E to reach 2), looking at it from the right-hand side.
+
+![Task 3](poc_demo_answers/task3.png)
 
 Cells to select:
 
@@ -43,6 +57,10 @@ Cells to select:
 
 ## Task 4: diagonal xy same (split)
 
+Best view: layer z = 1 on its own (press Z, then Q/E to reach 1), looking at it from the front.
+
+![Task 4](poc_demo_answers/task4.png)
+
 Cells to select:
 
 - (3, 6, 1) = 134 (decimal 92)  ← add this one
@@ -57,6 +75,10 @@ Cells to select:
 2. Subtract: 4004 − 1166 = **2616** (decimal 1422)
 
 ## Task 5: diagonal xz same (split)
+
+Best view: layer y = 5 on its own (press Y, then Q/E to reach 5), looking at it from above.
+
+![Task 5](poc_demo_answers/task5.png)
 
 Cells to select:
 
@@ -73,6 +95,10 @@ Cells to select:
 
 ## Task 6: diagonal yz diff (split)
 
+Best view: layer x = 2 on its own (press X, then Q/E to reach 2), looking at it from the right-hand side.
+
+![Task 6](poc_demo_answers/task6.png)
+
 Cells to select:
 
 - (2, 6, 0) = 452 (decimal 298)  ← add this one
@@ -88,6 +114,10 @@ Cells to select:
 
 ## Task 7: triagonal xyz same (split)
 
+Best view: the line passes through every z layer, one cell in each, so step through the layers with Q/E (after pressing Z), looking at each from the front. One picture per layer:
+
+![Task 7](poc_demo_answers/task7.png)
+
 Cells to select:
 
 - (3, 6, 2) = 445 (decimal 293)  ← add this one
@@ -102,6 +132,10 @@ Cells to select:
 2. Subtract: 4004 − 1377 = **2405** (decimal 1285)
 
 ## Task 8: triagonal xy same z diff (split)
+
+Best view: the line passes through every z layer, one cell in each, so step through the layers with Q/E (after pressing Z), looking at each from the front. One picture per layer:
+
+![Task 8](poc_demo_answers/task8.png)
 
 Cells to select:
 
