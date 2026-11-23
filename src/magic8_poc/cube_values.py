@@ -101,3 +101,20 @@ CUBE_VALUES: list[list[list[int]]] = [
         [244, 333,  52, 397, 500,  77, 308, 141],  # y = 7
     ],
 ]
+
+
+if __name__ == "__main__":
+    # Check these numbers form a most perfect cube. Run from src with:
+    #     python -m magic8_poc.cube_values
+    # This only runs when the file is run directly, so importing
+    # CUBE_VALUES elsewhere in the game does not run the check.
+    from magic8_poc.cube import Cube
+    from magic8_poc.magic_check import find_magic_errors
+
+    errors = find_magic_errors(Cube(CUBE_VALUES))
+    if len(errors) == 0:
+        print("CUBE_VALUES is a most perfect magic cube.")
+    else:
+        print(f"CUBE_VALUES is not most perfect: {len(errors)} wrong sums.")
+        for error in errors:
+            print("  " + error)
