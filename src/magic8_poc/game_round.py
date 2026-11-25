@@ -240,26 +240,34 @@ class Round:
     def revealed_cells(self) -> set[Coord]:
         """Cells whose number should be shown.
 
-        The starter is always shown. After a correct subtraction, the whole
-        line (or the complement, in task 1) is shown too.
+        The starter is always shown. Once every target is found, the cells
+        the player adds are shown so they can add them up. After a correct
+        subtraction, the whole line (or the complement, in task 1) is shown
+        too.
         """
         cells = {self.starter}
+        cells.update(self.addition_cells)
         if self._line_revealed:
             cells.update(self._target_cells)
         return cells
 
     @property
-    def addition_values(self) -> list[int]:
-        """The numbers in the addition column: the starter, then the extra
-        numbers from the line. Empty for task 1 and before the addition step.
+    def addition_cells(self) -> list[Coord]:
+        """The cells whose numbers the player adds: the starter, then the
+        extra cells from the line. Empty for task 1 and before the addition
+        step.
         """
         if self._phase in (Phase.READY, Phase.SELECTING):
             return []
         if not self._ruleset.has_addition_step(self.current_task_type):
             return []
+        return self._addition_cells()
 
+    @property
+    def addition_values(self) -> list[int]:
+        """The numbers in the cells the player adds (see addition_cells)."""
         values = []
-        for cell in self._addition_cells():
+        for cell in self.addition_cells:
             values.append(self.value_at(cell))
         return values
 
