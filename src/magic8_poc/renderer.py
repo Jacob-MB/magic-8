@@ -28,6 +28,7 @@ STARTER_FILL = (235, 190, 60)
 CORRECT_FILL = (80, 180, 100)
 ADDITION_FILL = (70, 140, 200)
 INCORRECT_FILL = (200, 80, 80)
+GHOST_FILL  =(128, 128, 128)
 FACE_EDGE_COLOUR = (25, 25, 25)
 CURSOR_COLOUR = (255, 230, 0)
 NUMBER_TEXT_COLOUR = (240, 240, 240)
@@ -82,6 +83,16 @@ class View:
                         cells.add(cell)
         return cells
 
+    def ghost_cells (self) -> set [Coord]:
+        all_cells = set()
+        for x in range(CUBE_SIZE):
+            for y in range(CUBE_SIZE):
+                for z in range(CUBE_SIZE):
+                    cell = (x, y, z)
+                    all_cells.add(cell)
+        g_cells = all_cells.difference(self.visible_cells())
+        return g_cells
+
 
 @dataclass
 class DrawnFace:
@@ -98,6 +109,7 @@ class RenderedFrame:
     """A drawn frame, plus what the UI needs to map the screen to cells."""
 
     surface: pygame.Surface
+    ghost_surface: pygame.Surface
     faces: list[DrawnFace]                                    # Drawn back to front
     cell_centres: dict[Coord, tuple[int, int]] = field(default_factory=dict)
 
@@ -121,6 +133,7 @@ class Renderer:
         self.width = width
         self.height = height
         self.surface = pygame.Surface((width, height))
+        self.ghost_surface = pygame.Surface((width, height))
         self.centre_x = width // 2
         self.centre_y = height // 2
         self.scale = 55
@@ -132,9 +145,15 @@ class Renderer:
     def render(self, game_round: Round, view: View) -> RenderedFrame:
         """Draw one frame of the cube for the round and view."""
         self.surface.fill(BACKGROUND_COLOUR)
+        self.ghost_surface.fill(BACKGROUND_COLOUR)
+        self.ghost_surface.set_alpha (128)
 
         visible_cells = view.visible_cells()
-        faces = self._draw_cube(game_round, view, visible_cells)
+        if game_round._ghost == True:
+            ghost_cells = view.ghost_cells()
+        else:
+            ghost_cells = None
+        faces = self._draw_cube(game_round, view, visible_cells, ghost_cells)
         self._draw_numbers(game_round, faces)
         self._draw_cursor(view)
 
@@ -144,7 +163,7 @@ class Renderer:
             if position is not None:
                 cell_centres[cell] = position
 
-        return RenderedFrame(self.surface, faces, cell_centres)
+        return RenderedFrame(self.surface, self.ghost_surface, faces, cell_centres)
 
     # ------------------------------------------------------------------
     # Projection
@@ -218,7 +237,7 @@ class Renderer:
             return LAYER_FILL
         return HIDDEN_FILL
 
-    def _draw_cube(self, game_round: Round, view: View, visible_cells):
+    def _draw_cube(self, game_round: Round, view: View, visible_cells, ghost_cells):
         """Draw every outward-facing face of the visible cells, back to front."""
         layer_isolated = view.layer_axis is not None
         faces = []
@@ -258,12 +277,49 @@ class Renderer:
                         int(base_fill[1] * brightness),
                         int(base_fill[2] * brightness))
                 faces.append(DrawnFace(depth_total / len(vertices), polygon, cell, fill))
+        if ghost_cells != None:
+            ghost_faces = []
+            for cell in ghost_cells:
+                centre = self._cell_centre(cell)
+                base_fill = GHOST_FILL
+            
+                for corners, normal, brightness in FACE_DEFINITIONS:                            
+                    vertices = []
+                    for corner_x, corner_y, corner_z in corners:
+                        vertices.append((centre[0] + corner_x, centre[1] + corner_y, centre[2] + corner_z))
+            
+                    polygon = []
+                    depth_total = 0.0
+                    for vertex in vertices:
+                        depth_total += self._rotate(vertex, view)[2]
+                        polygon.append(self._project(vertex, view))
+                    if None in polygon:
+                        continue
+            
+                    fill = (int(base_fill[0] * brightness),
+                            int(base_fill[1] * brightness),
+                            int(base_fill[2] * brightness))
+                    ghost_faces.append(DrawnFace(depth_total / len(vertices), polygon, cell, fill))
+        else:
+            ghost_faces = None
 
         # Painter's algorithm: draw the furthest faces first.
         faces.sort(key=lambda face: face.depth, reverse=True)
+        
+
+        if ghost_faces != None:
+            ghost_faces.sort(key=lambda face: face.depth, reverse=True)
+            for face in ghost_faces:
+                pygame.draw.polygon(self.ghost_surface, face.fill, face.polygon)
+                pygame.draw.polygon(self.ghost_surface, FACE_EDGE_COLOUR, face.polygon, 1)
+
+        self.surface.blit(self.ghost_surface, (0,0))
         for face in faces:
             pygame.draw.polygon(self.surface, face.fill, face.polygon)
             pygame.draw.polygon(self.surface, FACE_EDGE_COLOUR, face.polygon, 1)
+        
+        
+
         return faces
 
     def _draw_numbers(self, game_round: Round, faces: list[DrawnFace]) -> None:
