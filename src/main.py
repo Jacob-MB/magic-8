@@ -5,6 +5,7 @@ same game as python -m magic8_poc.
 """
 
 import asyncio
+import pygame
 
 from magic8_poc.ui import main
 
