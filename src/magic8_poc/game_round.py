@@ -87,6 +87,9 @@ class Round:
         self._incorrect_cells: set[Coord] = set()
         self._line_revealed = False
 
+        #toggle ghost
+        self._ghost = False
+
     # ------------------------------------------------------------------
     # Actions (called by the game loop)
     # ------------------------------------------------------------------

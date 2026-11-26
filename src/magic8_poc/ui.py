@@ -193,10 +193,14 @@ class GameUI:
             self.move_cursor(CURSOR_KEYS[event.key])
         elif event.key in LAYER_KEYS:
             self.toggle_layer(LAYER_KEYS[event.key])
+        elif event.key == pygame.K_k:
+            self.show_ghost()
         elif event.key == pygame.K_q:
             self.move_layer(-1)
         elif event.key == pygame.K_e:
             self.move_layer(1)
+        elif event.key == pygame.K_l:
+            self.starting_pos()
 
     def handle_answer_key(self, event) -> None:
         """Keys used while the player is typing the addition or subtraction."""
@@ -298,6 +302,10 @@ class GameUI:
             self.view.layer_axis = axis
             self.view.layer_index = self.view.cursor[axis]
 
+    def show_ghost(self) -> None:
+        #show the whole cube
+        self.round._ghost = not self.round._ghost
+
     def move_layer(self, step: int) -> None:
         if self.view.layer_axis is None:
             return
@@ -310,6 +318,16 @@ class GameUI:
         cursor = list(self.view.cursor)
         cursor[self.view.layer_axis] = new_index
         self.view.cursor = tuple(cursor)
+
+    def starting_pos (self) -> None:
+        game_round = self.round
+        layer_axis = game_round.continuous_plane.off_plane_axis
+        self.view = View(layer_axis=layer_axis,
+                        layer_index=game_round.starter[layer_axis],
+                        cursor=game_round.starter)
+
+        # Keep the cursor in the shown layer.
+        self.view.cursor = game_round.starter
 
     @staticmethod
     def nearest_outside_cell(cell: Coord) -> Coord:
@@ -506,6 +524,8 @@ class GameUI:
             "Drag / arrows: rotate",
             "WASD: move cursor   SPACE: select",
             "X Y Z: layer   Q / E: change layer",
+            "K: show additional layers",
+            "L: return to starter",
             "ENTER: start task / submit",
         ]
         y = WINDOW_HEIGHT - 25 * len(lines) - 10
